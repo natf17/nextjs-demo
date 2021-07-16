@@ -3,6 +3,7 @@ import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import { ApolloClient, InMemoryCache } from '@apollo/client';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 import GetGlobalStrings from './../shared/graphql-cms/GetGlobalStrings';
 
@@ -23,7 +24,9 @@ export default function Home({ strings, locale, locales}) {
           
         {strings.venueName}
         </h1>
-
+        <Link href="/menu">
+          <a>Menu</a>
+        </Link>
       </main>
 
       <footer className={styles.footer}>

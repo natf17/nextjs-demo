@@ -1,7 +1,7 @@
 import { ApolloClient, InMemoryCache } from '@apollo/client';
 import styles from '../styles/Home.module.css'
 import { useRouter } from 'next/router';
-
+import Link from 'next/link';
 
 import GetMenuStrings from './../shared/graphql-cms/GetMenuStrings';
 
@@ -16,16 +16,12 @@ export default function Home({ strings, locale, locales}) {
         <h1 className={styles.title}>
         { strings.Map.XX_fieldName }
         </h1>
-
+        <Link href="/">
+          <a>Home</a>
+        </Link>
       </main>
 
       <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-        </a>
       </footer>
     </div>
   )
