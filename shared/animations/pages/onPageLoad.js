@@ -1,0 +1,1 @@
+// define page animations for when a page loads

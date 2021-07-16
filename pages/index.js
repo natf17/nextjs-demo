@@ -7,7 +7,7 @@ import Link from 'next/link';
 
 import { motion } from 'framer-motion';
 
-import GetGlobalStrings from './../shared/graphql-cms/GetGlobalStrings';
+import GetGlobalStrings from '../shared/queries/GetGlobalStrings';
 
 export default function Home({ strings, locale, locales}) {
   let router = useRouter();
