@@ -1,4 +1,4 @@
-import { ApolloClient, InMemoryCache } from '@apollo/client';
+import makeGraphQLRequest from '../utils/makeGraphQLRequest';
 import GetGlobalStrings from '../shared/queries/GetGlobalStrings';
 import Home from '../components/Home'
 
@@ -8,27 +8,15 @@ export default Home;
 
 /* SERVER SIDE CONFIG */
 export async function getStaticProps({ locale, locales }) {
+  // make request for strings on Strapi
+  const data = await makeGraphQLRequest(locale, GetGlobalStrings);
 
-  // NOTE: All configured UTS locales inside of Next.js match exactly with Strapi's
-
-  const client = new ApolloClient({
-    uri: process.env.CMS_GRAPHQL_ENDPOINT,
-    cache: new InMemoryCache()
-  });
-
-  
-  const { data } = await client.query({
-    query: GetGlobalStrings(locale)
-  });
-
-
-  // handle graphql errors
-  if (!data.string) {
-    return {
-      notFound: true
-    }
+  // handle request errors with 404
+  if (!data || !data.string) {
+    return { notFound: true }
   }
-
+  
+  // pass down data into component props
   return {
     props: {
       strings: data.string,
