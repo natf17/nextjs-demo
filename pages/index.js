@@ -1,6 +1,6 @@
 import { ApolloClient, InMemoryCache } from '@apollo/client';
 import GetGlobalStrings from '../shared/queries/GetGlobalStrings';
-import Home from './../components/index'
+import Home from '../components/Home'
 
 /* EXPORT COMPONENT */
 export default Home;
@@ -23,6 +23,11 @@ export async function getStaticProps({ locale, locales }) {
 
 
   // handle graphql errors
+  if (!data.string) {
+    return {
+      notFound: true
+    }
+  }
 
   return {
     props: {

@@ -1,6 +1,7 @@
-import { ApolloClient, InMemoryCache } from '@apollo/client';
+// import { ApolloClient, InMemoryCache } from '@apollo/client';
 import GetMenuStrings from '../shared/queries/GetMenuStrings';
-import Menu from './../components/menu';
+import Menu from '../components/Menu';
+import makeGraphQLRequest from '../utils/makeGraphQLRequest';
 
 /* EXPORT COMPONENT */
 export default Menu;
@@ -8,21 +9,15 @@ export default Menu;
 
 /* SERVER SIDE CONFIG */
 export async function getStaticProps({ locale, locales }) {
+  // make request for strings on Strapi
+  const data = await makeGraphQLRequest("locale", GetMenuStrings);
 
-  // NOTE: All configured UTS locales inside of Next.js match exactly with Strapi's
-
-  const client = new ApolloClient({
-    uri: process.env.CMS_GRAPHQL_ENDPOINT,
-    cache: new InMemoryCache()
-  });
-
-  
-  const { data } = await client.query({
-    query: GetMenuStrings(locale)
-  });
-
-  
-  // handle graphql errors
+  // handle request errors with 404
+  if (!data || !data.strings) {
+    return {
+      notFound: true
+    }
+  }
 
   return {
     props: {
