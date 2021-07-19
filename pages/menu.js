@@ -1,47 +1,15 @@
 import { ApolloClient, InMemoryCache } from '@apollo/client';
-import styles from '../styles/Home.module.css'
-import { useRouter } from 'next/router';
-import Link from 'next/link';
-
-import { motion } from 'framer-motion';
-
 import GetMenuStrings from '../shared/queries/GetMenuStrings';
+import Menu from './../components/menu';
 
-export default function Home({ strings, locale, locales}) {
-  let router = useRouter();
-
-
-  return (
-    <motion.div 
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      className={styles.container}
-    >
-      
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-        { strings.Map.XX_fieldName }
-        </h1>
-        <Link href="/">
-          <a>Home</a>
-        </Link>
-      </main>
-
-      <footer className={styles.footer}>
-      </footer>
-    </motion.div>
-  )
-}
+/* EXPORT COMPONENT */
+export default Menu;
 
 
-
-
-/* DATA FETCHING -- (PRE-RENDERED VIA getStaticProps) */
+/* SERVER SIDE CONFIG */
 export async function getStaticProps({ locale, locales }) {
 
-  // NOTE: All configured locales inside of Next.js are the same as the locales configured
-  // within Strapi
+  // NOTE: All configured UTS locales inside of Next.js match exactly with Strapi's
 
   const client = new ApolloClient({
     uri: process.env.CMS_GRAPHQL_ENDPOINT,
@@ -53,6 +21,7 @@ export async function getStaticProps({ locale, locales }) {
     query: GetMenuStrings(locale)
   });
 
+  
   // handle graphql errors
 
   return {
