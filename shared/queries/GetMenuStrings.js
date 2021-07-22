@@ -4,6 +4,7 @@ const query = (locale = "en") => {
   return gql`
     query {
       menuString(locale: "${locale}") {
+        pageTitle,
         mapTitle,
         eventsTitle,
         Map {

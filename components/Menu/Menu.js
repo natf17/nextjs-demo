@@ -21,7 +21,7 @@ export default function Home({ strings, locale, locales}) {
       
       <main className={styles.main}>
         <h1 className={styles.title}>
-        { strings.mapTitle } {strings.eventsTitle}
+        { strings.pageTitle }
         </h1>
 
         <div>

@@ -21,7 +21,7 @@ export default function Events({ strings, locale, locales}) {
       
       <main className={styles.main}>
         <h1 className={styles.title}>
-        { strings.Map.XX_fieldName }
+        Events page (hardcoded)
         </h1>
         <Link href="/">
           <a>Home</a>
