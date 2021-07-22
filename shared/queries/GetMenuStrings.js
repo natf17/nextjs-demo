@@ -4,8 +4,9 @@ const query = (locale = "en") => {
   return gql`
     query {
       menuString(locale: "${locale}") {
+        mapTitle,
+        eventsTitle,
         Map {
-          XX_fieldName
           bathrooms
           waterFountains
           firstAid
@@ -13,7 +14,6 @@ const query = (locale = "en") => {
           viewMapDirectory
         },
         Events {
-          XX_fieldName
           regConventions
           circuitAssemblies
           eventHelp
