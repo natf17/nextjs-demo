@@ -21,7 +21,7 @@ export default function Map({ strings, locale, locales}) {
       
       <main className={styles.main}>
         <h1 className={styles.title}>
-        { strings.Map.XX_fieldName }
+        { strings.mapTitle }
         </h1>
         <Link href="/">
           <a>Home</a>

@@ -27,9 +27,23 @@ export default function Home({ strings, locale, locales}) {
           
         {strings.venueName}
         </h1>
-        <Link href="/menu">
-          <a>Menu</a>
-        </Link>
+        <div>
+          <Link href="/">
+            <a>Home</a>
+          </Link>
+
+          <Link href="/menu">
+            <a>Menu</a>
+          </Link>
+
+          <Link href="/map">
+            <a>Map</a>
+          </Link>
+
+          <Link href="/events">
+            <a>Events</a>
+          </Link>
+        </div>
       </main>
 
       <footer className={styles.footer}>

@@ -21,11 +21,26 @@ export default function Home({ strings, locale, locales}) {
       
       <main className={styles.main}>
         <h1 className={styles.title}>
-        { strings.Map.XX_fieldName }
+        { strings.mapTitle } {strings.eventsTitle}
         </h1>
-        <Link href="/">
-          <a>Home</a>
-        </Link>
+
+        <div>
+          <Link href="/">
+            <a>Home</a>
+          </Link>
+
+          <Link href="/menu">
+            <a>Menu</a>
+          </Link>
+
+          <Link href="/map">
+            <a>Map</a>
+          </Link>
+
+          <Link href="/events">
+            <a>Events</a>
+          </Link>
+        </div>
       </main>
 
       <footer className={styles.footer}>
