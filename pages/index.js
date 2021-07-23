@@ -1,5 +1,5 @@
 import makeGraphQLRequest from '../utils/makeGraphQLRequest';
-import GetGlobalStrings from '../shared/queries/GetGlobalStrings';
+import GetGlobalStrings from '../shared/queries/GetGlobalSettings';
 import Home from '../components/Home'
 
 /* EXPORT COMPONENT */
