@@ -21,15 +21,13 @@ export default function Events({ strings, locale, locales}) {
       
       <main className={styles.main}>
         <h1 className={styles.title}>
-        Events page (hardcoded)
+        {strings.pageTitle} {`— feeding from Menu data, need to add dataset`}
         </h1>
         <Link href="/">
           <a>Home</a>
         </Link>
       </main>
 
-      <footer className={styles.footer}>
-      </footer>
     </motion.div>
   )
 }
