@@ -4,7 +4,7 @@
 function Footer() {
   return (
     <footer>
-      This is the header hello
+      This is the footer hello
     </footer>
   );
 }
