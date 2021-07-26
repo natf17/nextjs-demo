@@ -3,7 +3,7 @@ import { gql } from '@apollo/client';
 const query = (locale = "en") => {
   return gql`
     query {
-      string(locale: "${locale}") { 
+      globalSetting(locale: "${locale}") { 
         kioskTitle
         venueName
         locale
