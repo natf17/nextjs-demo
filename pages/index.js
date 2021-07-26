@@ -12,14 +12,17 @@ export async function getStaticProps({ locale, locales }) {
   const data = await makeGraphQLRequest(locale, GetGlobalStrings);
 
   // handle request errors with 404
-  if (!data || !data.string) {
+  if (!data) {
     return { notFound: true }
   }
+
+  // handle Apollo errors (look into documentation) and
+  // separate into utility func for all pages with data fetching
   
   // pass down data into component props
   return {
     props: {
-      strings: data.string,
+      strings: data.globalSetting,
       locale,
       locales
     }
