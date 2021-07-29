@@ -33,26 +33,36 @@ const query = (locale = "en") => {
           bathrooms {
             image {
               url
+              width
+              height
             }
           }
           waterFountains {
             image {
               url
+              width
+              height
             }
           }
           firstAid {
             image {
               url
+              width
+              height
             }
           }
           donations {
             image {
               url
+              width
+              height
             }
           }
           viewAll {
             image {
               url
+              width
+              height
             }
           }
         }
@@ -82,21 +92,29 @@ const query = (locale = "en") => {
           regConventions {
             image {
               url
+              width
+              height
             }
           }
           circuitAssemblies {
             image {
               url
+              width
+              height
             }
           }
           eventInfo {
             image {
               url
+              width
+              height
             }
           }
           viewAll {
             image {
               url
+              width
+              height
             }
           }
         }
