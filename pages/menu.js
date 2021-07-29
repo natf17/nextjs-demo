@@ -12,14 +12,14 @@ export async function getStaticProps({ locale, locales }) {
   const data = await makeGraphQLRequest(locale, GetMenuStrings);
 
   // handle request errors with 404
-  if (!data || !data.menuString) {
+  if (!data || !data.menuPage) {
     return { notFound: true }
   }
 
   // pass down data into component props
   return {
     props: {
-      strings: data.menuString,
+      strings: data.menuPage,
       locale,
       locales
     }

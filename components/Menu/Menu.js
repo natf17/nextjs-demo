@@ -20,9 +20,25 @@ export default function Home({ strings, locale, locales}) {
     >
       
       <main className={styles.main}>
+
         <h1 className={styles.title}>
         { strings.pageTitle }
         </h1>
+
+        <h3>{ strings.directorySection.title }</h3>
+        <ul>
+          <li>{ strings.directorySection.bathrooms.label }
+              { strings.directoryImages.bathrooms.image.url }
+          </li>
+          <li>{ strings.directorySection.waterFountains.label }</li>
+          <li>{ strings.directorySection.firstAid.label }</li>
+          <li>{ strings.directorySection.donations.label }</li>
+          <li>{ strings.directorySection.viewAll.label }</li>
+        </ul>
+
+
+
+        <h3>{ strings.directorySection.title }</h3>
 
         <div>
           <Link href="/">
