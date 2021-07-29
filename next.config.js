@@ -7,7 +7,7 @@ module.exports = {
     defaultLocale: "en",
   },
   
-  images : {
-    domains: [process.env.IMAGES_DOMAIN],
+  images: {
+    domains: [process.env.IMG_DOMAIN],
   }
 }

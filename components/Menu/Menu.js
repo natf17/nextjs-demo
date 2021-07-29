@@ -1,6 +1,7 @@
 import styles from './../../styles/Home.module.css';
 
 import { useRouter } from 'next/router';
+import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 
@@ -25,20 +26,25 @@ export default function Home({ strings, locale, locales}) {
         { strings.pageTitle }
         </h1>
 
-        <h3>{ strings.directorySection.title }</h3>
+        <h3>{ strings.directory.title }</h3>
         <ul>
-          <li>{ strings.directorySection.bathrooms.label }
-              { strings.directoryImages.bathrooms.image.url }
-          </li>
-          <li>{ strings.directorySection.waterFountains.label }</li>
-          <li>{ strings.directorySection.firstAid.label }</li>
-          <li>{ strings.directorySection.donations.label }</li>
-          <li>{ strings.directorySection.viewAll.label }</li>
+          <li>{ strings.directory.bathrooms.label }</li>
+          <Image 
+            src={ `${process.env.NEXT_PUBLIC_IMG_API + strings.directory.bathrooms.image.url}` }
+            alt={ strings.directory.bathrooms.label }
+            width={ strings.directory.bathrooms.image.width }
+            height={ strings.directory.bathrooms.image.height}
+          />
+
+          <li>{ strings.directory.waterFountains.label }</li>
+          <li>{ strings.directory.firstAid.label }</li>
+          <li>{ strings.directory.donations.label }</li>
+          <li>{ strings.directory.viewAll.label }</li>
         </ul>
 
 
 
-        <h3>{ strings.directorySection.title }</h3>
+        <h3>{ strings.directory.title }</h3>
 
         <div>
           <Link href="/">

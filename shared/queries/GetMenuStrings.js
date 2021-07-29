@@ -5,32 +5,11 @@ const query = (locale = "en") => {
     query {
       menuPage(locale: "${locale}") {
         pageTitle
-        directorySection {
-          title
+        directory {
+          title 
           bathrooms {
+            isVisible
             label
-            isHidden
-          }
-          waterFountains {
-            label
-            isHidden
-          }
-          firstAid {
-            label
-            isHidden        
-          }
-          donations {
-            label
-            isHidden
-          }
-          viewAll {
-            label
-            isHidden
-          }
-        }
-        
-        directoryImages {
-          bathrooms {
             image {
               url
               width
@@ -38,6 +17,8 @@ const query = (locale = "en") => {
             }
           }
           waterFountains {
+            isVisible
+            label
             image {
               url
               width
@@ -45,6 +26,8 @@ const query = (locale = "en") => {
             }
           }
           firstAid {
+            isVisible
+            label
             image {
               url
               width
@@ -52,6 +35,8 @@ const query = (locale = "en") => {
             }
           }
           donations {
+            isVisible
+            label
             image {
               url
               width
@@ -59,6 +44,8 @@ const query = (locale = "en") => {
             }
           }
           viewAll {
+            isVisible
+            label
             image {
               url
               width
@@ -67,29 +54,11 @@ const query = (locale = "en") => {
           }
         }
         
-        eventsSection {
+        events {
           title
           regConventions {
+            isVisible
             label
-            isHidden
-          }
-          circuitAssemblies {
-            label
-            isHidden
-          }
-          eventInfo {
-            label
-            isHidden        
-          }
-          viewAll {
-            label
-            isHidden
-          }
-        }
-        
-        
-        eventsImages {
-          regConventions {
             image {
               url
               width
@@ -97,6 +66,8 @@ const query = (locale = "en") => {
             }
           }
           circuitAssemblies {
+            isVisible
+            label
             image {
               url
               width
@@ -104,6 +75,8 @@ const query = (locale = "en") => {
             }
           }
           eventInfo {
+            isVisible
+            label
             image {
               url
               width
@@ -111,6 +84,8 @@ const query = (locale = "en") => {
             }
           }
           viewAll {
+            isVisible
+            label
             image {
               url
               width
