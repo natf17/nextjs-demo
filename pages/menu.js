@@ -6,10 +6,6 @@ import Menu from '../components/Menu';
 export default Menu;
 
 
-/* PAGE CONFIG */
-const DIRECTORY_MENU_INDEXES = ['bathrooms', 'waterFountains', 'donations', 'firstAid', 'viewAll'];
-const EVENTS_MENU_INDEXES = ['regConventions', 'circuitAssemblies', 'eventInfo', 'viewAll'];
-
 
 /* SERVER SIDE CONFIG */
 export async function getStaticProps({ locale, locales }) {
@@ -25,8 +21,6 @@ export async function getStaticProps({ locale, locales }) {
   return {
     props: {
       strings: data.menuPage,
-      directoryIndexes: DIRECTORY_MENU_INDEXES,
-      eventsIndexes: EVENTS_MENU_INDEXES,
       locale,
       locales
     }

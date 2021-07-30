@@ -6,46 +6,12 @@ const query = (locale = "en") => {
       menuPage(locale: "${locale}") {
         pageTitle
         directory {
-          title 
-          bathrooms {
+          title
+          menuItems {
+            id 
             isVisible
-            label
-            image {
-              url
-              width
-              height
-            }
-          }
-          waterFountains {
-            isVisible
-            label
-            image {
-              url
-              width
-              height
-            }
-          }
-          firstAid {
-            isVisible
-            label
-            image {
-              url
-              width
-              height
-            }
-          }
-          donations {
-            isVisible
-            label
-            image {
-              url
-              width
-              height
-            }
-          }
-          viewAll {
-            isVisible
-            label
+            label      
+            url        
             image {
               url
               width
@@ -53,39 +19,13 @@ const query = (locale = "en") => {
             }
           }
         }
-        
         events {
           title
-          regConventions {
+          menuItems {
+            id 
             isVisible
-            label
-            image {
-              url
-              width
-              height
-            }
-          }
-          circuitAssemblies {
-            isVisible
-            label
-            image {
-              url
-              width
-              height
-            }
-          }
-          eventInfo {
-            isVisible
-            label
-            image {
-              url
-              width
-              height
-            }
-          }
-          viewAll {
-            isVisible
-            label
+            label      
+            url        
             image {
               url
               width
