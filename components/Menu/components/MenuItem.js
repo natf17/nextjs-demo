@@ -14,11 +14,11 @@ export default function MenuItem(item) {
       {/* Check for image */}
       {item.image && 
         <Image 
-        src={`${process.env.NEXT_PUBLIC_IMG_API + item.image.url}`} 
-        alt=''
-        width={item.image.width}
-        height={item.image.height}
-      />
+          src={`${process.env.NEXT_PUBLIC_IMG_API + item.image.url}`} 
+          alt=''
+          width={item.image.width}
+          height={item.image.height}
+        />
       }
       
     </div>
