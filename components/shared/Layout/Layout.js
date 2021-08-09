@@ -1,14 +1,12 @@
 // global page layout
 import Header from './components/Header';
-import Footer from './components/Footer';
 
 
 export default function Layout({ children }) {
   return (
     <>
-      <Header />
-      <main>{children}</main>
-      <Footer />
+      <header className='fixed w-screen h-16 bg-blue-100'><Header /></header>
+      <main className='pt-16 bg-blue-200'>{children}</main>
     </>
   )
 }
