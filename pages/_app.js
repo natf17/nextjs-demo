@@ -1,4 +1,4 @@
-import '../styles/globals.css';
+import 'tailwindcss/tailwind.css';
 import { AnimatePresence } from 'framer-motion';
 import { useRouter } from 'next/router';
 import Layout from './../components/shared/Layout';
