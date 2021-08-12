@@ -5,7 +5,16 @@ module.exports = {
   ],
   darkMode: false, // or 'media' or 'class'
   theme: {
-    extend: {},
+    extend: {
+      gridTemplateColumns: {
+        // Custom configuration for menu: min 200px, expand extra space
+        'menu': 'repeat(auto-fill, minmax(200px, 1fr))'
+      },
+      gridAutoRows: {
+        // Same as columns: min 200px, expand to fill extra space
+        'menu': 'minmax(200px, 1fr)'
+      }
+    },
   },
   variants: {
     extend: {},

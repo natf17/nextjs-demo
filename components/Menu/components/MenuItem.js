@@ -5,7 +5,11 @@ import Image from 'next/image';
 export default function MenuItem(item) {
   
   return (
-    <div className="flex max-w-xs bg-yellow-200 border border-solid border-gray-400">
+    <div className="
+      flex flex-none
+      bg-yellow-200 p-1
+      border border-solid border-gray-400"
+    >
       
       
       <Link href={item.url}>
