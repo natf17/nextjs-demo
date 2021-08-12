@@ -11,16 +11,16 @@ export default function MenuItem(item) {
       <Link href={item.url}>
         <a>
           {/* Image / placeholder */}
-          <div>
-            { item.image && 
+          <div className="bg-yellow-700">
+            {/* { item.image && 
               <Image 
                 src={`${process.env.NEXT_PUBLIC_IMG_API + item.image.url}`} 
                 alt=''
                 width={item.image.width}
                 height={item.image.height}
-                className=''
+                className="w-16"
               />
-            }
+            } */}
           </div>
 
           {/* Image label */}
