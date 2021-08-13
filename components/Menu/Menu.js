@@ -10,24 +10,28 @@ export default function Home({ strings }) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
+      // stretch to fill height of container
+      className='self-stretch w-full'
     >
       
-      <main>
+      <main className='bg-green-100 h-full'>
 
-        <h1 className="text-3xl text-left">
+        <h1 className='text-4xl text-center p-2'>
         { strings.pageTitle }
         </h1>
 
         {/* Directory */}
-        <h3 className='text-2xl text-left'>{ strings.directory.title }</h3>
-        <MenuRow 
+        <MenuRow
+          title={ strings.directory.title }
           menuItems={ strings.directory.menuItems } 
         />
 
 
         {/* Events */}
-        <h3 className='text-2xl text-left'>{ strings.events.title }</h3>
-        <MenuRow menuItems={ strings.events.menuItems } />
+        <MenuRow 
+          title={strings.events.title }
+          menuItems={ strings.events.menuItems } 
+        />
 
 
 

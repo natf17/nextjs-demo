@@ -5,10 +5,10 @@ import Image from 'next/image';
 export default function MenuItem(item) {
   
   return (
-    <div className="
+    <div className='
       flex flex-none
       bg-yellow-200 p-1
-      border border-solid border-gray-400"
+      border border-solid border-gray-400'
     >
       
       
