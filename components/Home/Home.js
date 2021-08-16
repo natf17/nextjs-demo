@@ -12,8 +12,6 @@ export default function Home({ strings, locale, locales}) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-    
-      className={styles.container}
     >
       <Head>
         <title>{strings.venueName}</title>
@@ -21,8 +19,8 @@ export default function Home({ strings, locale, locales}) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
+      <main>
+        <h1>
           
         {strings.venueName}
         </h1>
@@ -35,7 +33,7 @@ export default function Home({ strings, locale, locales}) {
             <a>Menu</a>
           </Link>
 
-          <Link href="/map">
+          <Link href="/directory">
             <a>Map</a>
           </Link>
 
@@ -45,14 +43,14 @@ export default function Home({ strings, locale, locales}) {
         </div>
       </main>
 
-      <footer className={styles.footer}>
+      <footer>
         <a
           href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
           target="_blank"
           rel="noopener noreferrer"
         >
           Powered by{' '}
-          <span className={styles.logo}>
+          <span>
             <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
           </span>
         </a>
