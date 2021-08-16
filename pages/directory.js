@@ -1,9 +1,9 @@
 import makeGraphQLRequest from '../utils/makeGraphQLRequest';
 import GetMapStrings from '../shared/queries/GetMapStrings';
-import Map from '../components/Map';
+import Directory from '../components/Directory';
 
 /* EXPORT COMPONENT */
-export default Map;
+export default Directory;
 
 
 /* SERVER SIDE CONFIG */
