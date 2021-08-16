@@ -11,12 +11,12 @@ export default function MenuItem(item) {
           bg-yellow-200 p-1
           border border-solid border-gray-400'
         >
-          {/* Alignment container */}
+          {/* Container sizing */}
           <div className='bg-yellow-700 h-2/3 overflow-hidden
             flex justify-center items-center
           '>
               { item.image &&
-                // Size constraining container
+                // Center/alignment container
                 <div className='w-20 h-20 overflow-hidden relative
                   flex justify-center items-center
                 '>
@@ -31,7 +31,10 @@ export default function MenuItem(item) {
           </div>
 
           {/* Image label */}
-          <div className='h-1/3 overflow-hidden text-center'>{ item.label }</div>
+          <div className='h-1/3 overflow-hidden text-center flex justify-center items-center
+          '>
+            { item.label }
+          </div>
         </a>
       </Link>
 
