@@ -5,34 +5,35 @@ import Image from 'next/image';
 export default function MenuItem(item) {
   
   return (
-    <div className='
-      flex flex-none
-      bg-yellow-200 p-1
-      border border-solid border-gray-400'
-    >
-      
-      
       <Link href={item.url}>
-        <a>
-          {/* Image / placeholder */}
-          <div className="bg-yellow-700">
-            {/* { item.image && 
-              <Image 
-                src={`${process.env.NEXT_PUBLIC_IMG_API + item.image.url}`} 
-                alt=''
-                width={item.image.width}
-                height={item.image.height}
-                className="w-16"
-              />
-            } */}
+        <a className='
+          flex flex-col 
+          bg-yellow-200 p-1
+          border border-solid border-gray-400'
+        >
+          {/* Alignment container */}
+          <div className='bg-yellow-700 h-2/3 overflow-hidden
+            flex justify-center items-center
+          '>
+              { item.image &&
+                // Size constraining container
+                <div className='w-20 h-20 overflow-hidden relative
+                  flex justify-center items-center
+                '>
+                  <Image 
+                    src={`${process.env.NEXT_PUBLIC_IMG_API + item.image.url}`} 
+                    alt=''
+                    width={item.image.width} // insert dimensions, should be sq
+                    height={item.image.height}
+                  />
+                </div>
+              }            
           </div>
 
           {/* Image label */}
-          <div>{ item.label }</div>
+          <div className='h-1/3 overflow-hidden text-center'>{ item.label }</div>
         </a>
       </Link>
-      
-      
-    </div>
+
   )
 }
