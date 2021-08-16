@@ -1,5 +1,3 @@
-import styles from './../../styles/Home.module.css';
-
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
@@ -16,11 +14,10 @@ export default function Map({ strings, locale, locales}) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className={styles.container}
     >
       
-      <main className={styles.main}>
-        <h1 className={styles.title}>
+      <main>
+        <h1>
         { strings.pageTitle }
         </h1>
         <Link href="/">
@@ -28,8 +25,6 @@ export default function Map({ strings, locale, locales}) {
         </Link>
       </main>
 
-      <footer className={styles.footer}>
-      </footer>
     </motion.div>
   )
 }

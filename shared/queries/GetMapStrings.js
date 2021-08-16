@@ -5,6 +5,13 @@ const query = (locale = "en") => {
     query {
       mapPage(locale: "${locale}") {
         pageTitle
+        tapWidget {
+          instructions
+          br_label
+          water_label
+          firstaid_label
+          donations_label
+        }
       }
     }  
   `;
