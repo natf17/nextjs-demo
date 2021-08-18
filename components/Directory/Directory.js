@@ -26,8 +26,8 @@ export default function Map({ strings, locale, locales}) {
 
         {/* Search widgets */}
         <div className='bg-yellow-200 max-w-md'>
-          <h4>{ strings.tapWidget.instructions }</h4>
-          <div className='bg-yellow-300 p-2
+          <h4 className='p-2'>{ strings.tapWidget.instructions }</h4>
+          <div className='bg-yellow-300 p-1
             flex justify-around
           '>          
             <AmenityBtn label={ strings.tapWidget.br_label } />
@@ -35,12 +35,15 @@ export default function Map({ strings, locale, locales}) {
             <AmenityBtn label={ strings.tapWidget.firstaid_label } />
             <AmenityBtn label={ strings.tapWidget.donations_label } />
           </div>
-        </div>
 
-
-        <Link href="/">
-          <a>Home</a>
-        </Link>
+          {/* Search results list-view pane */}
+          <div className='bg-blue-200'>
+            <header className='text-xl p-2'>Amenity name</header>
+            <div className='bg-blue-100'>
+              Amenity locations, list-view
+            </div>
+          </div>
+        </div>      
       </main>
 
     </motion.div>
