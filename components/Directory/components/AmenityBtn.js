@@ -7,7 +7,7 @@ export default function AmenityBtn({label}) {
         flex items-center justify-center'>      
       </div>
 
-      <div className='text-center'>{label}</div>
+      <div className='text-center text-sm'>{label}</div>
     </div>
     
   )

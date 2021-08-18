@@ -25,10 +25,10 @@ export default function Map({ strings, locale, locales}) {
         </h1>
 
         {/* Search widgets */}
-        <div className='bg-yellow-200'>
+        <div className='bg-yellow-200 max-w-md'>
           <h4>{ strings.tapWidget.instructions }</h4>
-          <div className='bg-yellow-300
-            flex p-2
+          <div className='bg-yellow-300 p-2
+            flex justify-around
           '>          
             <AmenityBtn label={ strings.tapWidget.br_label } />
             <AmenityBtn label={ strings.tapWidget.water_label } />
