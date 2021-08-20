@@ -1,8 +1,8 @@
 import React from 'react';
 
-export default function AmenityBtn({label}) {
+export default function AmenityBtn({label, onClick, amenityId}) {
   return (
-    <div>
+    <div onClick={onClick.bind(null, {amenityId, localizedName: label})}>
       <div className='rounded-full bg-green-50 h-16 w-16
         flex items-center justify-center'>      
       </div>
