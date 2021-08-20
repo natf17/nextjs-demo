@@ -4,6 +4,7 @@ const query = (locale = "en") => {
   return gql`
       query {
         waterFountains(locale:"${locale}"){
+          id
           name
           isWheelchairAccessible
           note
