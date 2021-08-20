@@ -23,7 +23,7 @@ export async function getStaticProps({ locale, locales }) {
 
 
   // handle request errors with 404
-  if (!data) {
+  if (!data || !data.mapPage) {
     return { notFound: true }
   }
 

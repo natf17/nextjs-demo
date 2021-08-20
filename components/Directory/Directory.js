@@ -67,11 +67,9 @@ export default function Map({
           <div className='bg-blue-200'>
             <header className='text-xl p-2'>{ router.query.amenityLocalizedName }</header>
             <div className='bg-blue-100'>
-              <div>Amenity locations, list-view</div>
-              <div>amenityId: { router.query.amenityId }</div>
-              <div>
+              { AMENITIES[router.query.amenityId] && AMENITIES[router.query.amenityId].locations &&
                 <LocationResults locations={ AMENITIES[router.query.amenityId].locations } />
-              </div>
+              }                
             </div>
           </div>
         </div>      

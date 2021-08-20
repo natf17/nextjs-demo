@@ -12,7 +12,7 @@ export async function getStaticProps({ locale, locales }) {
   const data = await makeGraphQLRequest(locale, GetGlobalStrings);
 
   // handle request errors with 404
-  if (!data) {
+  if (!data || !data.globalSetting) {
     return { notFound: true }
   }
 

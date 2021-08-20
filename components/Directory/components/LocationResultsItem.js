@@ -1,7 +1,8 @@
 import React from 'react';
+import Image from 'next/image';
 
 export default function LocationResultsItem(props) {
-  const { name, isWheelchairAccessible, location, note } = props;
+  const { name, isWheelchairAccessible, location, featImg, note } = props;
   // Bathroom-specific props
   const { gender = null } = props;
   // Water-specific props
@@ -13,15 +14,30 @@ export default function LocationResultsItem(props) {
 
 
   return (
-    <div>
+    <div className='
+      flex
+    '>
       {/* Thumbnail */}
-      <div>Thumbnail</div>
+      <div className='
+        w-20 h-20 overflow-hidden relative
+        flex justify-center items-center
+      '>
+        { featImg && 
+          <Image 
+            src={ `${process.env.NEXT_PUBLIC_IMG_API + featImg.url}` } 
+            alt={ name }
+            width={ featImg.width } // insert dimensions, should be sq
+            height={ featImg.height }
+          />
+        }
+        
+      </div>
 
       {/* Amenity quick-view */}
-      <div>
-        <h4>{name}</h4>
+      <div className='p-2'>
+        <h3 className='text-lg font-medium'>{name}</h3>
         <div>
-          {location.fullname}, {gender}, {isWheelchairAccessible}, {paymentTypesAccepted}
+          {location && location.fullname}, {gender}, {isWheelchairAccessible}, {paymentTypesAccepted}
           {note}
         </div>
       </div>
