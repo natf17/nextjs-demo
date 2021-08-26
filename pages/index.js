@@ -7,7 +7,7 @@ export default Home;
 
 
 /* SERVER SIDE CONFIG */
-export async function getStaticProps({ locale, locales }) {
+export async function getStaticProps() {
   // make request for strings on Strapi
   const data = await makeGraphQLRequest(locale, GetGlobalStrings);
 
@@ -22,9 +22,7 @@ export async function getStaticProps({ locale, locales }) {
   // pass down data into component props
   return {
     props: {
-      strings: data.globalSetting,
-      locale,
-      locales
+      strings: data.globalSetting
     }
   }
 }
