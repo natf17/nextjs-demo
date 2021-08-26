@@ -2,17 +2,18 @@ import makeGraphQLRequest from '../utils/makeGraphQLRequest';
 import GetGlobalStrings from '../shared/queries/GetGlobalSettings';
 import Home from '../components/Home'
 
+// Type data
 import { GetStaticProps } from 'next';
+import { ParsedUrlQuery } from 'querystring';
+
 
 /* EXPORT COMPONENT */
 export default Home;
 
 
 
-
-// BEGIN REFACTOR
-import { ParsedUrlQuery } from 'querystring';
-type StringData = {
+// API Schema
+export type StringData = {
   kioskTitle: string,
   venueName: string,
   locale: string,
@@ -22,23 +23,34 @@ type StringData = {
   }
 }
 
-type Props = {
+// Props passed down to page component
+export type Props = {
   strings: StringData,
   locale: string
 }
 
-interface Params extends ParsedUrlQuery {
-  id: string
+// Context params interface
+export interface Params extends ParsedUrlQuery {
+  locale: string
 }
+
+
 
 export const getStaticProps: GetStaticProps<Props, Params> = async (context) => {
   const locale = context.locale!;
-  const data = await makeGraphQLRequest(locale, GetGlobalStrings);
-
-  return {
-    props: { 
-      strings: data.globalSetting,
-      locale
+  
+  try {
+    const { globalSetting } = await makeGraphQLRequest(locale, GetGlobalStrings);
+    return {
+      props: {
+        strings: globalSetting,
+        locale
+      }
+    }
+  } catch (error) {
+    // if any errors, return 404
+    return {
+      notFound: true
     }
   }
 }
@@ -47,7 +59,7 @@ export const getStaticProps: GetStaticProps<Props, Params> = async (context) => 
 
 
 
-/* SERVER SIDE CONFIG -- WORKING CODE, TO REFACTOR */
+/* OLD CODE */
 // export async function getStaticProps({ locale })  {
 //   // make request for strings on Strapi
 //   const data = await makeGraphQLRequest(locale, GetGlobalStrings);

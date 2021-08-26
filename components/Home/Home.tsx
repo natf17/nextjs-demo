@@ -3,8 +3,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 
+import { Props } from '../../pages';
 
-export default function Home({ strings, locale, locales}) {
+export default function Home({ strings }:Props) {
 
 
   return (
