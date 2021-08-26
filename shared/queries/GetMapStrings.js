@@ -12,6 +12,23 @@ const query = (locale = "en") => {
           firstaid_label
           donations_label
         }
+        
+        bathroomAmenity {
+          widgetLabel
+          headingLabel
+        }
+        waterFountainAmenity {
+          widgetLabel
+          headingLabel
+        }
+        firstAidAmenity {
+          widgetLabel
+          headingLabel
+        }
+        donationAmenity {
+          widgetLabel
+          headingLabel
+        }
       }
     }  
   `;

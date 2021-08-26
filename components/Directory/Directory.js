@@ -5,36 +5,18 @@ import { motion } from 'framer-motion';
 import AmenityBtn from './components/AmenityBtn';
 import LocationResults from './components/LocationResults';
 
-
+// TODO: CONVERT TO TYPESCRIPT
+// TODO: CONVERT TO USING TWIN.MACRO FOR CLASSNAMES
+// TODO: FIX ERROR CHECKING AND HANDLING AT PAGE-LEVEL DIRECTORY.JS
 
 
 export default function Map({ 
-  strings, bathroomLocations, waterFtnLocations, 
-  firstAidLocations, donationLocations}) {
+  strings, amenityData}) {
   const router = useRouter();
   
-  const AMENITIES = {
-    bathroom: {
-      id: 'bathroom',
-      locations: bathroomLocations
-    },
-    waterFountain: {
-      id: 'waterFountain',
-      locations: waterFtnLocations
-    },
-    firstAid: {
-      id: 'firstAid',
-      locations: firstAidLocations
-    },
-    donation: {
-      id: 'donation',
-      locations: donationLocations
-    }
-  }
 
-  const onLocationSelect = ({amenityId, localizedName}) => {
-    router.push(`?amenityId=${amenityId}&amenityLocalizedName=${localizedName}`, undefined, { shallow: true });
-    console.log(AMENITIES[router.query.amenityId]);
+  const onLocationSelect = ({amenityId}) => {
+    router.push(`?amenityId=${amenityId}`, undefined, { shallow: true });    
   }
 
 
@@ -51,24 +33,26 @@ export default function Map({
           { strings.pageTitle }
         </h1>
 
-        {/* Search widgets */}
+        {/* Locations Select Pane */}
         <div className='bg-yellow-200 max-w-md'>
           <h4 className='p-2'>{ strings.tapWidget.instructions }</h4>
           <div className='bg-yellow-300 p-1
             flex justify-around
-          '>          
-            <AmenityBtn onClick={onLocationSelect} amenityId={AMENITIES.bathroom.id} label={ strings.tapWidget.br_label } />
-            <AmenityBtn onClick={onLocationSelect} amenityId={AMENITIES.waterFountain.id} label={ strings.tapWidget.water_label } />
-            <AmenityBtn onClick={onLocationSelect} amenityId={AMENITIES.firstAid.id} label={ strings.tapWidget.firstaid_label } />
-            <AmenityBtn onClick={onLocationSelect} amenityId={AMENITIES.donation.id} label={ strings.tapWidget.donations_label } />
+          '>
+            <AmenityBtn onClick={onLocationSelect} amenityId={amenityData.bathrooms.id} label={ amenityData.bathrooms.widgetLabel } />
+            <AmenityBtn onClick={onLocationSelect} amenityId={amenityData.waterFountains.id} label={ amenityData.waterFountains.widgetLabel } />
+            <AmenityBtn onClick={onLocationSelect} amenityId={amenityData.firstAid.id} label={ amenityData.firstAid.widgetLabel } />
+            <AmenityBtn onClick={onLocationSelect} amenityId={amenityData.donations.id} label={ amenityData.donations.widgetLabel } />
           </div>
 
           {/* Search results list-view pane */}
           <div className='bg-blue-200'>
-            <header className='text-xl p-2'>{ router.query.amenityLocalizedName }</header>
+            <header className='text-xl p-2'>
+              { amenityData[router.query.amenityId] && amenityData[router.query.amenityId].headingLabel }
+            </header>
             <div className='bg-blue-100'>
-              { AMENITIES[router.query.amenityId] && AMENITIES[router.query.amenityId].locations &&
-                <LocationResults locations={ AMENITIES[router.query.amenityId].locations } />
+              { amenityData[router.query.amenityId] && amenityData[router.query.amenityId].locations &&
+                <LocationResults locations={ amenityData[router.query.amenityId].locations } />
               }                
             </div>
           </div>

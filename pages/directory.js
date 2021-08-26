@@ -27,10 +27,38 @@ export async function getStaticProps({ locale, locales }) {
     return { notFound: true }
   }
 
+  // TODO: require ALL requests to resolve, else return error page
+
+  // TEST: build composite amenity object with merged data
+  const testCompositeAmenities = {
+    bathrooms: {
+      id: 'bathrooms',
+      ...data.mapPage.bathroomAmenity,
+      locations: [...bathroomLocations.bathrooms],
+    },
+    waterFountains: {
+      id: 'waterFountains',
+      ...data.mapPage.waterFountainAmenity,
+      locations: [...waterFtnLocations.waterFountains],
+    },
+    firstAid: {
+      id: 'firstAid',
+      ...data.mapPage.firstAidAmenity,
+      locations: [...firstAidLocations.firstAids],
+    },
+    donations: {
+      id: 'donations',
+      ...data.mapPage.donationAmenity,
+      locations: [...donationLocations.donations],
+    }
+  }
+
+
   // pass down data into component props
   return {
     props: {
       strings: data.mapPage,
+      amenityData: testCompositeAmenities,
       bathroomLocations: bathroomLocations.bathrooms,
       waterFtnLocations: waterFtnLocations.waterFountains,
       firstAidLocations: firstAidLocations.firstAids,
