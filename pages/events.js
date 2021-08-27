@@ -1,5 +1,5 @@
 import makeGraphQLRequest from '../utils/makeGraphQLRequest';
-import GetMenuStrings from '../shared/queries/GetMenuStrings';
+import GetMenuStrings from '../shared/models/GetMenuStrings';
 import Events from '../components/Events';
 
 /* EXPORT COMPONENT */

@@ -1,13 +1,15 @@
 import makeGraphQLRequest from '../utils/makeGraphQLRequest';
-import GetMapStrings from '../shared/queries/GetMapStrings';
-import GetDonationLocations from '../shared/queries/GetDonationLocations';
-import GetBathroomLocations from '../shared/queries/GetBathroomLocations';
-import GetWaterFountainLocations from '../shared/queries/GetWaterFountainLocations';
-import GetFirstAidLocations from '../shared/queries/GetFirstAidLocations';
+import GetMapStrings from '../shared/models/GetMapStrings';
+import GetDonationLocations from '../shared/models/GetDonationLocations';
+import GetBathroomLocations from '../shared/models/GetBathroomLocations';
+import GetWaterFountainLocations from '../shared/models/GetWaterFountainLocations';
+import GetFirstAidLocations from '../shared/models/GetFirstAidLocations';
 import Directory from '../components/Directory';
 
-/* EXPORT COMPONENT */
-export default Directory;
+// type data
+import { GetStaticProps } from 'next';
+import { ParsedUrlQuery } from 'querystring';
+
 
 
 /* SERVER SIDE CONFIG */
@@ -68,3 +70,8 @@ export async function getStaticProps({ locale, locales }) {
     }
   }
 }
+
+
+
+/* EXPORT COMPONENT */
+export default Directory;
