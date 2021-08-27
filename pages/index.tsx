@@ -7,11 +7,6 @@ import { GetStaticProps } from 'next';
 import { ParsedUrlQuery } from 'querystring';
 
 
-/* EXPORT COMPONENT */
-export default Home;
-
-
-
 // API Schema
 export type StringData = {
   kioskTitle: string,
@@ -56,6 +51,8 @@ export const getStaticProps: GetStaticProps<Props, Params> = async (context) => 
 }
 
 
+/* EXPORT COMPONENT */
+export default Home;
 
 
 
