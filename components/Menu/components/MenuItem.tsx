@@ -2,7 +2,10 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
-export default function MenuItem(item) {
+import { MenuItem as MenuItemType } from '../../../pages/menu';
+
+
+export default function MenuItem(item: MenuItemType) {
   
   return (
       <Link href={item.url}>

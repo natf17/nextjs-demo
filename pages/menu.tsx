@@ -11,15 +11,15 @@ export type MenuStringData = {
   pageTitle: string,
   directory: {
     title: string,
-    menuItems?: MenuItems[]
+    menuItems?: MenuItem[]
   },
   events: {
     title: string,
-    menuItems?: MenuItems[]
+    menuItems?: MenuItem[]
   }
 }
 // should this be moved to request models? / graphql schemas?
-export type MenuItems = {
+export type MenuItem = {
   id: number | string,
   isVisible: boolean,
   label: string,

@@ -1,8 +1,14 @@
 import React from 'react';
 import MenuItem from './MenuItem';
 
+import { MenuItem as MenuItemType } from '../../../pages/menu';
 
-export default function MenuRow({title, menuItems}) {
+export interface Props {
+  title: string,
+  menuItems?: MenuItemType[]
+}
+
+export default function MenuRow({title, menuItems}: Props) {
   return (
 
     <div className='py-6'>
@@ -14,6 +20,7 @@ export default function MenuRow({title, menuItems}) {
         grid-cols-menu auto-rows-menu
       '>
         { 
+          menuItems &&
           menuItems.map((item) => {
             return (
               <MenuItem

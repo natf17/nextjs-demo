@@ -1,9 +1,12 @@
 import { motion } from 'framer-motion';
+// import type definition
+import { Props } from '../../pages/menu';
 
 import MenuRow from './components/MenuRow';
 
 
-export default function Home({ strings }) {
+
+export default function Home({ strings }: Props) {
 
   return (
     <motion.div 
@@ -17,7 +20,7 @@ export default function Home({ strings }) {
       <main className='bg-green-100 h-full'>
 
         <h1 className='text-4xl text-center p-2'>
-        { strings.pageTitle }
+        { strings.pageTitle }        
         </h1>
 
         {/* Directory */}
