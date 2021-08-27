@@ -9,6 +9,8 @@ import Directory from '../components/Directory';
 // type data
 import { GetStaticProps } from 'next';
 import { ParsedUrlQuery } from 'querystring';
+import { MapPageSchema } from '../shared/models/GetMapStrings';
+
 
 
 
