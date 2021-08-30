@@ -9,7 +9,7 @@ import { Props } from './../../pages/directory';
 // TODO: CONVERT TO USING TWIN.MACRO FOR CLASSNAMES
 // TODO: FIX ERROR CHECKING AND HANDLING AT PAGE-LEVEL DIRECTORY.JS
 
-export type AMENITY_ID = 'bathrooms' | 'firstAid' | 'donations' | 'waterFountains';
+import { AmenityId as AMENITY_ID } from './../../pages/directory';
 
 export default function Map({ strings, amenityData }: Props) {
   const router = useRouter();
@@ -66,10 +66,10 @@ export default function Map({ strings, amenityData }: Props) {
           <div className='bg-yellow-300 p-1
             flex justify-around
           '>
-            <AmenityBtn onClick={onLocationSelect} amenityId={amenityData.bathrooms.id} label={ amenityData.bathrooms.widgetLabel } />
-            <AmenityBtn onClick={onLocationSelect} amenityId={amenityData.waterFountains.id} label={ amenityData.waterFountains.widgetLabel } />
-            <AmenityBtn onClick={onLocationSelect} amenityId={amenityData.firstAid.id} label={ amenityData.firstAid.widgetLabel } />
-            <AmenityBtn onClick={onLocationSelect} amenityId={amenityData.donations.id} label={ amenityData.donations.widgetLabel } />
+            <AmenityBtn onClick={onLocationSelect} amenityId={'bathrooms'} label={ amenityData.bathrooms.widgetLabel } />
+            <AmenityBtn onClick={onLocationSelect} amenityId={'waterFountains'} label={ amenityData.waterFountains.widgetLabel } />
+            <AmenityBtn onClick={onLocationSelect} amenityId={'firstAid'} label={ amenityData.firstAid.widgetLabel } />
+            <AmenityBtn onClick={onLocationSelect} amenityId={'donations'} label={ amenityData.donations.widgetLabel } />
           </div>
 
           {/* Search results list-view pane */}

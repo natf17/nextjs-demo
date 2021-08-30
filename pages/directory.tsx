@@ -16,23 +16,26 @@ import { BathroomLocationSchema } from '../shared/models/GetBathroomLocations';
 import { WaterFountainSchema } from '../shared/models/GetWaterFountainLocations';
 import { FirstAidSchema } from '../shared/models/GetFirstAidLocations';
 
+// ID used to programatically identify each amenity
+export type AmenityId = 'bathrooms' | 'firstAid' | 'donations' | 'waterFountains';
+
 
 // Composite data we will be constructing from above types
 export type AmenityData = {
   bathrooms: LocationAmenity & {
-    id: string,
+    id: AmenityId,
     locations?: BathroomLocationSchema[]
   },
   waterFountains: LocationAmenity & {
-    id: string,
+    id: AmenityId,
     locations?: WaterFountainSchema[]
   },
   firstAid: LocationAmenity & {
-    id: string,
+    id: AmenityId,
     locations?: FirstAidSchema[]
   },
   donations: LocationAmenity & {
-    id: string,
+    id: AmenityId,
     locations?: DonationLocationSchema[]
   }
 }
