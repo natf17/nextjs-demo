@@ -1,6 +1,7 @@
 import { gql } from '@apollo/client';
 
-export type MapPageSchema = {
+// separated types for easy type separation and import from modules
+export type BasicPageSchema = {
   pageTitle: string,
   tapWidget: {
     instructions?: string,
@@ -8,16 +9,26 @@ export type MapPageSchema = {
     water_label?: string,
     firstaid_label?: string,
     donations_label?: string,
-  },
+  }
+}
+
+export type MapPageSchema = BasicPageSchema & {
   bathroomAmenity: LocationAmenity,
   waterFountainAmenity: LocationAmenity,
   firstAidAmenity: LocationAmenity,
   donationAmenity: LocationAmenity
 };
 
+
 export type LocationAmenity = {
   widgetLabel: string,
   headingLabel: string
+}
+
+export type LocationSchema = {
+  fullname: string,
+  level_name: 'FIRST' | 'MEZZ' | 'SECOND' | 'THIRD',
+  level_num: number
 }
 
 const query = (locale = "en") => {

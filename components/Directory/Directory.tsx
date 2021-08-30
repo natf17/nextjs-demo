@@ -1,23 +1,50 @@
 import { useRouter } from 'next/router';
-import Link from 'next/link';
 import { motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
 
 import AmenityBtn from './components/AmenityBtn';
 import LocationResults from './components/LocationResults';
 
-// TODO: CONVERT TO TYPESCRIPT
+import { Props } from './../../pages/directory';
 // TODO: CONVERT TO USING TWIN.MACRO FOR CLASSNAMES
 // TODO: FIX ERROR CHECKING AND HANDLING AT PAGE-LEVEL DIRECTORY.JS
 
+export type AMENITY_ID = 'bathrooms' | 'firstAid' | 'donations' | 'waterFountains';
 
-export default function Map({ 
-  strings, amenityData}) {
+export default function Map({ strings, amenityData }: Props) {
   const router = useRouter();
-  
+  const [selectedAmenity, setSelectedAmenity] = useState<AMENITY_ID | undefined>(undefined);
 
-  const onLocationSelect = ({amenityId}) => {
-    router.push(`?amenityId=${amenityId}`, undefined, { shallow: true });    
+
+  const onLocationSelect = (amenityId: AMENITY_ID) => {
+    // map enum to amenity in data
+    const selection = amenityData[amenityId];
+
+    // if selection is valid, update the URL
+    if (selection) {
+
+      router.push({
+        query: { amenityId } 
+      }, undefined, {
+        shallow: true
+      });
+
+    }    
   }
+  
+  // on URL change
+  useEffect(() => {
+    // amenityId in url should be a valid selection (ts)
+    const amenityId = router.query.amenityId as AMENITY_ID;
+
+    // validate selection
+    if (amenityId && amenityData[amenityId]) {
+      console.log(`running: ${router.query.amenityId}`);
+      setSelectedAmenity(amenityId);
+    }
+    
+  }, [router, amenityData])
+  
 
 
   return (
@@ -46,17 +73,13 @@ export default function Map({
           </div>
 
           {/* Search results list-view pane */}
-          <div className='bg-blue-200'>
-            <header className='text-xl p-2'>
-              { amenityData[router.query.amenityId] && amenityData[router.query.amenityId].headingLabel }
-            </header>
-            <div className='bg-blue-100'>
-              { amenityData[router.query.amenityId] && amenityData[router.query.amenityId].locations &&
-                <LocationResults locations={ amenityData[router.query.amenityId].locations } />
-              }                
-            </div>
-          </div>
-        </div>      
+          { selectedAmenity && 
+            <LocationResults 
+              amenityTitle={ amenityData[selectedAmenity].headingLabel }
+              locations={ amenityData[selectedAmenity].locations }
+            />
+          }
+        </div>
       </main>
 
     </motion.div>

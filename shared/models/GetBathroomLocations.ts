@@ -1,11 +1,28 @@
 import { gql } from '@apollo/client';
 
+import { LocationSchema } from './GetMapStrings';
+
+export type BathroomLocationSchema = {
+  id: string,
+  name: string,
+  gender: 'men' | 'women' | 'uni',
+  isWheelchairAccessible: boolean,
+  note?: string,
+  location?: LocationSchema,
+  featImg: {
+    url: string,
+    width: number,
+    height: number
+  }
+};
+
 const query = (locale = "en") => {
   return gql`
       query {
-        firstAids(locale:"${locale}"){
+        bathrooms(locale:"${locale}"){
           id
           name
+          gender
           isWheelchairAccessible
           note
           location {
