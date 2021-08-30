@@ -1,10 +1,10 @@
 import React from 'react';
-import { AMENITY_ID } from '../Directory';
+import { AmenityId } from '../../../pages/directory';
 
 export type Props = {
   label: string,
-  onClick: (amenityId: AMENITY_ID) => void,
-  amenityId: AMENITY_ID
+  onClick: (amenityId: AmenityId) => void,
+  amenityId: AmenityId
 }
 
 export default function AmenityBtn({label, onClick, amenityId}: Props) {
