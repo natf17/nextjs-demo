@@ -8,7 +8,7 @@ export type BathroomLocationSchema = {
   gender: 'men' | 'women' | 'uni',
   isWheelchairAccessible: boolean,
   note?: string,
-  location?: LocationSchema,
+  location: LocationSchema,
   featImg: {
     url: string,
     width: number,

@@ -6,7 +6,7 @@ export type FirstAidSchema = {
   name: string,
   isWheelchairAccessible: boolean,
   note?: string,
-  location?: LocationSchema,
+  location: LocationSchema,
   featImg?: {
     url: string,
     width: number,

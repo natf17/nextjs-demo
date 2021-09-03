@@ -4,7 +4,7 @@ import { LocationSchema } from './GetMapStrings';
 export type DonationLocationSchema = {
   id: string,
   name: string,
-  location?: LocationSchema,
+  location: LocationSchema,
   paymentTypesAccepted: 'cash' | 'credit',
   note?: string,
   featImg?: {
