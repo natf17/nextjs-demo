@@ -8,15 +8,20 @@ import { WaterFountainSchema } from '../../../shared/models/GetWaterFountainLoca
 export type Props = BathroomLocationSchema | DonationLocationSchema | FirstAidSchema | WaterFountainSchema;
 
 export default function LocationResultsItem(props: Props) {
-  const { name, location, featImg, note } = props;
+  const { name, location, isWheelchairAccessible, featImg, note } = props;
   
+  // initialize type-specific properties
+  let gender, paymentTypesAccepted = null;
 
   // Bathroom-specific props
-  const { gender = null } = props;
+  if ("gender" in props) {
+    gender = props.gender;
+  }
 
   // Donations-specific props
-  const { paymentTypesAccepted = null } = props;
-
+  if ("paymentTypesAccepted" in props) {
+    paymentTypesAccepted = props.paymentTypesAccepted;
+  }
 
   return (
     <div className='
