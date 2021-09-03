@@ -1,15 +1,20 @@
 import React from 'react';
 import Image from 'next/image';
+import { BathroomLocationSchema } from '../../../shared/models/GetBathroomLocations';
+import { DonationLocationSchema } from '../../../shared/models/GetDonationLocations';
+import { FirstAidSchema } from '../../../shared/models/GetFirstAidLocations';
+import { WaterFountainSchema } from '../../../shared/models/GetWaterFountainLocations';
 
-export default function LocationResultsItem(props) {
-  const { name, isWheelchairAccessible, location, featImg, note } = props;
+export type Props = BathroomLocationSchema | DonationLocationSchema | FirstAidSchema | WaterFountainSchema;
+
+export default function LocationResultsItem(props: Props) {
+  const { name, location, featImg, note } = props;
+  
+
   // Bathroom-specific props
   const { gender = null } = props;
-  // Water-specific props
-    // none
-  // Firstaid-specific props
-    // none
-  // Donation-specific props
+
+  // Donations-specific props
   const { paymentTypesAccepted = null } = props;
 
 

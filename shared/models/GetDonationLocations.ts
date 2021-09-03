@@ -4,6 +4,7 @@ import { LocationSchema } from './GetMapStrings';
 export type DonationLocationSchema = {
   id: string,
   name: string,
+  isWheelchairAccessible: boolean,
   location: LocationSchema,
   paymentTypesAccepted: 'cash' | 'credit',
   note?: string,
@@ -20,6 +21,7 @@ const query = (locale = "en") => {
         donations(locale:"${locale}"){
           id
           name
+          isWheelchairAccessible
           location {
             fullname
             level_name
