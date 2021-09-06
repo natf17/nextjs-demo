@@ -66,10 +66,17 @@ export default function Map({ strings, amenityData }: Props) {
           <div className='bg-yellow-300 p-1
             flex justify-around
           '>
-            <AmenityBtn onClick={onLocationSelect} amenityId={'bathrooms'} label={ amenityData.bathrooms.widgetLabel } />
-            <AmenityBtn onClick={onLocationSelect} amenityId={'waterFountains'} label={ amenityData.waterFountains.widgetLabel } />
-            <AmenityBtn onClick={onLocationSelect} amenityId={'firstAid'} label={ amenityData.firstAid.widgetLabel } />
-            <AmenityBtn onClick={onLocationSelect} amenityId={'donations'} label={ amenityData.donations.widgetLabel } />
+            <AmenityBtn onClick={onLocationSelect} amenityId={'bathrooms'} 
+              label={ amenityData.bathrooms.widgetLabel } selected={selectedAmenity === 'bathrooms'} />
+
+            <AmenityBtn onClick={onLocationSelect} amenityId={'waterFountains'} 
+              label={ amenityData.waterFountains.widgetLabel } selected={selectedAmenity === 'waterFountains'} />
+
+            <AmenityBtn onClick={onLocationSelect} amenityId={'firstAid'} 
+              label={ amenityData.firstAid.widgetLabel } selected={selectedAmenity === 'firstAid'} />
+
+            <AmenityBtn onClick={onLocationSelect} amenityId={'donations'} 
+              label={ amenityData.donations.widgetLabel } selected={selectedAmenity === 'donations'} />
           </div>
 
           {/* Search results list-view pane */}

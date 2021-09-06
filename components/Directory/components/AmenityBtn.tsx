@@ -11,14 +11,16 @@ import { AttachMoneySharp as DonationsIcon } from '@material-ui/icons';
 export type Props = {
   label: string,
   onClick: (amenityId: AmenityId) => void,
-  amenityId: AmenityId
+  amenityId: AmenityId,
+  selected: boolean
 }
 
-export default function AmenityBtn({label, onClick, amenityId}: Props) {
+export default function AmenityBtn({label, onClick, amenityId, selected}: Props) {
   return (
     <div onClick={onClick.bind(null, amenityId)}>
-      <div className='rounded-full bg-green-50 h-16 w-16
-        flex items-center justify-center'>
+      <div className={`rounded-full bg-green-50 h-16 w-16
+        ${selected && 'border-4 border-blue-400'}
+        flex items-center justify-center`}>
           { amenityId === "bathrooms" &&
             <BathroomIcon fontSize="inherit" />
           }
