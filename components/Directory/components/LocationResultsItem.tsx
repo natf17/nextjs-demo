@@ -46,10 +46,22 @@ export default function LocationResultsItem(props: Props) {
       {/* Amenity quick-view */}
       <div className='p-2'>
         <h3 className='text-lg font-medium'>{name}</h3>
-        <div>
-          {location && location.fullname}, {gender}, {isWheelchairAccessible}, {paymentTypesAccepted}
-          {note}
-        </div>
+        <ul>
+          {/* Level */}
+          <li>{location && location.fullname}</li>
+          
+          {/* Gender */}
+          <li>{gender}</li>
+                    
+          {/* Accessibility */}
+          <li>{isWheelchairAccessible}</li>
+
+          {/* Payment types */}
+          <li>{paymentTypesAccepted}</li>
+
+          {/* Note */}
+          <li>{note}</li>
+        </ul>
       </div>
 
     </div>
