@@ -1,5 +1,5 @@
 import makeGraphQLRequest from '../utils/makeGraphQLRequest';
-import GetMapStrings from '../shared/models/GetMapStrings';
+import GetMapStrings, { MapImages } from '../shared/models/GetMapStrings';
 import GetDonationLocations from '../shared/models/GetDonationLocations';
 import GetBathroomLocations from '../shared/models/GetBathroomLocations';
 import GetWaterFountainLocations from '../shared/models/GetWaterFountainLocations';
@@ -25,23 +25,19 @@ export type AmenityId = 'bathrooms' | 'firstAid' | 'donations' | 'waterFountains
 export type AmenityData = {
   bathrooms: LocationAmenity & {
     id: AmenityId,
-    locations?: BathroomLocationSchema[],
-    mapImage: MapImage
+    locations?: BathroomLocationSchema[]
   },
   waterFountains: LocationAmenity & {
     id: AmenityId,
-    locations?: WaterFountainSchema[],
-    mapImage: MapImage
+    locations?: WaterFountainSchema[]
   },
   firstAid: LocationAmenity & {
     id: AmenityId,
-    locations?: FirstAidSchema[],
-    mapImage: MapImage
+    locations?: FirstAidSchema[]
   },
   donations: LocationAmenity & {
     id: AmenityId,
-    locations?: DonationLocationSchema[],
-    mapImage: MapImage
+    locations?: DonationLocationSchema[]
   }
 }
 
@@ -50,7 +46,8 @@ export type AmenityData = {
 export type Props = {
   strings: BasicPageSchema,
   amenityData: AmenityData,
-  locale: string
+  locale: string,
+  maps: MapImages
 }
 
 // Context params interface
@@ -77,28 +74,25 @@ export const getStaticProps: GetStaticProps<Props, Params> = async (context) => 
           bathrooms: {
             id: 'bathrooms',
             ...mapPage.bathroomAmenity,
-            locations: [...bathroomLocations.bathrooms],
-            mapImage: mapPage.maps.bathrooms
+            locations: [...bathroomLocations.bathrooms]
           },
           waterFountains: {
             id: 'waterFountains',
             ...mapPage.waterFountainAmenity,
-            locations: [...waterFtnLocations.waterFountains],
-            mapImage: mapPage.maps.waterFountains
+            locations: [...waterFtnLocations.waterFountains]
           },
           firstAid: {
             id: 'firstAid',
             ...mapPage.firstAidAmenity,
-            locations: [...firstAidLocations.firstAids],
-            mapImage: mapPage.maps.firstAid
+            locations: [...firstAidLocations.firstAids]
           },
           donations: {
             id: 'donations',
             ...mapPage.donationAmenity,
-            locations: [...donationLocations.donations],
-            mapImage: mapPage.maps.donations          
+            locations: [...donationLocations.donations] 
           }
         },
+        maps: mapPage.maps,
         locale
       }
     }
