@@ -16,13 +16,27 @@ export type MapPageSchema = BasicPageSchema & {
   bathroomAmenity: LocationAmenity,
   waterFountainAmenity: LocationAmenity,
   firstAidAmenity: LocationAmenity,
-  donationAmenity: LocationAmenity
+  donationAmenity: LocationAmenity,
+  maps: MapImages
 };
 
 
 export type LocationAmenity = {
   widgetLabel: string,
   headingLabel: string
+}
+
+export type MapImages = {
+  default: MapImage,
+  bathrooms: MapImage,
+  waterFountains: MapImage,
+  firstAid: MapImage,
+  donations: MapImage
+}
+export type MapImage = {
+  width: number,
+  height: number,
+  url: string
 }
 
 export type LocationSchema = {
@@ -59,6 +73,33 @@ const query = (locale = "en") => {
         donationAmenity {
           widgetLabel
           headingLabel
+        }
+        maps {
+          default {
+            width
+            height
+            url
+          }
+          bathrooms {
+            width
+            height
+            url
+          }
+          waterFountains {
+            width
+            height
+            url
+          }
+          firstAid {
+            width
+            height
+            url
+          }
+          donations {
+            width
+            height
+            url
+          }
         }
       }
     }  

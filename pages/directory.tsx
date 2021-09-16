@@ -15,6 +15,7 @@ import { DonationLocationSchema } from '../shared/models/GetDonationLocations';
 import { BathroomLocationSchema } from '../shared/models/GetBathroomLocations';
 import { WaterFountainSchema } from '../shared/models/GetWaterFountainLocations';
 import { FirstAidSchema } from '../shared/models/GetFirstAidLocations';
+import { MapImage } from '../shared/models/GetMapStrings';
 
 // ID used to programatically identify each amenity
 export type AmenityId = 'bathrooms' | 'firstAid' | 'donations' | 'waterFountains';
@@ -24,19 +25,23 @@ export type AmenityId = 'bathrooms' | 'firstAid' | 'donations' | 'waterFountains
 export type AmenityData = {
   bathrooms: LocationAmenity & {
     id: AmenityId,
-    locations?: BathroomLocationSchema[]
+    locations?: BathroomLocationSchema[],
+    mapImage: MapImage
   },
   waterFountains: LocationAmenity & {
     id: AmenityId,
-    locations?: WaterFountainSchema[]
+    locations?: WaterFountainSchema[],
+    mapImage: MapImage
   },
   firstAid: LocationAmenity & {
     id: AmenityId,
-    locations?: FirstAidSchema[]
+    locations?: FirstAidSchema[],
+    mapImage: MapImage
   },
   donations: LocationAmenity & {
     id: AmenityId,
-    locations?: DonationLocationSchema[]
+    locations?: DonationLocationSchema[],
+    mapImage: MapImage
   }
 }
 
@@ -72,22 +77,26 @@ export const getStaticProps: GetStaticProps<Props, Params> = async (context) => 
           bathrooms: {
             id: 'bathrooms',
             ...mapPage.bathroomAmenity,
-            locations: [...bathroomLocations.bathrooms]
+            locations: [...bathroomLocations.bathrooms],
+            mapImage: mapPage.maps.bathrooms
           },
           waterFountains: {
             id: 'waterFountains',
             ...mapPage.waterFountainAmenity,
-            locations: [...waterFtnLocations.waterFountains]
+            locations: [...waterFtnLocations.waterFountains],
+            mapImage: mapPage.maps.waterFountains
           },
           firstAid: {
             id: 'firstAid',
             ...mapPage.firstAidAmenity,
-            locations: [...firstAidLocations.firstAids]
+            locations: [...firstAidLocations.firstAids],
+            mapImage: mapPage.maps.firstAid
           },
           donations: {
             id: 'donations',
             ...mapPage.donationAmenity,
-            locations: [...donationLocations.donations]
+            locations: [...donationLocations.donations],
+            mapImage: mapPage.maps.donations          
           }
         },
         locale
