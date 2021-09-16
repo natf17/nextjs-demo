@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 
 import AmenityBtn from './components/AmenityBtn';
 import LocationResults from './components/LocationResults';
+import DirectoryMap from './components/DirectoryMap';
 
 import { Props } from './../../pages/directory';
 // TODO: CONVERT TO USING TWIN.MACRO FOR CLASSNAMES
@@ -11,7 +12,7 @@ import { Props } from './../../pages/directory';
 
 import { AmenityId as AMENITY_ID } from './../../pages/directory';
 
-export default function Map({ strings, amenityData }: Props) {
+export default function Map({ strings, amenityData, maps }: Props) {
   const router = useRouter();
   const [selectedAmenity, setSelectedAmenity] = useState<AMENITY_ID | undefined>(undefined);
 
@@ -61,7 +62,7 @@ export default function Map({ strings, amenityData }: Props) {
         </h1>
 
         {/* Locations Select Pane */}
-        <div className='bg-yellow-200 max-w-md'>
+        <div className='bg-yellow-200 sm:max-w-md'>
           <h4 className='p-2'>{ strings.tapWidget.instructions }</h4>
           <div className='bg-yellow-300 p-1
             flex justify-around
@@ -86,6 +87,13 @@ export default function Map({ strings, amenityData }: Props) {
               locations={ amenityData[selectedAmenity].locations }
             />
           }
+        </div>
+      
+        {/* Map view */}
+        <div className='bg-gray-400 lg:bg-gray-700'>
+          <DirectoryMap 
+            selectedAmenity={selectedAmenity} maps={maps} 
+           />
         </div>
       </main>
 
