@@ -10,14 +10,15 @@ export type Props = {
 
 export default function DirectoryMap({selectedAmenity, maps}: Props) {
   return (
-    <>
+    <div className="bg-gray-400 md:w-96 lg:w-3/5">
       { selectedAmenity ? 
 
         <Image 
         src={ `${process.env.NEXT_PUBLIC_IMG_API + maps[selectedAmenity].url}` } 
         alt={ '' }
-        width={ maps[selectedAmenity].width } // insert dimensions, should be sq
+        width={ maps[selectedAmenity].width }
         height={ maps[selectedAmenity].height }
+        layout="responsive"
         />
         
         :
@@ -25,10 +26,11 @@ export default function DirectoryMap({selectedAmenity, maps}: Props) {
         <Image 
         src={ `${process.env.NEXT_PUBLIC_IMG_API + maps.default.url}` } 
         alt={ '' }
-        width={ maps.default.width } // insert dimensions, should be sq
+        width={ maps.default.width }
         height={ maps.default.height }
+        
         />
       }
-    </>
+    </div>
   )
 }

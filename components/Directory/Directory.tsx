@@ -62,7 +62,7 @@ export default function Map({ strings, amenityData, maps }: Props) {
         </h1>
 
         {/* Locations Select Pane */}
-        <div className='bg-yellow-200 sm:max-w-md'>
+        <div className='bg-yellow-200 md:w-96 md:absolute'>
           <h4 className='p-2'>{ strings.tapWidget.instructions }</h4>
           <div className='bg-yellow-300 p-1
             flex justify-around
@@ -90,7 +90,9 @@ export default function Map({ strings, amenityData, maps }: Props) {
         </div>
       
         {/* Map view */}
-        <div className='bg-gray-400 lg:bg-gray-700'>
+        <div className='bg-gray-400 
+              md:min-h-screen md:flex justify-end items-center
+              lg:bg-gray-700'>
           <DirectoryMap 
             selectedAmenity={selectedAmenity} maps={maps} 
            />
