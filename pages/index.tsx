@@ -1,26 +1,16 @@
 import makeGraphQLRequest from '../utils/makeGraphQLRequest';
-import GetGlobalStrings from '../shared/models/GetGlobalSettings';
+import GetHomePageStrings from '../shared/models/GetHomePageStrings';
 import Home from '../components/Home'
 
 // Type data
 import { GetStaticProps } from 'next';
 import { ParsedUrlQuery } from 'querystring';
+import { HomePageSchema } from '../shared/models/GetHomePageStrings';
 
-
-// API Schema
-export type StringData = {
-  kioskTitle: string,
-  venueName: string,
-  locale: string,
-  localizations: {
-    id: string | number,
-    locale: string
-  }
-}
 
 // Props passed down to page component
 export type Props = {
-  strings: StringData,
+  strings: HomePageSchema,
   locale: string
 }
 
@@ -35,10 +25,10 @@ export const getStaticProps: GetStaticProps<Props, Params> = async (context) => 
   const locale = context.locale!;
   
   try {
-    const { globalSetting } = await makeGraphQLRequest(locale, GetGlobalStrings);
+    const { homePage } = await makeGraphQLRequest(locale, GetHomePageStrings);
     return {
       props: {
-        strings: globalSetting,
+        strings: homePage,
         locale
       }
     }
