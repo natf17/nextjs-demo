@@ -2,6 +2,8 @@ import '../styles/globals.css';
 import { AnimatePresence } from 'framer-motion';
 import { useRouter } from 'next/router';
 import Layout from './../components/shared/Layout';
+import Head from 'next/head';
+
 
 
 // Global values (see note below)
@@ -20,6 +22,9 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <Layout globalValues={globalValues}>
+      <Head>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <AnimatePresence exitBeforeEnter>
         <Component {...pageProps} key={ router.pathname } />
       </AnimatePresence>
