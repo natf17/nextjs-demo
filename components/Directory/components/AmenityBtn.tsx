@@ -17,7 +17,7 @@ export type Props = {
 
 export default function AmenityBtn({label, onClick, amenityId, selected}: Props) {
   return (
-    <div onClick={onClick.bind(null, amenityId)}>
+    <div onClick={onClick.bind(null, amenityId)} className='cursor-pointer'>
       <div className={`rounded-full bg-green-50 h-16 w-16
         ${selected && 'border-4 border-blue-400'}
         flex items-center justify-center`}>
