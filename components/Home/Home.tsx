@@ -12,16 +12,16 @@ export default function Home({ strings }:Props) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
+      className='w-full'
     >
       <Head><title>{strings.pageTitle}</title></Head>
-
-      <main>
-        <h1>{strings.welcomeText}</h1>
-        <h3>{strings.tapToContinuePrompt}</h3>
-        <div>    
-          <Link href="/menu">Menu</Link>
-        </div>
-      </main>
+      
+      <Link href="/menu">
+        <a className='block h-full'>
+          <h1 className='text-center text-6xl'>{strings.welcomeText}</h1>
+          <h3 className='text-center text-3xl'>{strings.tapToContinuePrompt}</h3>                  
+        </a>
+      </Link>
     </motion.div>
   )
 }
