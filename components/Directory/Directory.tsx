@@ -24,7 +24,7 @@ export default function Map({ strings, amenityData, maps }: Props) {
     // if selection is valid, update the URL
     if (selection) {
 
-      router.push({
+      router.replace({
         query: { amenityId } 
       }, undefined, {
         shallow: true
