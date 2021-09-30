@@ -15,7 +15,7 @@ export default function Header({src, width, height}:Props) {
       changes, etc. */}
       
       <Image 
-        src={`${process.env.NEXT_PUBLIC_IMG_API + src}`} 
+        src={src} 
         alt='logo'
         width={width}
         height={height}
