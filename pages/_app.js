@@ -9,8 +9,7 @@ import Head from 'next/head';
 // Global values (see note below)
 import headerLogo from '../public/headerLogo.svg';
 const globalValues = {
-  header: {
-    title: "Queens Assembly Hall",
+  header: {    
     logo: headerLogo
   }
 }

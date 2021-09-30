@@ -1,18 +1,25 @@
 import React from 'react';
+import Image from 'next/image';
 
 type Props = {
-  title: String
+  src: string,
+  width: number,
+  height: number
 }
 
-export default function Header({title}:Props) {
+export default function Header({src, width, height}:Props) {
   return (
     <div>
-      {/* This actually needs to be localized
-      and cannot simply be filled in as currently
-      designed at the _app.js level. We need some way
+      {/* To include text: we need some way to make this dynamic, i.e.
       to refresh this information when site language
       changes, etc. */}
-      {title}
+      
+      <Image 
+        src={`${process.env.NEXT_PUBLIC_IMG_API + src}`} 
+        alt='logo'
+        width={width}
+        height={height}
+      />
     </div>
   )
 }
