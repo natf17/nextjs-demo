@@ -1,16 +1,19 @@
 import makeGraphQLRequest from '../utils/makeGraphQLRequest';
 import GetEventsPageStrings from '../shared/models/GetEventsPageStrings';
+import {GetCombinedSeasonalEventData} from '../shared/models/GetEventData';
 import Events from '../components/Events'
 
 // Type data
 import { GetStaticProps } from 'next';
 import { ParsedUrlQuery } from 'querystring';
 import { EventsPageSchema } from '../shared/models/GetEventsPageStrings';
-
+import { EventSeason, SeasonalEvent } from '../shared/models/GetEventData';
 
 // Props passed down to page component
 export type Props = {
   strings: EventsPageSchema,
+  eventSeasons: EventSeason[],
+  seasonalEvents: SeasonalEvent[],
   locale: string
 }
 
@@ -26,9 +29,13 @@ export const getStaticProps: GetStaticProps<Props, Params> = async (context) => 
   
   try {
     const { eventsPage } = await makeGraphQLRequest(locale, GetEventsPageStrings);
+    const { eventSeasons, seasonalEvents} = await makeGraphQLRequest(locale, GetCombinedSeasonalEventData)
+
     return {
       props: {
         strings: eventsPage,
+        eventSeasons,
+        seasonalEvents,
         locale
       }
     }
