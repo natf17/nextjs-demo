@@ -1,11 +1,13 @@
-import { EventSeason } from "../../../shared/models/GetEventData"
+import { EventSeason, SeasonalEvent } from "../../../shared/models/GetEventData"
+import Event from "./Event"
 
 type Props = {
   title: string,
-  eventSeason?: EventSeason
+  eventSeason?: EventSeason,
+  events?: SeasonalEvent[]
 }
 
-export default function EventGroup({title, eventSeason}: Props) {
+export default function EventGroup({title, eventSeason, events}: Props) {
   return (
     <article>
       <h2 className='text-2xl uppercase'>{title}</h2>
@@ -21,9 +23,12 @@ export default function EventGroup({title, eventSeason}: Props) {
 
       {/* Show some events! */}
       <div className='bg-green-500'>
-        <article>
-          An event
-        </article>
+        { events && events.map((e) => {
+            return(
+              <Event key={e.id} {...e} />
+            )
+          })
+        }
       </div>
     </article>
   )

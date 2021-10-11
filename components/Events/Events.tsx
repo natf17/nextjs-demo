@@ -27,6 +27,17 @@ export default function Events({ strings, eventSeasons, seasonalEvents, locale}:
     return eventSeasons.find((s) => s.type === seasonType)
   }
 
+  function filterEventsByType(
+    seasonType: SeasonalType
+  ): SeasonalEvent[] | [] {
+
+    if (!filteredByLangEvents) {
+      return []
+    }
+    
+    return filteredByLangEvents.filter((e)=> e.seasonalType === seasonType);    
+  }
+
   return (
     <motion.div 
       initial={{ opacity: 0 }}
@@ -43,21 +54,25 @@ export default function Events({ strings, eventSeasons, seasonalEvents, locale}:
         <EventGroup 
           title={strings.sectionRegCo.title}
           eventSeason={getFirstSeasonOfType('REG')}
+          events={filterEventsByType('REG')}
         />
 
         <EventGroup 
           title={strings.sectionCACO.title}
           eventSeason={getFirstSeasonOfType('CACO')}
+          events={filterEventsByType('CACO')}
         />
 
         <EventGroup 
           title={strings.sectionCABR.title}
           eventSeason={getFirstSeasonOfType('CABR')}
+          events={filterEventsByType('CABR')}
         />
 
         <EventGroup 
           title={strings.sectionOtherEvents.title}
           eventSeason={getFirstSeasonOfType('OTHER')}
+          events={filterEventsByType('OTHER')}
         />
       </main>
     </motion.div>
