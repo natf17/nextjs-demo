@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client';
 
-type SeasonalType = 'REG' | 'CACO' | 'CABR' | 'OTHER';
+export type SeasonalType = 'REG' | 'CACO' | 'CABR' | 'OTHER';
 
 
 export type CombinedSeasonalEventData = {
