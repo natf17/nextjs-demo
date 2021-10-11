@@ -13,7 +13,8 @@ export type EventSeason = {
   type: string,
   durationDays: number,
   theme: string,
-  serviceYear: number
+  serviceYear: number,
+  seasonYears: string
 }
 
 export type SeasonalEvent = {
