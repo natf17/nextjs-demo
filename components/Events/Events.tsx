@@ -1,9 +1,12 @@
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
+import EventGroup from './components/EventGroup';
 
 // types
 import { Props } from '../../pages/events';
-import { SeasonalEvent } from '../../shared/models/GetEventData';
+import { EventSeason, SeasonalEvent, SeasonalType } from '../../shared/models/GetEventData';
+
+
 
 
 export default function Events({ strings, eventSeasons, seasonalEvents, locale}: Props) {
@@ -18,6 +21,12 @@ export default function Events({ strings, eventSeasons, seasonalEvents, locale}:
   }, [seasonalEvents, eventLang])
 
 
+  function getFirstSeasonOfType(
+    seasonType: SeasonalType
+  ): EventSeason | undefined {
+    return eventSeasons.find((s) => s.type === seasonType)
+  }
+
   return (
     <motion.div 
       initial={{ opacity: 0 }}
@@ -31,39 +40,25 @@ export default function Events({ strings, eventSeasons, seasonalEvents, locale}:
 
         <div>{strings.eventLangPickerLabel} <span id="">{eventLang}</span></div>
         
+        <EventGroup 
+          title={strings.sectionRegCo.title}
+          eventSeason={getFirstSeasonOfType('REG')}
+        />
 
-        <article>
-          <h2 className='text-2xl uppercase'>{strings.sectionRegCo.title}</h2>
-          <div>
-            Event information
-            {eventSeasons.filter(s => s.type === "REG").map((season) => {
-              return (
-                <div key={season.id}>
-                  {season.serviceYear}: {season.theme}
-                </div>
-              )
-            })}
+        <EventGroup 
+          title={strings.sectionCACO.title}
+          eventSeason={getFirstSeasonOfType('CACO')}
+        />
 
-            Events:
-            
-          </div>
-        </article>
+        <EventGroup 
+          title={strings.sectionCABR.title}
+          eventSeason={getFirstSeasonOfType('CABR')}
+        />
 
-        <article>
-          <h2 className='text-2xl uppercase'>{strings.sectionCACO.title}</h2>
-        </article>
-
-        <article>
-          <h2 className='text-2xl uppercase'>{strings.sectionCABR.title}</h2>
-        </article>
-
-        <article>
-          <h2 className='text-2xl uppercase'>{strings.sectionOtherEvents.title}</h2>
-        </article>
-
-        {eventSeasons.map((season) => {
-          <div>H</div> 
-        })}
+        <EventGroup 
+          title={strings.sectionOtherEvents.title}
+          eventSeason={getFirstSeasonOfType('OTHER')}
+        />
       </main>
     </motion.div>
   )
