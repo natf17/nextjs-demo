@@ -33,7 +33,7 @@ export default function Events({ strings, eventSeasons, seasonalEvents, locale}:
         
 
         <article>
-          <h2>{strings.sectionRegCo.title}</h2>
+          <h2 className='text-2xl uppercase'>{strings.sectionRegCo.title}</h2>
           <div>
             Event information
             {eventSeasons.filter(s => s.type === "REG").map((season) => {
@@ -50,15 +50,15 @@ export default function Events({ strings, eventSeasons, seasonalEvents, locale}:
         </article>
 
         <article>
-          <h2>{strings.sectionCACO.title}</h2>
+          <h2 className='text-2xl uppercase'>{strings.sectionCACO.title}</h2>
         </article>
 
         <article>
-          <h2>{strings.sectionRegCo.title}</h2>
+          <h2 className='text-2xl uppercase'>{strings.sectionCABR.title}</h2>
         </article>
 
         <article>
-          <h2>{strings.sectionOtherEvents.title}</h2>
+          <h2 className='text-2xl uppercase'>{strings.sectionOtherEvents.title}</h2>
         </article>
 
         {eventSeasons.map((season) => {
