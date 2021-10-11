@@ -50,3 +50,14 @@ export const getStaticProps: GetStaticProps<Props, Params> = async (context) => 
 
 /* EXPORT COMPONENT */
 export default Events;
+
+
+// customization notes
+/*
+    Keep in mind NextJS locales should match the
+    locales configured as enums in Strapi events
+    (e.g. English = 'en' not 'en-us', etc)
+    
+    This is used to load the correct default event
+    languages.
+*/
