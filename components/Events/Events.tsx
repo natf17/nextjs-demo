@@ -4,20 +4,11 @@ import EventGroup from './components/EventGroup';
 
 // types
 import { Props } from '../../pages/events';
-import { EventSeason, SeasonalEvent, SeasonalType } from '../../shared/models/GetEventData';
+import { EventSeason, SeasonalEvent } from '../../shared/models/GetEventData';
 // sort events into event types
 type EventsByType = {REG: SeasonalEvent[], CACO: SeasonalEvent[], CABR: SeasonalEvent[], other: SeasonalEvent[]};
-type FirstSeasonsByType = {REG?: EventSeason, CACO?: EventSeason, CABR?: EventSeason, other?: EventSeason};
+type FirstSeasonByType = {REG?: EventSeason, CACO?: EventSeason, CABR?: EventSeason, other?: EventSeason};
 
-
-
-function getFirstSeasonOfType(
-  seasons: EventSeason[],
-  seasonType: SeasonalType
-): EventSeason | undefined {
-  console.log('RUN getFirstSeasonOfType()')
-  return seasons.find((s) => s.type === seasonType);
-}
 
 
 export default function Events({ strings, eventSeasons, seasonalEvents, locale}: Props) {
@@ -71,8 +62,8 @@ export default function Events({ strings, eventSeasons, seasonalEvents, locale}:
 
 
   // extract event seasons
-  const firstSeasonsByType = useMemo(()=> {
-    let seasonsByType: FirstSeasonsByType = {}
+  const firstSeasonByType = useMemo(()=> {
+    let seasonsByType: FirstSeasonByType = {}
 
     seasonsByType.REG = eventSeasons.find((s) => s.type === 'REG');
     seasonsByType.CACO = eventSeasons.find((s) => s.type === 'CACO');
@@ -141,26 +132,26 @@ export default function Events({ strings, eventSeasons, seasonalEvents, locale}:
         
         <EventGroup 
           title={strings.sectionRegCo.title}
-          eventSeason={firstSeasonsByType.REG}
+          eventSeason={firstSeasonByType.REG}
           events={eventsByType.REG}
         />
 
         <EventGroup 
           title={strings.sectionCACO.title}
-          eventSeason={undefined}
-          events={[]}
+          eventSeason={firstSeasonByType.CACO}
+          events={eventsByType.CACO}
         />
 
         <EventGroup 
           title={strings.sectionCABR.title}
-          eventSeason={undefined}
-          events={[]}
+          eventSeason={firstSeasonByType.CABR}
+          events={eventsByType.CABR}
         />
 
         <EventGroup 
           title={strings.sectionOtherEvents.title}
-          eventSeason={undefined}
-          events={[]}
+          eventSeason={firstSeasonByType.other}
+          events={eventsByType.other}
         />
       </main>
     </motion.div>
