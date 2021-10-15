@@ -13,14 +13,13 @@ type FirstSeasonByType = {REG?: EventSeason, CACO?: EventSeason, CABR?: EventSea
 
 export default function Events({ strings, eventSeasons, seasonalEvents, locale}: Props) {
   // use locale lang as default eventLang
-  const [eventLangFilter, setEventLangFilter] = useState<string | null>(null);
+  const [eventLangFilter, setEventLangFilter] = useState<string | undefined>(undefined);
   const [visibleEvents, setVisibleEvents] = useState<SeasonalEvent[] | null>(null);
   const [dummyCounter, setDummyCounter] = useState(0);
   
 
   // calculate available languages from events
   const availableLangs = useMemo(() => {
-    console.log('running fn 1')
     let langs:string[] = [];
     seasonalEvents.map((e) => {
       if (!langs.includes(e.eventLanguage)) {
@@ -112,15 +111,19 @@ export default function Events({ strings, eventSeasons, seasonalEvents, locale}:
       <main className='bg-green-100 h-full'>
         <h1 className='text-4xl text-center p-2'>{strings.pageTitle}</h1>
 
-        <div>{strings.eventLangPickerLabel} <span id="">{eventLangFilter}</span></div>
-        {availableLangs.map((lang) => {
-          return (
-            <div key={lang}>{lang}</div>
-          )
-        })}
-
-        <br />
-
+        {/* Language picker */}
+        <form>
+          <label>
+            {strings.eventLangPickerLabel}
+            <select value={eventLangFilter} onChange={(e)=>{setEventLangFilter(e.target.value)}}>
+              {availableLangs.map((lang) => {
+                return (
+                  <option key={lang} value={lang}>{lang}</option>
+                );
+              })}
+            </select>          
+          </label>
+        </form>
         <div> 
           <h1 className='text-xl'>Dummy counter</h1>
           <div>
