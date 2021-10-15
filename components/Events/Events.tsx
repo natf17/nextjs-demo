@@ -124,14 +124,7 @@ export default function Events({ strings, eventSeasons, seasonalEvents, locale}:
             </select>          
           </label>
         </form>
-        <div> 
-          <h1 className='text-xl'>Dummy counter</h1>
-          <div>
-            <span>{dummyCounter}</span><br />
-            <button onClick={()=> {setDummyCounter(dummyCounter - 1)}}>-1</button>
-            <button onClick={()=> {setDummyCounter(dummyCounter + 1)}}>+1</button>
-          </div>
-        </div>
+
         
         <EventGroup 
           title={strings.sectionRegCo.title}
