@@ -118,7 +118,8 @@ export default function Events({ strings, eventSeasons, seasonalEvents, locale}:
             <select value={eventLangFilter} onChange={(e)=>{setEventLangFilter(e.target.value)}}>
               {availableLangs.map((lang) => {
                 return (
-                  <option key={lang} value={lang}>{lang}</option>
+                  // Test ECMAScript Intl API
+                  <option key={lang} value={lang}>{new Intl.DisplayNames([locale], {type:'language'}).of(lang)}</option>
                 );
               })}
             </select>          
