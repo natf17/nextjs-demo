@@ -16,6 +16,11 @@ export default function Events({ strings, eventSeasons, seasonalEvents, locale}:
   const [eventLangFilter, setEventLangFilter] = useState<string | undefined>(undefined);
   const [visibleEvents, setVisibleEvents] = useState<SeasonalEvent[] | null>(null);
   const [dummyCounter, setDummyCounter] = useState(0);
+
+  // TODO: 
+  // Either convert to using an intl library like react-intl, or make sure of supported features
+  // This is just a test
+  const languageTranslation = new Intl.DisplayNames([locale], {type:'language'});
   
 
   // calculate available languages from events
@@ -119,7 +124,7 @@ export default function Events({ strings, eventSeasons, seasonalEvents, locale}:
               {availableLangs.map((lang) => {
                 return (
                   // Test ECMAScript Intl API
-                  <option key={lang} value={lang}>{new Intl.DisplayNames([locale], {type:'language'}).of(lang)}</option>
+                  <option key={lang} value={lang}>{languageTranslation.of(lang)}</option>
                 );
               })}
             </select>          
@@ -130,7 +135,7 @@ export default function Events({ strings, eventSeasons, seasonalEvents, locale}:
         <EventGroup 
           title={strings.sectionRegCo.title}
           eventSeason={firstSeasonByType.REG}
-          events={eventsByType.REG}
+          events={eventsByType.REG}          
         />
 
         <EventGroup 
