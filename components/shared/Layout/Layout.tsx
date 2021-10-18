@@ -20,7 +20,7 @@ export default function Layout({ children, globalValues }: Props) {
 
   return (
     <>
-      {/* Only render header if not in home page */}
+      {/* Don't render header in home page */}
       {      
         asPath !== '/' &&
           <header className='fixed w-screen h-16 bg-blue-100'>
@@ -28,7 +28,7 @@ export default function Layout({ children, globalValues }: Props) {
           </header>
       }      
 
-      <main className='py-16 bg-blue-200 min-h-screen max-w-6xl m-auto flex'>
+      <main className='py-16 bg-blue-200 bg-opacity-10 min-h-screen max-w-6xl m-auto flex'>
         {children}
       </main>
     </>
