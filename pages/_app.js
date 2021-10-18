@@ -3,6 +3,8 @@ import { AnimatePresence } from 'framer-motion';
 import { useRouter } from 'next/router';
 import Layout from './../components/shared/Layout';
 import Head from 'next/head';
+import Image from 'next/image';
+import bgImage from '../public/bg_flipped.jpeg';
 
 
 
@@ -14,6 +16,13 @@ const globalValues = {
   }
 }
 
+const imageWrapperStyle = {
+  position: 'fixed',
+  height: '100vh',
+  width: '100vw',
+  overflow: 'hidden',
+  zIndex: -1
+}
 
 
 function MyApp({ Component, pageProps }) {
@@ -24,6 +33,18 @@ function MyApp({ Component, pageProps }) {
       <Head>
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      {/* bg image wrapper */}
+      <div style={imageWrapperStyle}>
+        <Image
+          src={bgImage}
+          alt='Background image'
+          layout='fill'
+          objectFit='cover'
+          quality={100}
+        />        
+      </div>
+
+      
       <AnimatePresence exitBeforeEnter>
         <Component {...pageProps} key={ router.pathname } />
       </AnimatePresence>
@@ -31,6 +52,7 @@ function MyApp({ Component, pageProps }) {
   );
 }
 
+// TODO
 /*
 Note: This page will need to be updated whenever global shared layout 
 values, such as the header and footer content, change. This is an active
