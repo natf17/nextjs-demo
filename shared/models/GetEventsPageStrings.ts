@@ -6,7 +6,10 @@ export type EventsPageSchema = {
   eventLangPickerLabel: string,
   general: {
     eventThemeLabel: string,
-    durationLabel: string
+    durationLabel: string,
+    yearsShowingLabel: string,
+    dateLabel: string,
+    eventLangLabel: string
   },
   sectionRegCo: {
     title: string
@@ -32,7 +35,10 @@ const query = (locale = "en") => {
         eventLangPickerLabel
         general {
           eventThemeLabel
-          durationLabel  
+          durationLabel
+          yearsShowingLabel
+          dateLabel
+          eventLangLabel
         }
         sectionRegCo {
           title
