@@ -7,7 +7,12 @@ type SeasonalEventProps = Pick<SeasonalEvent, 'startDate' | 'eventLanguage'>;
 
 
 export default function Event
-  ({dateLabel, eventLangLabel, startDate, eventLanguage}: Strings & SeasonalEventProps
+  ({
+    dateLabel, 
+    eventLangLabel, 
+    startDate, 
+    eventLanguage,
+    }: Strings & SeasonalEventProps
   ){
   return (
     <article>

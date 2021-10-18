@@ -25,16 +25,19 @@ export default function EventGroup({title, eventSeason, events, stringsGen}: Pro
 
       {/* Show some events! */}
       <div className='bg-green-500'>
-        { events && events.map((e) => {
-            return(
-              <Event key={e.id} 
-                dateLabel={stringsGen.dateLabel}
-                eventLangLabel={stringsGen.eventLangLabel}
-                startDate={e.startDate}
-                eventLanguage={e.eventLanguage}                
-              />
-            )
-          })
+        { events ? 
+            events.map((e) => {
+              return(
+                <Event key={e.id} 
+                  dateLabel={stringsGen.dateLabel}
+                  eventLangLabel={stringsGen.eventLangLabel}
+                  startDate={e.startDate}
+                  eventLanguage={e.eventLanguage}
+                />
+              )
+            }) 
+          :
+            <span>{stringsGen.noEventsFound}</span>
         }
       </div>
     </article>

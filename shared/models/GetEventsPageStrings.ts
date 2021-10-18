@@ -24,7 +24,8 @@ export type GeneralStrings = {
   durationLabel: string,
   yearsShowingLabel: string,
   dateLabel: string,
-  eventLangLabel: string
+  eventLangLabel: string,
+  noEventsFound: string
 }
 
 
@@ -40,6 +41,7 @@ const query = (locale = "en") => {
           yearsShowingLabel
           dateLabel
           eventLangLabel
+          noEventsFound
         }
         sectionRegCo {
           title
