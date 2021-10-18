@@ -18,8 +18,8 @@ export default function Home({ strings }:Props) {
       
       <Link href="/menu"><a className='block h-full'>
         <div className='h-full flex flex-col justify-center'>
-          <h1 className='text-left text-6xl'>{strings.welcomeText}</h1>
-          <h3 className='text-left text-3xl'>{strings.tapToContinuePrompt}</h3>                  
+          <h1 className='text-left text-6xl text-blue-50'>{strings.welcomeText}</h1>
+          <h3 className='text-left text-3xl text-blue-50'>{strings.tapToContinuePrompt}</h3>                  
         </div>
       </a></Link>
     </motion.div>

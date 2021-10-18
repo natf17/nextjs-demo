@@ -17,7 +17,7 @@ export default function Home({ strings }: Props) {
       className='self-stretch w-full'
     >
       
-      <main className='bg-green-100 h-full'>
+      <main className='h-full'>
 
         <h1 className='text-4xl text-center p-2'>
         { strings.pageTitle }        
