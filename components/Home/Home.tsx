@@ -17,7 +17,7 @@ export default function Home({ strings }:Props) {
       <Head><title>{strings.pageTitle}</title></Head>
       
       <Link href="/menu"><a className='block h-full'>
-        <div className='h-full'>
+        <div className='h-full flex flex-col justify-center'>
           <h1 className='text-left text-6xl'>{strings.welcomeText}</h1>
           <h3 className='text-left text-3xl'>{strings.tapToContinuePrompt}</h3>                  
         </div>
