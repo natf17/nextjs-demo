@@ -4,13 +4,7 @@ import { gql } from '@apollo/client';
 export type EventsPageSchema = {
   pageTitle: string,
   eventLangPickerLabel: string,
-  general: {
-    eventThemeLabel: string,
-    durationLabel: string,
-    yearsShowingLabel: string,
-    dateLabel: string,
-    eventLangLabel: string
-  },
+  general: GeneralStrings,
   sectionRegCo: {
     title: string
   },
@@ -25,6 +19,13 @@ export type EventsPageSchema = {
   }
 }
 
+export type GeneralStrings = {
+  eventThemeLabel: string,
+  durationLabel: string,
+  yearsShowingLabel: string,
+  dateLabel: string,
+  eventLangLabel: string
+}
 
 
 const query = (locale = "en") => {
