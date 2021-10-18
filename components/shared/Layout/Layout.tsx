@@ -17,7 +17,6 @@ export type Props = {
 
 export default function Layout({ children, globalValues }: Props) {
   const { asPath } = useRouter();
-  console.log(asPath);
 
   return (
     <>
