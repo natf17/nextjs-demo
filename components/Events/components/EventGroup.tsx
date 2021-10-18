@@ -25,7 +25,7 @@ export default function EventGroup({title, eventSeason, events, stringsGen}: Pro
 
       {/* Show some events! */}
       <div className='bg-green-500'>
-        { events ? 
+        { (events && events.length) ? 
             events.map((e) => {
               return(
                 <Event key={e.id} 
