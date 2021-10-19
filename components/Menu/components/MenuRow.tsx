@@ -12,7 +12,7 @@ export default function MenuRow({title, menuItems}: Props) {
   return (
 
     <div className='py-6'>
-      <h3 className='text-2xl text-left p-2'>{title}</h3>
+      <h3 className='text-2xl text-left p-2 text-blue-50'>{title}</h3>
 
       <div className='
         p-2 

@@ -11,7 +11,7 @@ export default function MenuItem(item: MenuItemType) {
       <Link href={item.url}>
         <a className='
           flex flex-col 
-          bg-yellow-200 p-1
+          bg-yellow-200 p-1 bg-opacity-50
           border border-solid border-gray-400'
         >
           {/* Container sizing */}

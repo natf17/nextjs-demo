@@ -28,7 +28,7 @@ export default function Layout({ children, globalValues }: Props) {
           </header>
       }      
 
-      <main className='py-16 bg-blue-200 bg-opacity-10 min-h-screen max-w-6xl m-auto flex'>
+      <main className='py-16 bg-black bg-opacity-40 min-h-screen max-w-6xl m-auto flex'>
         {children}
       </main>
     </>

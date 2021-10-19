@@ -56,8 +56,8 @@ export default function Map({ strings, amenityData, maps }: Props) {
       className='self-stretch w-full'
     >
       
-      <main className='bg-green-100 h-full'>
-        <h1 className='text-4xl text-center p-2'>
+      <main className='bg-green-100 bg-opacity-10 h-full'>
+        <h1 className='text-4xl text-center p-2 text-blue-50'>
           { strings.pageTitle }
         </h1>
 
@@ -90,9 +90,9 @@ export default function Map({ strings, amenityData, maps }: Props) {
         </div>
       
         {/* Map view */}
-        <div className='bg-gray-400 
+        <div className='bg-gray-400 bg-opacity-40
               md:min-h-screen md:flex justify-end items-center
-              lg:bg-gray-700'>
+              lg:bg-gray-700 lg:bg-opacity-40'>
           <DirectoryMap 
             selectedAmenity={selectedAmenity} maps={maps} 
            />
