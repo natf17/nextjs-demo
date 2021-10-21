@@ -3,10 +3,6 @@ import Link from 'next/link';
 import { Translate as LanguageIcon } from '@material-ui/icons';
 import { useRouter } from 'next/router';
 
-type Props = {
-  locales: string[]
-  activeLocale: string
-}
 
 
 export default function LanguagePicker() {
