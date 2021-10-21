@@ -15,8 +15,8 @@ export default function Header({src, width, height}:Props) {
 
   return (
     <div className='overflow-hidden h-16
-      inline-grid w-full grid-cols-navBar
-      px-10
+      grid w-full grid-cols-navBar
+      px-10 max-w-7xl m-auto bg-gray-100
     '>
       {/* To include text: we need some way to make this dynamic, i.e.
       to refresh this information when site language
@@ -38,7 +38,7 @@ export default function Header({src, width, height}:Props) {
       </a></Link>
 
       {/* Region right */}
-      <div>
+      <div className='flex flex-row-reverse text-right'>
         <LanguagePicker />      
       </div>
     </div>
