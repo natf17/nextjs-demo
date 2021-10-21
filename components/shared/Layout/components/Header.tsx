@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import LanguagePicker from './LanguagePicker';
 import { useRouter } from 'next/router';
+import BackButton from './BackButton';
 
 type Props = {
   src: string,
@@ -24,7 +25,7 @@ export default function Header({src, width, height}:Props) {
 
       {/* Region left */}
       <div className='flex'>
-        
+        <BackButton />
       </div>
 
 
