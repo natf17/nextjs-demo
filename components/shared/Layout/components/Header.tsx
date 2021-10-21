@@ -23,7 +23,9 @@ export default function Header({src, width, height}:Props) {
       changes, etc. */}
 
       {/* Region left */}
-      <div></div>
+      <div className='flex'>
+        
+      </div>
 
 
       {/* Region center (logo) */}
@@ -38,7 +40,7 @@ export default function Header({src, width, height}:Props) {
       </a></Link>
 
       {/* Region right */}
-      <div className='flex flex-row-reverse text-right'>
+      <div className='flex flex-row-reverse'>
         <LanguagePicker />      
       </div>
     </div>
