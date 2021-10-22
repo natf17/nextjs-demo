@@ -27,8 +27,8 @@ export default function EventGroup({title, eventSeason, events, stringsGen}: Pro
       }
 
       {/* Show some events! */}
-      <div className='bg-green-500'>
-        { (events && events.length) ? 
+      <div className='bg-green-500 py-2 grid grid-cols-events auto-rows-events gap-2'>
+        { (events && events.length) ?             
             events.map((e) => {
               return(
                 <Event key={e.id} 
@@ -38,9 +38,9 @@ export default function EventGroup({title, eventSeason, events, stringsGen}: Pro
                   eventLanguage={e.eventLanguage}                  
                 />
               )
-            }) 
+            })            
           :
-            <span>{stringsGen.noEventsFound}</span>
+            <span className='col-span-full'>{stringsGen.noEventsFound}</span>
         }
       </div>
     </article>

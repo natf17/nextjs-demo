@@ -9,12 +9,14 @@ module.exports = {
       gridTemplateColumns: {
         // Custom configuration for menu: min 200px, expand extra space
         'menu': 'repeat(auto-fill, minmax(200px, 1fr))',
-
+        
+        'events': 'repeat(auto-fill, minmax(11em, 1fr))',
         'navBar': '1fr 21em 1fr'
       },
       gridAutoRows: {
         // Same as columns: min 200px, expand to fill extra space
-        'menu': 'minmax(200px, 1fr)'
+        'menu': 'minmax(200px, 1fr)',
+        'events': 'minmax(10em, 1fr)'        
       }
     },
   },
