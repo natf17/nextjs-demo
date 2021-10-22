@@ -1,6 +1,7 @@
 import { EventSeason, SeasonalEvent } from "../../../shared/models/GetEventData"
 import { GeneralStrings } from "../../../shared/models/GetEventsPageStrings"
 import Event from "./Event"
+import SeasonInfo from "./SeasonInfo"
 
 export type Props = {
   title: string,
@@ -15,12 +16,14 @@ export default function EventGroup({title, eventSeason, events, stringsGen}: Pro
       <h2 className='text-2xl uppercase'>{title}</h2>
       {/* Event information */}
       {eventSeason && 
-        <ul className='bg-red-200'>
-          <li>{stringsGen.eventThemeLabel}: {eventSeason.theme}</li>
-          <li>{stringsGen.yearsShowingLabel}: {eventSeason.seasonYears}</li>
-          <li>{stringsGen.durationLabel}: {eventSeason.durationDays}</li>
-          <li></li>        
-        </ul>
+        <SeasonInfo 
+          theme={eventSeason.theme} 
+          seasonYears={eventSeason.seasonYears} 
+          durationDays={eventSeason.durationDays}
+          eventThemeLabel={stringsGen.eventThemeLabel}
+          yearsShowingLabel={stringsGen.yearsShowingLabel}
+          durationLabel={stringsGen.durationLabel}
+        />
       }
 
       {/* Show some events! */}
@@ -32,7 +35,7 @@ export default function EventGroup({title, eventSeason, events, stringsGen}: Pro
                   dateLabel={stringsGen.dateLabel}
                   eventLangLabel={stringsGen.eventLangLabel}
                   startDate={e.startDate}
-                  eventLanguage={e.eventLanguage}
+                  eventLanguage={e.eventLanguage}                  
                 />
               )
             }) 

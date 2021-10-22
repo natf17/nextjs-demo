@@ -131,34 +131,35 @@ export default function Events({ strings, eventSeasons, seasonalEvents, locale}:
           </label>
         </form>
 
-        
-        <EventGroup 
-          title={strings.sectionRegCo.title}
-          eventSeason={firstSeasonByType.REG}
-          events={eventsByType.REG}
-          stringsGen={strings.general}
-        />
+        <div className='px-3 py-6'>
+          <EventGroup 
+            title={strings.sectionRegCo.title}
+            eventSeason={firstSeasonByType.REG}
+            events={eventsByType.REG}
+            stringsGen={strings.general}
+          />
 
-        <EventGroup 
-          title={strings.sectionCACO.title}
-          eventSeason={firstSeasonByType.CACO}
-          events={eventsByType.CACO}
-          stringsGen={strings.general}
-        />
+          <EventGroup 
+            title={strings.sectionCACO.title}
+            eventSeason={firstSeasonByType.CACO}
+            events={eventsByType.CACO}
+            stringsGen={strings.general}
+          />
 
-        <EventGroup 
-          title={strings.sectionCABR.title}
-          eventSeason={firstSeasonByType.CABR}
-          events={eventsByType.CABR}
-          stringsGen={strings.general}
-        />
+          <EventGroup 
+            title={strings.sectionCABR.title}
+            eventSeason={firstSeasonByType.CABR}
+            events={eventsByType.CABR}
+            stringsGen={strings.general}
+          />
 
-        <EventGroup 
-          title={strings.sectionOtherEvents.title}
-          eventSeason={firstSeasonByType.other}
-          events={eventsByType.other}
-          stringsGen={strings.general}
-        />
+          <EventGroup 
+            title={strings.sectionOtherEvents.title}
+            eventSeason={firstSeasonByType.other}
+            events={eventsByType.other}
+            stringsGen={strings.general}
+          />
+        </div>
       </main>
     </motion.div>
   )
