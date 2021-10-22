@@ -1,5 +1,6 @@
 import '../styles/globals.css';
 import { AnimatePresence } from 'framer-motion';
+import { IntlProvider } from 'react-intl';
 import { useRouter } from 'next/router';
 import Layout from './../components/shared/Layout';
 import Head from 'next/head';
@@ -29,26 +30,28 @@ function MyApp({ Component, pageProps }) {
   const router = useRouter();
 
   return (
-    <Layout globalValues={globalValues}>
-      <Head>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      {/* bg image wrapper */}
-      <div style={imageWrapperStyle}>
-        <Image
-          src={bgImage}
-          alt='Background image'
-          layout='fill'
-          objectFit='cover'
-          quality={100}
-        />        
-      </div>
+    <IntlProvider locale={router.locale} key={router.locale}>
+      <Layout globalValues={globalValues}>
+        <Head>
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
+        {/* bg image wrapper */}
+        <div style={imageWrapperStyle}>
+          <Image
+            src={bgImage}
+            alt='Background image'
+            layout='fill'
+            objectFit='cover'
+            quality={100}
+          />        
+        </div>
 
-      
-      <AnimatePresence exitBeforeEnter>
-        <Component {...pageProps} key={ router.pathname } />
-      </AnimatePresence>
-    </Layout>
+        
+        <AnimatePresence exitBeforeEnter>
+          <Component {...pageProps} key={ router.pathname } />
+        </AnimatePresence>
+      </Layout>
+    </IntlProvider>
   );
 }
 
