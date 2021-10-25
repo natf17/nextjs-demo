@@ -6,17 +6,15 @@ import { Public as LangIcon } from '@material-ui/icons';
 import { FormattedDate, FormattedDateParts } from 'react-intl';
 import { useRouter } from 'next/router';
 
-type Strings = Pick<GeneralStrings, 'dateLabel' | 'eventLangLabel'>;
-type SeasonalEventProps = Pick<SeasonalEvent, 'startDate' | 'eventLanguage'>;
+
+type Props = Pick<SeasonalEvent, 'startDate' | 'eventLanguage'>;
 
 
 export default function Event
   ({
-    dateLabel, 
-    eventLangLabel, 
     startDate, 
     eventLanguage,
-    }: Strings & SeasonalEventProps
+    }:Props
   ){
 
   const { locale = 'en' } = useRouter();

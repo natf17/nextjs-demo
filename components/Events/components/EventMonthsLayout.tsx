@@ -71,10 +71,7 @@ export default function EventMonthsLayout({events}: Props) {
                 monthEvents.map((event) => {
 
                   return (
-                    // TODO: refactor Event component, maybe strip unnecessary date
                     <Event 
-                      dateLabel='' 
-                      eventLangLabel='lang' 
                       startDate={event.startDate} 
                       eventLanguage={event.eventLanguage} 
                       key={event.id} 
