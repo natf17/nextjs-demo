@@ -3,6 +3,7 @@ import { GeneralStrings } from "../../../shared/models/GetEventsPageStrings";
 import { ControlPoint } from "@material-ui/icons";
 import Event from "./Event";
 import SeasonInfo from "./SeasonInfo";
+import EventMonthsLayout from "./EventMonthsLayout";
 
 export type Props = {
   title: string,
@@ -34,7 +35,9 @@ export default function EventGroup({title, eventSeason, events, stringsGen}: Pro
         }
 
         {/* Show some events! */}
-        <div className='bg-green-500 py-2 grid grid-cols-events auto-rows-events gap-2'>
+        { events && events.length > 0 && <EventMonthsLayout events={events} /> }
+
+        {/* <div className='bg-green-500 py-2 grid grid-cols-events auto-rows-events gap-2'>
           { (events && events.length) ?             
               events.map((e) => {
                 return(
@@ -49,7 +52,7 @@ export default function EventGroup({title, eventSeason, events, stringsGen}: Pro
             :
               <span className='col-span-full'>{stringsGen.noEventsFound}</span>
           }
-        </div>
+        </div> */}
       </div>
     </article>
   )
