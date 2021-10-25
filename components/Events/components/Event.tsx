@@ -1,7 +1,6 @@
 import React from 'react';
 import { SeasonalEvent } from '../../../shared/models/GetEventData';
 import { GeneralStrings } from '../../../shared/models/GetEventsPageStrings';
-import { Schedule as DurationIcon } from '@material-ui/icons';
 import { Public as LangIcon } from '@material-ui/icons';
 
 import { FormattedDate, FormattedDateParts } from 'react-intl';
@@ -36,30 +35,35 @@ export default function Event
     }    
   }
 
+
+  const dayName = 'vie.';
+  const monthName = 'mayo';
+  const dayDate = '16';
+  const eventLang = 'español';
+
   return (
-    <article className='rounded bg-red-300 shadow overflow-hidden border border-blue-50'>
-      <header className='bg-red-900 text-yellow-200 p-1 text-center uppercase'>
+    <article className='rounded-lg bg-green-50 shadow p-1 px-3 overflow-hidden'>
+      {/* Localized day name */}
+      <div className='text-gray-600 text-lg pt-1'>{dayName}</div>
+
       {/* Localized month */}
+      <header className='text-center lowercase italic text-2xl py-1'>
         { localizedMonthFormatter(locale, startDate)}
       </header>
 
-
-      <div className='bg-yellow-50 py-2'>
-        <div className='text-5xl text-center'>
-          {/* Localized day */}
-          <FormattedDateParts value={startDate}>
-            {parts => (
-                <>{ parts.filter((part) => part.type === 'day')[0].value }</>
-            )}
-          </FormattedDateParts>
-        </div>
-
-        <div className='text-gray-500 italic text-center'>
-          <LangIcon color='inherit' fontSize='inherit' /> {eventLanguage}
-        </div>
+      {/* Day date */}      
+      <div className='text-6xl text-center'>
+        {/* Localized day */}
+        <FormattedDateParts value={startDate}>
+          {parts => (
+              <>{ parts.filter((part) => part.type === 'day')[0].value }</>
+          )}
+        </FormattedDateParts>
       </div>
-      {/* <span>{dateLabel}: {startDate}</span>
-      <span>{eventLangLabel}: {eventLanguage}</span> */}
+
+      <div className='text-gray-600 italic text-center text-lg pb-3'>
+        <LangIcon color='inherit' fontSize='inherit' /> {eventLanguage}
+      </div>
     </article>
   )
 }
