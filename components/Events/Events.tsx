@@ -17,9 +17,7 @@ export default function Events({ strings, eventSeasons, seasonalEvents, locale}:
   const [visibleEvents, setVisibleEvents] = useState<SeasonalEvent[] | null>(null);
   const [dummyCounter, setDummyCounter] = useState(0);
 
-  // TODO: 
-  // Either convert to using an intl library like react-intl, or make sure of supported features
-  // This is just a test
+  // TODO: check browser compatibility
   const languageTranslation = new Intl.DisplayNames([locale], {type:'language'});
   
 

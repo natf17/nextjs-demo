@@ -13,7 +13,7 @@ export type Props = {
 export default function EventGroup({title, eventSeason, events, stringsGen}: Props) {
   return (
     <article>
-      <h2 className='text-2xl uppercase'>{title}</h2>
+      <h2 className='text-3xl uppercase'>{title}</h2>
       {/* Event information */}
       {eventSeason && 
         <SeasonInfo 
