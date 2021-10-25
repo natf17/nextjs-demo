@@ -18,7 +18,7 @@ export default function SeasonInfo({
   return (
     <div className='border border-l-4 p-2 ml-10 w-96'>
       {/* Position somewhere in bg (absolute? or bg img) */}
-      <Info color='disabled' />
+      {/* <Info color='disabled' /> */}
 
       <ul className='text-lg'>
         <li className=''>
@@ -28,10 +28,8 @@ export default function SeasonInfo({
 
         <li className=''>
           <span className='font-black '>{yearsShowingLabel}: </span>
-          <span>{seasonYears}</span>
-        </li>
-        <li className=''>
-          <span className='font-black '>{durationLabel}: </span>
+          <span>{seasonYears}</span> 
+          <span className='font-black '> {durationLabel}: </span>
           <span>{durationDays}</span>
         </li>
       </ul>
