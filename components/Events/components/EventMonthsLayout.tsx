@@ -64,7 +64,7 @@ export default function EventMonthsLayout({events}: Props) {
       {Object.entries(eventsByMonth).map(([monthNum, monthEvents]) =>
         (
           monthEvents.length > 0 &&
-            <div key={monthNum} className={`border-l-8 ${monthsToColorsMap[monthNum]} pl-4 mb-8
+            <div key={monthNum} className={`border-l-8 ${monthsToColorsMap[monthNum]} pl-4 mb-8 last:mb-0
               grid grid-cols-events auto-rows-events gap-x-8
             `}>
               {              
