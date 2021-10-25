@@ -39,6 +39,7 @@ const GetCombinedSeasonalEventData = (locale = "en") => {
         durationDays
         theme
         serviceYear
+        seasonYears
       }
       seasonalEvents {
         id
