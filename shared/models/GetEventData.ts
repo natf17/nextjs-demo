@@ -24,6 +24,7 @@ export type SeasonalEvent = {
   eventLanguage: string,
   event_season: {
     serviceYear: number,
+    seasonYears: string,
     type: SeasonalType,
     theme: string
   }
@@ -48,6 +49,7 @@ const GetCombinedSeasonalEventData = (locale = "en") => {
         eventLanguage
         event_season {
           serviceYear
+          seasonYears
           type
           theme
         }
