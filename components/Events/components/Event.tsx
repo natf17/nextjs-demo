@@ -20,7 +20,8 @@ export default function Event
   const { locale = 'en' } = useRouter();
     
   // TODO: extract into custom hook? (takes in locale, returns fn that generates month names)
-  const localizedMonthFormatter: (locale:string, date:string) => any = (locale, date) => {    
+  const localizedMonthFormatter: (locale:string, date:string) => string = (locale, date) => {
+    console.log(date); 
     try {
       return new Intl.DateTimeFormat(locale, {
         month: 'long',
@@ -34,15 +35,34 @@ export default function Event
   }
 
 
-  const dayName = 'vie.';
-  const monthName = 'mayo';
-  const dayDate = '16';
-  const eventLang = 'español';
+  const getLocalizedDayName: (locale:string, date:string) => string = (locale, date) => {
+    try {
+      return new Intl.DateTimeFormat(locale, {
+        weekday: 'short',
+        timeZone: 'UTC'
+      }).format(new Date(date));
+    }
+    catch {
+      console.error(`Error creating localized day name using locale ${locale} and date ${date}`)
+      return 'DAY';
+    }
+  }
+
+  const getDayNumber: (date:string) => string = (date) => {
+    try {
+      return new Date(date).getDate().toString();
+    }
+    catch {
+      console.error(`Error creating day date using date ${date}`)
+      return '#'
+    }
+  }
+
 
   return (
     <article className='rounded-lg bg-green-50 shadow p-1 px-3 overflow-hidden'>
       {/* Localized day name */}
-      <div className='text-gray-600 text-lg pt-1'>{dayName}</div>
+      <div className='text-gray-600 text-lg pt-1 lowercase'>{getLocalizedDayName(locale, startDate)}.</div>
 
       {/* Localized month */}
       <header className='text-center lowercase italic text-2xl py-1'>
@@ -52,11 +72,7 @@ export default function Event
       {/* Day date */}      
       <div className='text-6xl text-center'>
         {/* Localized day */}
-        <FormattedDateParts value={startDate}>
-          {parts => (
-              <>{ parts.filter((part) => part.type === 'day')[0].value }</>
-          )}
-        </FormattedDateParts>
+        { getDayNumber(startDate) }
       </div>
 
       <div className='text-gray-600 italic text-center text-lg pb-3'>
