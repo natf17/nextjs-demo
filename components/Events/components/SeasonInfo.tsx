@@ -20,7 +20,7 @@ export default function SeasonInfo({
       {/* Position somewhere in bg (absolute? or bg img) */}
       {/* <Info color='disabled' /> */}
 
-      <ul className='text-lg border mt-2 p-2 bg-gray-900 rounded-lg'>
+      <ul className='border-l-2 mt-2 p-2 bg-gray-800'>
         <li className=''>
           <span className='font-black '>{eventThemeLabel}: </span>
           <span>{theme}</span>
