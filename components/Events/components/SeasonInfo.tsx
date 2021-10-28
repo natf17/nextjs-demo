@@ -16,11 +16,11 @@ export default function SeasonInfo({
   durationLabel, durationDays
 }: Props) {
   return (
-    <div className='border border-l-4 p-2 ml-10 w-96'>
+    <div className='text-blue-50 p-2 ml-10 w-96'>
       {/* Position somewhere in bg (absolute? or bg img) */}
       {/* <Info color='disabled' /> */}
 
-      <ul className='text-lg'>
+      <ul className='text-lg border mt-2 p-2 bg-gray-900 rounded-lg'>
         <li className=''>
           <span className='font-black '>{eventThemeLabel}: </span>
           <span>{theme}</span>

@@ -111,14 +111,14 @@ export default function Events({ strings, eventSeasons, seasonalEvents, locale}:
       className='self-stretch w-full'
     >
       
-      <main className='bg-green-100 bg-opacity-50 h-full'>
+      <main className='h-full'>
         <header className='mb-4'>
-          <h1 className='text-4xl text-center p-2'>{strings.pageTitle}</h1>
+          <h1 className='text-4xl text-center text-blue-50 p-2'>{strings.pageTitle}</h1>
 
           {/* Language picker */}
           <form className='text-lg w-10/12 mx-auto border-b p-3'>
             <label>
-              {strings.eventLangPickerLabel} 
+              <span className='text-blue-50'>{strings.eventLangPickerLabel}</span>
               <select value={eventLangFilter} onChange={(e)=>{setEventLangFilter(e.target.value)}}>
                 {availableLangs.map((lang) => {
                   return (

@@ -28,9 +28,14 @@ export default function EventGroup({title, eventSeason, events, stringsGen}: Pro
   }
 
   return (
-    <article>
+    <article className="mb-2 last:mb-0">
       {/* Event season name */}
-      <h2 className='text-3xl uppercase' onClick={ () => toggleExpanded() }>
+      <h2 
+        className={`
+          text-3xl uppercase
+          text-blue-200
+        `}
+        onClick={ () => toggleExpanded() }>
         <ControlPoint fontSize="inherit" color="inherit" /> {title}
       </h2>
 
@@ -55,7 +60,7 @@ export default function EventGroup({title, eventSeason, events, stringsGen}: Pro
         {/* Show some events! */}
         { (events && events.length > 0) 
           ? <EventMonthsLayout events={events} /> 
-          : <>{stringsGen.noEventsFound}</>
+          : <div className='text-blue-200 p-2'>{stringsGen.noEventsFound}</div>
         }
       </motion.div>
     </article>
