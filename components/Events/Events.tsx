@@ -111,7 +111,7 @@ export default function Events({ strings, eventSeasons, seasonalEvents, locale}:
       className='self-stretch w-full'
     >
       
-      <main className='h-full'>
+      <main className='h-full bg-black bg-opacity-50'>
         <header className='mb-4'>
           <h1 className='text-4xl text-center text-blue-50 p-2'>{strings.pageTitle}</h1>
 
