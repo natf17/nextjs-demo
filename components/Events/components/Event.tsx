@@ -26,7 +26,7 @@ export default function Event
       return new Intl.DateTimeFormat(locale, {
         month: 'long',
         timeZone: 'UTC'
-      }).format(new Date(date));
+      }).format(new Date(date.replace(/-/g, '\/')));
     }
     catch {
       console.error(`Error creating localized month name using locale ${locale} and date ${date}`);
@@ -40,7 +40,7 @@ export default function Event
       return new Intl.DateTimeFormat(locale, {
         weekday: 'short',
         timeZone: 'UTC'
-      }).format(new Date(date));
+      }).format(new Date(date.replace(/-/g, '\/')));
     }
     catch {
       console.error(`Error creating localized day name using locale ${locale} and date ${date}`)
@@ -50,7 +50,9 @@ export default function Event
 
   const getDayNumber: (date:string) => string = (date) => {
     try {
-      return new Date(date).getDate().toString();
+      // RegEx to replace hyphens w dashes for creating correct date
+      // see https://stackoverflow.com/questions/7556591/is-the-javascript-date-object-always-one-day-off
+      return new Date(date.replace(/-/g, '\/')).getDate().toString();
     }
     catch {
       console.error(`Error creating day date using date ${date}`)
