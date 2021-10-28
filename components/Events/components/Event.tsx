@@ -6,14 +6,19 @@ import { Public as LangIcon } from '@material-ui/icons';
 import { FormattedDate, FormattedDateParts } from 'react-intl';
 import { useRouter } from 'next/router';
 
+import monthsToColorsMap from '../config/eventColorsByMonth';
 
-type Props = Pick<SeasonalEvent, 'startDate' | 'eventLanguage'>;
+
+type Props = Pick<SeasonalEvent, 'startDate' | 'eventLanguage'> & {
+  monthNumber: string
+};
 
 
 export default function Event
   ({
     startDate, 
     eventLanguage,
+    monthNumber
     }:Props
   ){
 
@@ -62,7 +67,7 @@ export default function Event
 
 
   return (
-    <article className='rounded-lg bg-green-50 shadow p-1 px-3 overflow-hidden'>
+    <article className={`rounded-lg bg-${monthsToColorsMap[monthNumber].bg_light} shadow p-1 px-3 overflow-hidden`}>
       {/* Localized day name */}
       <div className='text-gray-600 text-lg pt-1 lowercase'>{getLocalizedDayName(locale, startDate)}.</div>
 

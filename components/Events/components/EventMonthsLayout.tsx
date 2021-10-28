@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { SeasonalEvent } from '../../../shared/models/GetEventData';
 import Event from './Event';
-
+import monthsToColorsMap from '../config/eventColorsByMonth'
 
 type Props = {
   events: SeasonalEvent[]
@@ -12,20 +12,6 @@ type EventsByMonth = {
   [index: number]: SeasonalEvent[] 
 }
 
-const monthsToColorsMap: { [index: string]: string } = {
-  1: 'border-red-400',
-  2: 'border-yellow-300',
-  3: 'border-purple-800',
-  4: 'border-red-400',
-  5: 'border-yellow-300',
-  6: 'border-purple-800',
-  7: 'border-red-400', 
-  8: 'border-yellow-300',
-  9: 'border-purple-800',
-  10: 'border-red-400',
-  11: 'border-yellow-300',
-  12: 'border-purple-800'
-}
 
 
 export default function EventMonthsLayout({events}: Props) {
@@ -64,7 +50,7 @@ export default function EventMonthsLayout({events}: Props) {
       {Object.entries(eventsByMonth).map(([monthNum, monthEvents]) =>
         (
           monthEvents.length > 0 &&
-            <div key={monthNum} className={`border-l-8 ${monthsToColorsMap[monthNum]} pl-4 mb-8 last:mb-0
+            <div key={monthNum} className={`border-l-8 border-${monthsToColorsMap[monthNum].accent} pl-4 mb-8 last:mb-0
               grid grid-cols-events auto-rows-events gap-x-8
             `}>
               {              
@@ -75,6 +61,7 @@ export default function EventMonthsLayout({events}: Props) {
                       startDate={event.startDate} 
                       eventLanguage={event.eventLanguage} 
                       key={event.id} 
+                      monthNumber={monthNum}
                     />
                   )
                 })
