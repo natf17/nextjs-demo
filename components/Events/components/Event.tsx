@@ -1,9 +1,6 @@
 import React from 'react';
 import { SeasonalEvent } from '../../../shared/models/GetEventData';
-import { GeneralStrings } from '../../../shared/models/GetEventsPageStrings';
 import { Public as LangIcon } from '@material-ui/icons';
-
-import { FormattedDate, FormattedDateParts } from 'react-intl';
 import { useRouter } from 'next/router';
 
 import monthsToColorsMap from '../config/eventColorsByMonth';
