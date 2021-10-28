@@ -26,7 +26,7 @@ export default function Event
     console.log(date); 
     try {
       return new Intl.DateTimeFormat(locale, {
-        month: 'long',
+        month: 'short',
         timeZone: 'UTC'
       }).format(new Date(date.replace(/-/g, '\/')));
     }
@@ -64,9 +64,7 @@ export default function Event
 
 
   return (
-    <>
- 
-
+    <>      
       <article 
         className={`
           rounded-lg shadow p-3 overflow-hidden
@@ -75,11 +73,20 @@ export default function Event
         `}
       >
         {/* Localized day name */}
-        <div className='text-gray-600 text-lg pt-1 lowercase bg-blue-100'>{getLocalizedDayName(locale, startDate)}.</div>
+        <div className='flex items-center text-gray-600 text-lg lowercase bg-blue-100'>
+          {getLocalizedDayName(locale, startDate)}.
+        </div>
+
         {/* Localized month */}
-        <div className='text-xl lowercase italic bg-red-100'>{localizedMonthFormatter(locale, startDate)}</div>
+        <div className='flex items-center text-xl lowercase italic bg-red-100 justify-center'>
+          {localizedMonthFormatter(locale, startDate)}
+        </div>
+
         {/* Day date */}
-        <div className='text-4xl bg-yellow-300'>{ getDayNumber(startDate) }</div>
+        <div className='flex items-center text-4xl bg-yellow-300'>
+          { getDayNumber(startDate) }
+        </div>
+
         {/* Language */}
         <div className='text-gray-600 italic text-lg col-span-full text-center bg-green-200'>
           <LangIcon color='inherit' fontSize='inherit' /> {eventLanguage}
