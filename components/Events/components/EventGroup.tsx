@@ -31,9 +31,9 @@ export default function EventGroup({title, eventSeason, events, stringsGen}: Pro
     <article className="mb-2 last:mb-0">
       {/* Event season name */}
       <h2 
-        className={`
+        className={`        
           text-3xl uppercase          
-          ${isGroupExpanded ? 'text-blue-300' : 'text-gray-300'}          
+          ${isGroupExpanded ? 'text-blue-300' : 'text-gray-300'}                        
         `}
         onClick={ () => toggleExpanded() }>
         <ControlPoint fontSize="inherit" color="inherit" /> {title}

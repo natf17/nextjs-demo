@@ -64,24 +64,27 @@ export default function Event
 
 
   return (
-    <article className={`rounded-lg bg-${monthsToColorsMap[monthNumber].bg_light} shadow p-1 px-3 overflow-hidden`}>
-      {/* Localized day name */}
-      <div className='text-gray-600 text-lg pt-1 lowercase'>{getLocalizedDayName(locale, startDate)}.</div>
+    <>
+ 
 
-      {/* Localized month */}
-      <header className='text-center lowercase italic text-2xl py-1'>
-        { localizedMonthFormatter(locale, startDate)}
-      </header>
-
-      {/* Day date */}      
-      <div className='text-6xl text-center'>
-        {/* Localized day */}
-        { getDayNumber(startDate) }
-      </div>
-
-      <div className='text-gray-600 italic text-center text-lg pb-3'>
-        <LangIcon color='inherit' fontSize='inherit' /> {eventLanguage}
-      </div>
-    </article>
+      <article 
+        className={`
+          rounded-lg shadow p-3 overflow-hidden
+          bg-${monthsToColorsMap[monthNumber].bg_light}
+          grid grid-cols-3 auto-rows-min gap-1
+        `}
+      >
+        {/* Localized day name */}
+        <div className='text-gray-600 text-lg pt-1 lowercase bg-blue-100'>{getLocalizedDayName(locale, startDate)}.</div>
+        {/* Localized month */}
+        <div className='text-xl lowercase italic bg-red-100'>{localizedMonthFormatter(locale, startDate)}</div>
+        {/* Day date */}
+        <div className='text-4xl bg-yellow-300'>{ getDayNumber(startDate) }</div>
+        {/* Language */}
+        <div className='text-gray-600 italic text-lg col-span-full text-center bg-green-200'>
+          <LangIcon color='inherit' fontSize='inherit' /> {eventLanguage}
+        </div>
+      </article>
+    </>
   )
 }
