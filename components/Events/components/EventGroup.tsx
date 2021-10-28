@@ -32,15 +32,15 @@ export default function EventGroup({title, eventSeason, events, stringsGen}: Pro
       {/* Event season name */}
       <h2 
         className={`
-          text-3xl uppercase
-          text-blue-200
+          text-3xl uppercase          
+          ${isGroupExpanded ? 'text-blue-300' : 'text-gray-300'}          
         `}
         onClick={ () => toggleExpanded() }>
         <ControlPoint fontSize="inherit" color="inherit" /> {title}
       </h2>
 
       {/* Event data */}
-      <motion.div className="border-l pl-4"
+      <motion.div className="border-l border-blue-300 pl-4"
         animate={ isGroupExpanded ? "expanded" : "collapsed" }
         variants = { variants }
         initial = { false }
