@@ -16,9 +16,27 @@ export type Props = {
 export default function EventGroup({title, eventSeason, events, stringsGen}: Props) {
   const [isGroupExpanded, setIsGroupExpanded] = useState(false);
 
+  // Animation
   const variants = {
-    expanded: { opacity: 1, height: "100%", display: "block" },
-    collapsed: { opacity: 0, height: "0", transitionEnd: { display: "none"}}
+    expanded: { 
+      opacity: 1, 
+      height: "100%", 
+      display: "block",
+      transition: {
+        when: "beforeChildren",
+        delayChildren: 0    
+      }
+    },
+    collapsed: { 
+      opacity: 0, 
+      height: "0",
+      transition: {
+        when: "afterChildren"
+      },
+      transitionEnd: { 
+        display: "none"
+      }
+    }
   };
   
 

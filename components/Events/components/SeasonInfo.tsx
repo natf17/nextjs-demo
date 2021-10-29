@@ -1,5 +1,6 @@
 import React from 'react';
 import { Info } from '@material-ui/icons';
+import { motion } from 'framer-motion';
 
 type Props = {
   eventThemeLabel: string,
@@ -15,9 +16,16 @@ export default function SeasonInfo({
   yearsShowingLabel, seasonYears,
   durationLabel, durationDays
 }: Props) {
+
+  const SeasonInfoAnimationVariants = {
+    // no animations for now, load with parent
+  }
+
   return (
-    <div className='text-blue-50 p-2 ml-10 w-96'>
-      {/* Position somewhere in bg (absolute? or bg img) */}
+    <motion.div 
+      className='text-blue-50 p-2 ml-10 w-96'
+      variants={ SeasonInfoAnimationVariants }
+    >      
       {/* <Info color='disabled' /> */}
 
       <ul className='border-l-2 mt-2 p-2 bg-gray-800'>
@@ -34,6 +42,6 @@ export default function SeasonInfo({
         </li>
       </ul>
 
-    </div>
+    </motion.div>
   )
 }
