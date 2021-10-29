@@ -23,7 +23,6 @@ export default function Event
     
   // TODO: extract into custom hook? (takes in locale, returns fn that generates month names)
   const localizedMonthFormatter: (locale:string, date:string) => string = (locale, date) => {
-    console.log(date); 
     try {
       return new Intl.DateTimeFormat(locale, {
         month: 'short',

@@ -41,7 +41,6 @@ export default function EventGroup({title, eventSeason, events, stringsGen}: Pro
 
 
   const toggleExpanded: () => void = () => {
-    console.log('toggleExpanded() called')
     setIsGroupExpanded(!isGroupExpanded);
   }
 
