@@ -13,32 +13,32 @@ export type Props = {
   stringsGen: GeneralStrings
 }
 
-export default function EventGroup({title, eventSeason, events, stringsGen}: Props) {
-  const [isGroupExpanded, setIsGroupExpanded] = useState(false);
-
-  // Animation
-  const variants = {
-    expanded: { 
-      opacity: 1, 
-      height: "100%", 
-      display: "block",
-      transition: {
-        delayChildren: 0.15,
-        staggerChildren: 0.05
-      }
-    },
-    collapsed: { 
-      opacity: 0, 
-      height: "0",
-      transition: {
-        when: "afterChildren"
-      },
-      transitionEnd: { 
-        display: "none"
-      }
+// Animation
+const variants = {
+  expanded: { 
+    opacity: 1, 
+    height: "100%", 
+    display: "block",
+    transition: {
+      delayChildren: 0.15,
+      staggerChildren: 0.05
     }
-  };
-  
+  },
+  collapsed: { 
+    opacity: 0, 
+    height: "0",
+    transition: {
+      when: "afterChildren"
+    },
+    transitionEnd: { 
+      display: "none"
+    }
+  }
+};
+
+export default function EventGroup({title, eventSeason, events, stringsGen}: Props) {
+  const [isGroupExpanded, setIsGroupExpanded] = useState(false);  
+
 
   const toggleExpanded: () => void = () => {
     console.log('toggleExpanded() called')
@@ -61,7 +61,7 @@ export default function EventGroup({title, eventSeason, events, stringsGen}: Pro
       <motion.div className="border-l border-blue-300 pl-4"
         animate={ isGroupExpanded ? "expanded" : "collapsed" }
         variants = { variants }
-        initial = { false }
+        initial = { false }        
       >
         {/* Event season information */}
         {eventSeason && 
