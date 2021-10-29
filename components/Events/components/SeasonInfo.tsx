@@ -13,7 +13,7 @@ type Props = {
 
 export default function SeasonInfo({
   eventThemeLabel, theme,
-  yearsShowingLabel, seasonYears,
+  seasonYears,
   durationLabel, durationDays
 }: Props) {
 
@@ -29,21 +29,20 @@ export default function SeasonInfo({
 
   return (
     <motion.div 
-      className='text-blue-50 p-2 ml-10 w-96'
+      className='text-gray-200 p-2 ml-10 w-96'
       variants={ SeasonInfoAnimationVariants }
     >      
       {/* <Info color='disabled' /> */}
 
       <ul className='border-l-2 mt-2 p-2 bg-gray-800'>
         <li className=''>
-          <span className='font-black '>{eventThemeLabel}: </span>
-          <span>{theme}</span>
+          <span>{seasonYears} | </span>
+          <span className='font-black'>{eventThemeLabel}: </span>
+          <span>{theme}</span>           
         </li>
 
-        <li className=''>
-          <span className='font-black '>{yearsShowingLabel}: </span>
-          <span>{seasonYears}</span> 
-          <span className='font-black '> {durationLabel}: </span>
+        <li>
+          <span className='font-black'>{durationLabel}: </span>
           <span>{durationDays}</span>
         </li>
       </ul>
