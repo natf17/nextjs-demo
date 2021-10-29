@@ -11,11 +11,11 @@ export default function MenuItem(item: MenuItemType) {
       <Link href={item.url}>
         <a className='
           flex flex-col 
-          bg-yellow-200 p-1 bg-opacity-50
-          border border-solid border-gray-400'
+          p-1 bg-black bg-opacity-50 text-gray-200
+          border border-solid border-blue-200'
         >
           {/* Container sizing */}
-          <div className='bg-yellow-700 h-2/3 overflow-hidden
+          <div className='h-2/3 overflow-hidden
             flex justify-center items-center
           '>
               { item.image &&
@@ -34,8 +34,13 @@ export default function MenuItem(item: MenuItemType) {
           </div>
 
           {/* Image label */}
-          <div className='h-1/3 overflow-hidden text-center flex justify-center items-center
-          '>
+          <div 
+            className='
+              h-1/3 overflow-hidden text-center 
+              flex justify-center items-center
+              uppercase text-xl
+            '
+          >
             { item.label }
           </div>
         </a>

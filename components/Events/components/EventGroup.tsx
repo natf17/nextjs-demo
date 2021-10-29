@@ -50,6 +50,7 @@ export default function EventGroup({title, eventSeason, events, stringsGen}: Pro
       <h2 
         className={`        
           text-3xl uppercase cursor-pointer select-none
+          filter drop-shadow-lg
           ${isGroupExpanded ? 'text-blue-300' : 'text-gray-300'}                        
         `}
         onClick={ () => toggleExpanded() }>

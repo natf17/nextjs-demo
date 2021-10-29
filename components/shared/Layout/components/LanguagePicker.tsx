@@ -22,7 +22,7 @@ export default function LanguagePicker() {
     <>
       {/* 1 locale: show simple toggle */}
       { locales.length === 2 &&        
-        <div className='text-green-700 flex items-center'>          
+        <div className='text-indigo-300 flex items-center'>          
           <Link href={router.pathname} locale={otherLocales[0]}>
             <a><LanguageIcon fontSize='inherit' /> {otherLocales[0]}</a>
           </Link>

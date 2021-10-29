@@ -45,6 +45,10 @@ function MyApp({ Component, pageProps }) {
             quality={100}
           />        
         </div>
+        {/* Filter wrapper */}
+        <div style={imageWrapperStyle} 
+          className='bg-black bg-opacity-50 backdrop-filter backdrop-blur' 
+        />
 
         
         <AnimatePresence exitBeforeEnter>
