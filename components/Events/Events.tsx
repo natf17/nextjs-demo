@@ -5,6 +5,7 @@ import EventGroup from './components/EventGroup';
 // types
 import { Props } from '../../pages/events';
 import { EventSeason, SeasonalEvent } from '../../shared/models/GetEventData';
+type EventGroupTypes = 'REG' | 'CACO' | 'CABR' | 'OTHER';
 // sort events into event types
 type EventsByType = {REG: SeasonalEvent[], CACO: SeasonalEvent[], CABR: SeasonalEvent[], other: SeasonalEvent[]};
 type FirstSeasonByType = {REG?: EventSeason, CACO?: EventSeason, CABR?: EventSeason, other?: EventSeason};
@@ -15,7 +16,32 @@ export default function Events({ strings, eventSeasons, seasonalEvents, locale}:
   // use locale lang as default eventLang
   const [eventLangFilter, setEventLangFilter] = useState<string | undefined>(undefined);
   const [visibleEvents, setVisibleEvents] = useState<SeasonalEvent[] | null>(null);
-  const [dummyCounter, setDummyCounter] = useState(0);
+  
+
+  // Dormant functionality to 'lift' EventGroup collapsed state
+  const selectedEventGroup: {[index:string]: boolean} = {
+    'REG': false,
+    'CACO': false,
+    'CABR': false,
+    'OTHER': false
+  }
+
+  function selectEventGroup(eventGroupType:EventGroupTypes) {
+    // grab latest state / duplicate
+    let newState = Object.assign({}, selectedEventGroup);
+
+    // only allow one to be opened
+    for (const index in newState) {
+      if (index === eventGroupType) {
+        newState[index] = true;
+      } else {
+        newState[index] = false;
+      }
+    }
+
+    return newState;
+  }
+
 
   // TODO: check browser compatibility
   const languageTranslation = new Intl.DisplayNames([locale], {type:'language'});
