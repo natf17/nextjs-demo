@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { SeasonalEvent } from '../../../shared/models/GetEventData';
 import Event from './Event';
-import monthsToColorsMap from '../config/eventColorsByMonth'
+import monthsToColorsMap from '../config/eventColorsByMonth';
+import { motion } from 'framer-motion';
 
 type Props = {
   events: SeasonalEvent[]
@@ -12,7 +13,14 @@ type EventsByMonth = {
   [index: number]: SeasonalEvent[] 
 }
 
-
+const EventMonthsLayoutAnimationVariants = {
+  "collapsed": {
+    opacity: 0
+  },
+  "expanded": {
+    opacity: 1
+  }
+}
 
 export default function EventMonthsLayout({events}: Props) {
   // receive all events
@@ -50,8 +58,9 @@ export default function EventMonthsLayout({events}: Props) {
       {Object.entries(eventsByMonth).map(([monthNum, monthEvents]) =>
         (
           monthEvents.length > 0 &&
-            <div 
-              key={monthNum} 
+            <motion.div
+              key={monthNum}
+              variants={EventMonthsLayoutAnimationVariants}
               className={`
                 border-l-8 border-${monthsToColorsMap[monthNum].accent} pl-4 mb-8 last:mb-0
                 grid grid-cols-events auto-rows-auto gap-8
@@ -70,7 +79,7 @@ export default function EventMonthsLayout({events}: Props) {
                   )
                 })
               }            
-            </div>  
+            </motion.div> 
         )
       )} 
     </div>

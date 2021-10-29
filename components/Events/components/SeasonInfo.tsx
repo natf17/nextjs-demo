@@ -19,6 +19,12 @@ export default function SeasonInfo({
 
   const SeasonInfoAnimationVariants = {
     // no animations for now, load with parent
+    "collapsed": {
+      opacity: 0
+    },
+    "expanded": {
+      opacity: 1      
+    }
   }
 
   return (

@@ -23,8 +23,8 @@ export default function EventGroup({title, eventSeason, events, stringsGen}: Pro
       height: "100%", 
       display: "block",
       transition: {
-        when: "beforeChildren",
-        delayChildren: 0    
+        delayChildren: 0.15,
+        staggerChildren: 0.05
       }
     },
     collapsed: { 

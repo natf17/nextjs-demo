@@ -65,7 +65,7 @@ export default function Event
 
   return (
     <>      
-      <article 
+      <article
         className={`
           rounded-lg shadow p-3 overflow-hidden
           bg-${monthsToColorsMap[monthNumber].bg_light}
