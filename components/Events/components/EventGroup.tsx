@@ -45,23 +45,27 @@ export default function EventGroup({title, eventSeason, events, stringsGen}: Pro
   }
 
   return (
-    <article className="mb-2 last:mb-0">
+    
+    <motion.article className="mb-2 last:mb-0" layout>
       {/* Event season name */}
-      <h2 
+      <motion.h2 
         className={`        
           text-3xl uppercase cursor-pointer select-none
           filter drop-shadow-lg
           ${isGroupExpanded ? 'text-blue-300' : 'text-gray-300'}                        
         `}
-        onClick={ () => toggleExpanded() }>
+        onClick={ () => toggleExpanded() }
+        layout
+      >
         <ControlPoint fontSize="inherit" color="inherit" /> {title}
-      </h2>
+      </motion.h2>
 
       {/* Event data */}
       <motion.div className="border-l border-blue-300 pl-4"
         animate={ isGroupExpanded ? "expanded" : "collapsed" }
         variants = { variants }
-        initial = { false }        
+        initial = { false }
+        layout     
       >
         {/* Event season information */}
         {eventSeason && 
@@ -78,9 +82,10 @@ export default function EventGroup({title, eventSeason, events, stringsGen}: Pro
         {/* Show some events! */}
         { (events && events.length > 0) 
           ? <EventMonthsLayout events={events} /> 
-          : <div className='text-blue-200 p-2'>{stringsGen.noEventsFound}</div>
+          : <motion.div layout className='text-blue-200 p-2'>{stringsGen.noEventsFound}</motion.div>
         }
       </motion.div>
-    </article>
+    </motion.article>
+    
   )
 }

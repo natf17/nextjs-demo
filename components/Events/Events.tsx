@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { AnimateSharedLayout, motion } from 'framer-motion';
 import { useEffect, useMemo, useState } from 'react';
 import EventGroup from './components/EventGroup';
 
@@ -156,8 +156,9 @@ export default function Events({ strings, eventSeasons, seasonalEvents, locale}:
             </label>
           </form>
         </header>
-
-        <div className='px-3 py-6'>
+        
+        <AnimateSharedLayout>
+        <motion.div className='px-3 py-6' layout>
           <EventGroup 
             title={strings.sectionRegCo.title}
             eventSeason={firstSeasonByType.REG}
@@ -185,7 +186,8 @@ export default function Events({ strings, eventSeasons, seasonalEvents, locale}:
             events={eventsByType.other}
             stringsGen={strings.general}
           />
-        </div>
+        </motion.div>
+        </AnimateSharedLayout>
       </main>
     </motion.div>
   )

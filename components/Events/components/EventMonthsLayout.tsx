@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { SeasonalEvent } from '../../../shared/models/GetEventData';
 import Event from './Event';
 import monthsToColorsMap from '../config/eventColorsByMonth';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 type Props = {
   events: SeasonalEvent[]
@@ -54,7 +54,8 @@ export default function EventMonthsLayout({events}: Props) {
 
   return (
     <motion.div 
-      className='px-2 py-4'      
+      className='px-2 py-4'  
+      layout
     >      
       {/* Repeating grid container - track presence with AnimatePresence for language change */}
       {Object.entries(eventsByMonth).map(([monthNum, monthEvents]) =>
@@ -67,6 +68,7 @@ export default function EventMonthsLayout({events}: Props) {
                 border-l-8 border-${monthsToColorsMap[monthNum].accent} pl-4 mb-8 last:mb-0
                 grid grid-cols-events auto-rows-auto gap-8
               `}
+              layout
             >
               {              
                 monthEvents.map((event) => {

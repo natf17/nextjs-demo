@@ -31,6 +31,7 @@ export default function SeasonInfo({
     <motion.div 
       className='text-gray-200 p-2 ml-10 w-96'
       variants={ SeasonInfoAnimationVariants }
+      layout
     >      
       {/* <Info color='disabled' /> */}
 
