@@ -1,6 +1,7 @@
 // global page layout
 import Header from './components/Header';
 import { useRouter } from 'next/router';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export type Props = {
   children: React.ReactNode, 
@@ -15,18 +16,40 @@ export type Props = {
   }
 }
 
+const HeaderAnimationStates = {
+  "hidden": {
+    top: -70,
+    opacity: 0
+  },
+  "visible": {
+    top: 0,
+    opacity: 1,
+    transition: {
+      delay: 1.15
+    }
+  }
+}
+
 export default function Layout({ children, globalValues }: Props) {
   const { asPath } = useRouter();
 
   return (
     <>
       {/* Don't render header in home page */}
+      <AnimatePresence>
       {      
         asPath !== '/' &&
-          <header className='fixed w-screen h-16 bg-black bg-opacity-10 backdrop-filter backdrop-blur-xl z-10'>
+          <motion.header 
+            className='fixed w-screen h-16 bg-black bg-opacity-10 backdrop-filter backdrop-blur-xl z-10'
+            initial="hidden"
+            animate="visible"
+            exit="hidden"
+            variants={HeaderAnimationStates}
+          >
             <Header {...globalValues.header.logo} />
-          </header>
+          </motion.header>
       }      
+      </AnimatePresence>
 
       <main className='
         py-16
