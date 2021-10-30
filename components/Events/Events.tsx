@@ -139,7 +139,7 @@ export default function Events({ strings, eventSeasons, seasonalEvents, locale}:
       
       <main className='h-full'>
         <header className='mb-4'>
-          <h1 className='text-4xl text-center text-blue-50 p-2'>{strings.pageTitle}</h1>
+          <h1 className='text-4xl text-center text-blue-50 p-2 py-6'>{strings.pageTitle}</h1>
 
           {/* Language picker */}
           <form className='text-lg w-10/12 mx-auto border-b p-3'>

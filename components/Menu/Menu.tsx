@@ -19,7 +19,7 @@ export default function Home({ strings }: Props) {
       
       <main className='h-full'>
 
-        <h1 className='text-4xl text-center p-2 text-blue-50'>
+        <h1 className='text-4xl text-center p-2 py-6 text-blue-50'>
         { strings.pageTitle }        
         </h1>
 
