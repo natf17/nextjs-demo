@@ -57,7 +57,7 @@ export default function Map({ strings, amenityData, maps }: Props) {
     >
       
       <main className='h-full'>
-        <header className='text-center p-2 py-6'>
+        <header className='text-center p-2 py-6 mb-6'>
           <h1 className='text-4xl text-blue-50 pb-2'>
             { strings.pageTitle }
           </h1>
@@ -65,9 +65,9 @@ export default function Map({ strings, amenityData, maps }: Props) {
         </header>        
 
         {/* Locations Select Pane */}
-        <div className='bg-yellow-200 md:w-96 md:absolute'>
-          <h4 className='p-2'>{ strings.tapWidget.instructions }</h4>
-          <div className='bg-yellow-300 p-1
+        <div className='max-w-2xl mx-auto'>          
+          <div className='
+            p-1 text-gray-300
             flex justify-around
           '>
             <AmenityBtn onClick={onLocationSelect} amenityId={'bathrooms'} 
@@ -83,17 +83,18 @@ export default function Map({ strings, amenityData, maps }: Props) {
               label={ amenityData.donations.widgetLabel } selected={selectedAmenity === 'donations'} />
           </div>
 
-          {/* Search results list-view pane */}
+          {/* Search results list-view pane */}          
+        </div>
+      
+        {/* Map view */}
+        <div className='flex'>
           { selectedAmenity && 
             <LocationResults 
               amenityTitle={ amenityData[selectedAmenity].headingLabel }
               locations={ amenityData[selectedAmenity].locations }
             />
           }
-        </div>
-      
-        {/* Map view */}
-        <div className='md:min-h-screen md:flex justify-end items-center'>
+          
           <DirectoryMap 
             selectedAmenity={selectedAmenity} maps={maps} 
            />
