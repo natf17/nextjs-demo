@@ -65,7 +65,7 @@ export default function Map({ strings, amenityData, maps }: Props) {
         </header>        
 
         {/* Locations Select Pane */}
-        <div className='max-w-2xl mx-auto mb-12'>          
+        <div className='max-w-2xl mx-auto mb-12 py-2 border-b border-gray-500'>          
           <div className='
             p-1 text-gray-300
             flex justify-around
@@ -83,13 +83,13 @@ export default function Map({ strings, amenityData, maps }: Props) {
               label={ amenityData.donations.widgetLabel } selected={selectedAmenity === 'donations'} />
           </div>
 
-          {/* Search results list-view pane */}          
+          
         </div>
       
         {/* Map view */}
         <div 
           className={`
-            grid grid-cols-1 bg-pink-50 w-full          
+            grid grid-cols-1 w-full          
             ${ selectedAmenity && 'md:grid-cols-mapWithResults'}
           `}
         >

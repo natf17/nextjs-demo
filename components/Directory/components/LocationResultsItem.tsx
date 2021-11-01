@@ -45,8 +45,8 @@ export default function LocationResultsItem(props: Props) {
 
       {/* Amenity quick-view */}
       <div className='p-2'>
-        <h3 className='text-lg font-medium'>{name}</h3>
-        <ul>
+        <h3 className='text-lg font-medium text-green-50'>{name}</h3>
+        <ul className='text-gray-300'>
           {/* Level */}
           <li>{location && location.fullname}</li>
           
