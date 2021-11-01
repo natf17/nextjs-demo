@@ -65,7 +65,7 @@ export default function Map({ strings, amenityData, maps }: Props) {
         </header>        
 
         {/* Locations Select Pane */}
-        <div className='max-w-2xl mx-auto'>          
+        <div className='max-w-2xl mx-auto mb-12'>          
           <div className='
             p-1 text-gray-300
             flex justify-around
@@ -87,17 +87,22 @@ export default function Map({ strings, amenityData, maps }: Props) {
         </div>
       
         {/* Map view */}
-        <div className='flex'>
+        <div 
+          className={`
+            grid grid-cols-1 bg-pink-50 w-full          
+            ${ selectedAmenity && 'md:grid-cols-mapWithResults'}
+          `}
+        >
           { selectedAmenity && 
             <LocationResults 
               amenityTitle={ amenityData[selectedAmenity].headingLabel }
               locations={ amenityData[selectedAmenity].locations }
             />
           }
-          
+
           <DirectoryMap 
             selectedAmenity={selectedAmenity} maps={maps} 
-           />
+          />
         </div>
       </main>
 

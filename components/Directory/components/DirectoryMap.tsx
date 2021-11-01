@@ -10,7 +10,7 @@ export type Props = {
 
 export default function DirectoryMap({selectedAmenity, maps}: Props) {
   return (
-    <div className="bg-gray-400 md:w-96 lg:w-3/5">
+    <div className="bg-gray-400 w-full max-w-6xl mx-auto">
       { selectedAmenity ? 
 
         <Image 
@@ -28,7 +28,7 @@ export default function DirectoryMap({selectedAmenity, maps}: Props) {
         alt={ '' }
         width={ maps.default.width }
         height={ maps.default.height }
-        
+        layout="responsive"
         />
       }
     </div>
