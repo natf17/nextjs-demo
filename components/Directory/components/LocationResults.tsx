@@ -12,8 +12,8 @@ export type Props = {
 
 export default function LocationResults({ amenityTitle, locations }: Props) {
   return (
-    <div className='bg-gray-800 bg-opacity-30 px-1'>
-      <header className='text-3xl p-2 text-green-400'> { amenityTitle } </header>
+    <div className='bg-gray-800 bg-opacity-30 px-1 rounded-tl-lg'>
+      <header className='text-3xl p-4 text-green-400'> { amenityTitle } </header>
 
       <div className='divide-y divide-gray-500'>
         { locations &&   
