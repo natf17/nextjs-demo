@@ -3,6 +3,7 @@ import { gql } from '@apollo/client';
 // separated types for easy type separation and import from modules
 export type BasicPageSchema = {
   pageTitle: string,
+  pageDescription: string,
   tapWidget: {
     instructions?: string,
     br_label?: string,
@@ -50,6 +51,7 @@ const query = (locale = "en") => {
     query {
       mapPage(locale: "${locale}") {
         pageTitle
+        pageDescription
         tapWidget {
           instructions
           br_label

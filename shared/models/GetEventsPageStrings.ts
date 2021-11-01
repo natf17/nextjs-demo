@@ -3,6 +3,7 @@ import { gql } from '@apollo/client';
 // separated types for easy type separation and import from modules
 export type EventsPageSchema = {
   pageTitle: string,
+  pageDescription: string,
   eventLangPickerLabel: string,
   general: GeneralStrings,
   sectionRegCo: {
@@ -34,6 +35,7 @@ const query = (locale = "en") => {
     query {
       eventsPage(locale: "${locale}") {
         pageTitle
+        pageDescription
         eventLangPickerLabel
         general {
           eventThemeLabel
