@@ -1,5 +1,6 @@
 import React from 'react';
 import { AmenityId } from '../../../pages/directory';
+import { motion } from 'framer-motion';
 
 // import the icons
 import { WcSharp as BathroomIcon } from '@material-ui/icons';
@@ -16,10 +17,10 @@ export type Props = {
 }
 
 export default function AmenityBtn({label, onClick, amenityId, selected}: Props) {
-  return (
+  return (    
     <div 
       onClick={onClick.bind(null, amenityId)} 
-      className='cursor-pointer flex flex-col'
+      className='cursor-pointer flex flex-col relative'
     >
       <div className='flex justify-center'>
         <div 
@@ -46,8 +47,15 @@ export default function AmenityBtn({label, onClick, amenityId, selected}: Props)
             }        
         </div>
       </div>
-      <div className='text-center text-base'>{label}</div>
-    </div>
+      <div className='text-center text-base'>{label}</div>   
+      
+      { selected && 
+        <motion.div 
+          className='absolute -bottom-3.5 left-0 right-0 h-px bg-red-300'
+          layoutId='underline22' 
+        /> 
+      }
+    </div>    
     
   )
 }

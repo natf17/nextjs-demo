@@ -81,9 +81,7 @@ export default function Map({ strings, amenityData, maps }: Props) {
 
             <AmenityBtn onClick={onLocationSelect} amenityId={'donations'} 
               label={ amenityData.donations.widgetLabel } selected={selectedAmenity === 'donations'} />
-          </div>
-
-          
+          </div>        
         </div>
       
         {/* Map view */}
