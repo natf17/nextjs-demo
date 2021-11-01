@@ -57,9 +57,12 @@ export default function Map({ strings, amenityData, maps }: Props) {
     >
       
       <main className='h-full'>
-        <h1 className='text-4xl text-center p-2 py-6 text-blue-50'>
-          { strings.pageTitle }
-        </h1>
+        <header className='text-center p-2 py-6'>
+          <h1 className='text-4xl text-blue-50 pb-2'>
+            { strings.pageTitle }
+          </h1>
+          <p className='text-lg text-gray-300'>{ strings.pageDescription }</p>
+        </header>        
 
         {/* Locations Select Pane */}
         <div className='bg-yellow-200 md:w-96 md:absolute'>
