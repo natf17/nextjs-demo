@@ -8,19 +8,8 @@ export default async function makeGraphQLRequest(locale, query) {
   let client;
 
     // connect to GraphQL server
-    // Dev environment - no token necessary
-    if (process.env.NODE_ENV === 'development') {
-      client = new ApolloClient({
-        ssrMode: true,
-        link: createHttpLink({
-          uri: process.env.CMS_GRAPHQL_ENDPOINT,          
-        }),      
-        cache: new InMemoryCache()
-      });  
-    }
-
-    // Production - add JWT access token
-    else {
+    // If token is necessary, include it
+    if (process.env.NODE_ENV === 'production' && process.env.CMS_ACCESS_TOKEN) {
       client = new ApolloClient({
         ssrMode: true,
         link: createHttpLink({
@@ -28,6 +17,17 @@ export default async function makeGraphQLRequest(locale, query) {
           headers: {
             authorization: `Bearer ${process.env.CMS_ACCESS_TOKEN}`
           }
+        }),      
+        cache: new InMemoryCache()
+      });        
+    }
+
+    // No token needed
+    else {
+      client = new ApolloClient({
+        ssrMode: true,
+        link: createHttpLink({
+          uri: process.env.CMS_GRAPHQL_ENDPOINT,          
         }),      
         cache: new InMemoryCache()
       });
@@ -42,3 +42,10 @@ export default async function makeGraphQLRequest(locale, query) {
 
     return data;
 }
+
+
+/* ***
+APOLLO CONFIGURATION
+https://www.apollographql.com/docs/react/performance/server-side-rendering/#initializing-apollo-client
+https://www.apollographql.com/docs/react/networking/authentication/#header
+* ***/
