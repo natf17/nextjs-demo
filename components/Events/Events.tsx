@@ -44,7 +44,7 @@ export default function Events({ strings, eventSeasons, seasonalEvents, locale}:
 
 
   // TODO: check browser compatibility
-  const languageTranslation = new Intl.DisplayNames([locale], {type:'language'});
+  // const languageTranslation = new Intl.DisplayNames([locale], {type:'language'});
   
 
   // calculate available languages from events
@@ -151,7 +151,8 @@ export default function Events({ strings, eventSeasons, seasonalEvents, locale}:
                 {availableLangs.map((lang) => {
                   return (
                     // Test ECMAScript Intl API
-                    <option key={lang} value={lang}>{languageTranslation.of(lang)}</option>
+                    // languageTranslation.of(lang) -- currently disabled for production (see line 47)
+                    <option key={lang} value={lang}>{lang}</option>
                   );
                 })}
               </select>          
