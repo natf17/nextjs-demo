@@ -24,7 +24,7 @@ export default function MenuItem(item: MenuItemType) {
                   flex justify-center items-center
                 '>
                   <Image 
-                    src={`${process.env.NEXT_PUBLIC_IMG_API + item.image.url}`} 
+                    src={`${process.env.NEXT_PUBLIC_VERCEL_IMG_API + item.image.url}`} 
                     alt=''
                     width={item.image.width} // insert dimensions, should be sq
                     height={item.image.height}

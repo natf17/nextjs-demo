@@ -34,7 +34,7 @@ export default function LocationResultsItem(props: Props) {
       '>
         { featImg && 
           <Image 
-            src={ `${process.env.NEXT_PUBLIC_IMG_API + featImg.url}` } 
+            src={ `${process.env.NEXT_PUBLIC_VERCEL_IMG_API + featImg.url}` } 
             alt={ name }
             width={ featImg.width } // insert dimensions, should be sq
             height={ featImg.height }

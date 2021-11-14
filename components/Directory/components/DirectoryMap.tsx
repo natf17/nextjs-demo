@@ -14,7 +14,7 @@ export default function DirectoryMap({selectedAmenity, maps}: Props) {
       { selectedAmenity ? 
 
         <Image 
-        src={ `${process.env.NEXT_PUBLIC_IMG_API + maps[selectedAmenity].url}` } 
+        src={ `${process.env.NEXT_PUBLIC_VERCEL_IMG_API + maps[selectedAmenity].url}` } 
         alt={ '' }
         width={ maps[selectedAmenity].width }
         height={ maps[selectedAmenity].height }
@@ -24,7 +24,7 @@ export default function DirectoryMap({selectedAmenity, maps}: Props) {
         :
 
         <Image 
-        src={ `${process.env.NEXT_PUBLIC_IMG_API + maps.default.url}` } 
+        src={ `${process.env.NEXT_PUBLIC_VERCEL_IMG_API + maps.default.url}` } 
         alt={ '' }
         width={ maps.default.width }
         height={ maps.default.height }
