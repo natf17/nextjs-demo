@@ -5,7 +5,8 @@ import EventGroup from './components/EventGroup';
 // types
 import { Props } from '../../pages/events';
 import { EventSeason, SeasonalEvent } from '../../shared/models/GetEventData';
-type EventGroupTypes = 'REG' | 'CACO' | 'CABR' | 'OTHER';
+export type EventGroupTypes = 'REG' | 'CACO' | 'CABR' | 'OTHER';
+type EventGroupsOpenState = { [index: string]: boolean };
 // sort events into event types
 type EventsByType = {REG: SeasonalEvent[], CACO: SeasonalEvent[], CABR: SeasonalEvent[], other: SeasonalEvent[]};
 type FirstSeasonByType = {REG?: EventSeason, CACO?: EventSeason, CABR?: EventSeason, other?: EventSeason};
@@ -16,30 +17,31 @@ export default function Events({ strings, eventSeasons, seasonalEvents, locale}:
   // use locale lang as default eventLang
   const [eventLangFilter, setEventLangFilter] = useState<string | undefined>(undefined);
   const [visibleEvents, setVisibleEvents] = useState<SeasonalEvent[] | null>(null);
-  
-
-  // Dormant functionality to 'lift' EventGroup collapsed state
-  const selectedEventGroup: {[index:string]: boolean} = {
+  const [eventGroupsOpenState, setEventGroupsOpenState] = useState<EventGroupsOpenState>({
     'REG': false,
     'CACO': false,
     'CABR': false,
     'OTHER': false
-  }
+  });
+  
 
   function selectEventGroup(eventGroupType:EventGroupTypes) {
     // grab latest state / duplicate
-    let newState = Object.assign({}, selectedEventGroup);
 
-    // only allow one to be opened
-    for (const index in newState) {
-      if (index === eventGroupType) {
-        newState[index] = true;
-      } else {
-        newState[index] = false;
+    setEventGroupsOpenState((prevState) => {
+      let newState = {...prevState};
+      // let newState = Object.assign({}, selectedEventGroup);
+
+      for (const index in newState) {
+        if (index === eventGroupType) {
+          newState[index] = !prevState[eventGroupType];
+        } else {
+          newState[index] = false;
+        }
       }
-    }
 
-    return newState;
+      return newState
+    })
   }
 
 
@@ -167,6 +169,10 @@ export default function Events({ strings, eventSeasons, seasonalEvents, locale}:
             eventSeason={firstSeasonByType.REG}
             events={eventsByType.REG}
             stringsGen={strings.general}
+
+            groupType='REG'
+            onGroupSelect={selectEventGroup}
+            isExpanded={eventGroupsOpenState['REG']}
           />
 
           <EventGroup 
@@ -174,6 +180,10 @@ export default function Events({ strings, eventSeasons, seasonalEvents, locale}:
             eventSeason={firstSeasonByType.CACO}
             events={eventsByType.CACO}
             stringsGen={strings.general}
+
+            groupType='CACO'
+            onGroupSelect={selectEventGroup}
+            isExpanded={eventGroupsOpenState['CACO']}
           />
 
           <EventGroup 
@@ -181,6 +191,10 @@ export default function Events({ strings, eventSeasons, seasonalEvents, locale}:
             eventSeason={firstSeasonByType.CABR}
             events={eventsByType.CABR}
             stringsGen={strings.general}
+
+            groupType='CABR'
+            onGroupSelect={selectEventGroup}
+            isExpanded={eventGroupsOpenState['CABR']}
           />
 
           <EventGroup 
@@ -188,6 +202,10 @@ export default function Events({ strings, eventSeasons, seasonalEvents, locale}:
             eventSeason={firstSeasonByType.other}
             events={eventsByType.other}
             stringsGen={strings.general}
+
+            groupType='OTHER'
+            onGroupSelect={selectEventGroup}
+            isExpanded={eventGroupsOpenState['OTHER']}
           />
         </motion.div>
         </AnimateSharedLayout>

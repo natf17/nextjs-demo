@@ -4,13 +4,16 @@ import { ControlPoint } from "@material-ui/icons";
 import { motion } from 'framer-motion';
 import SeasonInfo from "./SeasonInfo";
 import EventMonthsLayout from "./EventMonthsLayout";
-import { useState } from "react";
+import { EventGroupTypes } from "../Events";
 
 export type Props = {
   title: string,
   eventSeason?: EventSeason,
   events?: SeasonalEvent[],
-  stringsGen: GeneralStrings
+  stringsGen: GeneralStrings,
+  groupType: EventGroupTypes,
+  isExpanded: boolean,
+  onGroupSelect: (e:EventGroupTypes) => void
 }
 
 // Animation
@@ -36,12 +39,11 @@ const variants = {
   }
 };
 
-export default function EventGroup({title, eventSeason, events, stringsGen}: Props) {
-  const [isGroupExpanded, setIsGroupExpanded] = useState(false);  
+export default function EventGroup({title, eventSeason, events, stringsGen, groupType, isExpanded, onGroupSelect}: Props) {  
 
 
   const toggleExpanded: () => void = () => {
-    setIsGroupExpanded(!isGroupExpanded);
+    onGroupSelect(groupType)
   }
 
   return (
@@ -52,7 +54,7 @@ export default function EventGroup({title, eventSeason, events, stringsGen}: Pro
         className={`        
           text-3xl uppercase cursor-pointer select-none
           filter drop-shadow-lg
-          ${isGroupExpanded ? 'text-blue-300' : 'text-gray-300'}                        
+          ${isExpanded ? 'text-blue-300' : 'text-gray-300'}                        
         `}
         onClick={ () => toggleExpanded() }
         layout
@@ -62,7 +64,7 @@ export default function EventGroup({title, eventSeason, events, stringsGen}: Pro
 
       {/* Event data */}
       <motion.div className="border-l border-blue-300 pl-4"
-        animate={ isGroupExpanded ? "expanded" : "collapsed" }
+        animate={ isExpanded ? "expanded" : "collapsed" }
         variants = { variants }
         initial = { false }
         layout     
