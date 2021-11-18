@@ -67,7 +67,7 @@ export default function Event
       <article
         className={`
           rounded-lg shadow p-3 overflow-hidden
-          bg-${monthsToColorsMap[monthNumber].bg_light}
+          ${monthsToColorsMap[monthNumber].bg_light}
           grid grid-cols-3 auto-rows-min gap-1
         `}
       >

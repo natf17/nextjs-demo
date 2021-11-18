@@ -15,7 +15,10 @@ type EventsByMonth = {
 
 const EventMonthsLayoutAnimationVariants = {
   "collapsed": {
-    opacity: 0
+    opacity: 0,
+    transition: {
+      duration: 0.2
+    }
   },
   "expanded": {
     opacity: 1
@@ -65,7 +68,7 @@ export default function EventMonthsLayout({events}: Props) {
               key={monthNum}
               variants={EventMonthsLayoutAnimationVariants}
               className={`
-                border-l-8 border-${monthsToColorsMap[monthNum].accent} pl-4 mb-8 last:mb-0
+                border-l-8 ${monthsToColorsMap[monthNum].border_accent} pl-4 mb-8 last:mb-0
                 grid grid-cols-events auto-rows-auto gap-8
               `}
               layout
