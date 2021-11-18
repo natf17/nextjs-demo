@@ -45,8 +45,8 @@ export default function Events({ strings, eventSeasons, seasonalEvents, locale}:
   }
 
 
-  // TODO: check browser compatibility
-  // const languageTranslation = new Intl.DisplayNames([locale], {type:'language'});
+  // TODO: check browser compatibility - support for all major modern browsers, as of Sept 2021
+  const languageTranslation = new Intl.DisplayNames([locale], {type:'language'});
   
 
   // calculate available languages from events
@@ -152,9 +152,8 @@ export default function Events({ strings, eventSeasons, seasonalEvents, locale}:
               <select value={eventLangFilter} onChange={(e)=>{setEventLangFilter(e.target.value)}}>
                 {availableLangs.map((lang) => {
                   return (
-                    // Test ECMAScript Intl API
-                    // languageTranslation.of(lang) -- currently disabled for production (see line 47)
-                    <option key={lang} value={lang}>{lang}</option>
+                    // ECMAScript Intl API
+                    <option key={lang} value={lang}>{languageTranslation.of(lang)}</option>
                   );
                 })}
               </select>          

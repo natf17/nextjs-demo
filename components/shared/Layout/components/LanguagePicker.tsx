@@ -9,11 +9,12 @@ export default function LanguagePicker() {
   const router = useRouter();
   const {locale, locales} = router;
 
-  // Check that locales are configured
-  if (!locale || !locales) {
+  // Check that at least two locales are configured in Next
+  if (!locale || !locales || locales.length < 2) {
     return null;
   }
 
+  // Populate other locales to enable locale switching
   const currentLocaleIndex = locales.findIndex((i) => i === locale);
   const otherLocales = [...locales];
   otherLocales.splice(currentLocaleIndex, 1);
@@ -24,7 +25,7 @@ export default function LanguagePicker() {
       { locales.length === 2 &&        
         <div className='text-indigo-300 flex items-center'>          
           <Link href={router.pathname} locale={otherLocales[0]}>
-            <a><LanguageIcon fontSize='inherit' /> {otherLocales[0]}</a>
+            <a><LanguageIcon fontSize='inherit' /> {new Intl.DisplayNames(otherLocales[0], {type:'language'}).of(otherLocales[0])}</a>
           </Link>
         </div>        
       }
