@@ -1,4 +1,4 @@
-import '../styles/globals.css';
+import '../styles/tailwind.css';
 import { AnimatePresence } from 'framer-motion';
 import { IntlProvider } from 'react-intl';
 import { useRouter } from 'next/router';
