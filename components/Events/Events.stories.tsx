@@ -10,9 +10,8 @@ export default {
 
 const Template: ComponentStory<typeof Events> = (args) => <Events {...args} />;
 
-export const ScreenWithEvents = Template.bind({});
-
-ScreenWithEvents.args = {
+export const WithSeasonsAndEvents = Template.bind({});
+WithSeasonsAndEvents.args = {
   locale: 'en',
   eventSeasons:[{
     "seasonYears": "2021",
@@ -70,4 +69,11 @@ ScreenWithEvents.args = {
       title: 'sectionOtherEvents title'
     }
   }
+};
+
+
+export const WithSeasonsNoEvents = Template.bind({});
+WithSeasonsNoEvents.args = {
+  ...WithSeasonsAndEvents.args,
+  seasonalEvents: []
 };
