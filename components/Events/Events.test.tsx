@@ -1,9 +1,21 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import Events, {Props} from '../../pages/events';
+import { composeStories } from '@storybook/testing-react';
+import * as stories from './Events.stories'
+import * as globalConfig from './../../.storybook/preview';
+
+
+// Failing for some reason, the composeStories() is not correctly setting
+// useRouter() context. useRouter() returns null, whereas inside Storybook, 
+// it correctly returns the mock Router context that storybook-addon-next-router enables
+// This causes an error when running this test, as the render() function cannot render the
+// Event.tsx component, which attempts to destructure the useRouter() return object {locale}
+const { WithSeasonsAndEvents } = composeStories(stories, globalConfig);
+
+
 
 describe('Events Screen', ()=> {
-
+  render(<WithSeasonsAndEvents />);
   it('renders input data', ()=> {
     
   });
