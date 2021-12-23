@@ -2,39 +2,47 @@ import React, { useState } from 'react';
 import { KeyboardArrowDown as DownArrowIcon } from '@material-ui/icons';
 
 type OptionPickerProps = {
-  currentValue: string,
+  initialValue: string,
   options: {value: string, label: string}[],
   onSelect: (selectedValue: string) => void
 }
 
 
-export default function OptionPicker({currentValue, options, onSelect}: OptionPickerProps) {
+export default function OptionPicker({initialValue, options, onSelect}: OptionPickerProps) {
   const [open, setOpen] = useState(false);
-
+  const [selectedValue, setSelectedValue] = useState(initialValue);
+  
   if (!options)           return null;
   if (options.length < 1) return null;
 
-  const moreThanTwo = options.length > 2;
+  const moreThanOne = options.length > 1;
 
   const handleSelect: (selectedValue: string) => void = (selectedValue) => {
+    // update selection
+    setSelectedValue(selectedValue)
+    // close dropdown
     setOpen(false);
+    // call callback
     onSelect(selectedValue);
   }
   
   return (
     <div>
+      {/* Button */}
       <button 
         className={`
           border border-green-600 rounded-md
-          px-2 py-2 text-green-300
+          px-2 py-2 text-green-300          
         `}
-        onClick={() => setOpen((prev) => !prev)}
+        onClick={() => moreThanOne && setOpen((prev) => !prev)}
       >
-        { currentValue }
-
-        { moreThanTwo && <DownArrowIcon />}
+        <div className={`inline-block max-w-sm overflow-hidden whitespace-nowrap overflow-ellipsis`}>
+          { options.filter((option) => option.value === selectedValue)[0].label }
+        </div>
+        { moreThanOne && <DownArrowIcon />}
       </button>
 
+      {/* Dropdown */}
       { open && 
         <ul className={`
             border border-green-800 text-green-400 
@@ -43,7 +51,10 @@ export default function OptionPicker({currentValue, options, onSelect}: OptionPi
           `}
         >
           { options.map((option) => (
-              <li key={option.value} className={`py-3 cursor-pointer`} onClick={() => handleSelect(option.value)}>{option.label}</li>
+              <li key={option.value}
+                  className={`py-3 cursor-pointer`}
+                  onClick={() => handleSelect(option.value)}
+              >{option.label}</li>
             ) 
           )}
         </ul>
