@@ -27,46 +27,56 @@ jest.mock('next/router', () => ({
   })
 );
 
+// Compose story with season and events data
 const { WithSeasonsAndEvents } = composeStories(stories);
 
 
-describe('Events Screen', ()=> {
+describe('Page data', ()=> {
   render(<WithSeasonsAndEvents />);
 
-  it('mocks useRouter and tracks calls to it', () => {
-
+  it('calls useRouter()', () => {
     expect(useRouter).toHaveBeenCalled();
-
   });
 
 
-  it('renders input data', ()=> {
+  it('renders page title', () => {
+    // move into beforeAll (to be accessible by future assertions w/o having to render inside each assertion)
+    render(<WithSeasonsAndEvents />);
+    const pageTitle = screen.getByRole('heading', { level: 1});
+    expect(pageTitle).toHaveTextContent(WithSeasonsAndEvents.args!.strings!.pageTitle);
+  });
+  
+
+
+  // it('renders page title', async ()=> {
+  //   const givenTitle = WithSeasonsAndEvents!.args!.strings!.pageTitle;
+  //   const renderedTitle = await screen.findByRole('heading', { level:1 });    
     
-  });
+  // });
 });
 
-describe('Events language picker', () => {  
-  it('shows all event languages available', ()=> {
+// describe('Events language picker', () => {  
+//   it('shows all event languages available', ()=> {
     
-  });
+//   });
 
 
-  it('correctly filters displayed events based on language selection', ()=> {
+//   it('correctly filters displayed events based on language selection', ()=> {
 
-  });
+//   });
 
   
-  it('does not render if no event languages exist', () => {
+//   it('does not render if no event languages exist', () => {
 
-  });
-
-
-  it('displays available language if only one event language is available', () => {
-
-  });
+//   });
 
 
-  it('disables language selection if only one event language is available', () => {
+//   it('displays available language if only one event language is available', () => {
 
-  });
-});
+//   });
+
+
+//   it('disables language selection if only one event language is available', () => {
+
+//   });
+// });
