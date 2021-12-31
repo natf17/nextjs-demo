@@ -4,10 +4,12 @@ import { Public as LangIcon } from '@material-ui/icons';
 import { useRouter } from 'next/router';
 
 import monthsToColorsMap from '../config/eventColorsByMonth';
+import useLocalizedDateFormatter from '../hooks/useLocalizedDateFormatter';
 
 
 type Props = Pick<SeasonalEvent, 'startDate' | 'eventLanguage'> & {
-  monthNumber: string
+  monthNumber: string,
+  duration?: number,
 };
 
 
@@ -15,80 +17,49 @@ export default function Event
   ({
     startDate, 
     eventLanguage,
-    monthNumber
+    monthNumber,
+    duration = 1,
     }:Props
   ){
 
   const { locale = 'en' } = useRouter();
-    
-  // TODO: extract into custom hook? (takes in locale, returns fn that generates month names)
-  const localizedMonthFormatter: (locale:string, date:string) => string = (locale, date) => {
-    try {
-      return new Intl.DateTimeFormat(locale, {
-        month: 'short',
-        timeZone: 'UTC'
-      }).format(new Date(date.replace(/-/g, '\/')));
-    }
-    catch {
-      console.error(`Error creating localized month name using locale ${locale} and date ${date}`);
-      return 'MONTH';
-    }    
-  }
+  // RegEx to replace hyphens w dashes for creating correct date
+  // see https://stackoverflow.com/questions/7556591/is-the-javascript-date-object-always-one-day-off
+  const sanitizedStartDate = new Date(startDate.replace(/-/g, '\/'));
+  const sanitizedEndDate = new Date(sanitizedStartDate);
+  sanitizedEndDate.setDate(sanitizedEndDate.getDate() + (duration - 1));
 
-
-  const getLocalizedDayName: (locale:string, date:string) => string = (locale, date) => {
-    try {
-      return new Intl.DateTimeFormat(locale, {
-        weekday: 'short',
-        timeZone: 'UTC'
-      }).format(new Date(date.replace(/-/g, '\/')));
-    }
-    catch {
-      console.error(`Error creating localized day name using locale ${locale} and date ${date}`)
-      return 'DAY';
-    }
-  }
-
-  const getDayNumber: (date:string) => string = (date) => {
-    try {
-      // RegEx to replace hyphens w dashes for creating correct date
-      // see https://stackoverflow.com/questions/7556591/is-the-javascript-date-object-always-one-day-off
-      return new Date(date.replace(/-/g, '\/')).getDate().toString();
-    }
-    catch {
-      console.error(`Error creating day date using date ${date}`)
-      return '#'
-    }
-  }
+  // format: Jul 2
+  const formatShortDate = useLocalizedDateFormatter({locale, dateTimeFormat: {month: 'short', day: 'numeric'}});
+  // format: Thurs
+  const formatShortDayName = useLocalizedDateFormatter({locale, dateTimeFormat: {weekday: 'short'}});
+  
+  // left-to-right date ranges
+  const localizedDateRange = formatShortDate(sanitizedStartDate) 
+          + ((duration > 1) ? ` - ${formatShortDate(sanitizedEndDate)}` : '' )
+  const localizedDayNameRange = formatShortDayName(sanitizedStartDate) 
+          + ((duration > 1) ?  ` - ${formatShortDayName(sanitizedEndDate)}` : '');
 
 
   return (
     <>      
       <article
         className={`
-          rounded-lg shadow p-3 overflow-hidden
+          rounded-lg shadow overflow-hidden p-2
           ${monthsToColorsMap[monthNumber].bg_light}
-          grid grid-cols-3 auto-rows-min gap-1
+          grid grid-cols-1 auto-rows-min gap-1 bg-opacity-20
         `}
       >
-        {/* Localized day name */}
-        <div className='flex items-center text-gray-600 text-lg lowercase bg-blue-100'>
-          {getLocalizedDayName(locale, startDate)}.
+        {/* Event info */}
+        <div className='text-gray-300 grid grid-cols-eventCardInfoRow text-xs px-2'>
+          <div className='uppercase'>{localizedDayNameRange}</div>
+          <div className='uppercase text-right'>
+            <LangIcon className='text-gray-400' fontSize='inherit' /> {eventLanguage}
+          </div>
         </div>
-
-        {/* Localized month */}
-        <div className='flex items-center text-xl lowercase italic bg-red-100 justify-center'>
-          {localizedMonthFormatter(locale, startDate)}
-        </div>
-
-        {/* Day date */}
-        <div className='flex items-center text-4xl bg-yellow-300'>
-          { getDayNumber(startDate) }
-        </div>
-
-        {/* Language */}
-        <div className='text-gray-600 italic text-lg col-span-full text-center bg-green-200'>
-          <LangIcon color='inherit' fontSize='inherit' /> {eventLanguage}
+        {/* Event date range */}
+        <div className='text-gray-50 text-center text-2xl lowercase'>          
+          {localizedDateRange}
         </div>
       </article>
     </>
