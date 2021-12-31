@@ -3,7 +3,7 @@
     "target": "es6",
     "lib": [
       "dom",
-      "dom.iterable",      
+      "dom.iterable",
       "esnext"
     ],
     "allowJs": true,
@@ -16,7 +16,8 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "incremental": true
   },
   "include": [
     "next-env.d.ts",

@@ -14,7 +14,8 @@ export type EventSeason = {
   durationDays: number,
   theme: string,
   serviceYear: number,
-  seasonYears: string
+  seasonYears: string,
+  durationText: string,
 }
 
 export type SeasonalEvent = {
@@ -41,6 +42,7 @@ const GetCombinedSeasonalEventData = (locale = "en") => {
         theme
         serviceYear
         seasonYears
+        durationText
       }
       seasonalEvents {
         id

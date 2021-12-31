@@ -5,6 +5,7 @@ import EventGroup from './components/EventGroup';
 // types
 import { Props } from '../../pages/events';
 import { EventSeason, SeasonalEvent } from '../../shared/models/GetEventData';
+import OptionPicker from '../shared/ui/forms/OptionPicker';
 export type EventGroupTypes = 'REG' | 'CACO' | 'CABR' | 'OTHER';
 type EventGroupsOpenState = { [index: string]: boolean };
 // sort events into event types
@@ -145,20 +146,24 @@ export default function Events({ strings, eventSeasons, seasonalEvents, locale}:
 
           <p className='text-lg text-gray-300'>{ strings.pageDescription }</p>
 
-          {/* Language picker */}
-          <form className='text-lg text-left w-10/12 mx-auto border-b p-3'>
-            <label>
-              <span className='text-blue-50'>{strings.eventLangPickerLabel}</span>
-              <select value={eventLangFilter} onChange={(e)=>{setEventLangFilter(e.target.value)}}>
-                {availableLangs.map((lang) => {
-                  return (
-                    // ECMAScript Intl API
-                    <option key={lang} value={lang}>{languageTranslation.of(lang)}</option>
-                  );
-                })}
-              </select>          
-            </label>
-          </form>
+          {/* Language picker */}          
+          {/* what does the user see when eventLangFilter is falsy? */}          
+          <div className='text-lg text-left w-10/12 mx-auto border-b p-3'>        
+          { eventLangFilter && 
+            <>
+              <span className='text-blue-50'>{strings.eventLangPickerLabel} </span>     
+              <OptionPicker
+                options={
+                  availableLangs.map((langCode) => ({
+                    value: langCode, 
+                    label: languageTranslation.of(langCode)
+                  }))}
+                initialValue={eventLangFilter}
+                onSelect={(langCode) => setEventLangFilter(langCode)}
+              />
+            </>
+          }
+          </div>            
         </header>
         
         <AnimateSharedLayout>
