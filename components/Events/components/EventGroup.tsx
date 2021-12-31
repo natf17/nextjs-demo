@@ -75,6 +75,7 @@ export default function EventGroup({title, eventSeason, events, stringsGen, grou
             theme={eventSeason.theme} 
             seasonYears={eventSeason.seasonYears} 
             durationDays={eventSeason.durationDays}
+            durationText={eventSeason.durationText}
             eventThemeLabel={stringsGen.eventThemeLabel}
             yearsShowingLabel={stringsGen.yearsShowingLabel}
             durationLabel={stringsGen.durationLabel}

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Info } from '@material-ui/icons';
 import { motion } from 'framer-motion';
 
 type Props = {
@@ -8,13 +7,14 @@ type Props = {
   durationLabel: string,
   theme: string,
   seasonYears: string,
-  durationDays: number
+  durationDays: number,
+  durationText: string,
 }
 
 export default function SeasonInfo({
-  eventThemeLabel, theme,
+  theme,
   seasonYears,
-  durationLabel, durationDays
+  durationText,
 }: Props) {
 
   const SeasonInfoAnimationVariants = {
@@ -29,24 +29,15 @@ export default function SeasonInfo({
 
   return (
     <motion.div 
-      className='text-gray-200 p-2 ml-10 w-96'
+      className='text-gray-200 p-2 max-w-lg'
       variants={ SeasonInfoAnimationVariants }
       layout
     >      
-      {/* <Info color='disabled' /> */}
-
-      <ul className='border-l-2 mt-2 p-2 bg-gray-800'>
-        <li className=''>
-          <span>{seasonYears} | </span>
-          <span className='font-black'>{eventThemeLabel}: </span>
-          <span>{theme}</span>           
-        </li>
-
-        <li>
-          <span className='font-black'>{durationLabel}: </span>
-          <span>{durationDays}</span>
-        </li>
-      </ul>
+      <h3 className='border-gray-400 border-b-2 mt-2 p-2 bg-gray-800 bg-opacity-30'>
+          <span>{seasonYears} • </span>
+          <span>{theme} • </span>
+          <span>{durationText}</span>             
+      </h3>
 
     </motion.div>
   )
