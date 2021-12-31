@@ -7,7 +7,8 @@ import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
 
 type Props = {
-  events: SeasonalEvent[]
+  events: SeasonalEvent[],
+  seasonalEventDuration?: number,
 }
 
 
@@ -27,7 +28,7 @@ const EventMonthsLayoutAnimationVariants = {
   }
 }
 
-export default function EventMonthsLayout({events}: Props) {
+export default function EventMonthsLayout({events, seasonalEventDuration}: Props) {
   // receive all events
   // organize into months
   // layout months into CSS grid rows
@@ -65,7 +66,8 @@ export default function EventMonthsLayout({events}: Props) {
       layout
     >      
       {/* Repeating grid container - track presence with AnimatePresence for language change */}
-      {Object.entries(eventsByMonth).map(([monthNum, monthEvents]) =>
+      {/* TODO: FIX POSSIBLE ARBITRARY ORDERING WITH Object.entries() */}
+      {Object.entries(eventsByMonth).map(([monthNum, monthEvents], index) =>
         (
           monthEvents.length > 0 &&
             <motion.div
@@ -87,6 +89,7 @@ export default function EventMonthsLayout({events}: Props) {
                       eventLanguage={event.eventLanguage} 
                       key={event.id} 
                       monthNumber={monthNum}
+                      duration={seasonalEventDuration ?? 1}
                     />
                   )
                 })

@@ -83,7 +83,7 @@ export default function EventGroup({title, eventSeason, events, stringsGen, grou
 
         {/* Show some events! */}
         { (events && events.length > 0) 
-          ? <EventMonthsLayout events={events} /> 
+          ? <EventMonthsLayout events={events} seasonalEventDuration={eventSeason?.durationDays} /> 
           : <motion.div layout className='text-blue-200 p-2'>{stringsGen.noEventsFound}</motion.div>
         }
       </motion.div>
