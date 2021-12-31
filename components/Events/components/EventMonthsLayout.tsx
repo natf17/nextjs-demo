@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { SeasonalEvent } from '../../../shared/models/GetEventData';
 import Event from './Event';
 import monthsToColorsMap from '../config/eventColorsByMonth';
+import useLocalizedMonths from '../hooks/useLocalizedMonths';
 import { motion } from 'framer-motion';
+import { useRouter } from 'next/router';
 
 type Props = {
   events: SeasonalEvent[]
@@ -31,6 +33,8 @@ export default function EventMonthsLayout({events}: Props) {
   // layout months into CSS grid rows
   // handle styling associated w each month
   const [eventsByMonth, setEventsByMonth] = useState<EventsByMonth>({1:[], 2: [], 3: [], 4:[], 5:[], 6: [], 7: [], 8: [], 9:[], 10:[], 11:[], 12: []})
+  const { locale = 'en' } = useRouter()
+  const localizedMonths = useLocalizedMonths({locale: locale, month: 'short'})
 
   // TODO: How can we ensure that events are received in chronological order?
   // i.e. so that events within a grid-row are displayed in ascending order
@@ -42,7 +46,7 @@ export default function EventMonthsLayout({events}: Props) {
     events.forEach((event) => {
       // try to create date and push into sorted object
       try {
-        const monthNum = new Date(event.startDate).getMonth() + 1;
+        const monthNum = new Date(event.startDate.replace(/-/g, '\/')).getMonth() + 1;
         updatedEventsByMonth[monthNum].push(event)
       }
       catch {
@@ -72,7 +76,8 @@ export default function EventMonthsLayout({events}: Props) {
                 grid grid-cols-events auto-rows-auto gap-8
               `}
               layout
-            >
+            >              
+              <div className={`text-blue-300 uppercase`}>{ localizedMonths[parseInt(monthNum)] }</div>
               {              
                 monthEvents.map((event) => {
 
