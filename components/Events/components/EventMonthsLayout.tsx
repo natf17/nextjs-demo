@@ -77,7 +77,7 @@ export default function EventMonthsLayout({events}: Props) {
               `}
               layout
             >              
-              <div className={`text-blue-300 uppercase`}>{ localizedMonths[parseInt(monthNum)] }</div>
+              <div className={`text-blue-300 uppercase`}>{ localizedMonths[parseInt(monthNum) - 1] }</div>
               {              
                 monthEvents.map((event) => {
 
