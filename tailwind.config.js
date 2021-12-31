@@ -10,8 +10,9 @@ module.exports = {
         // Custom configuration for menu: min 200px, expand extra space
         'menu': 'repeat(auto-fill, minmax(200px, 1fr))',
         
-        'events': 'repeat(auto-fill, minmax(11em, 1fr))',
+        'events': '5em repeat(auto-fill, minmax(12em, 1fr))',
         'navBar': '1fr 21em 1fr',
+        'eventCardInfoRow': '3fr 1fr',
         'mapWithResults': 'minmax(20em, 1fr) 2fr'
       },
       gridAutoRows: {
