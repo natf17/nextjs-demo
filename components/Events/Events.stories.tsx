@@ -19,7 +19,8 @@ WithSeasonsAndEvents.args = {
     "type": "REG",
     "theme": "Powerful by Faith!",
     "id": "1",
-    "durationDays": 3
+    "durationDays": 3,
+    "durationText": "Three day event",
   },
   {
     "seasonYears": "2021-2022",
@@ -27,7 +28,8 @@ WithSeasonsAndEvents.args = {
     "type": "CACO",
     "theme": "\"Excercise Faith!\"",
     "id": "3",
-    "durationDays": 1
+    "durationDays": 1,
+    "durationText": "1 day event",
   },
   {
     "seasonYears": "2021-2022",
@@ -35,7 +37,8 @@ WithSeasonsAndEvents.args = {
     "type": "CABR",
     "theme": "Strengthen Your Faith!",
     "id": "5",
-    "durationDays": 1
+    "durationDays": 1,
+    "durationText": "1 day event",
   }],  
   seasonalEvents: [
     {
