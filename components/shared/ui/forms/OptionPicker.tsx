@@ -62,7 +62,7 @@ export default function OptionPicker({initialValue, options, onSelect}: OptionPi
         <div 
           className={`
             inline-block max-w-xs overflow-hidden 
-            whitespace-nowrap overflow-ellipsis align-top
+            whitespace-nowrap text-ellipsis align-top
           `}
         >
           { options.filter((option) => option.value === selectedValue)[0].label }
