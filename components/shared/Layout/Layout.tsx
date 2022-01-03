@@ -1,34 +1,34 @@
 // global page layout
-import Header from './components/Header';
-import { useRouter } from 'next/router';
-import { motion, AnimatePresence } from 'framer-motion';
+import Header from "./components/Header";
+import { useRouter } from "next/router";
+import { motion, AnimatePresence } from "framer-motion";
 
 export type Props = {
-  children: React.ReactNode, 
+  children: React.ReactNode;
   globalValues: {
-    header: {      
+    header: {
       logo: {
-        src: string,
-        height: number,
-        width: number
-      }
-    }
-  }
-}
+        src: string;
+        height: number;
+        width: number;
+      };
+    };
+  };
+};
 
 const HeaderAnimationStates = {
-  "hidden": {
+  hidden: {
     top: -70,
-    opacity: 0
+    opacity: 0,
   },
-  "visible": {
+  visible: {
     top: 0,
     opacity: 1,
     transition: {
-      delay: 1.15
-    }
-  }
-}
+      delay: 1.15,
+    },
+  },
+};
 
 export default function Layout({ children, globalValues }: Props) {
   const { asPath } = useRouter();
@@ -37,10 +37,9 @@ export default function Layout({ children, globalValues }: Props) {
     <>
       {/* Don't render header in home page */}
       <AnimatePresence>
-      {      
-        asPath !== '/' &&
-          <motion.header 
-            className='fixed w-screen h-16 bg-black bg-opacity-10 backdrop-filter backdrop-blur-xl z-10'
+        {asPath !== "/" && (
+          <motion.header
+            className="fixed w-screen h-16 bg-black bg-opacity-10 backdrop-filter backdrop-blur-xl z-10"
             initial="hidden"
             animate="visible"
             exit="hidden"
@@ -48,15 +47,17 @@ export default function Layout({ children, globalValues }: Props) {
           >
             <Header {...globalValues.header.logo} />
           </motion.header>
-      }      
+        )}
       </AnimatePresence>
 
-      <main className='
+      <main
+        className="
         py-16
         min-h-screen max-w-7xl m-auto flex
-      '>
+      "
+      >
         {children}
       </main>
     </>
-  )
+  );
 }
