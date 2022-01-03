@@ -41,6 +41,7 @@
     "babel-plugin-import": "^1.13.3",
     "eslint": "7.30.0",
     "eslint-config-next": "11.0.1",
+    "eslint-config-prettier": "^8.3.0",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^27.3.1",
     "node-mocks-http": "^1.11.0",
