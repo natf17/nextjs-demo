@@ -100,7 +100,18 @@ export default function EventGroup({
             seasonalEventDuration={eventSeason?.durationDays}
           />
         ) : (
-          <motion.div layout className="text-blue-200 p-2">
+          <motion.div
+            layout
+            className="text-blue-200 p-2"
+            variants={{
+              collapsed: {
+                opacity: 0,
+              },
+              expanded: {
+                opacity: 1,
+              },
+            }}
+          >
             {stringsGen.noEventsFound}
           </motion.div>
         )}

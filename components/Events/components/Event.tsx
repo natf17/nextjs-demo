@@ -5,10 +5,25 @@ import { useRouter } from "next/router";
 
 import monthsToColorsMap from "../config/eventColorsByMonth";
 import useLocalizedDateFormatter from "../hooks/useLocalizedDateFormatter";
+import { motion } from "framer-motion";
 
 type Props = Pick<SeasonalEvent, "startDate" | "eventLanguage"> & {
   monthNumber: string;
   duration?: number;
+  key: string;
+};
+
+const EventAnimationVariants = {
+  // no animations for now, load with parent
+  initial: {
+    opacity: 0,
+  },
+  animate: {
+    opacity: 1,
+  },
+  exit: {
+    opacity: 0,
+  },
 };
 
 export default function Event({
@@ -16,6 +31,7 @@ export default function Event({
   eventLanguage,
   monthNumber,
   duration = 1,
+  key,
 }: Props) {
   const { locale = "en" } = useRouter();
   // RegEx to replace hyphens w dashes for creating correct date
@@ -44,27 +60,30 @@ export default function Event({
     (duration > 1 ? ` - ${formatShortDayName(sanitizedEndDate)}` : "");
 
   return (
-    <>
-      <article
-        className={`
+    <motion.article
+      key={key}
+      animate={{ opacity: 1, transition: { duration: 2 } }}
+      initial={{ opacity: 0 }}
+      exit={{ opacity: 0, transition: { duration: 2 } }}
+      className={`
           rounded-lg shadow overflow-hidden p-2
           ${monthsToColorsMap[monthNumber].bg_light}
           grid grid-cols-1 auto-rows-min gap-1 bg-opacity-20
         `}
-      >
-        {/* Event info */}
-        <div className="text-gray-300 grid grid-cols-eventCardInfoRow text-xs px-2">
-          <div className="uppercase">{localizedDayNameRange}</div>
-          <div className="uppercase text-right">
-            <LangIcon className="text-gray-400" fontSize="inherit" />{" "}
-            {eventLanguage}
-          </div>
+      layout
+    >
+      {/* Event info */}
+      <div className="text-gray-300 grid grid-cols-eventCardInfoRow text-xs px-2">
+        <div className="uppercase">{localizedDayNameRange}</div>
+        <div className="uppercase text-right">
+          <LangIcon className="text-gray-400" fontSize="inherit" />{" "}
+          {eventLanguage}
         </div>
-        {/* Event date range */}
-        <div className="text-gray-50 text-center text-2xl lowercase">
-          {localizedDateRange}
-        </div>
-      </article>
-    </>
+      </div>
+      {/* Event date range */}
+      <div className="text-gray-50 text-center text-2xl lowercase">
+        {localizedDateRange}
+      </div>
+    </motion.article>
   );
 }
