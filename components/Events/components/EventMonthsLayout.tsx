@@ -128,7 +128,7 @@ export default function EventMonthsLayout({
                     key={e.id}
                     startDate={e.startDate}
                     eventLanguage={e.eventLanguage}
-                    monthNumber={monthIndex.toString()}
+                    monthNumber={(monthIndex + 1).toString()}
                     duration={seasonalEventDuration ?? 1}
                   />
                 ))}
