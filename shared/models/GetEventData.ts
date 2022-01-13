@@ -1,36 +1,34 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
-export type SeasonalType = 'REG' | 'CACO' | 'CABR' | 'OTHER';
-
+export type SeasonalType = "REG" | "CACO" | "CABR" | "OTHER";
 
 export type CombinedSeasonalEventData = {
-  eventSeasons: EventSeason[],
-  seasonalEvents: SeasonalEvent[]
-}
+  eventSeasons: EventSeason[];
+  seasonalEvents: SeasonalEvent[];
+};
 
 export type EventSeason = {
-  id: string,
-  type: string,
-  durationDays: number,
-  theme: string,
-  serviceYear: number,
-  seasonYears: string,
-  durationText: string,
-}
+  id: string;
+  type: string;
+  durationDays: number;
+  theme: string;
+  serviceYear: number;
+  seasonYears: string;
+  durationText: string;
+};
 
 export type SeasonalEvent = {
-  id: string,
-  seasonalType: SeasonalType
-  startDate: string,
-  eventLanguage: string,
+  id: string;
+  seasonalType: SeasonalType;
+  startDate: string;
+  eventLanguage: string;
   event_season: {
-    serviceYear: number,
-    seasonYears: string,
-    type: SeasonalType,
-    theme: string
-  }
-}
-
+    serviceYear: number;
+    seasonYears: string;
+    type: SeasonalType;
+    theme: string;
+  };
+};
 
 const GetCombinedSeasonalEventData = (locale = "en") => {
   return gql`
@@ -44,7 +42,7 @@ const GetCombinedSeasonalEventData = (locale = "en") => {
         seasonYears
         durationText
       }
-      seasonalEvents {
+      seasonalEvents(sort: "startDate:asc") {
         id
         seasonalType
         startDate
@@ -58,6 +56,6 @@ const GetCombinedSeasonalEventData = (locale = "en") => {
       }
     }  
   `;
-} 
+};
 
-export {GetCombinedSeasonalEventData};
+export { GetCombinedSeasonalEventData };

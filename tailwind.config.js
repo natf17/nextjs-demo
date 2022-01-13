@@ -1,9 +1,8 @@
 module.exports = {
-  purge: [
+  content: [
     './pages/**/*.{js,ts,jsx,tsx}',
     './components/**/*.{js,ts,jsx,tsx}'
   ],
-  darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
       gridTemplateColumns: {
@@ -20,11 +19,6 @@ module.exports = {
         'menu': 'minmax(200px, 1fr)',
         'events': 'minmax(10em, 1fr)'        
       }
-    },
-  },
-  variants: {
-    extend: {
-      margin: ['last']
     },
   },
   plugins: [],

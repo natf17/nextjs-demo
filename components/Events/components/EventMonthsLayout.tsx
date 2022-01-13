@@ -1,110 +1,148 @@
-import React, { useEffect, useState } from 'react';
-import { SeasonalEvent } from '../../../shared/models/GetEventData';
-import Event from './Event';
-import monthsToColorsMap from '../config/eventColorsByMonth';
-import useLocalizedMonths from '../hooks/useLocalizedMonths';
-import { motion } from 'framer-motion';
-import { useRouter } from 'next/router';
+import React, { useEffect, useState } from "react";
+import { SeasonalEvent } from "../../../shared/models/GetEventData";
+import Event from "./Event";
+import monthsToColorsMap from "../config/eventColorsByMonth";
+import useLocalizedMonths from "../hooks/useLocalizedMonths";
+import { AnimatePresence, motion } from "framer-motion";
+import { useRouter } from "next/router";
 
 type Props = {
-  events: SeasonalEvent[],
-  seasonalEventDuration?: number,
-}
+  events: SeasonalEvent[];
+  seasonalEventDuration?: number;
+};
 
-
-type EventsByMonth = { 
-  [index: number]: SeasonalEvent[] 
-}
+type EventsByMonth = {
+  [index: number]: SeasonalEvent[];
+};
 
 const EventMonthsLayoutAnimationVariants = {
-  "collapsed": {
+  collapsed: {
     opacity: 0,
-    transition: {
-      duration: 0.2
-    }
   },
-  "expanded": {
-    opacity: 1
-  }
-}
+  expanded: {
+    opacity: 1,
+  },
+};
 
-export default function EventMonthsLayout({events, seasonalEventDuration}: Props) {
-  // receive all events
-  // organize into months
-  // layout months into CSS grid rows
-  // handle styling associated w each month
-  const [eventsByMonth, setEventsByMonth] = useState<EventsByMonth>({1:[], 2: [], 3: [], 4:[], 5:[], 6: [], 7: [], 8: [], 9:[], 10:[], 11:[], 12: []})
-  const { locale = 'en' } = useRouter()
-  const localizedMonths = useLocalizedMonths({locale: locale, month: 'short'})
+const eventsByMonthTemplate: EventsByMonth = {
+  1: [],
+  2: [],
+  3: [],
+  4: [],
+  5: [],
+  6: [],
+  7: [],
+  8: [],
+  9: [],
+  10: [],
+  11: [],
+  12: [],
+};
 
-  // TODO: How can we ensure that events are received in chronological order?
-  // i.e. so that events within a grid-row are displayed in ascending order
+// For mapping over 12 months
+const len12Array = [...Array(12)];
 
-  // sort events
+/*
+  Component receives events, returns arranged by month
+*/
+export default function EventMonthsLayout({
+  events,
+  seasonalEventDuration,
+}: Props) {
+  const { locale = "en" } = useRouter();
+  const localizedMonths = useLocalizedMonths({
+    locale: locale,
+    month: "short",
+  });
+
+  // Holds events arranged by month
+  const [eventsByMonth, setEventsByMonth] = useState<EventsByMonth>(
+    // deep clone events template object
+    JSON.parse(JSON.stringify(eventsByMonthTemplate))
+  );
+
+  // arrange events by month
   useEffect(() => {
-    let updatedEventsByMonth: EventsByMonth = {1:[], 2: [], 3: [], 4:[], 5:[], 6: [], 7: [], 8: [], 9:[], 10:[], 11:[], 12: []};
+    // deep clone events-by-month template
+    let updatedEventsByMonth: EventsByMonth = JSON.parse(
+      JSON.stringify(eventsByMonthTemplate)
+    );
 
+    // create date and push into new object
     events.forEach((event) => {
-      // try to create date and push into sorted object
       try {
-        const monthNum = new Date(event.startDate.replace(/-/g, '\/')).getMonth() + 1;
-        updatedEventsByMonth[monthNum].push(event)
-      }
-      catch {
-        console.error(`Error creating Date object from SeasonalEvent startDate ${event.startDate}`);
+        const monthNum =
+          new Date(event.startDate.replace(/-/g, "/")).getMonth() + 1;
+        updatedEventsByMonth[monthNum].push(event);
+      } catch {
+        console.error(
+          `Error creating Date object from SeasonalEvent startDate ${event.startDate}. Skipping event.`
+        );
       }
     });
 
     setEventsByMonth(updatedEventsByMonth);
-  }, [events])
-
-
+  }, [events]);
 
   return (
-    <motion.div 
-      className='px-2 py-4'  
+    <motion.div
+      className="px-2 py-4"
+      variants={EventMonthsLayoutAnimationVariants}
       layout
-    >      
-      {/* Repeating grid container - track presence with AnimatePresence for language change */}
-      {/* TODO: FIX POSSIBLE ARBITRARY ORDERING WITH Object.entries() */}
-      {Object.entries(eventsByMonth).map(([monthNum, monthEvents], index) =>
-        (
-          monthEvents.length > 0 &&
+    >
+      {/* 12 months */}
+      {len12Array.map((_, monthIndex) => (
+        // Track showing/hiding month rows
+        <AnimatePresence key={monthIndex}>
+          {eventsByMonth[monthIndex + 1].length > 0 && (
             <motion.div
-              key={monthNum}
-              variants={EventMonthsLayoutAnimationVariants}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
               className={`
-                border-l-8 ${monthsToColorsMap[monthNum].border_accent} pl-4 mb-8 last:mb-0
-                grid grid-cols-events auto-rows-auto gap-8
+                border-l-8 ${
+                  monthsToColorsMap[monthIndex + 1].border_accent
+                } pl-4 mb-8 last:mb-0
+                grid grid-cols-[5em_1fr]                
               `}
               layout
-            >              
-              <div className={`text-blue-300 uppercase`}>{ localizedMonths[parseInt(monthNum) - 1] }</div>
-              {              
-                monthEvents.map((event) => {
+            >
+              {/* Col 1: Month */}
+              <motion.div
+                className={`text-blue-300 uppercase`}
+                // only animate position in layout changes (prevents stretching)
+                layout="position"
+              >
+                {localizedMonths[monthIndex]}
+              </motion.div>
 
-                  return (
-                    <Event 
-                      startDate={event.startDate} 
-                      eventLanguage={event.eventLanguage} 
-                      key={event.id} 
-                      monthNumber={monthNum}
-                      duration={seasonalEventDuration ?? 1}
-                    />
-                  )
-                })
-              }            
-            </motion.div> 
-        )
-      )}
+              <motion.div
+                className={`                  
+                  grid grid-cols-[repeat(auto-fill,_minmax(12em,_1fr))]
+                  auto-rows-auto gap-8
+                `}
+              >
+                {/* Cols 2 to n: Events  */}
+                {eventsByMonth[monthIndex + 1].map((e) => (
+                  <Event
+                    key={e.id}
+                    startDate={e.startDate}
+                    eventLanguage={e.eventLanguage}
+                    monthNumber={monthIndex.toString()}
+                    duration={seasonalEventDuration ?? 1}
+                  />
+                ))}
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      ))}
     </motion.div>
-  )
+  );
 }
 
-
-
-// Eventually create a compressed + expanded version 
-// of this component (default to compressed) with a 
-// button to open expanded version. This one will 
-// take up more space and provided a larger view, 
+// Eventually create a compressed + expanded version
+// of this component (default to compressed) with a
+// button to open expanded version. This one will
+// take up more space and provided a larger view,
 // available only after certain # of events/months
