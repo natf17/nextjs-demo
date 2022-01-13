@@ -113,17 +113,15 @@ export default function EventMonthsLayout({
               </div>
 
               {/* Cols 2 to n: Events  */}
-              <AnimatePresence>
-                {eventsByMonth[monthIndex + 1].map((e) => (
-                  <Event
-                    key={e.id}
-                    startDate={e.startDate}
-                    eventLanguage={e.eventLanguage}
-                    monthNumber={monthIndex.toString()}
-                    duration={seasonalEventDuration ?? 1}
-                  />
-                ))}
-              </AnimatePresence>
+              {eventsByMonth[monthIndex + 1].map((e) => (
+                <Event
+                  key={e.id}
+                  startDate={e.startDate}
+                  eventLanguage={e.eventLanguage}
+                  monthNumber={monthIndex.toString()}
+                  duration={seasonalEventDuration ?? 1}
+                />
+              ))}
             </motion.div>
           )}
         </AnimatePresence>

@@ -13,19 +13,6 @@ type Props = Pick<SeasonalEvent, "startDate" | "eventLanguage"> & {
   key: string;
 };
 
-const EventAnimationVariants = {
-  // no animations for now, load with parent
-  initial: {
-    opacity: 0,
-  },
-  animate: {
-    opacity: 1,
-  },
-  exit: {
-    opacity: 0,
-  },
-};
-
 export default function Event({
   startDate,
   eventLanguage,
@@ -62,15 +49,13 @@ export default function Event({
   return (
     <motion.article
       key={key}
-      animate={{ opacity: 1, transition: { duration: 2 } }}
-      initial={{ opacity: 0 }}
-      exit={{ opacity: 0, transition: { duration: 2 } }}
+      animate={{ opacity: 1, scale: 1 }}
+      initial={{ opacity: 0, scale: 0.8 }}
       className={`
           rounded-lg shadow overflow-hidden p-2
           ${monthsToColorsMap[monthNumber].bg_light}
           grid grid-cols-1 auto-rows-min gap-1 bg-opacity-20
         `}
-      layout
     >
       {/* Event info */}
       <div className="text-gray-300 grid grid-cols-eventCardInfoRow text-xs px-2">

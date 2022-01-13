@@ -25,10 +25,6 @@ const variants = {
     opacity: 1,
     height: "100%",
     display: "block",
-    transition: {
-      delayChildren: 0.15,
-      staggerChildren: 0.05,
-    },
   },
   collapsed: {
     opacity: 0,
