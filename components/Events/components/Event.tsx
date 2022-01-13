@@ -56,6 +56,8 @@ export default function Event({
           ${monthsToColorsMap[monthNumber].bg_light}
           grid grid-cols-1 auto-rows-min gap-1 bg-opacity-20
         `}
+      // only animate position in layout changes (prevents stretching)
+      layout="position"
     >
       {/* Event info */}
       <div className="text-gray-300 grid grid-cols-eventCardInfoRow text-xs px-2">
@@ -66,9 +68,9 @@ export default function Event({
         </div>
       </div>
       {/* Event date range */}
-      <div className="text-gray-50 text-center text-2xl lowercase">
+      <motion.div className="text-gray-50 text-center text-2xl">
         {localizedDateRange}
-      </div>
+      </motion.div>
     </motion.article>
   );
 }

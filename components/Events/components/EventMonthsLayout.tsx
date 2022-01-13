@@ -103,25 +103,36 @@ export default function EventMonthsLayout({
                 border-l-8 ${
                   monthsToColorsMap[monthIndex + 1].border_accent
                 } pl-4 mb-8 last:mb-0
-                grid grid-cols-events auto-rows-auto gap-8
+                grid grid-cols-[5em_1fr]                
               `}
               layout
             >
               {/* Col 1: Month */}
-              <div className={`text-blue-300 uppercase`}>
+              <motion.div
+                className={`text-blue-300 uppercase`}
+                // only animate position in layout changes (prevents stretching)
+                layout="position"
+              >
                 {localizedMonths[monthIndex]}
-              </div>
+              </motion.div>
 
-              {/* Cols 2 to n: Events  */}
-              {eventsByMonth[monthIndex + 1].map((e) => (
-                <Event
-                  key={e.id}
-                  startDate={e.startDate}
-                  eventLanguage={e.eventLanguage}
-                  monthNumber={monthIndex.toString()}
-                  duration={seasonalEventDuration ?? 1}
-                />
-              ))}
+              <motion.div
+                className={`                  
+                  grid grid-cols-[repeat(auto-fill,_minmax(12em,_1fr))]
+                  auto-rows-auto gap-8
+                `}
+              >
+                {/* Cols 2 to n: Events  */}
+                {eventsByMonth[monthIndex + 1].map((e) => (
+                  <Event
+                    key={e.id}
+                    startDate={e.startDate}
+                    eventLanguage={e.eventLanguage}
+                    monthNumber={monthIndex.toString()}
+                    duration={seasonalEventDuration ?? 1}
+                  />
+                ))}
+              </motion.div>
             </motion.div>
           )}
         </AnimatePresence>
