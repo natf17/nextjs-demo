@@ -1,6 +1,6 @@
 import React from "react";
 import { useRouter } from "next/router";
-import { KeyboardBackspace } from "@material-ui/icons";
+import { KeyboardBackspace } from "@mui/icons-material";
 
 export default function BackButton() {
   const router = useRouter();

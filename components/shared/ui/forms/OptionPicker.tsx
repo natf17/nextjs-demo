@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { KeyboardArrowDown as DownArrowIcon } from "@material-ui/icons";
+import { KeyboardArrowDown as DownArrowIcon } from "@mui/icons-material";
 
 type OptionPickerProps = {
   initialValue: string;
