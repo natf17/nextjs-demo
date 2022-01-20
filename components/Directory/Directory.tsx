@@ -109,6 +109,7 @@ export default function Map({ strings, amenityData, maps }: Props) {
           {selectedAmenity && (
             <LocationResults
               amenityTitle={amenityData[selectedAmenity].headingLabel}
+              amenityId={selectedAmenity}
               locations={amenityData[selectedAmenity].locations}
             />
           )}

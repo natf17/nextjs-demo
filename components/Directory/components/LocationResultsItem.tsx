@@ -56,7 +56,7 @@ export default function LocationResultsItem(props: Props) {
         <h3 className="text-lg font-medium text-green-50">{name}</h3>
         <ul className="text-gray-300">
           {/* Level */}
-          <li>{location && location.fullname}</li>
+          <li>{location?.fullname}</li>
 
           {/* Gender */}
           <li>{gender}</li>
