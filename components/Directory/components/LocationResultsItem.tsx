@@ -5,6 +5,15 @@ import { DonationLocationSchema } from "../../../shared/models/GetDonationLocati
 import { FirstAidSchema } from "../../../shared/models/GetFirstAidLocations";
 import { WaterFountainSchema } from "../../../shared/models/GetWaterFountainLocations";
 
+// Icons
+import { Wc as UniIcon } from "@mui/icons-material";
+import { Man as ManIcon } from "@mui/icons-material";
+import { Woman as WomanIcon } from "@mui/icons-material";
+import { Accessible as AccessibleIcon } from "@mui/icons-material";
+import { CreditScore as CreditCardIcon } from "@mui/icons-material";
+import { CreditCardOff as NoCreditCardIcon } from "@mui/icons-material";
+import { LocalAtm as CashIcon } from "@mui/icons-material";
+
 export type Props =
   | BathroomLocationSchema
   | DonationLocationSchema
@@ -59,13 +68,16 @@ export default function LocationResultsItem(props: Props) {
           <li>{location?.fullname}</li>
 
           {/* Gender */}
-          <li>{gender}</li>
+          <li>{gender === "uni" && <UniIcon />}</li>
+          <li>{gender === "men" && <ManIcon />}</li>
+          <li>{gender === "women" && <WomanIcon />}</li>
 
           {/* Accessibility */}
-          <li>{isWheelchairAccessible}</li>
+          <li>{isWheelchairAccessible && <AccessibleIcon />}</li>
 
           {/* Payment types */}
-          <li>{paymentTypesAccepted}</li>
+          <li>{paymentTypesAccepted === "cash" && <CashIcon />}</li>
+          <li>{paymentTypesAccepted === "credit" && <CreditCardIcon />}</li>
 
           {/* Note */}
           <li>{note}</li>
