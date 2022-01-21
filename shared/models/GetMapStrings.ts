@@ -103,7 +103,7 @@ const query = (locale = "en") => {
           }
         }
       }
-      locations(locale:"${locale}"){
+      locations(locale:"${locale}", sort:"level_num:asc"){
         id
         fullname
         level_num
