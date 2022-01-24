@@ -22,6 +22,7 @@ const query = (locale = "en") => {
           id
           name
           isWheelchairAccessible
+          note
           location {
             fullname
             level_name
