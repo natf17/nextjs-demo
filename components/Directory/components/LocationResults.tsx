@@ -27,7 +27,7 @@ export default function LocationResults({
 }: Props) {
   return (
     <div className="bg-gray-500 bg-opacity-30 px-1 rounded-tl-lg">
-      <header className="text-3xl p-4 text-green-400"> {amenityTitle} </header>
+      <header className="text-3xl p-4 text-slate-200"> {amenityTitle} </header>
 
       {/* Here we can perform some logic for different amenityIds */}
       {locations && amenityId === "bathrooms" && (

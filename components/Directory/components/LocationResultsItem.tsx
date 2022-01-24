@@ -41,17 +41,13 @@ export default function LocationResultsItem(props: Props) {
 
   return (
     <div>
-      <div
-        className="
-      flex
-    "
-      >
+      <div className="flex">
         {/* Thumbnail */}
         <div
           className="
-        w-20 h-20 overflow-hidden relative
-        flex justify-center items-center
-      "
+            w-20 h-20 overflow-hidden relative
+            flex justify-center items-center
+          "
         >
           {featImg && (
             <Image
@@ -124,7 +120,7 @@ export default function LocationResultsItem(props: Props) {
 
       {/* Note */}
       {note && (
-        <div className="text-emerald-200 text-sm">
+        <div className="text-emerald-200 text-sm p-2">
           <InfoIcon /> <span className="italic text-emerald-100">{note}</span>
         </div>
       )}
