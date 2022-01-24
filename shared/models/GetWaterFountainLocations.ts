@@ -1,24 +1,24 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
-import { LocationSchema } from './GetMapStrings';
+import { LocationSchema } from "./GetMapStrings";
 
 export type WaterFountainSchema = {
-  id: string,
-  name: string,
-  isWheelchairAccessible: boolean,
-  note?: string,
-  location: LocationSchema,
+  id: string;
+  name: string;
+  isWheelchairAccessible: boolean;
+  note?: string;
+  location: LocationSchema;
   featImg?: {
-    url: string,
-    width: number,
-    height: number
-  }
-}
+    url: string;
+    width: number;
+    height: number;
+  };
+};
 
 const query = (locale = "en") => {
   return gql`
       query {
-        waterFountains(locale:"${locale}"){
+        waterFountains(locale:"${locale}", sort:"location.level_num:asc"){
           id
           name
           isWheelchairAccessible
