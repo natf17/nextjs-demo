@@ -14,7 +14,7 @@ import { CreditScore as CreditCardIcon } from "@mui/icons-material";
 import { CreditCardOff as NoCreditCardIcon } from "@mui/icons-material";
 import { LocationOn as BuildingLevelIcon } from "@mui/icons-material";
 import { LocalAtm as CashIcon } from "@mui/icons-material";
-import { Info as InfoIcon } from "@mui/icons-material";
+import { InfoOutlined as InfoIcon } from "@mui/icons-material";
 
 export type Props =
   | BathroomLocationSchema
@@ -40,13 +40,13 @@ export default function LocationResultsItem(props: Props) {
   }
 
   return (
-    <div>
+    <div className="py-2">
       <div className="flex">
         {/* Thumbnail */}
         <div
           className="
-            w-20 h-20 overflow-hidden relative
-            flex justify-center items-center
+            w-16 h-16 overflow-hidden relative
+            flex justify-center items-center self-center
           "
         >
           {featImg && (
@@ -61,7 +61,7 @@ export default function LocationResultsItem(props: Props) {
 
         {/* Amenity quick-view */}
         <div className="p-2">
-          <h3 className="text-lg font-medium text-green-50">{name}</h3>
+          <h3 className="text-lg font-medium text-green-50 py-1">{name}</h3>
           <ul className="text-gray-300">
             {/* Level */}
             <li className="inline-block">
@@ -115,15 +115,15 @@ export default function LocationResultsItem(props: Props) {
               )}
             </div>
           </ul>
+          {/* Note */}
+          {note && (
+            <div className="text-emerald-200 py-1 text-sm">
+              <InfoIcon />{" "}
+              <span className="italic text-emerald-100">{note}</span>
+            </div>
+          )}
         </div>
       </div>
-
-      {/* Note */}
-      {note && (
-        <div className="text-emerald-200 text-sm p-2">
-          <InfoIcon /> <span className="italic text-emerald-100">{note}</span>
-        </div>
-      )}
     </div>
   );
 }
