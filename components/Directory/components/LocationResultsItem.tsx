@@ -4,6 +4,7 @@ import { BathroomLocationSchema } from "../../../shared/models/GetBathroomLocati
 import { DonationLocationSchema } from "../../../shared/models/GetDonationLocations";
 import { FirstAidSchema } from "../../../shared/models/GetFirstAidLocations";
 import { WaterFountainSchema } from "../../../shared/models/GetWaterFountainLocations";
+import LocationFeatureChip from "./LocationFeatureChip";
 
 // Icons
 import { Wc as UniIcon } from "@mui/icons-material";
@@ -77,54 +78,35 @@ export default function LocationResultsItem(props: Props) {
             <div className="inline-block before:content-[' '] before:mr-4 text-blue-100">
               {/* Accessibility */}
               {isWheelchairAccessible && (
-                <li
-                  className={`                
-                  inline-block bg-slate-700
-                  px-1 border border-blue-500 rounded-xl`}
-                >
+                <LocationFeatureChip>
                   <AccessibleIcon />
-                </li>
+                </LocationFeatureChip>
               )}
 
               {/* Gender neutral */}
               {gender === "uni" && (
-                <li
-                  className={`
-                  inline-block bg-slate-700
-                  px-1 border border-blue-500 rounded-xl`}
-                >
+                <LocationFeatureChip>
                   <UniIcon />
-                </li>
+                </LocationFeatureChip>
               )}
 
               {/* Payment types */}
               {paymentTypesAccepted === "cash" && (
                 <>
-                  <li
-                    className={`
-                  text-slate-400 inline-block bg-slate-200
-                  px-1 border border-slate-500 rounded-xl`}
-                  >
+                  <LocationFeatureChip disabled>
                     <NoCreditCardIcon />
-                  </li>
-                  <li
-                    className={`
-                inline-block bg-slate-700
-                px-1 border border-blue-500 rounded-xl`}
-                  >
+                  </LocationFeatureChip>
+
+                  <LocationFeatureChip>
                     <CashIcon />
-                  </li>
+                  </LocationFeatureChip>
                 </>
               )}
 
               {paymentTypesAccepted === "credit" && (
-                <li
-                  className={`
-                  inline-block bg-slate-700
-                  px-1 border border-blue-500 rounded-xl`}
-                >
+                <LocationFeatureChip>
                   <CreditCardIcon />
-                </li>
+                </LocationFeatureChip>
               )}
             </div>
           </ul>
