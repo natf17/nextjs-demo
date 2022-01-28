@@ -5,8 +5,7 @@ import { DonationLocationSchema } from "../../../shared/models/GetDonationLocati
 import { FirstAidSchema } from "../../../shared/models/GetFirstAidLocations";
 import { LocationSchema } from "../../../shared/models/GetMapStrings";
 import { WaterFountainSchema } from "../../../shared/models/GetWaterFountainLocations";
-import LocationResultsBR from "./LocationResultsBR";
-import LocationResultsItem from "./LocationResultsItem";
+import LocationResultsByLevel from "./LocationResultsBR";
 
 export type Props = {
   amenityTitle: string;
@@ -29,21 +28,11 @@ export default function LocationResults({
     <div className="bg-gray-500 bg-opacity-30 px-1 rounded-tl-lg">
       <header className="text-3xl p-4 text-slate-200"> {amenityTitle} </header>
 
-      {/* Here we can perform some logic for different amenityIds */}
-      {locations && amenityId === "bathrooms" && (
-        <LocationResultsBR
+      {locations && (
+        <LocationResultsByLevel
           locations={locations as BathroomLocationSchema[]}
           locationData={locationData}
         />
-      )}
-
-      {locations && amenityId !== "bathrooms" && (
-        <div className="divide-y divide-gray-500">
-          {locations &&
-            locations.map((location) => {
-              return <LocationResultsItem key={location.id} {...location} />;
-            })}
-        </div>
       )}
     </div>
   );

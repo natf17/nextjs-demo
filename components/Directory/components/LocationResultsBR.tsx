@@ -1,15 +1,23 @@
 import React from "react";
 import { BathroomLocationSchema } from "../../../shared/models/GetBathroomLocations";
+import { DonationLocationSchema } from "../../../shared/models/GetDonationLocations";
+import { FirstAidSchema } from "../../../shared/models/GetFirstAidLocations";
 import { LocationSchema } from "../../../shared/models/GetMapStrings";
+import { WaterFountainSchema } from "../../../shared/models/GetWaterFountainLocations";
 import LocationResultsItem from "./LocationResultsItem";
 
+export type MapLocationItem =
+  | BathroomLocationSchema
+  | WaterFountainSchema
+  | FirstAidSchema
+  | DonationLocationSchema;
 type Props = {
-  locations: BathroomLocationSchema[];
+  locations: MapLocationItem[];
   locationData: LocationSchema[];
 };
 
-function LocationResultsBR({
-  locations: bathrooms,
+function LocationResultsByLevel({
+  locations: results,
   locationData: localizedLocationData,
 }: Props) {
   return (
@@ -17,8 +25,8 @@ function LocationResultsBR({
       {localizedLocationData.map((locationArea) => {
         // Display by level
         if (
-          bathrooms.some(
-            (br) => br.location.level_name === locationArea.level_name
+          results.some(
+            (item) => item.location.level_name === locationArea.level_name
           )
         ) {
           return (
@@ -28,12 +36,13 @@ function LocationResultsBR({
               </header>
 
               <div className="divide-y divide-gray-500">
-                {bathrooms
+                {results
                   .filter(
-                    (br) => br.location.level_name === locationArea.level_name
+                    (item) =>
+                      item.location.level_name === locationArea.level_name
                   )
-                  .map((br) => (
-                    <LocationResultsItem key={br.id} {...br} />
+                  .map((item) => (
+                    <LocationResultsItem key={item.id} {...item} />
                   ))}
               </div>
             </div>
@@ -46,4 +55,4 @@ function LocationResultsBR({
   );
 }
 
-export default LocationResultsBR;
+export default LocationResultsByLevel;
