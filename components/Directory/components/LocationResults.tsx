@@ -5,7 +5,7 @@ import { DonationLocationSchema } from "../../../shared/models/GetDonationLocati
 import { FirstAidSchema } from "../../../shared/models/GetFirstAidLocations";
 import { LocationSchema } from "../../../shared/models/GetMapStrings";
 import { WaterFountainSchema } from "../../../shared/models/GetWaterFountainLocations";
-import LocationResultsByLevel from "./LocationResultsBR";
+import LocationResultsByLevel from "./LocationResultsByLevel";
 
 export type Props = {
   amenityTitle: string;
