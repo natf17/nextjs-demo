@@ -1,4 +1,5 @@
 import React from "react";
+import { AmenityId } from "../../../pages/directory";
 import { BathroomLocationSchema } from "../../../shared/models/GetBathroomLocations";
 import { DonationLocationSchema } from "../../../shared/models/GetDonationLocations";
 import { FirstAidSchema } from "../../../shared/models/GetFirstAidLocations";
@@ -14,11 +15,13 @@ export type MapLocationItem =
 type Props = {
   locations: MapLocationItem[];
   locationData: LocationSchema[];
+  amenityId: AmenityId;
 };
 
 function LocationResultsByLevel({
   locations: results,
   locationData: localizedLocationData,
+  amenityId,
 }: Props) {
   return (
     <>
@@ -42,7 +45,11 @@ function LocationResultsByLevel({
                       item.location.level_name === locationArea.level_name
                   )
                   .map((item) => (
-                    <LocationResultsItem key={item.id} {...item} />
+                    <LocationResultsItem
+                      key={item.id}
+                      amenityId={amenityId}
+                      {...item}
+                    />
                   ))}
               </div>
             </div>

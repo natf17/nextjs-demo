@@ -32,6 +32,7 @@ export default function LocationResults({
         <LocationResultsByLevel
           locations={locations as BathroomLocationSchema[]}
           locationData={locationData}
+          amenityId={amenityId}
         />
       )}
     </div>

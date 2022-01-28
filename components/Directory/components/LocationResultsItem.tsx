@@ -15,12 +15,16 @@ import { CreditCardOff as NoCreditCardIcon } from "@mui/icons-material";
 import { LocationOn as BuildingLevelIcon } from "@mui/icons-material";
 import { LocalAtm as CashIcon } from "@mui/icons-material";
 import { InfoOutlined as InfoIcon } from "@mui/icons-material";
+import { AmenityId } from "../../../pages/directory";
 
-export type Props =
+export type Props = (
   | BathroomLocationSchema
   | DonationLocationSchema
   | FirstAidSchema
-  | WaterFountainSchema;
+  | WaterFountainSchema
+) & {
+  amenityId: AmenityId;
+};
 
 export default function LocationResultsItem(props: Props) {
   const { name, location, isWheelchairAccessible, featImg, note } = props;
@@ -95,13 +99,22 @@ export default function LocationResultsItem(props: Props) {
 
               {/* Payment types */}
               {paymentTypesAccepted === "cash" && (
-                <li
-                  className={`
-                  inline-block bg-slate-700
-                  px-1 border border-blue-500 rounded-xl`}
-                >
-                  <CashIcon />
-                </li>
+                <>
+                  <li
+                    className={`
+                  text-slate-400 inline-block bg-slate-200
+                  px-1 border border-slate-500 rounded-xl`}
+                  >
+                    <NoCreditCardIcon />
+                  </li>
+                  <li
+                    className={`
+                inline-block bg-slate-700
+                px-1 border border-blue-500 rounded-xl`}
+                  >
+                    <CashIcon />
+                  </li>
+                </>
               )}
 
               {paymentTypesAccepted === "credit" && (
