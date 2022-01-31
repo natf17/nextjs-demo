@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { AmenityId } from "../../../pages/directory";
 import { BathroomLocationSchema } from "../../../shared/models/GetBathroomLocations";
 import { DonationLocationSchema } from "../../../shared/models/GetDonationLocations";
@@ -20,44 +20,81 @@ type Props = {
 
 function LocationResultsByLevel({
   locations: results,
-  locationData: localizedLocationData,
+  locationData,
   amenityId,
 }: Props) {
+  const [availableLevels, setAvailableLevels] = useState<
+    LocationSchema[] | null
+  >(null);
+  const [selectedLocation, setSelectedLocation] = useState<
+    LocationSchema["level_name"] | null
+  >(null);
+
+  // gather available levels & set defaults
+  useEffect(() => {
+    let levels: LocationSchema[] = [];
+
+    // only add levels with corresponding results for selected POI
+    locationData.forEach((location) => {
+      if (results.some((i) => i.location.level_name === location.level_name)) {
+        levels.push(location);
+      }
+    });
+
+    // set default location
+    if (levels.length > 0 && levels[0]) {
+      setSelectedLocation(levels[0].level_name);
+    }
+
+    // set available levels
+    setAvailableLevels(levels);
+  }, [results, locationData]);
+
   return (
     <>
-      {localizedLocationData.map((locationArea) => {
-        // Display by level
-        if (
-          results.some(
-            (item) => item.location.level_name === locationArea.level_name
-          )
-        ) {
-          return (
-            <div className="mb-5" key={locationArea.level_num}>
-              <header className="text-base text-emerald-300 uppercase border-b-2 border-emerald-100">
-                {locationArea.fullname}
-              </header>
-
-              <div className="divide-y divide-gray-500">
-                {results
-                  .filter(
-                    (item) =>
-                      item.location.level_name === locationArea.level_name
-                  )
-                  .map((item) => (
-                    <LocationResultsItem
-                      key={item.id}
-                      amenityId={amenityId}
-                      {...item}
-                    />
-                  ))}
+      <div>
+        {/* Display level selection tabs */}
+        <div className="border-b-4 border-gray-400">
+          {availableLevels?.map((level) => {
+            return (
+              <div
+                key={level.level_num}
+                className={`
+                    uppercase text-lg
+                    p-2 px-4 inline-block cursor-pointer                    
+                    ${
+                      level.level_name === selectedLocation
+                        ? `${
+                            level.level_name === "MEZZ"
+                              ? "text-emerald-400"
+                              : "text-indigo-400"
+                          }`
+                        : "text-slate-300"
+                    }
+                  `}
+                onClick={() => setSelectedLocation(level.level_name)}
+              >
+                {/* Return location name */}
+                {level.fullname}
               </div>
-            </div>
-          );
-        }
-        // if no results for this location area, skip and continue loop
-        return false;
-      })}
+            );
+          })}
+        </div>
+
+        {/* Display location results */}
+        <div className="divide-y divide-gray-500">
+          {selectedLocation &&
+            results
+              .filter((item) => item.location.level_name === selectedLocation)
+              .map((item) => (
+                <LocationResultsItem
+                  key={item.id}
+                  amenityId={amenityId}
+                  {...item}
+                />
+              ))}
+        </div>
+      </div>
     </>
   );
 }
