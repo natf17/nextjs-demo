@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
 import { AmenityId } from "../../../pages/directory";
 import { BathroomLocationSchema } from "../../../shared/models/GetBathroomLocations";
@@ -54,20 +55,20 @@ function LocationResultsByLevel({
     <>
       <div>
         {/* Display level selection tabs */}
-        <div className="border-b-4 border-gray-400">
+        <div className="border-b-4 border-slate-500">
           {availableLevels?.map((level) => {
             return (
               <div
                 key={level.level_num}
                 className={`
-                    uppercase text-lg
+                    uppercase text-lg relative
                     p-2 px-4 inline-block cursor-pointer                    
                     ${
                       level.level_name === selectedLocation
                         ? `${
                             level.level_name === "MEZZ"
-                              ? "text-emerald-400"
-                              : "text-indigo-400"
+                              ? "text-emerald-300"
+                              : "text-indigo-300"
                           }`
                         : "text-slate-300"
                     }
@@ -76,6 +77,21 @@ function LocationResultsByLevel({
               >
                 {/* Return location name */}
                 {level.fullname}
+
+                {/* Selected tab border */}
+                {level.level_name === selectedLocation && (
+                  <motion.div
+                    className={`
+                      absolute -bottom-1 left-0 right-0 h-1
+                      ${
+                        level.level_name === "MEZZ"
+                          ? "bg-emerald-400"
+                          : "bg-indigo-400"
+                      }
+                    `}
+                    layoutId="LocationResultsByLevel.tab_border"
+                  />
+                )}
               </div>
             );
           })}
