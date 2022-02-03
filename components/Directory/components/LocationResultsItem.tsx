@@ -113,8 +113,7 @@ export default function LocationResultsItem(props: Props) {
           {/* Note */}
           {note && (
             <div className="text-emerald-200 py-1 text-sm">
-              <InfoIcon />{" "}
-              <span className="italic text-emerald-100">{note}</span>
+              * <span className="italic text-emerald-100">{note}</span>
             </div>
           )}
         </div>
