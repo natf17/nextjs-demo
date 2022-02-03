@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { Translate as LanguageIcon } from "@material-ui/icons";
+import { Translate as LanguageIcon } from "@mui/icons-material";
 import { useRouter } from "next/router";
 
 export default function LanguagePicker() {

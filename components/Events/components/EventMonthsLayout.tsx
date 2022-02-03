@@ -140,9 +140,3 @@ export default function EventMonthsLayout({
     </motion.div>
   );
 }
-
-// Eventually create a compressed + expanded version
-// of this component (default to compressed) with a
-// button to open expanded version. This one will
-// take up more space and provided a larger view,
-// available only after certain # of events/months

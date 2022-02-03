@@ -20,6 +20,7 @@ export default function DirectoryMap({ selectedAmenity, maps }: Props) {
           width={maps[selectedAmenity].width}
           height={maps[selectedAmenity].height}
           layout="responsive"
+          priority
         />
       ) : (
         <Image
@@ -28,6 +29,7 @@ export default function DirectoryMap({ selectedAmenity, maps }: Props) {
           width={maps.default.width}
           height={maps.default.height}
           layout="responsive"
+          priority
         />
       )}
     </div>

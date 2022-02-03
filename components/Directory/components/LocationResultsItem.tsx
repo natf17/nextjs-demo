@@ -4,12 +4,28 @@ import { BathroomLocationSchema } from "../../../shared/models/GetBathroomLocati
 import { DonationLocationSchema } from "../../../shared/models/GetDonationLocations";
 import { FirstAidSchema } from "../../../shared/models/GetFirstAidLocations";
 import { WaterFountainSchema } from "../../../shared/models/GetWaterFountainLocations";
+import LocationFeatureChip from "./LocationFeatureChip";
 
-export type Props =
+// Icons
+import { Wc as UniIcon } from "@mui/icons-material";
+import { Man as ManIcon } from "@mui/icons-material";
+import { Woman as WomanIcon } from "@mui/icons-material";
+import { Accessible as AccessibleIcon } from "@mui/icons-material";
+import { CreditScore as CreditCardIcon } from "@mui/icons-material";
+import { CreditCardOff as NoCreditCardIcon } from "@mui/icons-material";
+import { LocationOn as BuildingLevelIcon } from "@mui/icons-material";
+import { LocalAtm as CashIcon } from "@mui/icons-material";
+import { InfoOutlined as InfoIcon } from "@mui/icons-material";
+import { AmenityId } from "../../../pages/directory";
+
+export type Props = (
   | BathroomLocationSchema
   | DonationLocationSchema
   | FirstAidSchema
-  | WaterFountainSchema;
+  | WaterFountainSchema
+) & {
+  amenityId: AmenityId;
+};
 
 export default function LocationResultsItem(props: Props) {
   const { name, location, isWheelchairAccessible, featImg, note } = props;
@@ -29,47 +45,78 @@ export default function LocationResultsItem(props: Props) {
   }
 
   return (
-    <div
-      className="
-      flex
-    "
-    >
-      {/* Thumbnail */}
-      <div
-        className="
-        w-20 h-20 overflow-hidden relative
-        flex justify-center items-center
-      "
-      >
-        {featImg && (
-          <Image
-            src={`${process.env.NEXT_PUBLIC_VERCEL_IMG_API + featImg.url}`}
-            alt={name}
-            width={featImg.width} // insert dimensions, should be sq
-            height={featImg.height}
-          />
-        )}
-      </div>
+    <div className="py-2">
+      <div className="flex">
+        {/* Thumbnail */}
+        <div
+          className="
+            w-16 h-16 overflow-hidden relative
+            flex justify-center items-center self-center
+          "
+        >
+          {featImg && (
+            <Image
+              src={`${process.env.NEXT_PUBLIC_VERCEL_IMG_API + featImg.url}`}
+              alt={name}
+              width={featImg.width} // insert dimensions, should be sq
+              height={featImg.height}
+            />
+          )}
+        </div>
 
-      {/* Amenity quick-view */}
-      <div className="p-2">
-        <h3 className="text-lg font-medium text-green-50">{name}</h3>
-        <ul className="text-gray-300">
-          {/* Level */}
-          <li>{location && location.fullname}</li>
+        {/* Amenity quick-view */}
+        <div className="p-2">
+          <h3 className="text-lg font-medium text-green-50 py-1">{name}</h3>
+          <ul className="text-gray-300">
+            {/* Level */}
+            <li className="inline-block">
+              <BuildingLevelIcon />
+              {location?.fullname}
+            </li>
 
-          {/* Gender */}
-          <li>{gender}</li>
+            {/* Other icon designations */}
+            <div className="inline-block before:content-[' '] before:mr-4 text-blue-100">
+              {/* Accessibility */}
+              {isWheelchairAccessible && (
+                <LocationFeatureChip>
+                  <AccessibleIcon />
+                </LocationFeatureChip>
+              )}
 
-          {/* Accessibility */}
-          <li>{isWheelchairAccessible}</li>
+              {/* Gender neutral */}
+              {gender === "uni" && (
+                <LocationFeatureChip>
+                  <UniIcon />
+                </LocationFeatureChip>
+              )}
 
-          {/* Payment types */}
-          <li>{paymentTypesAccepted}</li>
+              {/* Payment types */}
+              {paymentTypesAccepted === "cash" && (
+                <>
+                  <LocationFeatureChip disabled>
+                    <NoCreditCardIcon />
+                  </LocationFeatureChip>
 
+                  <LocationFeatureChip>
+                    <CashIcon />
+                  </LocationFeatureChip>
+                </>
+              )}
+
+              {paymentTypesAccepted === "credit" && (
+                <LocationFeatureChip>
+                  <CreditCardIcon />
+                </LocationFeatureChip>
+              )}
+            </div>
+          </ul>
           {/* Note */}
-          <li>{note}</li>
-        </ul>
+          {note && (
+            <div className="text-emerald-200 py-1 text-sm">
+              * <span className="italic text-emerald-100">{note}</span>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

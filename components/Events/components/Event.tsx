@@ -1,6 +1,6 @@
 import React from "react";
 import { SeasonalEvent } from "../../../shared/models/GetEventData";
-import { Public as LangIcon } from "@material-ui/icons";
+import { Public as LangIcon } from "@mui/icons-material";
 import { useRouter } from "next/router";
 
 import monthsToColorsMap from "../config/eventColorsByMonth";

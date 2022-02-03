@@ -12,7 +12,12 @@ import { Props } from "./../../pages/directory";
 
 import { AmenityId as AMENITY_ID } from "./../../pages/directory";
 
-export default function Map({ strings, amenityData, maps }: Props) {
+export default function Map({
+  strings,
+  amenityData,
+  maps,
+  locationData,
+}: Props) {
   const router = useRouter();
   const [selectedAmenity, setSelectedAmenity] = useState<
     AMENITY_ID | undefined
@@ -109,7 +114,9 @@ export default function Map({ strings, amenityData, maps }: Props) {
           {selectedAmenity && (
             <LocationResults
               amenityTitle={amenityData[selectedAmenity].headingLabel}
+              amenityId={selectedAmenity}
               locations={amenityData[selectedAmenity].locations}
+              locationData={locationData}
             />
           )}
 

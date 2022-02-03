@@ -3,7 +3,7 @@ import {
   SeasonalEvent,
 } from "../../../shared/models/GetEventData";
 import { GeneralStrings } from "../../../shared/models/GetEventsPageStrings";
-import { ControlPoint } from "@material-ui/icons";
+import { ControlPoint } from "@mui/icons-material";
 import { motion } from "framer-motion";
 import SeasonInfo from "./SeasonInfo";
 import EventMonthsLayout from "./EventMonthsLayout";

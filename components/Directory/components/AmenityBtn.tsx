@@ -3,10 +3,10 @@ import { AmenityId } from "../../../pages/directory";
 import { motion } from "framer-motion";
 
 // import the icons
-import { WcSharp as BathroomIcon } from "@material-ui/icons";
-import { LocalDrinkSharp as WaterFtnIcon } from "@material-ui/icons";
-import { LocalHospitalSharp as FirstAidIcon } from "@material-ui/icons";
-import { AttachMoneySharp as DonationsIcon } from "@material-ui/icons";
+import { Wc as BathroomIcon } from "@mui/icons-material";
+import { LocalDrink as WaterFtnIcon } from "@mui/icons-material";
+import { LocalHospital as FirstAidIcon } from "@mui/icons-material";
+import { AttachMoney as DonationsIcon } from "@mui/icons-material";
 
 export type Props = {
   label: string;
