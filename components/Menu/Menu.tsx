@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Props } from "../../pages/menu";
 
 import MenuRow from "./components/MenuRow";
+import MenuRowLayoutDual from "./components/MenuRowLayoutDual";
 
 export default function Home({ strings }: Props) {
   return (
@@ -18,16 +19,26 @@ export default function Home({ strings }: Props) {
           {strings.pageTitle}
         </h1>
 
+        {/* MenuRowLayoutDual - About & Events */}
+        <MenuRowLayoutDual
+          sectionSm={
+            <MenuRow
+              title={strings.about.title}
+              menuItems={strings.about.menuItems}
+            />
+          }
+          sectionLg={
+            <MenuRow
+              title={strings.events.title}
+              menuItems={strings.events.menuItems}
+            />
+          }
+        />
+
         {/* Directory */}
         <MenuRow
           title={strings.directory.title}
           menuItems={strings.directory.menuItems}
-        />
-
-        {/* Events */}
-        <MenuRow
-          title={strings.events.title}
-          menuItems={strings.events.menuItems}
         />
       </main>
     </motion.div>
