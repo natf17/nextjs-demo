@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 const query = (locale = "en") => {
   return gql`
@@ -33,11 +33,23 @@ const query = (locale = "en") => {
             }
           }
         }
-
-        
+        about {
+          title
+          menuItems {
+            id 
+            isVisible
+            label      
+            url        
+            image {
+              url
+              width
+              height
+            }
+          }
+        }
       }
     }  
   `;
-} 
+};
 
 export default query;
