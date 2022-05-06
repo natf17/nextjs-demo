@@ -7,7 +7,7 @@ export interface Props {
 
 export default function MenuRow({ sectionSm, sectionLg }: Props) {
   return (
-    <div className="grid grid-cols-6 gap-8 mb-8">
+    <div className="grid grid-cols-6 gap-32 mb-11">
       <div className="col-span-6 md:col-span-2">{sectionSm}</div>
       <div className="col-span-6 md:col-span-4">{sectionLg}</div>
     </div>

@@ -20,26 +20,28 @@ export default function Home({ strings }: Props) {
         </h1>
 
         {/* MenuRowLayoutDual - About & Events */}
-        <MenuRowLayoutDual
-          sectionSm={
-            <MenuRow
-              title={strings.about.title}
-              menuItems={strings.about.menuItems}
-            />
-          }
-          sectionLg={
-            <MenuRow
-              title={strings.events.title}
-              menuItems={strings.events.menuItems}
-            />
-          }
-        />
+        <div className="mt-2">
+          <MenuRowLayoutDual
+            sectionSm={
+              <MenuRow
+                title={strings.about.title}
+                menuItems={strings.about.menuItems}
+              />
+            }
+            sectionLg={
+              <MenuRow
+                title={strings.events.title}
+                menuItems={strings.events.menuItems}
+              />
+            }
+          />
 
-        {/* Directory */}
-        <MenuRow
-          title={strings.directory.title}
-          menuItems={strings.directory.menuItems}
-        />
+          {/* Directory */}
+          <MenuRow
+            title={strings.directory.title}
+            menuItems={strings.directory.menuItems}
+          />
+        </div>
       </main>
     </motion.div>
   );
