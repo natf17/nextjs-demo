@@ -30,6 +30,7 @@ export default function IdleUser({ isOpen, resetKiosk }: Props) {
     <div>
       <Modal
         isOpen={isOpen}
+        onRequestClose={idleTimer.reset}
         style={{
           overlay: { backgroundColor: "rgba(0,0,0,0.75)", zIndex: "10" },
           content: {

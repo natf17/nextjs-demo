@@ -33,7 +33,7 @@ const imageWrapperStyle = {
 
 // inactivity timer settings (in seconds)
 const INACTIVITY_TIMER = {
-  idletime: 10,
+  idletime: 45,
   promptduration: 15,
 };
 
