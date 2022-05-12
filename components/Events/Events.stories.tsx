@@ -297,19 +297,15 @@ WithSeasonsAndEvents.args = {
     },
     sectionCABR: {
       title: "Event type CABR title",
-      btn_text: "CABR btn title",
     },
     sectionCACO: {
       title: "Event type CACO title",
-      btn_text: "CACO btn title",
     },
     sectionRegCo: {
       title: "Event type REGO title",
-      btn_text: "REGO btn title",
     },
     sectionOtherEvents: {
       title: "Event type OTHER title",
-      btn_text: "OTHER btn title",
     },
   },
 };
