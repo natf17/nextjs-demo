@@ -1,40 +1,37 @@
-import { gql } from "@apollo/client";
+import { gql } from '@apollo/client';
 
 // separated types for easy type separation and import from modules
 export type EventsPageSchema = {
-  pageTitle: string;
-  pageDescription: string;
-  eventLangPickerLabel: string;
-  general: GeneralStrings;
+  pageTitle: string,
+  pageDescription: string,
+  eventLangPickerLabel: string,
+  general: GeneralStrings,
   sectionRegCo: {
-    title: string;
-    btn_text: string;
-  };
+    title: string
+  },
   sectionCACO: {
-    title: string;
-    btn_text: string;
-  };
+    title: string
+  },
   sectionCABR: {
-    title: string;
-    btn_text: string;
-  };
+    title: string
+  },
   sectionOtherEvents: {
-    title: string;
-    btn_text: string;
-  };
-};
+    title: string
+  }
+}
 
 export type GeneralStrings = {
-  eventThemeLabel: string;
-  durationLabel: string;
-  yearsShowingLabel: string;
-  dateLabel: string;
-  eventLangLabel: string;
-  noEventsFound: string;
-};
+  eventThemeLabel: string,
+  durationLabel: string,
+  yearsShowingLabel: string,
+  dateLabel: string,
+  eventLangLabel: string,
+  noEventsFound: string
+}
+
 
 const query = (locale = "en") => {
-  return gql/* GraphQL */ `
+  return gql`
     query {
       eventsPage(locale: "${locale}") {
         pageTitle
@@ -50,23 +47,19 @@ const query = (locale = "en") => {
         }
         sectionRegCo {
           title
-          btn_text
         }
         sectionCACO {
           title
-          btn_text
         }
         sectionCABR {
           title
-          btn_text
         }
         sectionOtherEvents {
           title
-          btn_text
         }
       }
     }  
   `;
-};
+} 
 
 export default query;
