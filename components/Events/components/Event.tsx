@@ -10,7 +10,7 @@ import { motion } from "framer-motion";
 type Props = Pick<SeasonalEvent, "startDate" | "eventLanguage"> & {
   monthNumber: string;
   duration?: number;
-  key: string;
+  id: string;
 };
 
 export default function Event({
@@ -18,7 +18,7 @@ export default function Event({
   eventLanguage,
   monthNumber,
   duration = 1,
-  key,
+  id,
 }: Props) {
   const { locale = "en" } = useRouter();
   // RegEx to replace hyphens w dashes for creating correct date
@@ -48,7 +48,7 @@ export default function Event({
 
   return (
     <motion.article
-      key={key}
+      key={id}
       animate={{ opacity: 1, scale: 1 }}
       initial={{ opacity: 0, scale: 0.8 }}
       className={`

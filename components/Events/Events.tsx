@@ -203,16 +203,6 @@ export default function Events({
               onGroupSelect={selectEventGroup}
               isExpanded={eventGroupsOpenState["CABR"]}
             />
-
-            <EventGroup
-              title={strings.sectionOtherEvents.title}
-              eventSeason={firstSeasonByType.other}
-              events={eventsByType.other}
-              stringsGen={strings.general}
-              groupType="OTHER"
-              onGroupSelect={selectEventGroup}
-              isExpanded={eventGroupsOpenState["OTHER"]}
-            />
           </motion.div>
         </LayoutGroup>
       </main>

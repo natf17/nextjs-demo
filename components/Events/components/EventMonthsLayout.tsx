@@ -126,6 +126,7 @@ export default function EventMonthsLayout({
                 {eventsByMonth[monthIndex + 1].map((e) => (
                   <Event
                     key={e.id}
+                    id={e.id}
                     startDate={e.startDate}
                     eventLanguage={e.eventLanguage}
                     monthNumber={(monthIndex + 1).toString()}

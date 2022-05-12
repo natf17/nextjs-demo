@@ -10,8 +10,9 @@ export default function MenuItem(item: MenuItemType) {
       <a
         className="
           flex flex-col 
-          p-1 bg-black bg-opacity-50 text-gray-200
-          border border-solid border-blue-200"
+          p-1 bg-black bg-opacity-40 text-gray-200          
+          border-b border-solid border-blue-200 rounded
+          shadow-md shadow-blue-500/50"
       >
         {/* Container sizing */}
         <div
@@ -43,7 +44,7 @@ export default function MenuItem(item: MenuItemType) {
           className="
               h-1/3 overflow-hidden text-center 
               flex justify-center items-center
-              uppercase text-xl
+              uppercase text-lg px-1
             "
         >
           {item.label}

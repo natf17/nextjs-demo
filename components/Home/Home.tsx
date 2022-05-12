@@ -3,8 +3,21 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 
 import { Props } from "../../pages/index";
+import { useEffect } from "react";
+import { useIdleTimerContext } from "react-idle-timer";
 
 export default function Home({ strings }: Props) {
+  const idleTimer = useIdleTimerContext();
+
+  // disable inactivity timer on home page
+  useEffect(() => {
+    idleTimer.pause();
+
+    return () => {
+      idleTimer.reset();
+    };
+  }, [idleTimer]);
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
