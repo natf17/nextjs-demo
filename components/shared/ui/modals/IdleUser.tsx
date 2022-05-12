@@ -1,13 +1,37 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useIdleTimerContext } from "react-idle-timer";
 import Modal from "react-modal";
 
-export default function IdleUser() {
+type Props = {
+  isOpen: boolean;
+  resetKiosk: () => void;
+};
+
+export default function IdleUser({ isOpen, resetKiosk }: Props) {
+  const idleTimer = useIdleTimerContext();
+  const [remainingTime, setRemainingTime] = useState(
+    idleTimer.getRemainingTime()
+  );
+
+  // show time remaining
+  useEffect(() => {
+    // set getRemainingTime timer to update UI
+    const timerId = setInterval(() => {
+      setRemainingTime(Math.floor(idleTimer.getRemainingTime() / 1000));
+    }, 1000);
+
+    // cleanup
+    return () => {
+      clearTimeout(timerId);
+    };
+  }, [idleTimer]);
+
   return (
     <div>
       <Modal
-        isOpen={true}
+        isOpen={isOpen}
         style={{
-          overlay: { backgroundColor: "rgba(0,0,0,0.75)" },
+          overlay: { backgroundColor: "rgba(0,0,0,0.75)", zIndex: "10" },
           content: {
             width: "30rem",
             marginLeft: "auto",
@@ -34,10 +58,16 @@ export default function IdleUser() {
 
         {/* Footer */}
         <footer className="py-2 px-1 text-lg">
-          <button className="bg-indigo-300 p-3 rounded-md mr-6 font-bold">
-            I&apos;m still here (X)
+          <button
+            className="bg-indigo-300 p-3 rounded-md mr-6 font-bold"
+            onClick={idleTimer.reset}
+          >
+            I&apos;m still here ({remainingTime})
           </button>
-          <button className="bg-red-300 p-3 rounded-md font-bold">
+          <button
+            className="bg-red-300 p-3 rounded-md font-bold"
+            onClick={resetKiosk}
+          >
             End session
           </button>
         </footer>
