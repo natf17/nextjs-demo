@@ -1,26 +1,28 @@
 import { LayoutGroup, motion } from "framer-motion";
+import { useRouter } from "next/router";
 import { useEffect, useMemo, useState } from "react";
-import EventGroup from "./components/EventGroup";
 
 // types
 import { Props } from "../../pages/events";
 import { EventSeason, SeasonalEvent } from "../../shared/models/GetEventData";
-import OptionPicker from "../shared/ui/forms/OptionPicker";
+import DynamicEventLayout from "./components/DynamicEventLayout";
 export type EventGroupTypes = "REG" | "CACO" | "CABR" | "OTHER";
-type EventGroupsOpenState = { [index: string]: boolean };
+
 // sort events into event types
 type EventsByType = {
   REG: SeasonalEvent[];
   CACO: SeasonalEvent[];
   CABR: SeasonalEvent[];
-  other: SeasonalEvent[];
+  OTHER: SeasonalEvent[];
 };
 type FirstSeasonByType = {
   REG?: EventSeason;
   CACO?: EventSeason;
   CABR?: EventSeason;
-  other?: EventSeason;
+  OTHER?: EventSeason;
 };
+
+const EVENT_TYPES: EventGroupTypes[] = ["REG", "CACO", "CABR"];
 
 export default function Events({
   strings,
@@ -35,37 +37,10 @@ export default function Events({
   const [visibleEvents, setVisibleEvents] = useState<SeasonalEvent[] | null>(
     null
   );
-  const [eventGroupsOpenState, setEventGroupsOpenState] =
-    useState<EventGroupsOpenState>({
-      REG: false,
-      CACO: false,
-      CABR: false,
-      OTHER: false,
-    });
+  const router = useRouter();
 
-  function selectEventGroup(eventGroupType: EventGroupTypes) {
-    // grab latest state / duplicate
-
-    setEventGroupsOpenState((prevState) => {
-      let newState = { ...prevState };
-      // let newState = Object.assign({}, selectedEventGroup);
-
-      for (const index in newState) {
-        if (index === eventGroupType) {
-          newState[index] = !prevState[eventGroupType];
-        } else {
-          newState[index] = false;
-        }
-      }
-
-      return newState;
-    });
-  }
-
-  // TODO: check browser compatibility - support for all major modern browsers, as of Sept 2021
-  const languageTranslation = new Intl.DisplayNames([locale], {
-    type: "language",
-  });
+  const [selectedEventType, setSelectedEventType] =
+    useState<EventGroupTypes | null>(null);
 
   // calculate available languages from events
   const availableLangs = useMemo(() => {
@@ -81,7 +56,7 @@ export default function Events({
 
   // sort events into event types
   const eventsByType = useMemo(() => {
-    let sorted: EventsByType = { REG: [], CACO: [], CABR: [], other: [] };
+    let sorted: EventsByType = { REG: [], CACO: [], CABR: [], OTHER: [] };
     if (visibleEvents) {
       visibleEvents.forEach((event) => {
         switch (event.seasonalType) {
@@ -98,7 +73,7 @@ export default function Events({
             break;
 
           case "OTHER":
-            sorted.other.push(event);
+            sorted.OTHER.push(event);
             break;
         }
       });
@@ -114,7 +89,7 @@ export default function Events({
     seasonsByType.REG = eventSeasons.find((s) => s.type === "REG");
     seasonsByType.CACO = eventSeasons.find((s) => s.type === "CACO");
     seasonsByType.CABR = eventSeasons.find((s) => s.type === "CABR");
-    seasonsByType.other = eventSeasons.find((s) => s.type === "OTHER");
+    seasonsByType.OTHER = eventSeasons.find((s) => s.type === "OTHER");
 
     return seasonsByType;
   }, [eventSeasons]);
@@ -138,6 +113,21 @@ export default function Events({
     }
   }, [seasonalEvents, eventLangFilter]);
 
+  // watch URL for selected event type
+  useEffect(() => {
+    // event type
+    const urlEventType = router.query.eventType as EventGroupTypes;
+
+    // validate event type
+    if (EVENT_TYPES.indexOf(urlEventType) > -1) {
+      setSelectedEventType(urlEventType);
+    }
+  }, [router]);
+
+  const onEventTypeSelect = (eventType: EventGroupTypes) => {
+    router.replace({ query: { eventType } }, undefined, { shallow: true });
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -147,63 +137,63 @@ export default function Events({
     >
       <main className="h-full">
         <header className="text-center p-2 py-6">
-          <h1 className="text-4xl text-blue-50 pb-2">{strings.pageTitle}</h1>
+          <h1 className="text-4xl text-blue-50 pb-2 mb-12">
+            {strings.pageTitle}
+          </h1>
 
-          <p className="text-lg text-gray-300">{strings.pageDescription}</p>
-
-          {/* Language picker */}
-          {/* what does the user see when eventLangFilter is falsy? */}
-          <div className="text-lg text-left w-10/12 mx-auto border-b p-3">
-            {eventLangFilter && (
-              <>
-                <span className="text-blue-50">
-                  {strings.eventLangPickerLabel}{" "}
-                </span>
-                <OptionPicker
-                  options={availableLangs.map((langCode) => ({
-                    value: langCode,
-                    label: languageTranslation.of(langCode),
-                  }))}
-                  initialValue={eventLangFilter}
-                  onSelect={(langCode) => setEventLangFilter(langCode)}
-                />
-              </>
+          {/* Select event type */}
+          <motion.div layout>
+            {!selectedEventType && (
+              <p className="text-lg text-gray-300 p-2 pb-6 pt-16">
+                {strings.pageDescription.toUpperCase()}
+              </p>
             )}
-          </div>
+            <motion.div layout>
+              {EVENT_TYPES.map((eventType, idx) => (
+                <button
+                  key={idx}
+                  className={`
+                    rounded-full p-4 px-5 mr-4 last:mr-0 border 
+                    ${
+                      selectedEventType === eventType
+                        ? "bg-slate-300/10 border-slate-300 shadow-md shadow-cyan-500/50 text-blue-400"
+                        : "text-slate-400 border-slate-500"
+                    }
+                  `}
+                  onClick={() => onEventTypeSelect(eventType)}
+                >
+                  <h2
+                    className={`        
+                    text-2xl uppercase select-none
+                    filter drop-shadow-lg          
+                    text-center                  
+                  `}
+                  >
+                    {strings[`section${eventType}`].btn_text}
+                  </h2>
+                </button>
+              ))}
+            </motion.div>
+          </motion.div>
         </header>
 
         <LayoutGroup>
-          <motion.div className="px-3 py-6" layout>
-            <EventGroup
-              title={strings.sectionRegCo.title}
-              eventSeason={firstSeasonByType.REG}
-              events={eventsByType.REG}
-              stringsGen={strings.general}
-              groupType="REG"
-              onGroupSelect={selectEventGroup}
-              isExpanded={eventGroupsOpenState["REG"]}
-            />
-
-            <EventGroup
-              title={strings.sectionCACO.title}
-              eventSeason={firstSeasonByType.CACO}
-              events={eventsByType.CACO}
-              stringsGen={strings.general}
-              groupType="CACO"
-              onGroupSelect={selectEventGroup}
-              isExpanded={eventGroupsOpenState["CACO"]}
-            />
-
-            <EventGroup
-              title={strings.sectionCABR.title}
-              eventSeason={firstSeasonByType.CABR}
-              events={eventsByType.CABR}
-              stringsGen={strings.general}
-              groupType="CABR"
-              onGroupSelect={selectEventGroup}
-              isExpanded={eventGroupsOpenState["CABR"]}
-            />
-          </motion.div>
+          {selectedEventType && (
+            <motion.div className="px-3 py-6" layout>
+              <DynamicEventLayout
+                eventTypeNameFull={strings[`section${selectedEventType}`].title}
+                eventSeason={firstSeasonByType[selectedEventType]}
+                events={eventsByType[selectedEventType]}
+                // maybe move into context?
+                stringsGen={strings.general}
+                chooseLangLabel={strings.eventLangPickerLabel}
+                groupType={selectedEventType}
+                currentLang={eventLangFilter}
+                availableLangs={availableLangs}
+                onChooseLang={(langCode) => setEventLangFilter(langCode)}
+              />
+            </motion.div>
+          )}
         </LayoutGroup>
       </main>
     </motion.div>

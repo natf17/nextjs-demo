@@ -7,15 +7,18 @@ import { motion } from "framer-motion";
 import SeasonInfo from "./SeasonInfo";
 import EventMonthsLayout from "./EventMonthsLayout";
 import { EventGroupTypes } from "../Events";
+import EventInformationPane from "./EventInformationPane";
 
 export type Props = {
-  title: string;
+  eventTypeNameFull: string;
   eventSeason?: EventSeason;
   events?: SeasonalEvent[];
   stringsGen: GeneralStrings;
   groupType: EventGroupTypes;
-  isExpanded: boolean;
-  onGroupSelect: (e: EventGroupTypes) => void;
+  availableLangs: string[];
+  currentLang?: string;
+  onChooseLang: (langCode: string) => void;
+  chooseLangLabel: string;
 };
 
 // Animation
@@ -38,43 +41,30 @@ const variants = {
 };
 
 export default function DynamicEventLayout({
-  title,
+  eventTypeNameFull,
   eventSeason,
   events,
   stringsGen,
+  currentLang,
+  availableLangs,
+  onChooseLang,
+  chooseLangLabel,
 }: Props) {
   return (
     <motion.article className="mb-2" layout>
-      {/* Event season name */}
-      <motion.h2
-        className={`        
-          text-2xl uppercase select-none
-          filter drop-shadow-lg          
-          text-blue-300 text-center                  
-        `}
-        layout
-      >
-        {title}
-      </motion.h2>
-
       {/* Event season information */}
-      {eventSeason && (
-        <div className="flex justify-center">
-          <SeasonInfo
-            theme={eventSeason.theme}
-            seasonYears={eventSeason.seasonYears}
-            durationDays={eventSeason.durationDays}
-            durationText={eventSeason.durationText}
-            eventThemeLabel={stringsGen.eventThemeLabel}
-            yearsShowingLabel={stringsGen.yearsShowingLabel}
-            durationLabel={stringsGen.durationLabel}
-          />
-        </div>
-      )}
+      <EventInformationPane
+        eventTypeName={eventTypeNameFull}
+        eventSeason={eventSeason}
+        currentLang={currentLang}
+        availableLangs={availableLangs}
+        onChooseLang={onChooseLang}
+        chooseLangLabel={chooseLangLabel}
+      />
 
       {/* Event data */}
       <motion.div
-        className="border-l border-blue-300 pl-4"
+        className="p-6"
         animate="expanded"
         variants={variants}
         initial={false}
