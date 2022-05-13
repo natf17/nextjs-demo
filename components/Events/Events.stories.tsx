@@ -303,11 +303,11 @@ WithSeasonsAndEvents.args = {
       title: "Event type CACO title",
       btn_text: "CACO btn title",
     },
-    sectionRegCo: {
+    sectionREG: {
       title: "Event type REGO title",
       btn_text: "REGO btn title",
     },
-    sectionOtherEvents: {
+    sectionOTHER: {
       title: "Event type OTHER title",
       btn_text: "OTHER btn title",
     },

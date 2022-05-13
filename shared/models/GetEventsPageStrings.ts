@@ -6,7 +6,7 @@ export type EventsPageSchema = {
   pageDescription: string;
   eventLangPickerLabel: string;
   general: GeneralStrings;
-  sectionRegCo: {
+  sectionREG: {
     title: string;
     btn_text: string;
   };
@@ -18,7 +18,7 @@ export type EventsPageSchema = {
     title: string;
     btn_text: string;
   };
-  sectionOtherEvents: {
+  sectionOTHER: {
     title: string;
     btn_text: string;
   };
@@ -48,7 +48,7 @@ const query = (locale = "en") => {
           eventLangLabel
           noEventsFound
         }
-        sectionRegCo {
+        sectionREG {
           title
           btn_text
         }
@@ -60,7 +60,7 @@ const query = (locale = "en") => {
           title
           btn_text
         }
-        sectionOtherEvents {
+        sectionOTHER {
           title
           btn_text
         }
