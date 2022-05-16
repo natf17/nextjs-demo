@@ -8,15 +8,9 @@ import { EventSeason, SeasonalEvent } from "../../shared/models/GetEventData";
 import DynamicEventLayout from "./components/DynamicEventLayout";
 import EventTypeBtn from "./components/EventTypeBtn";
 import getUniqueLangs from "./utils/getUniqueLangs";
+import sortEventsByType from "./utils/sortEventsByType";
 export type EventGroupTypes = "REG" | "CACO" | "CABR" | "OTHER";
 
-// sort events into event types
-type EventsByType = {
-  REG: SeasonalEvent[];
-  CACO: SeasonalEvent[];
-  CABR: SeasonalEvent[];
-  OTHER: SeasonalEvent[];
-};
 type FirstSeasonByType = {
   REG?: EventSeason;
   CACO?: EventSeason;
@@ -51,30 +45,7 @@ export default function Events({
 
   // sort events into event types
   const eventsByType = useMemo(() => {
-    let sorted: EventsByType = { REG: [], CACO: [], CABR: [], OTHER: [] };
-    if (visibleEvents) {
-      visibleEvents.forEach((event) => {
-        switch (event.seasonalType) {
-          case "REG":
-            sorted.REG.push(event);
-            break;
-
-          case "CACO":
-            sorted.CACO.push(event);
-            break;
-
-          case "CABR":
-            sorted.CABR.push(event);
-            break;
-
-          case "OTHER":
-            sorted.OTHER.push(event);
-            break;
-        }
-      });
-    }
-
-    return sorted;
+    return sortEventsByType(visibleEvents);
   }, [visibleEvents]);
 
   // extract event seasons
