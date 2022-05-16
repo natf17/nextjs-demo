@@ -6,6 +6,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Props } from "../../pages/events";
 import { EventSeason, SeasonalEvent } from "../../shared/models/GetEventData";
 import DynamicEventLayout from "./components/DynamicEventLayout";
+import EventTypeBtn from "./components/EventTypeBtn";
 export type EventGroupTypes = "REG" | "CACO" | "CABR" | "OTHER";
 
 // sort events into event types
@@ -150,28 +151,14 @@ export default function Events({
             )}
             <motion.div layout>
               {EVENT_TYPES.map((eventType, idx) => (
-                <button
+                <EventTypeBtn
+                  eventType={eventType}
                   key={idx}
-                  className={`
-                    rounded-full p-4 px-5 mr-4 last:mr-0 border 
-                    ${
-                      selectedEventType === eventType
-                        ? "bg-slate-300/10 border-slate-300 shadow-md shadow-cyan-500/50 text-blue-400"
-                        : "text-slate-400 border-slate-500"
-                    }
-                  `}
+                  selected={eventType === selectedEventType}
                   onClick={() => onEventTypeSelect(eventType)}
                 >
-                  <h2
-                    className={`        
-                    text-2xl uppercase select-none
-                    filter drop-shadow-lg          
-                    text-center                  
-                  `}
-                  >
-                    {strings[`section${eventType}`].btn_text}
-                  </h2>
-                </button>
+                  {strings[`section${eventType}`].btn_text}
+                </EventTypeBtn>
               ))}
             </motion.div>
           </motion.div>
