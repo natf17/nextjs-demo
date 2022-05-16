@@ -92,7 +92,11 @@ function MyApp({ Component, pageProps }) {
           </AnimatePresence>
         </Layout>
 
-        <IdleUser resetKiosk={resetKiosk} isOpen={isIdleModalOpen} />
+        <IdleUser
+          resetKiosk={resetKiosk}
+          isOpen={isIdleModalOpen}
+          promptDuration={INACTIVITY_TIMER.promptduration}
+        />
       </IdleTimerProvider>
     </IntlProvider>
   );
