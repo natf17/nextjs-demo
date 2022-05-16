@@ -4,19 +4,13 @@ import { useEffect, useMemo, useState } from "react";
 
 // types
 import { Props } from "../../pages/events";
-import { EventSeason, SeasonalEvent } from "../../shared/models/GetEventData";
+import { SeasonalEvent } from "../../shared/models/GetEventData";
 import DynamicEventLayout from "./components/DynamicEventLayout";
 import EventTypeBtn from "./components/EventTypeBtn";
+import getEventSeasons from "./utils/getEventSeasons";
 import getUniqueLangs from "./utils/getUniqueLangs";
 import sortEventsByType from "./utils/sortEventsByType";
 export type EventGroupTypes = "REG" | "CACO" | "CABR" | "OTHER";
-
-type FirstSeasonByType = {
-  REG?: EventSeason;
-  CACO?: EventSeason;
-  CABR?: EventSeason;
-  OTHER?: EventSeason;
-};
 
 const EVENT_TYPES: EventGroupTypes[] = ["REG", "CACO", "CABR"];
 
@@ -34,7 +28,6 @@ export default function Events({
     null
   );
   const router = useRouter();
-
   const [selectedEventType, setSelectedEventType] =
     useState<EventGroupTypes | null>(null);
 
@@ -50,14 +43,7 @@ export default function Events({
 
   // extract event seasons
   const firstSeasonByType = useMemo(() => {
-    let seasonsByType: FirstSeasonByType = {};
-
-    seasonsByType.REG = eventSeasons.find((s) => s.type === "REG");
-    seasonsByType.CACO = eventSeasons.find((s) => s.type === "CACO");
-    seasonsByType.CABR = eventSeasons.find((s) => s.type === "CABR");
-    seasonsByType.OTHER = eventSeasons.find((s) => s.type === "OTHER");
-
-    return seasonsByType;
+    return getEventSeasons(eventSeasons);
   }, [eventSeasons]);
 
   // availableEventLangs: if available, filter events by locale language by default
