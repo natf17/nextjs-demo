@@ -7,6 +7,7 @@ import { Props } from "../../pages/events";
 import { EventSeason, SeasonalEvent } from "../../shared/models/GetEventData";
 import DynamicEventLayout from "./components/DynamicEventLayout";
 import EventTypeBtn from "./components/EventTypeBtn";
+import getUniqueLangs from "./utils/getUniqueLangs";
 export type EventGroupTypes = "REG" | "CACO" | "CABR" | "OTHER";
 
 // sort events into event types
@@ -45,14 +46,7 @@ export default function Events({
 
   // calculate available languages from events
   const availableLangs = useMemo(() => {
-    let langs: string[] = [];
-    seasonalEvents.map((e) => {
-      if (!langs.includes(e.eventLanguage)) {
-        langs.push(e.eventLanguage);
-      }
-    });
-
-    return langs;
+    return getUniqueLangs(seasonalEvents);
   }, [seasonalEvents]);
 
   // sort events into event types
