@@ -4,13 +4,13 @@ import { useEffect, useMemo, useState } from "react";
 
 // types
 import { Props } from "../../pages/events";
-import { SeasonalEvent } from "../../shared/models/GetEventData";
+import { SeasonalEvent, SeasonalType } from "../../shared/models/GetEventData";
 import DynamicEventLayout from "./components/DynamicEventLayout";
 import EventTypeBtn from "./components/EventTypeBtn";
 import getEventSeasons from "./utils/getEventSeasons";
 import getUniqueLangs from "./utils/getUniqueLangs";
 import sortEventsByType from "./utils/sortEventsByType";
-export type EventGroupTypes = "REG" | "CACO" | "CABR" | "OTHER";
+export type EventGroupTypes = SeasonalType;
 
 const EVENT_TYPES: EventGroupTypes[] = ["REG", "CACO", "CABR"];
 

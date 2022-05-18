@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { SeasonalEvent } from "../../../shared/models/GetEventData";
 import Event from "./Event";
-import monthsToColorsMap from "../config/eventColorsByMonth";
 import useLocalizedMonths from "../hooks/useLocalizedMonths";
 import { AnimatePresence, motion } from "framer-motion";
 import { useRouter } from "next/router";
+import { EventGroupTypes } from "../Events";
+import eventColorsByType from "../config/eventColorsByType";
 
 type Props = {
   events: SeasonalEvent[];
   seasonalEventDuration?: number;
+  eventType?: EventGroupTypes;
 };
 
 type EventsByMonth = {
@@ -48,6 +50,7 @@ const len12Array = [...Array(12)];
 export default function EventMonthsLayout({
   events,
   seasonalEventDuration,
+  eventType,
 }: Props) {
   const { locale = "en" } = useRouter();
   const localizedMonths = useLocalizedMonths({
@@ -101,7 +104,9 @@ export default function EventMonthsLayout({
               exit={{ opacity: 0 }}
               className={`
                 border-l-8 ${
-                  monthsToColorsMap[monthIndex + 1].border_accent
+                  eventType
+                    ? eventColorsByType[eventType].month
+                    : "border-blue-400"
                 } pl-4 mb-8 last:mb-0
                 grid grid-cols-[5em_1fr]                
               `}
@@ -131,6 +136,7 @@ export default function EventMonthsLayout({
                     eventLanguage={e.eventLanguage}
                     monthNumber={(monthIndex + 1).toString()}
                     duration={seasonalEventDuration ?? 1}
+                    eventType={eventType}
                   />
                 ))}
               </motion.div>

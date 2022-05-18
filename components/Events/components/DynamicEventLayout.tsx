@@ -4,7 +4,6 @@ import {
 } from "../../../shared/models/GetEventData";
 import { GeneralStrings } from "../../../shared/models/GetEventsPageStrings";
 import { motion } from "framer-motion";
-import SeasonInfo from "./SeasonInfo";
 import EventMonthsLayout from "./EventMonthsLayout";
 import { EventGroupTypes } from "../Events";
 import EventInformationPane from "./EventInformationPane";
@@ -49,6 +48,7 @@ export default function DynamicEventLayout({
   availableLangs,
   onChooseLang,
   chooseLangLabel,
+  groupType,
 }: Props) {
   return (
     <motion.article className="mb-2" layout>
@@ -75,6 +75,7 @@ export default function DynamicEventLayout({
           <EventMonthsLayout
             events={events}
             seasonalEventDuration={eventSeason?.durationDays}
+            eventType={groupType}
           />
         ) : (
           <motion.div

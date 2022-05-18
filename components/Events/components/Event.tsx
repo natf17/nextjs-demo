@@ -1,23 +1,28 @@
 import React from "react";
-import { SeasonalEvent } from "../../../shared/models/GetEventData";
-import { CheckCircle, Public as LangIcon } from "@mui/icons-material";
+import {
+  SeasonalEvent,
+  SeasonalType,
+} from "../../../shared/models/GetEventData";
+import { Public as LangIcon } from "@mui/icons-material";
 import { useRouter } from "next/router";
 
-import monthsToColorsMap from "../config/eventColorsByMonth";
 import useLocalizedDateFormatter from "../hooks/useLocalizedDateFormatter";
 import { motion } from "framer-motion";
 import isDateBeforeFactory from "../utils/isDateBeforeFactory";
+import eventColorsByType from "../config/eventColorsByType";
+import { EventGroupTypes } from "../Events";
 
 type Props = Pick<SeasonalEvent, "startDate" | "eventLanguage"> & {
   monthNumber: string;
   duration?: number;
   id: string;
+  eventType?: EventGroupTypes;
 };
 
 export default function Event({
   startDate,
   eventLanguage,
-  monthNumber,
+  eventType,
   duration = 1,
   id,
 }: Props) {
@@ -60,10 +65,13 @@ export default function Event({
           ${
             isPastEvent
               ? "bg-slate-600 bg-opacity-40"
-              : `bg-cyan-700 bg-opacity-30`
+              : `${
+                  eventType
+                    ? eventColorsByType[eventType].event_tile
+                    : "bg-blue-900"
+                } bg-opacity-50`
           }
         `}
-      // ${monthsToColorsMap[monthNumber].bg_light}
       // only animate position in layout changes (prevents stretching)
       layout="position"
     >
