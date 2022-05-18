@@ -1,11 +1,12 @@
 import React from "react";
 import { SeasonalEvent } from "../../../shared/models/GetEventData";
-import { Public as LangIcon } from "@mui/icons-material";
+import { CheckCircle, Public as LangIcon } from "@mui/icons-material";
 import { useRouter } from "next/router";
 
 import monthsToColorsMap from "../config/eventColorsByMonth";
 import useLocalizedDateFormatter from "../hooks/useLocalizedDateFormatter";
 import { motion } from "framer-motion";
+import isDateBeforeFactory from "../utils/isDateBeforeFactory";
 
 type Props = Pick<SeasonalEvent, "startDate" | "eventLanguage"> & {
   monthNumber: string;
@@ -46,21 +47,32 @@ export default function Event({
     formatShortDayName(sanitizedStartDate) +
     (duration > 1 ? ` - ${formatShortDayName(sanitizedEndDate)}` : "");
 
+  const isPastEvent = isDateBeforeFactory(new Date())(sanitizedEndDate);
+
   return (
     <motion.article
       key={id}
       animate={{ opacity: 1, scale: 1 }}
       initial={{ opacity: 0, scale: 0.8 }}
       className={`
-          rounded-lg shadow overflow-hidden p-2
-          ${monthsToColorsMap[monthNumber].bg_light}
-          grid grid-cols-1 auto-rows-min gap-1 bg-opacity-20
+          rounded-lg shadow overflow-hidden p-2          
+          grid grid-cols-1 auto-rows-min gap-1
+          ${
+            isPastEvent
+              ? "bg-slate-600 bg-opacity-40"
+              : `bg-cyan-700 bg-opacity-30`
+          }
         `}
+      // ${monthsToColorsMap[monthNumber].bg_light}
       // only animate position in layout changes (prevents stretching)
       layout="position"
     >
       {/* Event info */}
-      <div className="text-gray-300 grid grid-cols-eventCardInfoRow text-xs px-2">
+      <div
+        className={`${
+          isPastEvent ? "text-gray-300" : "text-gray-200"
+        } grid grid-cols-eventCardInfoRow text-xs px-2`}
+      >
         <div className="uppercase">{localizedDayNameRange}</div>
         <div className="uppercase text-right">
           <LangIcon className="text-gray-400" fontSize="inherit" />{" "}
@@ -68,7 +80,11 @@ export default function Event({
         </div>
       </div>
       {/* Event date range */}
-      <motion.div className="text-gray-50 text-center text-2xl">
+      <motion.div
+        className={`${
+          isPastEvent ? "text-gray-300" : "text-gray-50"
+        } text-center text-2xl`}
+      >
         {localizedDateRange}
       </motion.div>
     </motion.article>
