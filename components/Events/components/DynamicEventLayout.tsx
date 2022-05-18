@@ -68,6 +68,7 @@ export default function DynamicEventLayout({
         animate="expanded"
         variants={variants}
         initial={false}
+        key={groupType}
         layout
       >
         {/* Show some events! */}
