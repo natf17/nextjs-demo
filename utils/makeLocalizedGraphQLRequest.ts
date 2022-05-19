@@ -5,7 +5,7 @@ export type LocalizedQuery = {
   locale: string;
   query: DocumentNode;
   variables?: {
-    [index: string]: string;
+    [index: string]: string | number;
   };
 };
 
