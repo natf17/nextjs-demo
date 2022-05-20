@@ -1,6 +1,5 @@
 import makeGraphQLRequest from "../utils/makeGraphQLRequest";
 import GetEventsPageStrings from "../shared/models/GetEventsPageStrings";
-import { GetCombinedSeasonalEventData } from "../shared/models/GetEventData";
 import Events from "../components/Events";
 
 // Type data
@@ -8,6 +7,9 @@ import { GetStaticProps } from "next";
 import { ParsedUrlQuery } from "querystring";
 import { EventsPageSchema } from "../shared/models/GetEventsPageStrings";
 import { EventSeason, SeasonalEvent } from "../shared/models/GetEventData";
+import makeLocalizedGraphQLRequest from "../utils/makeLocalizedGraphQLRequest";
+import { GET_COMBINED_SEASONAL_EVENT_DATA } from "../graphql/queries/GetEventData";
+import getCurrentServiceYear from "../utils/getCurrentServiceYear";
 
 // Props passed down to page component
 export type Props = {
@@ -25,17 +27,23 @@ export interface Params extends ParsedUrlQuery {
 export const getStaticProps: GetStaticProps<Props, Params> = async (
   context
 ) => {
+  // GQL required variables
   const locale = context.locale!;
+  const serviceYear = getCurrentServiceYear();
 
   try {
     const { eventsPage } = await makeGraphQLRequest(
       locale,
       GetEventsPageStrings
     );
-    const { eventSeasons, seasonalEvents } = await makeGraphQLRequest(
-      locale,
-      GetCombinedSeasonalEventData
-    );
+
+    const { eventSeasons, seasonalEvents } = await makeLocalizedGraphQLRequest({
+      locale: locale,
+      query: GET_COMBINED_SEASONAL_EVENT_DATA,
+      variables: {
+        serviceYear: serviceYear,
+      },
+    });
 
     return {
       props: {
