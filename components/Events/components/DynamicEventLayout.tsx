@@ -75,6 +75,7 @@ export default function DynamicEventLayout({
         {events && events.length > 0 ? (
           <EventMonthsLayout
             events={events}
+            eventSeason={eventSeason}
             seasonalEventDuration={eventSeason?.durationDays}
             eventType={groupType}
           />

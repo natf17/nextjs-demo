@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { SeasonalEvent } from "../../../shared/models/GetEventData";
+import {
+  EventSeason,
+  SeasonalEvent,
+} from "../../../shared/models/GetEventData";
 import Event from "./Event";
 import useLocalizedMonths from "../hooks/useLocalizedMonths";
 import { AnimatePresence, motion } from "framer-motion";
 import { useRouter } from "next/router";
 import { EventGroupTypes } from "../Events";
 import eventColorsByType from "../config/eventColorsByType";
+import getCurrentServiceYear from "../../../utils/getCurrentServiceYear";
 
 type Props = {
   events: SeasonalEvent[];
+  eventSeason?: EventSeason;
   seasonalEventDuration?: number;
   eventType?: EventGroupTypes;
 };
@@ -53,6 +58,8 @@ export default function EventMonthsLayout({
   eventType,
 }: Props) {
   const { locale = "en" } = useRouter();
+  const currentServiceYear = getCurrentServiceYear();
+  const getCurrentYear = new Date().getFullYear();
   const localizedMonths = useLocalizedMonths({
     locale: locale,
     month: "short",
