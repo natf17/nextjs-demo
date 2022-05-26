@@ -5,32 +5,39 @@ import Modal from "react-modal";
 type Props = {
   isOpen: boolean;
   resetKiosk: () => void;
+  promptDuration: number;
 };
 
-export default function IdleUser({ isOpen, resetKiosk }: Props) {
+export default function IdleUser({
+  isOpen,
+  resetKiosk,
+  promptDuration,
+}: Props) {
   const idleTimer = useIdleTimerContext();
-  const [remainingTime, setRemainingTime] = useState(
-    idleTimer.getRemainingTime()
-  );
+  const [remainingTime, setRemainingTime] = useState(promptDuration);
 
   // show time remaining
   useEffect(() => {
+    if (!isOpen) {
+      return;
+    }
     // set getRemainingTime timer to update UI
     const timerId = setInterval(() => {
-      setRemainingTime(Math.floor(idleTimer.getRemainingTime() / 1000));
+      const timeRemaining = Math.round(idleTimer.getRemainingTime() / 1000);
+      setRemainingTime(timeRemaining);
     }, 1000);
 
-    // cleanup
     return () => {
       clearTimeout(timerId);
     };
-  }, [idleTimer]);
+  }, [idleTimer, isOpen]);
 
   return (
     <div>
       <Modal
         isOpen={isOpen}
         onRequestClose={idleTimer.reset}
+        onAfterClose={() => setRemainingTime(promptDuration)}
         style={{
           overlay: { backgroundColor: "rgba(0,0,0,0.75)", zIndex: "10" },
           content: {

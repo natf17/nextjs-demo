@@ -9,7 +9,7 @@ export type CombinedSeasonalEventData = {
 
 export type EventSeason = {
   id: string;
-  type: SeasonalType;
+  type: string;
   durationDays: number;
   theme: string;
   serviceYear: number;
@@ -30,32 +30,33 @@ export type SeasonalEvent = {
   };
 };
 
-const GetCombinedSeasonalEventData = (locale = "en") => {
-  return gql`
-    query {
-      eventSeasons(locale: "${locale}") {
-        id
-        type
-        durationDays
-        theme
+const GET_COMBINED_SEASONAL_EVENT_DATA = gql`
+  query GetCombinedSeasonalEventData($locale: String!, $serviceYear: Int!) {
+    eventSeasons(locale: $locale, where: { serviceYear: $serviceYear }) {
+      id
+      type
+      durationDays
+      theme
+      serviceYear
+      seasonYears
+      durationText
+    }
+    seasonalEvents(
+      sort: "startDate:asc"
+      where: { event_season: { serviceYear: $serviceYear } }
+    ) {
+      id
+      seasonalType
+      startDate
+      eventLanguage
+      event_season {
         serviceYear
         seasonYears
-        durationText
+        type
+        theme
       }
-      seasonalEvents(sort: "startDate:asc") {
-        id
-        seasonalType
-        startDate
-        eventLanguage
-        event_season {
-          serviceYear
-          seasonYears
-          type
-          theme
-        }
-      }
-    }  
-  `;
-};
+    }
+  }
+`;
 
-export { GetCombinedSeasonalEventData };
+export { GET_COMBINED_SEASONAL_EVENT_DATA };
