@@ -9,7 +9,7 @@ export type CombinedSeasonalEventData = {
 
 export type EventSeason = {
   id: string;
-  type: string;
+  type: SeasonalType;
   durationDays: number;
   theme: string;
   serviceYear: number;
