@@ -51,6 +51,7 @@ export default function Events({
     if (availableLangs.includes(locale)) {
       setEventLangFilter(locale);
     }
+    setEventLangFilter(locale);
   }, [availableLangs, locale]);
 
   // eventLang: filter events to match selected lang
