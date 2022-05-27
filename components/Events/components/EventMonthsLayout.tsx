@@ -39,6 +39,10 @@ export default function EventMonthsLayout({
     locale: locale,
     month: "short",
   });
+  const today = new Date();
+  const todayYear = today.getFullYear();
+  const todayOneBasedMonthNum = today.getMonth() + 1;
+  const isPastYear = todayYear > dateYear;
 
   return (
     <motion.div
@@ -47,9 +51,15 @@ export default function EventMonthsLayout({
       layout
     >
       <motion.h2
-        className={`text-3xl mb-6 ${
-          eventType ? eventColorsByType[eventType].text : "text-blue-400"
-        }`}
+        className={`text-3xl mb-6
+          ${
+            isPastYear
+              ? "text-gray-400"
+              : eventType
+              ? eventColorsByType[eventType].text
+              : "text-blue-400"
+          }
+        `}
         layout
       >
         {dateYear}
@@ -59,6 +69,7 @@ export default function EventMonthsLayout({
         {eventsByMonth &&
           Object.keys(eventsByMonth).map((oneBasedMonthNumString) => {
             const oneBasedMonthNumInt = parseInt(oneBasedMonthNumString);
+            const isPastMonth = todayOneBasedMonthNum > oneBasedMonthNumInt;
 
             return (
               <AnimatePresence key={oneBasedMonthNumString}>
@@ -68,7 +79,9 @@ export default function EventMonthsLayout({
                   exit={{ opacity: 0 }}
                   className={`
                 border-l-8 ${
-                  eventType
+                  isPastYear || isPastMonth
+                    ? "border-gray-400"
+                    : eventType
                     ? eventColorsByType[eventType].month
                     : "border-blue-400"
                 } pl-4 mb-8 last:mb-0
@@ -78,7 +91,11 @@ export default function EventMonthsLayout({
                 >
                   {/* Col 1: Month */}
                   <motion.div
-                    className={`text-blue-300 uppercase`}
+                    className={`${
+                      isPastYear || isPastMonth
+                        ? "text-gray-400"
+                        : "text-blue-300"
+                    } uppercase`}
                     // only animate position in layout changes (prevents stretching)
                     layout="position"
                   >
