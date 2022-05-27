@@ -36,6 +36,11 @@ export default function EventInformationPane({
     type: "language",
   });
 
+  const dropdownOptions = availableLangs.map((langCode) => ({
+    value: langCode,
+    label: languageTranslation.of(langCode),
+  }));
+
   return (
     <motion.div
       className="text-gray-200 p-2 grid grid-cols-6 border-b border-slate-500"
@@ -72,10 +77,7 @@ export default function EventInformationPane({
               {chooseLangLabel}{" "}
             </span>
             <OptionPicker
-              options={availableLangs.map((langCode) => ({
-                value: langCode,
-                label: languageTranslation.of(langCode),
-              }))}
+              options={dropdownOptions}
               initialValue={currentLang}
               onSelect={(langCode) => onChooseLang(langCode)}
             />

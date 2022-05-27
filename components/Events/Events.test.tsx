@@ -23,7 +23,7 @@ import { useRouter } from "next/router";
 jest.mock("next/router", () => ({
   __esModule: true,
   ...jest.requireActual("next/router"),
-  useRouter: jest.fn(() => ({ locale: "en" })),
+  useRouter: jest.fn(() => ({ locale: "en", query: {} })),
 }));
 
 // Compose story with season and events data

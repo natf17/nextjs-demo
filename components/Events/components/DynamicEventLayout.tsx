@@ -7,6 +7,8 @@ import { motion } from "framer-motion";
 import EventMonthsLayout from "./EventMonthsLayout";
 import { EventGroupTypes } from "../Events";
 import EventInformationPane from "./EventInformationPane";
+import { useMemo } from "react";
+import groupEventsByDate from "../utils/groupEventsByDate";
 
 export type Props = {
   eventTypeNameFull: string;
@@ -50,6 +52,14 @@ export default function DynamicEventLayout({
   chooseLangLabel,
   groupType,
 }: Props) {
+  // divide events into years
+  const eventsByYearByMonth = useMemo(() => {
+    if (events && events.length > 0) {
+      return groupEventsByDate(events);
+    }
+    return null;
+  }, [events]);
+
   return (
     <motion.article className="mb-2" layout>
       {/* Event season information */}
@@ -71,14 +81,22 @@ export default function DynamicEventLayout({
         key={groupType}
         layout
       >
-        {/* Show some events! */}
-        {events && events.length > 0 ? (
-          <EventMonthsLayout
-            events={events}
-            eventSeason={eventSeason}
-            seasonalEventDuration={eventSeason?.durationDays}
-            eventType={groupType}
-          />
+        {eventsByYearByMonth ? (
+          // Display by year
+          Object.keys(eventsByYearByMonth).map((val) => {
+            const year = parseInt(val);
+
+            return (
+              <EventMonthsLayout
+                key={val}
+                eventsByMonth={eventsByYearByMonth[year]}
+                eventSeason={eventSeason}
+                seasonalEventDuration={eventSeason?.durationDays}
+                eventType={groupType}
+                dateYear={year}
+              />
+            );
+          })
         ) : (
           <motion.div
             layout

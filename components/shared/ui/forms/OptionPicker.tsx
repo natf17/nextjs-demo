@@ -71,7 +71,8 @@ export default function OptionPicker({
             whitespace-nowrap text-ellipsis align-top
           `}
         >
-          {options.filter((option) => option.value === selectedValue)[0].label}
+          {options.filter((option) => option.value === selectedValue)[0]
+            ?.label || " "}
         </div>
 
         {/* Only show arrow if there are more options */}

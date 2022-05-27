@@ -1,12 +1,24 @@
 import { SeasonalEvent } from "../../../shared/models/GetEventData";
 
-type OneBasedMonthNumbers = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
+export type OneBasedMonthNumbers =
+  | 1
+  | 2
+  | 3
+  | 4
+  | 5
+  | 6
+  | 7
+  | 8
+  | 9
+  | 10
+  | 11
+  | 12;
 
-type ByMonths<T> = {
+export type ByMonths<T> = {
   [month in OneBasedMonthNumbers]?: T[];
 };
 
-type ByYear<T> = {
+export type ByYear<T> = {
   [year: number]: ByMonths<T>;
 } | null;
 
