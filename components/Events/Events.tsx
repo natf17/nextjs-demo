@@ -33,8 +33,15 @@ export default function Events({
 
   // calculate available languages from events
   const availableLangs = useMemo(() => {
-    return getUniqueLangs(seasonalEvents);
-  }, [seasonalEvents]);
+    const uniqueLangs = getUniqueLangs(seasonalEvents);
+
+    // ensure system locale is always an "available" lang even if there are no matching events
+    if (!uniqueLangs.includes(locale)) {
+      uniqueLangs.push(locale);
+    }
+
+    return uniqueLangs;
+  }, [seasonalEvents, locale]);
 
   // sort events into event types
   const eventsByType = useMemo(() => {
@@ -46,11 +53,8 @@ export default function Events({
     return getEventSeasons(eventSeasons);
   }, [eventSeasons]);
 
-  // availableEventLangs: if available, filter events by locale language by default
+  // filter events by locale language by default, even if no events in that locale
   useEffect(() => {
-    if (availableLangs.includes(locale)) {
-      setEventLangFilter(locale);
-    }
     setEventLangFilter(locale);
   }, [availableLangs, locale]);
 
