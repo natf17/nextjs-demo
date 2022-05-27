@@ -54,7 +54,7 @@ export default function DynamicEventLayout({
 }: Props) {
   // divide events into years
   const eventsByYearByMonth = useMemo(() => {
-    if (events) {
+    if (events && events.length > 0) {
       return groupEventsByDate(events);
     }
     return null;
