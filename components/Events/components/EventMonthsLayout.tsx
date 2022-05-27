@@ -9,17 +9,15 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useRouter } from "next/router";
 import { EventGroupTypes } from "../Events";
 import eventColorsByType from "../config/eventColorsByType";
-import getCurrentServiceYear from "../../../utils/getCurrentServiceYear";
+import { ByMonths, OneBasedMonthNumbers } from "../utils/groupEventsByDate";
 
 type Props = {
   events: SeasonalEvent[];
   eventSeason?: EventSeason;
+  dateYear: number;
+  eventsByMonth?: ByMonths<SeasonalEvent>;
   seasonalEventDuration?: number;
   eventType?: EventGroupTypes;
-};
-
-type EventsByMonth = {
-  [index: number]: SeasonalEvent[];
 };
 
 const EventMonthsLayoutAnimationVariants = {
@@ -31,85 +29,45 @@ const EventMonthsLayoutAnimationVariants = {
   },
 };
 
-const eventsByMonthTemplate: EventsByMonth = {
-  1: [],
-  2: [],
-  3: [],
-  4: [],
-  5: [],
-  6: [],
-  7: [],
-  8: [],
-  9: [],
-  10: [],
-  11: [],
-  12: [],
-};
-
-// For mapping over 12 months
-const len12Array = [...Array(12)];
-
-/*
-  Component receives events, returns arranged by month
-*/
 export default function EventMonthsLayout({
-  events,
   seasonalEventDuration,
   eventType,
+  dateYear,
+  eventsByMonth,
 }: Props) {
   const { locale = "en" } = useRouter();
-  const currentServiceYear = getCurrentServiceYear();
-  const getCurrentYear = new Date().getFullYear();
   const localizedMonths = useLocalizedMonths({
     locale: locale,
     month: "short",
   });
 
-  // Holds events arranged by month
-  const [eventsByMonth, setEventsByMonth] = useState<EventsByMonth>(
-    // deep clone events template object
-    JSON.parse(JSON.stringify(eventsByMonthTemplate))
-  );
-
-  // arrange events by month
-  useEffect(() => {
-    // deep clone events-by-month template
-    let updatedEventsByMonth: EventsByMonth = JSON.parse(
-      JSON.stringify(eventsByMonthTemplate)
-    );
-
-    // create date and push into new object
-    events.forEach((event) => {
-      try {
-        const monthNum =
-          new Date(event.startDate.replace(/-/g, "/")).getMonth() + 1;
-        updatedEventsByMonth[monthNum].push(event);
-      } catch {
-        console.error(
-          `Error creating Date object from SeasonalEvent startDate ${event.startDate}. Skipping event.`
-        );
-      }
-    });
-
-    setEventsByMonth(updatedEventsByMonth);
-  }, [events]);
-
   return (
     <motion.div
-      className="px-2 py-4"
+      className="py-4"
       variants={EventMonthsLayoutAnimationVariants}
       layout
     >
+      <motion.h2
+        className={`text-3xl mb-6 ${
+          eventType ? eventColorsByType[eventType].text : "text-blue-400"
+        }`}
+        layout
+      >
+        {dateYear}
+      </motion.h2>
       {/* 12 months */}
-      {len12Array.map((_, monthIndex) => (
-        // Track showing/hiding month rows
-        <AnimatePresence key={monthIndex}>
-          {eventsByMonth[monthIndex + 1].length > 0 && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className={`
+      <div className="px-2">
+        {eventsByMonth &&
+          Object.keys(eventsByMonth).map((oneBasedMonthNumString) => {
+            const oneBasedMonthNumInt = parseInt(oneBasedMonthNumString);
+
+            return (
+              <AnimatePresence key={oneBasedMonthNumString}>
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className={`
                 border-l-8 ${
                   eventType
                     ? eventColorsByType[eventType].month
@@ -117,40 +75,43 @@ export default function EventMonthsLayout({
                 } pl-4 mb-8 last:mb-0
                 grid grid-cols-[5em_1fr]                
               `}
-              layout
-            >
-              {/* Col 1: Month */}
-              <motion.div
-                className={`text-blue-300 uppercase`}
-                // only animate position in layout changes (prevents stretching)
-                layout="position"
-              >
-                {localizedMonths[monthIndex]}
-              </motion.div>
+                  layout
+                >
+                  {/* Col 1: Month */}
+                  <motion.div
+                    className={`text-blue-300 uppercase`}
+                    // only animate position in layout changes (prevents stretching)
+                    layout="position"
+                  >
+                    {localizedMonths[oneBasedMonthNumInt - 1]}
+                  </motion.div>
 
-              <motion.div
-                className={`                  
+                  <motion.div
+                    className={`                  
                   grid grid-cols-[repeat(auto-fill,_minmax(12em,_1fr))]
                   auto-rows-auto gap-8
                 `}
-              >
-                {/* Cols 2 to n: Events  */}
-                {eventsByMonth[monthIndex + 1].map((e) => (
-                  <Event
-                    key={e.id}
-                    id={e.id}
-                    startDate={e.startDate}
-                    eventLanguage={e.eventLanguage}
-                    monthNumber={(monthIndex + 1).toString()}
-                    duration={seasonalEventDuration ?? 1}
-                    eventType={eventType}
-                  />
-                ))}
-              </motion.div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      ))}
+                  >
+                    {/* Cols 2 to n: Events  */}
+                    {eventsByMonth?.[
+                      oneBasedMonthNumInt as OneBasedMonthNumbers
+                    ]?.map((e) => (
+                      <Event
+                        key={e.id}
+                        id={e.id}
+                        startDate={e.startDate}
+                        eventLanguage={e.eventLanguage}
+                        monthNumber={oneBasedMonthNumInt.toString()}
+                        duration={seasonalEventDuration ?? 1}
+                        eventType={eventType}
+                      />
+                    ))}
+                  </motion.div>
+                </motion.div>
+              </AnimatePresence>
+            );
+          })}
+      </div>
     </motion.div>
   );
 }
