@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
   EventSeason,
   SeasonalEvent,
@@ -12,7 +12,6 @@ import eventColorsByType from "../config/eventColorsByType";
 import { ByMonths, OneBasedMonthNumbers } from "../utils/groupEventsByDate";
 
 type Props = {
-  events: SeasonalEvent[];
   eventSeason?: EventSeason;
   dateYear: number;
   eventsByMonth?: ByMonths<SeasonalEvent>;
@@ -55,7 +54,7 @@ export default function EventMonthsLayout({
       >
         {dateYear}
       </motion.h2>
-      {/* 12 months */}
+
       <div className="px-2">
         {eventsByMonth &&
           Object.keys(eventsByMonth).map((oneBasedMonthNumString) => {

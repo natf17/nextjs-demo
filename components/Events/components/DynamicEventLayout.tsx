@@ -89,7 +89,6 @@ export default function DynamicEventLayout({
             return (
               <EventMonthsLayout
                 key={val}
-                events={[]}
                 eventsByMonth={eventsByYearByMonth[year]}
                 eventSeason={eventSeason}
                 seasonalEventDuration={eventSeason?.durationDays}
