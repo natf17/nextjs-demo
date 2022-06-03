@@ -7,14 +7,16 @@ import { LocationSchema } from "../../../shared/models/GetMapStrings";
 import { WaterFountainSchema } from "../../../shared/models/GetWaterFountainLocations";
 import LocationResultsByLevel from "./LocationResultsByLevel";
 
+export type MapLocationItem =
+  | BathroomLocationSchema
+  | WaterFountainSchema
+  | FirstAidSchema
+  | DonationLocationSchema;
+
 export type Props = {
   amenityTitle: string;
   amenityId: AmenityId;
-  locations?:
-    | BathroomLocationSchema[]
-    | WaterFountainSchema[]
-    | FirstAidSchema[]
-    | DonationLocationSchema[];
+  locations?: MapLocationItem[];
   locationData: LocationSchema[];
 };
 
@@ -30,7 +32,7 @@ export default function LocationResults({
 
       {locations && (
         <LocationResultsByLevel
-          locations={locations as BathroomLocationSchema[]}
+          locations={locations}
           locationData={locationData}
           amenityId={amenityId}
         />

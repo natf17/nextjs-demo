@@ -2,6 +2,7 @@ import { gql } from "@apollo/client";
 import { LocationSchema } from "./GetMapStrings";
 
 export type DonationLocationSchema = {
+  __typename: "Donation";
   id: string;
   name: string;
   isWheelchairAccessible: boolean;
@@ -19,6 +20,7 @@ const query = (locale = "en") => {
   return gql`
       query {
         donations(locale:"${locale}", sort:"location.level_num:asc"){
+          __typename
           id
           name
           isWheelchairAccessible

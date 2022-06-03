@@ -3,6 +3,7 @@ import { gql } from "@apollo/client";
 import { LocationSchema } from "./GetMapStrings";
 
 export type BathroomLocationSchema = {
+  __typename: "Bathrooms";
   id: string;
   name: string;
   gender: "men" | "women" | "uni";
@@ -20,6 +21,7 @@ const query = (locale = "en") => {
   return gql`
       query {
         bathrooms(locale:"${locale}", sort:"location.level_num:asc"){
+          __typename
           id
           name
           gender

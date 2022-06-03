@@ -1,18 +1,10 @@
 import { motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
 import { AmenityId } from "../../../pages/directory";
-import { BathroomLocationSchema } from "../../../shared/models/GetBathroomLocations";
-import { DonationLocationSchema } from "../../../shared/models/GetDonationLocations";
-import { FirstAidSchema } from "../../../shared/models/GetFirstAidLocations";
 import { LocationSchema } from "../../../shared/models/GetMapStrings";
-import { WaterFountainSchema } from "../../../shared/models/GetWaterFountainLocations";
 import LocationResultsItem from "./LocationResultsItem";
+import { MapLocationItem } from "./LocationResults";
 
-export type MapLocationItem =
-  | BathroomLocationSchema
-  | WaterFountainSchema
-  | FirstAidSchema
-  | DonationLocationSchema;
 type Props = {
   locations: MapLocationItem[];
   locationData: LocationSchema[];
