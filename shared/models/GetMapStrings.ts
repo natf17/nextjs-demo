@@ -43,6 +43,11 @@ export type LocationSchema = {
   fullname: string;
   level_name: "FIRST" | "MEZZ" | "SECOND" | "THIRD";
   level_num: number;
+  map: {
+    width: number;
+    height: number;
+    url: string;
+  };
 };
 
 const query = (locale = "en") => {
@@ -108,6 +113,11 @@ const query = (locale = "en") => {
         fullname
         level_num
         level_name
+        map {          
+          width
+          height
+          url
+        }
       }
     }  
   `;

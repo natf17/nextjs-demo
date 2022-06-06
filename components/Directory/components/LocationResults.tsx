@@ -27,16 +27,22 @@ export default function LocationResults({
   locationData,
 }: Props) {
   return (
-    <div className="bg-gray-500 bg-opacity-30 px-1 rounded-tl-lg">
-      <header className="text-3xl p-4 text-slate-200"> {amenityTitle} </header>
+    // Grid container
+    <div>
+      <div className=" px-1">
+        <header className="text-3xl p-4 text-slate-200">
+          {" "}
+          {amenityTitle}{" "}
+        </header>
 
-      {locations && (
-        <LocationResultsByLevel
-          locations={locations}
-          locationData={locationData}
-          amenityId={amenityId}
-        />
-      )}
+        {locations && (
+          <LocationResultsByLevel
+            locations={locations}
+            locationData={locationData}
+            amenityId={amenityId}
+          />
+        )}
+      </div>
     </div>
   );
 }

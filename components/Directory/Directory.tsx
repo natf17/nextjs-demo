@@ -106,7 +106,7 @@ export default function Map({
         {/* Map view */}
         <div
           className={`
-            grid grid-cols-1 w-full          
+            grid grid-cols-1 w-full bg-gray-500 bg-opacity-30      
             ${selectedAmenity && "md:grid-cols-mapWithResults"}
           `}
         >
@@ -119,7 +119,11 @@ export default function Map({
             />
           )}
 
-          <DirectoryMap selectedAmenity={selectedAmenity} maps={maps} />
+          <DirectoryMap
+            selectedAmenity={selectedAmenity}
+            maps={maps}
+            locationData={locationData}
+          />
         </div>
       </main>
     </motion.div>
