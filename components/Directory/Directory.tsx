@@ -7,10 +7,12 @@ import LocationResults from "./components/LocationResults";
 import DirectoryMap from "./components/DirectoryMap";
 
 import { Props } from "./../../pages/directory";
+import useMapUIStore from "./useStore";
 // TODO: CONVERT TO USING TWIN.MACRO FOR CLASSNAMES
 // TODO: FIX ERROR CHECKING AND HANDLING AT PAGE-LEVEL DIRECTORY.JS
 
 import { AmenityId as AMENITY_ID } from "./../../pages/directory";
+import { MotionFadeEnter } from "./../../shared/animations/pages/onPageLoad";
 
 export default function Map({
   strings,
@@ -23,6 +25,8 @@ export default function Map({
     AMENITY_ID | undefined
   >(undefined);
 
+  // shared state
+  const selectAmenity = useMapUIStore((state) => state.selectAmenity);
   const onLocationSelect = (amenityId: AMENITY_ID) => {
     // map enum to amenity in data
     const selection = amenityData[amenityId];
@@ -48,18 +52,13 @@ export default function Map({
 
     // validate selection
     if (amenityId && amenityData[amenityId]) {
-      console.log(`running: ${router.query.amenityId}`);
       setSelectedAmenity(amenityId);
+      selectAmenity(amenityId);
     }
-  }, [router, amenityData]);
+  }, [router, amenityData, selectAmenity]);
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      className="self-stretch w-full"
-    >
+    <motion.div {...MotionFadeEnter} className="self-stretch w-full">
       <main className="h-full">
         <header className="text-center p-2 py-6 mb-6">
           <h1 className="text-4xl text-blue-50 pb-2">{strings.pageTitle}</h1>
