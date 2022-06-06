@@ -4,7 +4,7 @@ import { AmenityId } from "../../../pages/directory";
 import { LocationSchema } from "../../../shared/models/GetMapStrings";
 import LocationResultsItem from "./LocationResultsItem";
 import { MapLocationItem } from "./LocationResults";
-import useMapUIStore from "./../useStore";
+import useMapUIStore from "../useMapUIStore";
 
 type Props = {
   locations: MapLocationItem[];

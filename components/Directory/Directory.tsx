@@ -7,7 +7,7 @@ import LocationResults from "./components/LocationResults";
 import DirectoryMap from "./components/DirectoryMap";
 
 import { Props } from "./../../pages/directory";
-import useMapUIStore from "./useStore";
+import useMapUIStore from "./useMapUIStore";
 // TODO: CONVERT TO USING TWIN.MACRO FOR CLASSNAMES
 // TODO: FIX ERROR CHECKING AND HANDLING AT PAGE-LEVEL DIRECTORY.JS
 

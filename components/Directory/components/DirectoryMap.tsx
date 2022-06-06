@@ -5,7 +5,7 @@ import {
   LocationSchema,
   MapImages,
 } from "../../../shared/models/GetMapStrings";
-import useMapUIStore from "./../useStore";
+import useMapUIStore from "../useMapUIStore";
 
 export type Props = {
   selectedAmenity: AmenityId | undefined;

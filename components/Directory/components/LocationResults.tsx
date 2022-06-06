@@ -29,7 +29,11 @@ export default function LocationResults({
   return (
     // Grid container
     <div>
-      <div className=" px-1">
+      <div className="px-1">
+        {/* If no selected amenity */}
+
+        {/* If selected amenity */}
+
         <header className="text-3xl p-4 text-slate-200">
           {" "}
           {amenityTitle}{" "}
