@@ -1,8 +1,7 @@
 import { useRouter } from "next/router";
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
-import AmenityBtn from "./components/AmenityBtn";
 import LocationResults from "./components/LocationResults";
 import DirectoryMap from "./components/DirectoryMap";
 
@@ -21,29 +20,21 @@ export default function Map({
   locationData,
 }: Props) {
   const router = useRouter();
-  const [selectedAmenity, setSelectedAmenity] = useState<
-    AMENITY_ID | undefined
-  >(undefined);
 
   // shared state
   const selectAmenity = useMapUIStore((state) => state.selectAmenity);
-  const onLocationSelect = (amenityId: AMENITY_ID) => {
-    // map enum to amenity in data
-    const selection = amenityData[amenityId];
+  const selectLevel = useMapUIStore((state) => state.selectLevel);
+  const setAvailableLevels = useMapUIStore((state) => state.setAvailableLevels);
 
-    // if selection is valid, update the URL
-    if (selection) {
-      router.replace(
-        {
-          query: { amenityId },
-        },
-        undefined,
-        {
-          shallow: true,
-        }
-      );
+  // load available levels & set default
+  useEffect(() => {
+    setAvailableLevels(locationData);
+
+    // initialize selected level as first available level
+    if (locationData && locationData?.length > 0) {
+      selectLevel(locationData[0].level_name);
     }
-  };
+  }, [setAvailableLevels, locationData, selectLevel]);
 
   // on URL change
   useEffect(() => {
@@ -52,8 +43,9 @@ export default function Map({
 
     // validate selection
     if (amenityId && amenityData[amenityId]) {
-      setSelectedAmenity(amenityId);
       selectAmenity(amenityId);
+    } else {
+      selectAmenity(null);
     }
   }, [router, amenityData, selectAmenity]);
 
@@ -65,65 +57,19 @@ export default function Map({
           <p className="text-lg text-gray-300">{strings.pageDescription}</p>
         </header>
 
-        {/* Locations Select Pane */}
-        <div className="max-w-2xl mx-auto mb-12 py-2 border-b border-gray-500">
-          <div
-            className="
-            p-1 text-gray-300
-            flex justify-around
-          "
-          >
-            <AmenityBtn
-              onClick={onLocationSelect}
-              amenityId={"bathrooms"}
-              label={amenityData.bathrooms.widgetLabel}
-              selected={selectedAmenity === "bathrooms"}
-            />
-
-            <AmenityBtn
-              onClick={onLocationSelect}
-              amenityId={"waterFountains"}
-              label={amenityData.waterFountains.widgetLabel}
-              selected={selectedAmenity === "waterFountains"}
-            />
-
-            <AmenityBtn
-              onClick={onLocationSelect}
-              amenityId={"firstAid"}
-              label={amenityData.firstAid.widgetLabel}
-              selected={selectedAmenity === "firstAid"}
-            />
-
-            <AmenityBtn
-              onClick={onLocationSelect}
-              amenityId={"donations"}
-              label={amenityData.donations.widgetLabel}
-              selected={selectedAmenity === "donations"}
-            />
-          </div>
-        </div>
-
         {/* Map view */}
         <div
           className={`
-            grid grid-cols-1 w-full bg-gray-500 bg-opacity-30      
-            ${selectedAmenity && "md:grid-cols-mapWithResults"}
+            grid grid-cols-1 w-full bg-gray-500 bg-opacity-30 pb-10
+            md:grid-cols-mapWithResults rounded-t-2xl overflow-hidden
           `}
         >
-          {selectedAmenity && (
-            <LocationResults
-              amenityTitle={amenityData[selectedAmenity].headingLabel}
-              amenityId={selectedAmenity}
-              locations={amenityData[selectedAmenity].locations}
-              locationData={locationData}
-            />
-          )}
-
-          <DirectoryMap
-            selectedAmenity={selectedAmenity}
-            maps={maps}
+          <LocationResults
+            amenityData={amenityData}
             locationData={locationData}
           />
+
+          <DirectoryMap maps={maps} locationData={locationData} />
         </div>
       </main>
     </motion.div>
