@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { AmenityId } from "../../../pages/directory";
 import { LocationSchema } from "../../../shared/models/GetMapStrings";
 import LocationResultsItem from "./LocationResultsItem";
@@ -12,35 +12,14 @@ type Props = {
   amenityId: AmenityId;
 };
 
-function LocationResultsByLevel({
-  locations: results,
-  locationData,
-  amenityId,
-}: Props) {
-  const setAvailableLevelsZZ = useMapUIStore((s) => s.setAvailableLevels);
+function LocationResultsByLevel({ locations: results, amenityId }: Props) {
   const selectedLevelZZ = useMapUIStore((s) => s.selectedLevelName);
   const availableLevelsZZ = useMapUIStore((s) => s.availableLevels);
   const selectLevelZZ = useMapUIStore((s) => s.selectLevel);
 
-  // gather available levels & set defaults
-  useEffect(() => {
-    let levels: LocationSchema[] = [];
-
-    // only add levels with corresponding results for selected POI
-    locationData.forEach((location) => {
-      if (results.some((i) => i.location.level_name === location.level_name)) {
-        levels.push(location);
-      }
-    });
-
-    // set default location
-    if (levels.length > 0 && levels[0]) {
-      selectLevelZZ(levels[0].level_name);
-    }
-
-    // set available levels
-    setAvailableLevelsZZ(levels);
-  }, [results, locationData, selectLevelZZ, setAvailableLevelsZZ]);
+  const searchResults = results.filter(
+    (item) => item.location.level_name === selectedLevelZZ
+  );
 
   return (
     <>
@@ -90,16 +69,19 @@ function LocationResultsByLevel({
 
         {/* Display location results */}
         <div className="divide-y divide-gray-500">
-          {selectedLevelZZ &&
-            results
-              .filter((item) => item.location.level_name === selectedLevelZZ)
-              .map((item) => (
-                <LocationResultsItem
-                  key={item.id}
-                  amenityId={amenityId}
-                  {...item}
-                />
-              ))}
+          {searchResults && searchResults.length > 0 ? (
+            searchResults.map((item) => (
+              <LocationResultsItem
+                key={item.id}
+                amenityId={amenityId}
+                {...item}
+              />
+            ))
+          ) : (
+            <div className="p-4 text-center text-gray-200">
+              ADD CMS FIELD: No results in selected level
+            </div>
+          )}
         </div>
       </div>
     </>
