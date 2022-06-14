@@ -20,7 +20,7 @@ export type MapUIState = {
   availableLevels: Level[];
   selectedLevelName: Level["level_name"] | null;
 
-  selectAmenity: (amenityId: AmenityId) => void;
+  selectAmenity: (amenityId: AmenityId | null) => void;
   setLocationResults: (locationResults: LocationResults) => void;
   selectResultsItem: (id: string) => void;
   setAvailableLevels: (availableLevels: Level[]) => void;
