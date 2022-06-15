@@ -45,14 +45,7 @@ export default function AmenityBtn({
           {amenityId === "donations" && <DonationsIcon fontSize="inherit" />}
         </div>
       </div>
-      <div className="text-center text-base">{label}</div>
-
-      {selected && (
-        <motion.div
-          className="absolute -bottom-3.5 left-0 right-0 h-px bg-red-300"
-          layoutId="underline22"
-        />
-      )}
+      <div className="text-center text-sm text-zinc-300">{label}</div>
     </div>
   );
 }

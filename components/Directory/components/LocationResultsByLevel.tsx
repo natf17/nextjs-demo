@@ -78,7 +78,7 @@ function LocationResultsByLevel({ locations: results, amenityId }: Props) {
               />
             ))
           ) : (
-            <div className="p-4 text-center text-gray-200">
+            <div className="p-4 py-6 text-center text-gray-200">
               ADD CMS FIELD: No results in selected level
             </div>
           )}

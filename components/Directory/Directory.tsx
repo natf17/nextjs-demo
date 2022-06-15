@@ -60,7 +60,7 @@ export default function Map({
         {/* Map view */}
         <div
           className={`
-            grid grid-cols-1 w-full bg-gray-500 bg-opacity-30 pb-10
+            grid grid-cols-1 w-full bg-gray-500 bg-opacity-30
             md:grid-cols-mapWithResults rounded-t-2xl overflow-hidden
           `}
         >

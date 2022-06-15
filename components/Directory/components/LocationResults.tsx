@@ -46,52 +46,52 @@ export default function LocationResults({ amenityData, locationData }: Props) {
   return (
     // Grid container
     <div>
-      <div className="px-1 mt-10 ml-5 rounded-md bg-slate-900 bg-opacity-60 border-b-green-300 border-b-2">
+      <div
+        className="
+              mt-10 ml-5 rounded-md overflow-x-hidden
+              bg-slate-900 bg-opacity-60 border-b-green-300 border-b-2"
+      >
         {/* Display amenity selection menu */}
-        <div>
-          <div className="text-indigo-300 pt-4 pb-1 px-1 text-center">
-            ADD CMS: Select an option below to view locations
-          </div>
-          <div
-            className="
-              px-1 py-4 text-gray-300
+
+        <div
+          className="
+              px-1 py-8 bg-teal-600 bg-opacity-10 text-gray-300
               flex justify-around 
             "
-          >
-            <AmenityBtn
-              onClick={onLocationSelect}
-              amenityId={"bathrooms"}
-              label={amenityData.bathrooms.widgetLabel}
-              selected={selectedAmenity === "bathrooms"}
-            />
+        >
+          <AmenityBtn
+            onClick={onLocationSelect}
+            amenityId={"bathrooms"}
+            label={amenityData.bathrooms.widgetLabel}
+            selected={selectedAmenity === "bathrooms"}
+          />
 
-            <AmenityBtn
-              onClick={onLocationSelect}
-              amenityId={"waterFountains"}
-              label={amenityData.waterFountains.widgetLabel}
-              selected={selectedAmenity === "waterFountains"}
-            />
+          <AmenityBtn
+            onClick={onLocationSelect}
+            amenityId={"waterFountains"}
+            label={amenityData.waterFountains.widgetLabel}
+            selected={selectedAmenity === "waterFountains"}
+          />
 
-            <AmenityBtn
-              onClick={onLocationSelect}
-              amenityId={"firstAid"}
-              label={amenityData.firstAid.widgetLabel}
-              selected={selectedAmenity === "firstAid"}
-            />
+          <AmenityBtn
+            onClick={onLocationSelect}
+            amenityId={"firstAid"}
+            label={amenityData.firstAid.widgetLabel}
+            selected={selectedAmenity === "firstAid"}
+          />
 
-            <AmenityBtn
-              onClick={onLocationSelect}
-              amenityId={"donations"}
-              label={amenityData.donations.widgetLabel}
-              selected={selectedAmenity === "donations"}
-            />
-          </div>
+          <AmenityBtn
+            onClick={onLocationSelect}
+            amenityId={"donations"}
+            label={amenityData.donations.widgetLabel}
+            selected={selectedAmenity === "donations"}
+          />
         </div>
 
         {/* If selected amenity */}
         {selectedAmenity && (
-          <div className="pt-6 border-t border-dotted border-t-slate-500">
-            <header className="text-3xl px-4 pt-4 pb-2 text-slate-200">
+          <div className="pt-2 px-1">
+            <header className="text-2xl px-4 pt-4 pb-2 text-slate-200">
               {`${amenityData[selectedAmenity].headingLabel}`}
             </header>
 
@@ -104,6 +104,12 @@ export default function LocationResults({ amenityData, locationData }: Props) {
             ) : (
               <>No locations</>
             )}
+          </div>
+        )}
+
+        {!selectedAmenity && (
+          <div className="text-zinc-300 pt-4 pb-1 px-1 text-center">
+            ADD CMS: Select an option to view locations
           </div>
         )}
       </div>

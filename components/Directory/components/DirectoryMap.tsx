@@ -21,9 +21,11 @@ export default function DirectoryMap({ locationData }: Props) {
   )?.map;
 
   return (
-    <div className="w-full max-w-6xl mx-auto drop-shadow-md">
+    <div className="w-full max-w-6xl mx-auto drop-shadow-md p-6">
       {/* Select level */}
-      <div className="mt-10 px-2 text-center">
+      <div className="mt-10 p-2 text-center rounded-md bg-slate-800 max-w-lg mx-auto flex justify-center items-center">
+        {/* TODO: Add CMS field */}
+        <h1 className="text-zinc-300 px-2 uppercase">Add CMS: Floor level</h1>
         {availableLevelsZZ?.map((level) => (
           <button
             className={`uppercase rounded-lg py-2 px-3 mx-2 ${
@@ -41,23 +43,25 @@ export default function DirectoryMap({ locationData }: Props) {
         ))}
       </div>
 
-      {matchedLevelMap ? (
-        <Image
-          src={`${
-            process.env.NEXT_PUBLIC_VERCEL_IMG_API + matchedLevelMap.url
-          }`}
-          alt={""}
-          width={matchedLevelMap.width}
-          height={matchedLevelMap.height}
-          layout="responsive"
-          priority
-        />
-      ) : (
-        <div className="px-4 py-8 min-h-[20em] text-gray-200 flex justify-center items-center">
-          {/* TODO: Add field in API, then fix hardcoded value here */}
-          <h3>ADD CMS: Map not available for selected level</h3>
-        </div>
-      )}
+      <div className="p-10">
+        {matchedLevelMap ? (
+          <Image
+            src={`${
+              process.env.NEXT_PUBLIC_VERCEL_IMG_API + matchedLevelMap.url
+            }`}
+            alt={""}
+            width={matchedLevelMap.width}
+            height={matchedLevelMap.height}
+            layout="responsive"
+            priority
+          />
+        ) : (
+          <div className="min-h-[20em] text-gray-200 flex justify-center items-center">
+            {/* TODO: Add field in API, then fix hardcoded value here */}
+            <h3>ADD CMS: Map not available for selected level</h3>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
