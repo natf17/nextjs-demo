@@ -68,7 +68,10 @@ function LocationResultsByLevel({ locations: results, amenityId }: Props) {
         </motion.div>
 
         {/* Display location results */}
-        <motion.div className="divide-y divide-gray-500" layout>
+        {/* key={amenityId} | Force re-render when amenityId changes to prevent 
+            results-item transition animations e.g. list re-ordering effect
+        */}
+        <motion.div className="divide-y divide-gray-500" layout key={amenityId}>
           {searchResults && searchResults.length > 0 ? (
             searchResults.map((item) => (
               <LocationResultsItem
