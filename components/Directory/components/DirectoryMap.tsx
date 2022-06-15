@@ -5,6 +5,8 @@ import {
   MapImages,
 } from "../../../shared/models/GetMapStrings";
 import useMapUIStore from "../useMapUIStore";
+import { RestartAltSharp } from "@mui/icons-material";
+import { useRouter } from "next/router";
 
 export type Props = {
   maps: MapImages;
@@ -15,32 +17,54 @@ export default function DirectoryMap({ locationData }: Props) {
   const availableLevelsZZ = useMapUIStore((state) => state.availableLevels);
   const selectedLevelZZ = useMapUIStore((state) => state.selectedLevelName);
   const selectLevelZZ = useMapUIStore((state) => state.selectLevel);
+  const selectedAmenityZZ = useMapUIStore((state) => state.selectedAmenity);
+  const router = useRouter();
 
   const matchedLevelMap = locationData.find(
     (level) => level.level_name === selectedLevelZZ
   )?.map;
 
+  const resetAmenitySelection = () => {
+    router.replace({ query: { amenityId: null } }, undefined, {
+      shallow: true,
+    });
+  };
+
   return (
     <div className="w-full max-w-6xl mx-auto drop-shadow-md p-6">
       {/* Select level */}
-      <div className="mt-10 p-2 text-center rounded-md bg-slate-800 max-w-lg mx-auto flex justify-center items-center">
-        {/* TODO: Add CMS field */}
-        <h1 className="text-zinc-300 px-2 uppercase">Add CMS: Floor level</h1>
-        {availableLevelsZZ?.map((level) => (
+
+      <div className="flex mt-10 items-center justify-evenly">
+        <div className="p-2 text-center rounded-md bg-slate-800 max-w-lg flex justify-center items-center">
+          {/* TODO: Add CMS field */}
+          <h1 className="text-zinc-300 px-2 uppercase">Add: Level</h1>
+          {availableLevelsZZ?.map((level) => (
+            <button
+              className={`uppercase rounded-lg py-2 px-3 mx-2 ${
+                selectedLevelZZ === level.level_name
+                  ? selectedLevelZZ === "MEZZ"
+                    ? "bg-emerald-300"
+                    : "bg-indigo-300"
+                  : "bg-slate-300"
+              }`}
+              key={level.fullname}
+              onClick={() => selectLevelZZ(level.level_name)}
+            >
+              {level.fullname}
+            </button>
+          ))}
+        </div>
+
+        {/* Clear results */}
+        {selectedAmenityZZ && (
           <button
-            className={`uppercase rounded-lg py-2 px-3 mx-2 ${
-              selectedLevelZZ === level.level_name
-                ? selectedLevelZZ === "MEZZ"
-                  ? "bg-emerald-300"
-                  : "bg-indigo-300"
-                : "bg-slate-300"
-            }`}
-            key={level.fullname}
-            onClick={() => selectLevelZZ(level.level_name)}
+            className="uppercase rounded-lg py-2 px-3 bg-red-200"
+            onClick={resetAmenitySelection}
           >
-            {level.fullname}
+            {/* TODO: ADD CMS field */}
+            <RestartAltSharp fontSize="inherit" /> Add: Clear results
           </button>
-        ))}
+        )}
       </div>
 
       <div className="p-10">
