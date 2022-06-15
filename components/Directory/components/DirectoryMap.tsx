@@ -7,6 +7,7 @@ import {
 import useMapUIStore from "../useMapUIStore";
 import { RestartAltSharp } from "@mui/icons-material";
 import { useRouter } from "next/router";
+import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
 
 export type Props = {
   maps: MapImages;
@@ -34,38 +35,52 @@ export default function DirectoryMap({ locationData }: Props) {
     <div className="w-full max-w-6xl mx-auto drop-shadow-md p-6">
       {/* Select level */}
 
-      <div className="flex mt-10 items-center justify-evenly">
-        <div className="p-2 text-center rounded-md bg-slate-800 max-w-lg flex justify-center items-center">
-          {/* TODO: Add CMS field */}
-          <h1 className="text-zinc-300 px-2 uppercase">Add: Level</h1>
-          {availableLevelsZZ?.map((level) => (
-            <button
-              className={`uppercase rounded-lg py-2 px-3 mx-2 ${
-                selectedLevelZZ === level.level_name
-                  ? selectedLevelZZ === "MEZZ"
-                    ? "bg-emerald-300"
-                    : "bg-indigo-300"
-                  : "bg-slate-300"
-              }`}
-              key={level.fullname}
-              onClick={() => selectLevelZZ(level.level_name)}
-            >
-              {level.fullname}
-            </button>
-          ))}
-        </div>
-
-        {/* Clear results */}
-        {selectedAmenityZZ && (
-          <button
-            className="uppercase rounded-lg py-2 px-3 bg-red-200"
-            onClick={resetAmenitySelection}
+      <motion.div className="flex mt-10 items-center justify-evenly" layout>
+        {/* LayoutGroup and nested motion.layout components for animating shared layout 
+        changes as buttons disappear or reappear */}
+        <LayoutGroup>
+          <motion.div
+            className="p-2 text-center rounded-md bg-slate-800 max-w-lg flex justify-center items-center"
+            layout
           >
-            {/* TODO: ADD CMS field */}
-            <RestartAltSharp fontSize="inherit" /> Add: Clear results
-          </button>
-        )}
-      </div>
+            {/* TODO: Add CMS field */}
+            <h1 className="text-zinc-300 px-2 uppercase">Add: Level</h1>
+            {availableLevelsZZ?.map((level) => (
+              <button
+                className={`uppercase rounded-lg py-2 px-3 mx-2 ${
+                  selectedLevelZZ === level.level_name
+                    ? selectedLevelZZ === "MEZZ"
+                      ? "bg-emerald-300"
+                      : "bg-indigo-300"
+                    : "bg-slate-300"
+                }`}
+                key={level.fullname}
+                onClick={() => selectLevelZZ(level.level_name)}
+              >
+                {level.fullname}
+              </button>
+            ))}
+          </motion.div>
+
+          {/* Clear results */}
+          <AnimatePresence>
+            {selectedAmenityZZ && (
+              <motion.button
+                className="uppercase rounded-lg py-2 px-3 bg-red-300"
+                onClick={resetAmenitySelection}
+                key="clearSelectedAmenity"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                layout
+              >
+                {/* TODO: ADD CMS field */}
+                <RestartAltSharp fontSize="inherit" /> Add: Clear results
+              </motion.button>
+            )}
+          </AnimatePresence>
+        </LayoutGroup>
+      </motion.div>
 
       <div className="p-10">
         {matchedLevelMap ? (

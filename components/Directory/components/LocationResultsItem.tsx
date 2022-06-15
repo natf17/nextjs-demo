@@ -17,6 +17,7 @@ import { LocationOn as BuildingLevelIcon } from "@mui/icons-material";
 import { LocalAtm as CashIcon } from "@mui/icons-material";
 import { InfoOutlined as InfoIcon } from "@mui/icons-material";
 import { AmenityId } from "../../../pages/directory";
+import { motion } from "framer-motion";
 
 export type Props = (
   | BathroomLocationSchema
@@ -45,7 +46,7 @@ export default function LocationResultsItem(props: Props) {
   }
 
   return (
-    <div className="py-2">
+    <motion.div className="py-2" layout="position">
       <div className="flex">
         {/* Thumbnail */}
         <div
@@ -118,6 +119,6 @@ export default function LocationResultsItem(props: Props) {
           )}
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

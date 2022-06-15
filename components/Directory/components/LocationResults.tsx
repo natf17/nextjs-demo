@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import { useRouter } from "next/router";
 import React from "react";
 import { AmenityData, AmenityId } from "../../../pages/directory";
@@ -46,18 +47,21 @@ export default function LocationResults({ amenityData, locationData }: Props) {
   return (
     // Grid container
     <div>
-      <div
+      {/* motion.layout for animating side pane layout changes */}
+      <motion.div
         className="
               mt-10 ml-5 rounded-md overflow-x-hidden
               bg-slate-900 bg-opacity-60 border-b-green-300 border-b-2"
+        layout
       >
         {/* Display amenity selection menu */}
 
-        <div
+        <motion.div
           className="
               px-1 py-8 bg-teal-600 bg-opacity-10 text-gray-300
               flex justify-around 
             "
+          layout
         >
           <AmenityBtn
             onClick={onLocationSelect}
@@ -86,14 +90,17 @@ export default function LocationResults({ amenityData, locationData }: Props) {
             label={amenityData.donations.widgetLabel}
             selected={selectedAmenity === "donations"}
           />
-        </div>
+        </motion.div>
 
         {/* If selected amenity */}
         {selectedAmenity && (
-          <div className="pt-2 px-1">
-            <header className="text-2xl px-4 pt-4 pb-2 text-slate-200">
+          <motion.div className="pt-2 px-1" layout>
+            <motion.header
+              className="text-2xl px-4 pt-4 pb-2 text-slate-200"
+              layout
+            >
               {`${amenityData[selectedAmenity].headingLabel}`}
-            </header>
+            </motion.header>
 
             {amenityData[selectedAmenity].locations ? (
               <LocationResultsByLevel
@@ -104,15 +111,15 @@ export default function LocationResults({ amenityData, locationData }: Props) {
             ) : (
               <>No locations</>
             )}
-          </div>
+          </motion.div>
         )}
 
         {!selectedAmenity && (
-          <div className="text-zinc-300 pt-4 pb-1 px-1 text-center">
+          <motion.div className="text-zinc-300 py-4 px-1 text-center" layout>
             ADD CMS: Select an option to view locations
-          </div>
+          </motion.div>
         )}
-      </div>
+      </motion.div>
     </div>
   );
 }

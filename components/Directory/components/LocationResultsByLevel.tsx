@@ -23,9 +23,9 @@ function LocationResultsByLevel({ locations: results, amenityId }: Props) {
 
   return (
     <>
-      <div>
+      <motion.div layout>
         {/* Display level selection tabs */}
-        <div className="border-b-4 border-slate-500">
+        <motion.div className="border-b-4 border-slate-500" layout>
           {availableLevelsZZ?.map((level) => {
             return (
               <div
@@ -65,10 +65,10 @@ function LocationResultsByLevel({ locations: results, amenityId }: Props) {
               </div>
             );
           })}
-        </div>
+        </motion.div>
 
         {/* Display location results */}
-        <div className="divide-y divide-gray-500">
+        <motion.div className="divide-y divide-gray-500" layout>
           {searchResults && searchResults.length > 0 ? (
             searchResults.map((item) => (
               <LocationResultsItem
@@ -78,12 +78,12 @@ function LocationResultsByLevel({ locations: results, amenityId }: Props) {
               />
             ))
           ) : (
-            <div className="p-4 py-6 text-center text-gray-200">
+            <motion.div className="p-4 py-6 text-center text-gray-200" layout>
               ADD CMS FIELD: No results in selected level
-            </div>
+            </motion.div>
           )}
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </>
   );
 }
