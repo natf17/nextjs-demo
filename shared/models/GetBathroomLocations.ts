@@ -8,6 +8,7 @@ export type BathroomLocationSchema = {
   name: string;
   gender: "men" | "women" | "uni";
   isWheelchairAccessible: boolean;
+  svgElemId?: string;
   note?: string;
   location: LocationSchema;
   featImg: {
@@ -26,6 +27,7 @@ const query = (locale = "en") => {
           name
           gender
           isWheelchairAccessible
+          svgElemId
           note
           location {
             fullname

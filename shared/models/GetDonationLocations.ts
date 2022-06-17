@@ -6,6 +6,7 @@ export type DonationLocationSchema = {
   id: string;
   name: string;
   isWheelchairAccessible: boolean;
+  svgElemId?: string;
   location: LocationSchema;
   paymentTypesAccepted: "cash" | "credit";
   note?: string;
@@ -24,6 +25,7 @@ const query = (locale = "en") => {
           id
           name
           isWheelchairAccessible
+          svgElemId
           note
           location {
             fullname

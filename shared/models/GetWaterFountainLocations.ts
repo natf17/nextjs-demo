@@ -7,6 +7,7 @@ export type WaterFountainSchema = {
   id: string;
   name: string;
   isWheelchairAccessible: boolean;
+  svgElemId?: string;
   note?: string;
   location: LocationSchema;
   featImg?: {
@@ -24,6 +25,7 @@ const query = (locale = "en") => {
           id
           name
           isWheelchairAccessible
+          svgElemId
           note
           location {
             fullname
