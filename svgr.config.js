@@ -3,3 +3,5 @@ module.exports = {
   prettier: false,
   ref: true,
 };
+
+// https://react-svgr.com/docs/options/
