@@ -1,5 +1,9 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import Image from "next/image";
+import GroundSVG from "!@svgr/webpack!../../../public/custom-maps/en/ground.svg";
+/* import SVG as component while retaining next/image functionality
+    https://github.com/vercel/next.js/discussions/30472
+*/
 import {
   LocationSchema,
   MapImages,
@@ -8,6 +12,7 @@ import useMapUIStore from "../useMapUIStore";
 import { RestartAltSharp } from "@mui/icons-material";
 import { useRouter } from "next/router";
 import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
+import chooseMapAmenity from "../custom-maps/chooseMapAmenity";
 
 export type Props = {
   maps: MapImages;
@@ -20,6 +25,18 @@ export default function DirectoryMap({ locationData }: Props) {
   const selectLevelZZ = useMapUIStore((state) => state.selectLevel);
   const selectedAmenityZZ = useMapUIStore((state) => state.selectedAmenity);
   const router = useRouter();
+
+  const GroundMapSVG = useRef<SVGElement & HTMLElement>(null);
+  const MezzMapSVG = useRef<SVGElement & HTMLElement>(null);
+
+  useEffect(() => {
+    if (GroundMapSVG && GroundMapSVG.current) {
+      chooseMapAmenity({
+        selectedAmenity: selectedAmenityZZ,
+        SVGMapElem: GroundMapSVG.current,
+      });
+    }
+  }, [selectedAmenityZZ]);
 
   const matchedLevelMap = locationData.find(
     (level) => level.level_name === selectedLevelZZ
@@ -81,6 +98,10 @@ export default function DirectoryMap({ locationData }: Props) {
           </AnimatePresence>
         </LayoutGroup>
       </motion.div>
+
+      <div className="p-10">
+        <GroundSVG ref={GroundMapSVG} />
+      </div>
 
       <div className="p-10">
         {matchedLevelMap ? (
