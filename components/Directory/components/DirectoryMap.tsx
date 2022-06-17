@@ -114,7 +114,7 @@ export default function DirectoryMap({ locationData }: Props) {
         <GroundSVG ref={GroundMapSVG} />
       </div>
 
-      <div className="p-10">
+      <div className="p-10 hidden">
         {matchedLevelMap ? (
           <Image
             src={`${
