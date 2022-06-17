@@ -26,10 +26,12 @@ export type Props = (
   | WaterFountainSchema
 ) & {
   amenityId: AmenityId;
+  listNum: number;
 };
 
 export default function LocationResultsItem(props: Props) {
-  const { name, location, isWheelchairAccessible, featImg, note } = props;
+  const { name, location, isWheelchairAccessible, featImg, note, listNum } =
+    props;
 
   // initialize type-specific properties
   let gender,
@@ -67,7 +69,7 @@ export default function LocationResultsItem(props: Props) {
 
         {/* Amenity quick-view */}
         <div className="p-2">
-          <h3 className="text-lg font-medium text-green-50 py-1">{name}</h3>
+          <h3 className="text-lg font-medium text-green-50 py-1">{`${listNum}. ${name}`}</h3>
           <ul className="text-gray-300">
             {/* Level */}
             <li className="inline-block">
