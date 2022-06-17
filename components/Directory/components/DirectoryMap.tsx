@@ -13,6 +13,7 @@ import { RestartAltSharp } from "@mui/icons-material";
 import { useRouter } from "next/router";
 import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
 import chooseMapAmenity from "../custom-maps/chooseMapAmenity";
+import setMapSearchResults from "../custom-maps/setMapSearchResults";
 
 export type Props = {
   maps: MapImages;
@@ -24,6 +25,7 @@ export default function DirectoryMap({ locationData }: Props) {
   const selectedLevelZZ = useMapUIStore((state) => state.selectedLevelName);
   const selectLevelZZ = useMapUIStore((state) => state.selectLevel);
   const selectedAmenityZZ = useMapUIStore((state) => state.selectedAmenity);
+  const searchResultsZZ = useMapUIStore((state) => state.searchResults);
   const router = useRouter();
 
   const GroundMapSVG = useRef<SVGElement & HTMLElement>(null);
@@ -37,6 +39,15 @@ export default function DirectoryMap({ locationData }: Props) {
       });
     }
   }, [selectedAmenityZZ]);
+
+  useEffect(() => {
+    if (GroundMapSVG && GroundMapSVG.current) {
+      setMapSearchResults({
+        searchResults: searchResultsZZ,
+        SVGMapElem: GroundMapSVG.current,
+      });
+    }
+  }, [searchResultsZZ]);
 
   const matchedLevelMap = locationData.find(
     (level) => level.level_name === selectedLevelZZ
