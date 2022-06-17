@@ -5,6 +5,7 @@ import { DonationLocationSchema } from "../../shared/models/GetDonationLocations
 import { FirstAidSchema } from "../../shared/models/GetFirstAidLocations";
 import { WaterFountainSchema } from "../../shared/models/GetWaterFountainLocations";
 import { LocationSchema as Level } from "../../shared/models/GetMapStrings";
+import { MapLocationItem } from "./components/LocationResults";
 
 type LocationResults = (
   | BathroomLocationSchema
@@ -19,12 +20,14 @@ export type MapUIState = {
   selectedResultItemId: string | null;
   availableLevels: Level[];
   selectedLevelName: Level["level_name"] | null;
+  searchResults: MapLocationItem[] | null;
 
   selectAmenity: (amenityId: AmenityId | null) => void;
   setLocationResults: (locationResults: LocationResults) => void;
   selectResultsItem: (id: string) => void;
   setAvailableLevels: (availableLevels: Level[]) => void;
   selectLevel: (levelName: Level["level_name"]) => void;
+  setSearchResults: (searchResults: MapLocationItem[] | null) => void;
 };
 
 const useMapUIStore = create<MapUIState>((set) => ({
@@ -33,6 +36,7 @@ const useMapUIStore = create<MapUIState>((set) => ({
   selectedResultItemId: null,
   availableLevels: [],
   selectedLevelName: null,
+  searchResults: null,
 
   selectAmenity: (amenityId) => {
     set({
@@ -54,6 +58,9 @@ const useMapUIStore = create<MapUIState>((set) => ({
     set({
       selectedLevelName: levelName,
     });
+  },
+  setSearchResults: (searchResults) => {
+    set({ searchResults });
   },
 }));
 

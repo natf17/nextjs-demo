@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import React from "react";
+import React, { useEffect } from "react";
 import { AmenityId } from "../../../pages/directory";
 import { LocationSchema } from "../../../shared/models/GetMapStrings";
 import LocationResultsItem from "./LocationResultsItem";
@@ -16,10 +16,19 @@ function LocationResultsByLevel({ locations: results, amenityId }: Props) {
   const selectedLevelZZ = useMapUIStore((s) => s.selectedLevelName);
   const availableLevelsZZ = useMapUIStore((s) => s.availableLevels);
   const selectLevelZZ = useMapUIStore((s) => s.selectLevel);
+  const setSearchResultsZZ = useMapUIStore((s) => s.setSearchResults);
 
   const searchResults = results.filter(
     (item) => item.location.level_name === selectedLevelZZ
   );
+
+  useEffect(() => {
+    setSearchResultsZZ(searchResults);
+
+    return () => {
+      setSearchResultsZZ(null);
+    };
+  });
 
   return (
     <>
@@ -73,10 +82,11 @@ function LocationResultsByLevel({ locations: results, amenityId }: Props) {
         */}
         <motion.div className="divide-y divide-gray-500" layout key={amenityId}>
           {searchResults && searchResults.length > 0 ? (
-            searchResults.map((item) => (
+            searchResults.map((item, idx) => (
               <LocationResultsItem
                 key={item.id}
                 amenityId={amenityId}
+                listNum={idx + 1}
                 {...item}
               />
             ))
