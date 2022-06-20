@@ -1,5 +1,4 @@
 import React from "react";
-import Image from "next/image";
 import { BathroomLocationSchema } from "../../../shared/models/GetBathroomLocations";
 import { DonationLocationSchema } from "../../../shared/models/GetDonationLocations";
 import { FirstAidSchema } from "../../../shared/models/GetFirstAidLocations";
@@ -7,7 +6,12 @@ import { WaterFountainSchema } from "../../../shared/models/GetWaterFountainLoca
 import LocationFeatureChip from "./LocationFeatureChip";
 
 // Icons
-import { Wc as UniIcon } from "@mui/icons-material";
+import {
+  AttachMoney,
+  LocalDrink,
+  LocalHospital,
+  Wc as UniIcon,
+} from "@mui/icons-material";
 import { Man as ManIcon } from "@mui/icons-material";
 import { Woman as WomanIcon } from "@mui/icons-material";
 import { Accessible as AccessibleIcon } from "@mui/icons-material";
@@ -15,7 +19,6 @@ import { CreditScore as CreditCardIcon } from "@mui/icons-material";
 import { CreditCardOff as NoCreditCardIcon } from "@mui/icons-material";
 import { LocationOn as BuildingLevelIcon } from "@mui/icons-material";
 import { LocalAtm as CashIcon } from "@mui/icons-material";
-import { InfoOutlined as InfoIcon } from "@mui/icons-material";
 import { AmenityId } from "../../../pages/directory";
 import { motion } from "framer-motion";
 
@@ -30,8 +33,15 @@ export type Props = (
 };
 
 export default function LocationResultsItem(props: Props) {
-  const { name, location, isWheelchairAccessible, featImg, note, listNum } =
-    props;
+  const {
+    __typename,
+    name,
+    location,
+    isWheelchairAccessible,
+    featImg,
+    note,
+    listNum,
+  } = props;
 
   // initialize type-specific properties
   let gender,
@@ -55,15 +65,26 @@ export default function LocationResultsItem(props: Props) {
           className="
             w-16 h-16 overflow-hidden relative
             flex justify-center items-center self-center
+            text-slate-400
           "
         >
-          {featImg && (
-            <Image
-              src={`${process.env.NEXT_PUBLIC_VERCEL_IMG_API + featImg.url}`}
-              alt={name}
-              width={featImg.width} // insert dimensions, should be sq
-              height={featImg.height}
-            />
+          {__typename === "Bathrooms" && gender === "men" && (
+            <ManIcon className="text-slate-300" />
+          )}
+          {__typename === "Bathrooms" && gender === "women" && (
+            <WomanIcon className="text-slate-300" />
+          )}
+          {__typename === "Bathrooms" && gender === "uni" && (
+            <UniIcon className="text-slate-300" />
+          )}
+          {__typename === "Donation" && (
+            <AttachMoney className="text-purple-300" />
+          )}
+          {__typename === "FirstAid" && (
+            <LocalHospital className="text-red-300" />
+          )}
+          {__typename === "WaterFountain" && (
+            <LocalDrink className="text-teal-300" />
           )}
         </div>
 
