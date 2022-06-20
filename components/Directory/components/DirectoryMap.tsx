@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import Image from "next/image";
 import GroundSVG from "!@svgr/webpack!../../../public/custom-maps/en/ground.svg";
+import MezzSVG from "!@svgr/webpack!../../../public/custom-maps/en/mezz.svg";
 /* import SVG as component while retaining next/image functionality
     https://github.com/vercel/next.js/discussions/30472
 */
@@ -38,7 +39,14 @@ export default function DirectoryMap({ locationData }: Props) {
         SVGMapElem: GroundMapSVG.current,
       });
     }
-  }, [selectedAmenityZZ]);
+
+    if (MezzMapSVG && MezzMapSVG.current) {
+      chooseMapAmenity({
+        selectedAmenity: selectedAmenityZZ,
+        SVGMapElem: MezzMapSVG.current,
+      });
+    }
+  }, [selectedAmenityZZ, selectedLevelZZ]);
 
   useEffect(() => {
     if (GroundMapSVG && GroundMapSVG.current) {
@@ -47,7 +55,13 @@ export default function DirectoryMap({ locationData }: Props) {
         SVGMapElem: GroundMapSVG.current,
       });
     }
-  }, [searchResultsZZ]);
+    if (MezzMapSVG && MezzMapSVG.current) {
+      setMapSearchResults({
+        searchResults: searchResultsZZ,
+        SVGMapElem: MezzMapSVG.current,
+      });
+    }
+  }, [searchResultsZZ, selectedLevelZZ]);
 
   const matchedLevelMap = locationData.find(
     (level) => level.level_name === selectedLevelZZ
@@ -111,7 +125,8 @@ export default function DirectoryMap({ locationData }: Props) {
       </motion.div>
 
       <div className="p-10">
-        <GroundSVG ref={GroundMapSVG} />
+        {selectedLevelZZ === "FIRST" && <GroundSVG ref={GroundMapSVG} />}
+        {selectedLevelZZ === "MEZZ" && <MezzSVG ref={MezzMapSVG} />}
       </div>
 
       <div className="p-10 hidden">
