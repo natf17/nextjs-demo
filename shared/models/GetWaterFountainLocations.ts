@@ -3,7 +3,7 @@ import { gql } from "@apollo/client";
 import { LocationSchema } from "./GetMapStrings";
 
 export type WaterFountainSchema = {
-  typename: "WaterFountain";
+  __typename: "WaterFountain";
   id: string;
   name: string;
   isWheelchairAccessible: boolean;
