@@ -64,7 +64,9 @@ export default function AmenityBtn({
         </div>
       </div>
       <div className="text-center text-sm text-zinc-300 pt-1">{label}</div>
-      {selected && <div className="absolute -bottom-5 left-1/2">&bull;</div>}
+      {selected && (
+        <div className="text-zinc-400 absolute -bottom-5 left-1/2">&bull;</div>
+      )}
     </div>
   );
 }
