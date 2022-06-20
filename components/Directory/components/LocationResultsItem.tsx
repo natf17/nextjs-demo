@@ -33,15 +33,8 @@ export type Props = (
 };
 
 export default function LocationResultsItem(props: Props) {
-  const {
-    __typename,
-    name,
-    location,
-    isWheelchairAccessible,
-    featImg,
-    note,
-    listNum,
-  } = props;
+  const { __typename, name, location, isWheelchairAccessible, note, listNum } =
+    props;
 
   // initialize type-specific properties
   let gender,
