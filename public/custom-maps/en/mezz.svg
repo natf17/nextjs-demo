@@ -18,10 +18,7 @@
       [data-amenity-id].selected > .area-shape-public,
       [data-amenity-id].selected > .icon > .icon-bg,
       [data-location-id].selected {             
-        animation-duration: 1s;
-        animation-name: pulsestroke;
-        animation-iteration-count: infinite;
-        animation-direction: alternate;
+        fill: #e6c15c;
       }
 
 

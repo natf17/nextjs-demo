@@ -19,10 +19,7 @@
       [data-amenity-id].selected > .area-shape-public,
       [data-amenity-id].selected > .icon > .icon-bg,
       [data-location-id].selected {             
-        animation-duration: 1s;
-        animation-name: pulsestroke;
-        animation-iteration-count: infinite;
-        animation-direction: alternate;
+        fill: #e6c15c;
       }
       
       
@@ -42,14 +39,16 @@
       .text-label.search-result.dark {
         fill: #333; text-shadow: none;
       }
+      .text-label.you-are-here {
+        fill: #fcc7c7; text-shadow: 1px 1px 2px #222;
+      }
       
       /*ICONS*/                  
-      .icon-border {fill:none;stroke-width:0.75px;stroke:#000;}      
+      .icon-border {fill:none;stroke-width:0.75px;stroke:#000;} 
       .icon-bg{fill:#fff;}
       .icon-bg.water{fill:#dbdbdb;} /* #a7e8e8 */     
       .icon-bg.donations{fill:#dbdbdb;} /* #a7eaaa */       
       .glyph-staircase{fill:#616266;}
-      
     </style>
   </defs>  
   
@@ -109,10 +108,41 @@
     
     <!-- Donations & CC -->
     <!-- inside icons -->        
-  </g>    
+  </g>          
     
+  <!--  Walls and dividers-->
+  <g id="Walls" class="map-floorplan">    
+      <path d="M252.5,50.5l-10-14"/>    
+      <line x1="343.9" y1="88.88" x2="265.9" y2="88.88"/>        
+      <path d="M265.9,265.08V69.48l-4.4-6"/>            
+      <path d="M327.5,373.5v5l-59-16v-27h59v26"/>
+      <rect x="273.5" y="299.5" width="54" height="36"/>
+      <path d="M266.5,285.5v14h70"/>
+      <path d="M162.53,290.85l6-10v-94l-27-13v41l-108.5.5c-.33,15-.66,40-1,55l64.5-.5v35h58l3-5"/>
+      <rect x="96.5" y="304.5" width="34" height="58"/>
+      <path d="M91,120,33,167v48H142V174l-10-5Z"/>
+      <path class="wall-divider" d="M268.5,352.5h-125"/>
+      <path d="M265.5,103.5l-3.78,3.27"/>
+      <path class="wall-divider" d="M245.46,120.86l-65.05,56.33"/>
+      <path d="M172.28,184.23l-3.78,3.27"/>
+      <rect x="358.5" y="354.5" width="16" height="35"/>
+      <path d="M351.5,354.5h7v23h-7"/>
+      <path d="M333.5,354.5h-6v7"/>
+      <path d="M333.5,378.5h-6v-7"/>
+      <path d="M130.5,304.5v58h12v-36l12-22Z"/>
+      <path d="M49.5,373.5h-17v-103l64-1v99l-18,5h-10"/>
+      <path d="M283.5,36.5l20,25h17"/>
+      <path d="M333.5,61.5h29v-25"/>              
+      <path d="M375.5,257.5v42H359.32"/>    
+      <path d="M375.5,238.5v-17h45"/>
+  </g>
+  
   <!-- ICONS -->
   <g id="map-icons">
+    <!-- You are here -->
+    <path fill="red" d="M12 2C8.1 2 5 5.1 5 9C5 14.2 12 22 12 22S19 14.2 19 9C19 5.1 15.9 2 12 2M14.5 13L12 11.5L9.5 13L10.2 10.2L8 8.3L10.9 8.1L12 5.4L13.1 8L16 8.3L13.8 10.2L14.5 13Z" transform="translate(73 352) scale(1.35)"/>
+   
+   
     <!--Staircase (R)-->    
     <polygon class="glyph-staircase" points="291.19 308.76 291.19 313.21 286.74 313.21 286.74 317.67 282.28 317.67 282.28 322.12 277.83 322.12 277.83 327.76 291.19 327.76 296.83 327.76 296.83 322.12 296.83 308.76 291.19 308.76"/>
     
@@ -208,38 +238,14 @@
       </g>
     </g>                      
   </g> 
-    
-  <!--  Walls and dividers-->
-  <g id="Walls" class="map-floorplan">    
-      <path d="M252.5,50.5l-10-14"/>    
-      <line x1="343.9" y1="88.88" x2="265.9" y2="88.88"/>        
-      <path d="M265.9,265.08V69.48l-4.4-6"/>            
-      <path d="M327.5,373.5v5l-59-16v-27h59v26"/>
-      <rect x="273.5" y="299.5" width="54" height="36"/>
-      <path d="M266.5,285.5v14h70"/>
-      <path d="M162.53,290.85l6-10v-94l-27-13v41l-108.5.5c-.33,15-.66,40-1,55l64.5-.5v35h58l3-5"/>
-      <rect x="96.5" y="304.5" width="34" height="58"/>
-      <path d="M91,120,33,167v48H142V174l-10-5Z"/>
-      <path class="wall-divider" d="M268.5,352.5h-125"/>
-      <path d="M265.5,103.5l-3.78,3.27"/>
-      <path class="wall-divider" d="M245.46,120.86l-65.05,56.33"/>
-      <path d="M172.28,184.23l-3.78,3.27"/>
-      <rect x="358.5" y="354.5" width="16" height="35"/>
-      <path d="M351.5,354.5h7v23h-7"/>
-      <path d="M333.5,354.5h-6v7"/>
-      <path d="M333.5,378.5h-6v-7"/>
-      <path d="M130.5,304.5v58h12v-36l12-22Z"/>
-      <path d="M49.5,373.5h-17v-103l64-1v99l-18,5h-10"/>
-      <path d="M283.5,36.5l20,25h17"/>
-      <path d="M333.5,61.5h29v-25"/>              
-      <path d="M375.5,257.5v42H359.32"/>    
-      <path d="M375.5,238.5v-17h45"/>
-  </g>
         
   <!--  All text content -->
   <g id="Text" class="">
-    <text class="text-label" transform="translate(303.03 52.08)">Coatroom
+    <text class="text-label you-are-here" transform="translate(75, 396)" fill="red">You are <tspan x="5" y="14">here</tspan> 
     </text>
+    
+    <text class="text-label" transform="translate(303.03 52.08)">Coatroom
+    </text>    
     
     <text class="text-label" transform="translate(355.99 157.25)">Overflow
       <tspan x="4.69" y="14">Seating</tspan>    
@@ -280,7 +286,7 @@
     </text>    
     
     <!-- Donations (4) -->
-    <text class="text-label search-result" transform="translate(68 390)" data-search-result-id="donations-CC3">
+    <text class="text-label search-result" transform="translate(45 424)" data-search-result-id="donations-CC3">1
     </text>
   </g>
 </svg>
