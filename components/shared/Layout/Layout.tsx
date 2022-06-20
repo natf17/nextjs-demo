@@ -39,7 +39,7 @@ export default function Layout({ children, globalValues }: Props) {
       <AnimatePresence>
         {asPath !== "/" && (
           <motion.header
-            className="fixed w-screen h-16 bg-black bg-opacity-10 backdrop-filter backdrop-blur-xl z-10"
+            className="fixed w-screen h-16 bg-black bg-opacity-10 backdrop-filter backdrop-blur-xl z-10 border-b border-indigo-300"
             initial="hidden"
             animate="visible"
             exit="hidden"
