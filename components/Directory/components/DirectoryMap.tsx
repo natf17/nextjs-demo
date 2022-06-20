@@ -124,7 +124,8 @@ export default function DirectoryMap({ locationData }: Props) {
         </LayoutGroup>
       </motion.div>
 
-      <div className="p-10">
+      {/* TODO: Add CMS option to enable custom map */}
+      <div className="px-10">
         {selectedLevelZZ === "FIRST" && <GroundSVG ref={GroundMapSVG} />}
         {selectedLevelZZ === "MEZZ" && <MezzSVG ref={MezzMapSVG} />}
       </div>
