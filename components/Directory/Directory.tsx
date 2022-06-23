@@ -15,6 +15,7 @@ import { MotionFadeEnter } from "./../../shared/animations/pages/onPageLoad";
 
 export default function Map({
   strings,
+  mapConfig,
   amenityData,
   maps,
   locationData,
@@ -69,7 +70,11 @@ export default function Map({
             locationData={locationData}
           />
 
-          <DirectoryMap maps={maps} locationData={locationData} />
+          <DirectoryMap
+            maps={maps}
+            locationData={locationData}
+            mapConfig={mapConfig}
+          />
         </div>
       </main>
     </motion.div>
