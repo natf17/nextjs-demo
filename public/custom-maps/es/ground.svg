@@ -1,0 +1,292 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 449 496" id="ground">
+  <defs>
+    <style>
+      /*Animations*/
+      @keyframes pulsestroke {
+        from {
+          stroke-width: 1px;
+          fill: #e6d4a5;
+          animation-timing-function: ease-in-out;
+        }
+
+        to {
+          stroke-width: 1px;
+          fill: #e6c15c;
+        }
+      }
+      
+      /* SELECTED amenities (areas icons) */
+      [data-amenity-id].selected > .area-shape-public,
+      [data-amenity-id].selected > .icon > .icon-bg,
+      [data-location-id].selected {             
+        fill: #e6c15c;
+      }
+      
+      
+      .master-wall{fill:#00253b;stroke:#105f6d;stroke-linecap:round;stroke-linejoin:round;stroke-width:2px;}                                  
+      .map-floorplan {stroke: rgba(0, 181, 197, 1); fill:none; stroke-linecap:round;stroke-linejoin:round;}
+      .wall-divider { stroke: #105f6d; stroke-dasharray:10 20; fill:none; stroke-linecap:round;stroke-linejoin:round; }            
+      .area-shape-public{fill:#ccdfe2;}
+      .area-shape-public.aud{fill:#6590a5;}
+      .area-disabled{fill:#6590a5;}            
+      
+      .text-label{fill:#fff; font: 10px sans-serif; letter-spacing: 1px; text-shadow: 1px 1px 5px #222;}
+      .text-label.search-result {
+        font: italic bold 15px sans-serif;        
+        fill: #ffbf0f;
+        text-shadow: none;
+      }
+      .text-label.search-result.dark {
+        fill: #333; text-shadow: none;
+      }
+      .text-label.you-are-here {
+        fill: #fcc7c7; text-shadow: 1px 1px 2px #222;
+      }
+      
+      /*ICONS*/                  
+      .icon-border {fill:none;stroke-width:0.75px;stroke:#000;} 
+      .icon-bg{fill:#fff;}
+      .icon-bg.water{fill:#dbdbdb;} /* #a7e8e8 */     
+      .icon-bg.donations{fill:#dbdbdb;} /* #a7eaaa */       
+      .glyph-staircase{fill:#616266;}
+    </style>
+  </defs>  
+  
+  <!--  Outermost border-->
+  <g id="MasterWall">
+    <path class="master-wall" d="M32.43,462.11H375.26V299.5h45.32L421,37,195,36,32.53,166.65C32.53,202.46,32.51,262.17,32.43,462.11Z"/>
+  </g>
+    
+  <!-- DISABLED AREAS -->    
+  <g id="disabled">
+    <path class="area-disabled" d="M154.06,305.25,142,327.35v35.16H131V305.25Z"/> 
+    <!--Admin area shade-->
+    <path class="area-disabled" d="M142,215V174l-10-5L91,120,33,167v48Z"/>
+    <!--Coatroom shade-->
+    <path class="area-disabled" d="M302.57,61.64h60.07L363,37H283.76Z"/>
+    <!--Wall pieces-->
+    <rect class="area-disabled" x="329.83" y="89.31" width="14.06" height="17.07"/>
+    <rect class="area-disabled" x="329.83" y="152.54" width="14.06" height="46.2"/>
+    <rect class="area-disabled" x="358.29" y="354.44" width="16.65" height="35.15"/>
+    <path class="area-disabled" d="M375.26,430.39H363V462h12.22Z"/>
+    <path class="area-disabled" d="M32.43,429.06H44.66c0,87.7,0-54.73.13,33-4.12-.13-8.11-.13-12.23-.26C32.56,374.2,32.43,516.63,32.43,429.06Z"/>
+   </g>
+  
+  <!-- No access areas -->
+  <g id="map-areas-noaccess">
+    <!--Staircases-->
+    <rect class="area-shape-public stairs stairs-left" x="96.32" y="305.13" width="34.68" height="58"/>
+    <rect class="area-shape-public stairs stairs-right" x="273.49" y="299.42" width="54.06" height="35.92"/>
+        
+    <!--QAH Office-->
+    <path class="area-shape-public qah-office" d="M77.34,374.63c6.38-1.47,12.63-2.94,19-4.4q.2-49.62.13-99.23H33V374.63Z" fill="purple"/>
+                    
+    <!--Auditorium shape-->
+    <path class="area-shape-public aud aud-right" d="M267.76,412.32c-.13,1.06-.26,2.12-.4,3.19,11.83,1.59,24.72,3.85,38.27,6.91,14.09,3.19,27.11,6.91,38.94,10.76a27.12,27.12,0,0,1,1.06-3.06q-17.73-5.78-39.07-10.76C292.75,416.3,279.86,414,267.76,412.32Z"/>
+    <path class="area-shape-public aud aud-right" d="M346.83,446.87c-12-4-25-7.84-39.2-11.43a382.83,382.83,0,0,0-40.53-7.71c-.35,16.08-.69,18-1,33.27h81C347,452.63,346.89,456.54,346.83,446.87Z"/>    
+    <path class="area-shape-public aud aud-left" d="M139.4,412.32c.13,1.06.27,2.12.4,3.19-11.83,1.59-24.72,3.85-38.27,6.91-14.09,3.19-27.11,6.91-38.94,10.76a27.12,27.12,0,0,0-1.06-3.06q17.75-5.78,39.07-10.76C114.42,416.17,127.44,413.91,139.4,412.32Z"/>
+    <path class="area-shape-public aud aud-left" d="M140.73,427.73a382.83,382.83,0,0,0-40.53,7.71C86,439,72.83,442.88,61,446.87c0,10.37,0,4.14,0,14.13h81C141.59,444.48,141.16,444.48,140.73,427.73Z"/>
+    <path class="area-shape-public aud aud-center" d="M244,409.66c-.14,1.06-.14,2.13-.27,3.19-11.56-1.06-24.05-1.6-37.34-1.73a455.5,455.5,0,0,0-46.11,2v-3.32a463.41,463.41,0,0,1,46.64-2C219.93,408.07,232.28,408.6,244,409.66Z"/>
+    <path class="area-shape-public aud aud-center" d="M247.43,425.61a316.5,316.5,0,0,0-41.32-2.8,350.66,350.66,0,0,0-44,2.66c0,17.17-.06,19.16-.08,35.53h85.39Z"/>
+  </g>      
+    
+  <!-- Amenity IDs -->
+  <g id="map-amenityIDs">
+    <!--First aid-->
+    <g data-amenity-id="firstAid" class="">
+      <path class="area-shape-public firstaid" d="M268.47,335H328v43.9L268.94,362Z" data-location-id="firstAid"/>    
+    </g>    
+    
+    <!-- Bathrooms -->
+    <g data-amenity-id="bathrooms" class="">
+      <!--Women's BR-->
+      <path class="area-shape-public br br-w" data-location-id="bathrooms-W1" d="M168.77,280.81c0-31.23-.13-62.45-.13-93.68v-.53c-8.9-4.25-17.67-8.51-26.58-12.63.07,17.08.15,24.16.22,41.25L33,215q.31,13.53.25,27.76t-.55,27.55H96.75L97,305l57.55.39C159.34,297.16,164,288.92,168.77,280.81Z"/>
+
+      <!--Handicap BR-->
+      <rect class="area-shape-public br br-acc" x="375.37" y="222.21" width="45.29" height="77.31" data-location-id="bathrooms-H1"/>
+    </g>
+    
+    <!-- Donations & CC -->
+    <!-- inside icons -->        
+  </g>          
+    
+  <!--  Walls and dividers-->
+  <g id="Walls" class="map-floorplan">    
+      <path d="M252.5,50.5l-10-14"/>    
+      <line x1="343.9" y1="88.88" x2="265.9" y2="88.88"/>        
+      <path d="M265.9,265.08V69.48l-4.4-6"/>            
+      <path d="M327.5,373.5v5l-59-16v-27h59v26"/>
+      <rect x="273.5" y="299.5" width="54" height="36"/>
+      <path d="M266.5,285.5v14h70"/>
+      <path d="M162.53,290.85l6-10v-94l-27-13v41l-108.5.5c-.33,15-.66,40-1,55l64.5-.5v35h58l3-5"/>
+      <rect x="96.5" y="304.5" width="34" height="58"/>
+      <path d="M91,120,33,167v48H142V174l-10-5Z"/>
+      <path class="wall-divider" d="M268.5,352.5h-125"/>
+      <path d="M265.5,103.5l-3.78,3.27"/>
+      <path class="wall-divider" d="M245.46,120.86l-65.05,56.33"/>
+      <path d="M172.28,184.23l-3.78,3.27"/>
+      <rect x="358.5" y="354.5" width="16" height="35"/>
+      <path d="M351.5,354.5h7v23h-7"/>
+      <path d="M333.5,354.5h-6v7"/>
+      <path d="M333.5,378.5h-6v-7"/>
+      <path d="M130.5,304.5v58h12v-36l12-22Z"/>
+      <path d="M49.5,373.5h-17v-103l64-1v99l-18,5h-10"/>
+      <path d="M283.5,36.5l20,25h17"/>
+      <path d="M333.5,61.5h29v-25"/>              
+      <path d="M375.5,257.5v42H359.32"/>    
+      <path d="M375.5,238.5v-17h45"/>
+  </g>
+  
+  <!-- ICONS -->
+  <g id="map-icons">
+    <!-- You are here -->
+    <path fill="red" d="M12 2C8.1 2 5 5.1 5 9C5 14.2 12 22 12 22S19 14.2 19 9C19 5.1 15.9 2 12 2M14.5 13L12 11.5L9.5 13L10.2 10.2L8 8.3L10.9 8.1L12 5.4L13.1 8L16 8.3L13.8 10.2L14.5 13Z" transform="translate(73 352) scale(1.35)"/>
+   
+   
+    <!--Staircase (R)-->    
+    <polygon class="glyph-staircase" points="291.19 308.76 291.19 313.21 286.74 313.21 286.74 317.67 282.28 317.67 282.28 322.12 277.83 322.12 277.83 327.76 291.19 327.76 296.83 327.76 296.83 322.12 296.83 308.76 291.19 308.76"/>
+    
+    <!--Staircase (L)--> 
+    <polygon class="glyph-staircase" points="117.33 338.34 117.33 342.8 112.87 342.8 112.87 347.25 108.42 347.25 108.42 351.7 103.97 351.7 103.97 357.34 117.33 357.34 122.97 357.34 122.97 351.7 122.97 338.34 117.33 338.34"/>
+   
+    <!-- Label: Women's BR-->
+    <g class="icon icon-br-w l1">
+      <!--Background-->
+      <ellipse class="icon-bg" cx="129.63" cy="284.12" rx="13.83" ry="14.41"/>
+      <!--Border-->
+      <circle class="icon-border" cx="129.62" cy="284.03" r="14.16"/>
+      <!--Icon shape-->
+      <path d="M131.93,279.46a2.11,2.11,0,0,0-3.91,0l-3.08,7.74h3v6.05h4V287.2h3Z"/>
+      <circle cx="129.98" cy="275.12" r="2.01"/>
+    </g>
+    
+    <!-- Label: Handicap BR (BR icon)-->
+    <g class="icon icon-br-acc">
+      <ellipse class="icon-bg" cx="397.97" cy="278.86" rx="13.79" ry="14.52"/>
+      <circle class="icon-border" cx="398.01" cy="278.67" r="14.18"/>
+      <path d="M391.17,288.63V281.3h-1.46v-5.37a2,2,0,0,1,2-1.95h2.93a2,2,0,0,1,2,1.95v5.37h-1.46v7.33Zm12.21,0v-5.86h2.93l-2.48-7.45A1.94,1.94,0,0,0,402,274h-.12a2,2,0,0,0-1.86,1.34l-2.48,7.45h2.93v5.86ZM393.13,273a2,2,0,1,0-2-1.95A1.95,1.95,0,0,0,393.13,273Zm8.79,0a2,2,0,1,0-2-1.95A1.95,1.95,0,0,0,401.92,273Z"/>
+      <!--handicap icon-->
+      <!--BG-->
+      <ellipse class="icon-bg" cx="397.97" cy="244.37" rx="13.79" ry="14.52"/>
+      <!--border-->
+      <circle class="icon-border" cx="398.01" cy="244.17" r="14.18"/>
+      <!--Icon-->
+      <circle cx="398.01" cy="236.81" r="1.89"/>
+      <path d="M404.62,245.31v-1.89a5.29,5.29,0,0,1-3.84-1.73l-1.22-1.35a1.73,1.73,0,0,0-.58-.42h0a1.92,1.92,0,0,0-1.12-.25,1.94,1.94,0,0,0-1.71,2v5.58a1.89,1.89,0,0,0,1.89,1.89h4.72v4.72h1.89v-5.19a1.89,1.89,0,0,0-1.89-1.89H399.9v-3.26A8.07,8.07,0,0,0,404.62,245.31Zm-8.5,6.61a2.83,2.83,0,0,1-.94-5.5v-2a4.72,4.72,0,1,0,5.57,5.57h-2A2.82,2.82,0,0,1,396.12,251.92Z"/>
+    </g>
+        
+    <!-- Label: First aid-->
+    <g class="icon icon-firstaid l1">
+      <!--bg-->    
+      <ellipse class="icon-bg" cx="300.68" cy="352.89" rx="13.79" ry="14.12"/>
+      <!--border-->    
+      <circle class="icon-border" cx="300.72" cy="353.11" r="14.18"/>
+      <!--icon-->    
+      <path d="M306.57,345.79H294.88a1.66,1.66,0,0,0-1.66,1.67v11.68a1.67,1.67,0,0,0,1.67,1.67h11.69a1.68,1.68,0,0,0,1.67-1.67V347.46A1.68,1.68,0,0,0,306.57,345.79Zm0,13.35H294.88V347.46h11.69Zm-7.1-1.67H302v-2.92h2.92v-2.5H302v-2.92h-2.51v2.92h-2.92v2.5h2.92Z"/>
+    </g>
+                    
+    <!-- Amenity: waterFountains -->
+    <g data-amenity-id="waterFountains" class="">
+      <g class="icon">
+        <!--BG-->
+        <ellipse class="icon-bg water" cx="285.62" cy="71.94" rx="13.86" ry="14.41" data-location-id="waterFountains-C1" />
+        <!--border-->
+        <circle class="icon-border" cx="285.57" cy="71.84" r="14.16"/>
+        <!--Icon-->
+        <path d="M278,63l1.79,16.24a1.77,1.77,0,0,0,1.77,1.57h8.91a1.78,1.78,0,0,0,1.77-1.57L294,63Zm12.47,16h-8.91l-1-8.91h10.88Zm1.18-10.69H280.36l-.4-3.56H292ZM286,78.17a2.67,2.67,0,0,0,2.68-2.67c0-1.78-2.68-4.81-2.68-4.81s-2.67,3-2.67,4.81A2.66,2.66,0,0,0,286,78.17Zm0-4.53a5.06,5.06,0,0,1,.89,1.86.89.89,0,0,1-1.78,0A5.08,5.08,0,0,1,286,73.64Z"/>
+      </g>            
+    </g>      
+    
+    <!-- Amenity: donations -->    
+    <g data-amenity-id="donations" class="">
+      <!-- CC - coatroom -->
+      <g class="icon icon-donations cc l1">
+        <ellipse class="icon-bg donations" cx="391.93" cy="56.4" rx="13.77" ry="14.5" data-location-id="donations-CC1"/>
+        <circle class="icon-border" cx="391.97" cy="56.21" r="14.16"/>
+        <path d="M399.67,48.71h-15.4a1.9,1.9,0,0,0-1.91,1.92V62.18a1.91,1.91,0,0,0,1.92,1.92h15.4a1.92,1.92,0,0,0,1.92-1.92V50.63A1.91,1.91,0,0,0,399.67,48.71Zm0,13.47h-15.4V56.4h15.4Zm0-9.63h-15.4V50.63h15.4Z"/>
+      </g>
+      
+      <!-- CC - overflow -->
+      <g class="icon icon-donations cc l1">
+        <!--BG-->
+        <ellipse class="icon-bg donations" cx="337.42" cy="129.36" rx="13.77" ry="14.5" data-location-id="donations-CC2"/>
+        <!--border-->
+        <circle class="icon-border" cx="337.47" cy="129.17" r="14.16"/>
+        <!--Icon-->
+        <path d="M345.16,121.67H329.77a1.91,1.91,0,0,0-1.92,1.92v11.55a1.92,1.92,0,0,0,1.93,1.92h15.39a1.92,1.92,0,0,0,1.93-1.92V123.59A1.92,1.92,0,0,0,345.16,121.67Zm0,13.47H329.77v-5.78h15.39Zm0-9.62H329.77v-1.93h15.39Z"/>
+      </g>
+      
+      <!-- cash - audR -->
+      <g class="icon icon-donations cash l1">
+        <ellipse class="icon-bg donations" cx="267.71" cy="393.85" rx="13.77" ry="14.5" data-location-id="donations-CA1"/>
+        <circle class="icon-border" cx="267.76" cy="393.65" r="14.16"/>
+        <path d="M268.23,392.52c-2.73-.71-3.61-1.44-3.61-2.58,0-1.32,1.21-2.23,3.25-2.23s2.93,1,3,2.53h2.66a4.81,4.81,0,0,0-3.87-4.59V383h-3.61v2.6c-2.33.51-4.21,2-4.21,4.35,0,2.78,2.3,4.16,5.66,5,3,.72,3.61,1.78,3.61,2.9,0,.83-.59,2.16-3.25,2.16-2.48,0-3.46-1.11-3.59-2.53h-2.65c.15,2.64,2.12,4.12,4.43,4.61v2.61h3.61v-2.59c2.35-.44,4.21-1.8,4.21-4.27C273.88,394.4,271,393.23,268.23,392.52Z"/>
+      </g>
+      
+      <!-- cash - audL -->
+      <g class="icon icon-donations cash l1">
+        <ellipse class="icon-bg donations" cx="148.71" cy="393.85" rx="13.77" ry="14.5" data-location-id="donations-CA1"/>
+        <circle class="icon-border" cx="148.76" cy="393.65" r="14.16"/>
+        <path d="M149.23,392.52c-2.73-.71-3.61-1.44-3.61-2.58,0-1.32,1.21-2.23,3.25-2.23s2.93,1,3,2.53h2.66a4.81,4.81,0,0,0-3.87-4.59V383h-3.61v2.6c-2.33.51-4.21,2-4.21,4.35,0,2.78,2.3,4.16,5.66,5,3,.72,3.61,1.78,3.61,2.9,0,.83-.59,2.16-3.25,2.16-2.48,0-3.46-1.11-3.59-2.53h-2.65c.15,2.64,2.12,4.12,4.43,4.61v2.61h3.61v-2.59c2.35-.44,4.21-1.8,4.21-4.27C154.88,394.4,152,393.23,149.23,392.52Z"/>
+      </g>
+      
+      <!-- CC - AH Office -->
+      <g class="icon icon-donations cc l1">
+        <ellipse class="icon-bg donations" cx="49.39" cy="393.85" rx="13.77" ry="14.5" data-location-id="donations-CC3"/>
+        <circle class="icon-border" cx="49.44" cy="393.65" r="14.16"/>
+        <path d="M57.07,386.32H41.68a1.91,1.91,0,0,0-1.92,1.92v11.55a1.92,1.92,0,0,0,1.93,1.92H57.07A1.92,1.92,0,0,0,59,399.79V388.24A1.92,1.92,0,0,0,57.07,386.32Zm0,13.47H41.68V394H57.07Zm0-9.62H41.68v-1.93H57.07Z"/>
+      </g>
+    </g>                      
+  </g> 
+        
+  <!--  All text content -->
+  <g id="Text" class="">
+    <text class="text-label you-are-here" transform="translate(70, 396)" fill="red">Usted está <tspan x="18" y="13">aquí</tspan> 
+    </text>
+    
+    <text class="text-label" transform="translate(294 49)">Guardarropa
+    </text>    
+    
+    <text class="text-label" transform="translate(355.99 157.25)">Asientos
+      <tspan x="-2" y="14">adicionales</tspan>    
+    </text>
+    
+    <text class="text-label" transform="translate(143.19 113.8)">Entrada principal</text>
+    <text class="text-label" transform="translate(182 446)">Auditorio</text>    
+  </g>
+  
+  <!-- Search results labels -->
+  <g id="search-results">
+    <!-- BR Accessible -->
+    <text class="text-label search-result" transform="translate(360 265)" data-search-result-id="bathrooms-H1">
+    </text>
+    
+    <!-- BR Women's -->
+    <text class="text-label search-result" transform="translate(175 260)" data-search-result-id="bathrooms-W1">
+    </text>
+    
+    <!-- Water fountain -->
+    <text class="text-label search-result" transform="translate(262 57)" data-search-result-id="waterFountains-C1">
+    </text>
+    
+    <!-- First aid -->
+    <text class="text-label search-result" transform="translate(332 371)" data-search-result-id="firstAid">
+    </text>
+    
+    <!-- Donations (1) -->
+    <text class="text-label search-result" transform="translate(405 42)" data-search-result-id="donations-CC1">
+    </text>
+    
+    <!-- Donations (2) -->
+    <text class="text-label search-result" transform="translate(350 117)" data-search-result-id="donations-CC2">
+    </text>
+    
+    <!-- Donations (3) -->
+    <text class="text-label search-result" transform="translate(206 396)" data-search-result-id="donations-CA1">
+    </text>    
+    
+    <!-- Donations (4) -->
+    <text class="text-label search-result" transform="translate(45 424)" data-search-result-id="donations-CC3">1
+    </text>
+  </g>
+</svg>
