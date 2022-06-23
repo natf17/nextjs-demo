@@ -14,11 +14,19 @@ export type BasicPageSchema = {
 };
 
 export type MapPageSchema = BasicPageSchema & {
+  mapViewConfig: MapViewConfig;
   bathroomAmenity: LocationAmenity;
   waterFountainAmenity: LocationAmenity;
   firstAidAmenity: LocationAmenity;
   donationAmenity: LocationAmenity;
   maps: MapImages;
+};
+
+export type MapViewConfig = {
+  enableFsCustomMaps: boolean;
+  clearResults: string;
+  levelSelect: string;
+  mapNotAvailable: string;
 };
 
 export type LocationAmenity = {
@@ -63,7 +71,12 @@ const query = (locale = "en") => {
           firstaid_label
           donations_label
         }
-        
+        mapViewConfig {
+          enableFsCustomMaps
+          clearResults
+          levelSelect
+          mapNotAvailable
+        }
         bathroomAmenity {
           widgetLabel
           headingLabel
