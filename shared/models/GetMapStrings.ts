@@ -10,6 +10,7 @@ export type BasicPageSchema = {
     water_label?: string;
     firstaid_label?: string;
     donations_label?: string;
+    noResultsFound: string;
   };
 };
 
@@ -70,6 +71,7 @@ const query = (locale = "en") => {
           water_label
           firstaid_label
           donations_label
+          noResultsFound
         }
         mapViewConfig {
           enableFsCustomMaps
