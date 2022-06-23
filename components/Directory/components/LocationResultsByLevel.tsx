@@ -10,9 +10,14 @@ type Props = {
   locations: MapLocationItem[];
   locationData: LocationSchema[];
   amenityId: AmenityId;
+  noResultsFound: string;
 };
 
-function LocationResultsByLevel({ locations: results, amenityId }: Props) {
+function LocationResultsByLevel({
+  locations: results,
+  amenityId,
+  noResultsFound,
+}: Props) {
   const selectedLevelZZ = useMapUIStore((s) => s.selectedLevelName);
   const availableLevelsZZ = useMapUIStore((s) => s.availableLevels);
   const selectLevelZZ = useMapUIStore((s) => s.selectLevel);
@@ -92,7 +97,7 @@ function LocationResultsByLevel({ locations: results, amenityId }: Props) {
             ))
           ) : (
             <motion.div className="p-4 py-6 text-center text-gray-200" layout>
-              ADD CMS FIELD: No results in selected level
+              {noResultsFound}
             </motion.div>
           )}
         </motion.div>

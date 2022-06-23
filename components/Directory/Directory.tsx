@@ -68,6 +68,7 @@ export default function Map({
           <LocationResults
             amenityData={amenityData}
             locationData={locationData}
+            tapWidget={strings.tapWidget}
           />
 
           <DirectoryMap

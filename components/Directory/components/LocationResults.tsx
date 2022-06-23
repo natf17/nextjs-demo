@@ -5,7 +5,10 @@ import { AmenityData, AmenityId } from "../../../pages/directory";
 import { BathroomLocationSchema } from "../../../shared/models/GetBathroomLocations";
 import { DonationLocationSchema } from "../../../shared/models/GetDonationLocations";
 import { FirstAidSchema } from "../../../shared/models/GetFirstAidLocations";
-import { LocationSchema } from "../../../shared/models/GetMapStrings";
+import {
+  BasicPageSchema,
+  LocationSchema,
+} from "../../../shared/models/GetMapStrings";
 import { WaterFountainSchema } from "../../../shared/models/GetWaterFountainLocations";
 import useMapUIStore from "../useMapUIStore";
 import AmenityBtn from "./AmenityBtn";
@@ -20,9 +23,14 @@ export type MapLocationItem =
 export type Props = {
   amenityData: AmenityData;
   locationData: LocationSchema[];
+  tapWidget: BasicPageSchema["tapWidget"];
 };
 
-export default function LocationResults({ amenityData, locationData }: Props) {
+export default function LocationResults({
+  amenityData,
+  locationData,
+  tapWidget,
+}: Props) {
   const selectedAmenity = useMapUIStore((state) => state.selectedAmenity);
   const router = useRouter();
 
@@ -107,16 +115,17 @@ export default function LocationResults({ amenityData, locationData }: Props) {
                 locations={amenityData[selectedAmenity].locations!}
                 locationData={locationData}
                 amenityId={selectedAmenity}
+                noResultsFound={tapWidget.noResultsFound}
               />
             ) : (
-              <>No locations</>
+              tapWidget.noResultsFound
             )}
           </motion.div>
         )}
 
         {!selectedAmenity && (
           <motion.div className="text-zinc-300 py-4 px-1 text-center" layout>
-            ADD CMS: Select an option to view locations
+            {tapWidget?.instructions}
           </motion.div>
         )}
       </motion.div>
