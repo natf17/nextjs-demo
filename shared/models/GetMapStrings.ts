@@ -19,6 +19,7 @@ export type MapPageSchema = BasicPageSchema & {
   firstAidAmenity: LocationAmenity;
   donationAmenity: LocationAmenity;
   maps: MapImages;
+  locations: LocationSchema[];
 };
 
 export type LocationAmenity = {
