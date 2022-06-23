@@ -1,6 +1,5 @@
 import React from "react";
 import { AmenityId } from "../../../pages/directory";
-import { motion } from "framer-motion";
 
 // import the icons
 import { Wc as BathroomIcon } from "@mui/icons-material";
@@ -29,9 +28,28 @@ export default function AmenityBtn({
       <div className="flex justify-center">
         <div
           className={`
-            rounded-full bg-gray-900 h-16 w-16 border-4 border-gray-500
-            ${selected && "border-green-600 text-green-400"}
+            rounded-full bg-gray-900 h-16 w-16 border-4 border-gray-500            
             flex items-center justify-center text-3xl
+            ${
+              selected &&
+              amenityId === "waterFountains" &&
+              "border-slate-400 text-teal-300"
+            }
+            ${
+              selected &&
+              amenityId === "bathrooms" &&
+              "border-slate-400 text-slate-200"
+            }
+            ${
+              selected &&
+              amenityId === "firstAid" &&
+              "border-slate-400 text-red-300"
+            }
+            ${
+              selected &&
+              amenityId === "donations" &&
+              "border-slate-400 text-purple-300"
+            } 
           `}
         >
           {amenityId === "bathrooms" && <BathroomIcon fontSize="inherit" />}
@@ -45,13 +63,9 @@ export default function AmenityBtn({
           {amenityId === "donations" && <DonationsIcon fontSize="inherit" />}
         </div>
       </div>
-      <div className="text-center text-base">{label}</div>
-
+      <div className="text-center text-sm text-zinc-300 pt-1">{label}</div>
       {selected && (
-        <motion.div
-          className="absolute -bottom-3.5 left-0 right-0 h-px bg-red-300"
-          layoutId="underline22"
-        />
+        <div className="text-zinc-400 absolute -bottom-5 left-1/2">&bull;</div>
       )}
     </div>
   );

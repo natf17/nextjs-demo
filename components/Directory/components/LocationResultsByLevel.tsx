@@ -1,62 +1,46 @@
 import { motion } from "framer-motion";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { AmenityId } from "../../../pages/directory";
-import { BathroomLocationSchema } from "../../../shared/models/GetBathroomLocations";
-import { DonationLocationSchema } from "../../../shared/models/GetDonationLocations";
-import { FirstAidSchema } from "../../../shared/models/GetFirstAidLocations";
 import { LocationSchema } from "../../../shared/models/GetMapStrings";
-import { WaterFountainSchema } from "../../../shared/models/GetWaterFountainLocations";
 import LocationResultsItem from "./LocationResultsItem";
+import { MapLocationItem } from "./LocationResults";
+import useMapUIStore from "../useMapUIStore";
 
-export type MapLocationItem =
-  | BathroomLocationSchema
-  | WaterFountainSchema
-  | FirstAidSchema
-  | DonationLocationSchema;
 type Props = {
   locations: MapLocationItem[];
   locationData: LocationSchema[];
   amenityId: AmenityId;
+  noResultsFound: string;
 };
 
 function LocationResultsByLevel({
   locations: results,
-  locationData,
   amenityId,
+  noResultsFound,
 }: Props) {
-  const [availableLevels, setAvailableLevels] = useState<
-    LocationSchema[] | null
-  >(null);
-  const [selectedLocation, setSelectedLocation] = useState<
-    LocationSchema["level_name"] | null
-  >(null);
+  const selectedLevelZZ = useMapUIStore((s) => s.selectedLevelName);
+  const availableLevelsZZ = useMapUIStore((s) => s.availableLevels);
+  const selectLevelZZ = useMapUIStore((s) => s.selectLevel);
+  const setSearchResultsZZ = useMapUIStore((s) => s.setSearchResults);
 
-  // gather available levels & set defaults
+  const searchResults = results.filter(
+    (item) => item.location.level_name === selectedLevelZZ
+  );
+
   useEffect(() => {
-    let levels: LocationSchema[] = [];
+    setSearchResultsZZ(searchResults);
 
-    // only add levels with corresponding results for selected POI
-    locationData.forEach((location) => {
-      if (results.some((i) => i.location.level_name === location.level_name)) {
-        levels.push(location);
-      }
-    });
-
-    // set default location
-    if (levels.length > 0 && levels[0]) {
-      setSelectedLocation(levels[0].level_name);
-    }
-
-    // set available levels
-    setAvailableLevels(levels);
-  }, [results, locationData]);
+    return () => {
+      setSearchResultsZZ(null);
+    };
+  });
 
   return (
     <>
-      <div>
+      <motion.div layout>
         {/* Display level selection tabs */}
-        <div className="border-b-4 border-slate-500">
-          {availableLevels?.map((level) => {
+        <motion.div className="border-b-4 border-slate-500" layout>
+          {availableLevelsZZ?.map((level) => {
             return (
               <div
                 key={level.level_num}
@@ -64,7 +48,7 @@ function LocationResultsByLevel({
                     uppercase text-lg relative
                     p-2 px-4 inline-block cursor-pointer                    
                     ${
-                      level.level_name === selectedLocation
+                      level.level_name === selectedLevelZZ
                         ? `${
                             level.level_name === "MEZZ"
                               ? "text-emerald-300"
@@ -73,13 +57,13 @@ function LocationResultsByLevel({
                         : "text-slate-300"
                     }
                   `}
-                onClick={() => setSelectedLocation(level.level_name)}
+                onClick={() => selectLevelZZ(level.level_name)}
               >
                 {/* Return location name */}
                 {level.fullname}
 
                 {/* Selected tab border */}
-                {level.level_name === selectedLocation && (
+                {level.level_name === selectedLevelZZ && (
                   <motion.div
                     className={`
                       absolute -bottom-1 left-0 right-0 h-1
@@ -95,22 +79,29 @@ function LocationResultsByLevel({
               </div>
             );
           })}
-        </div>
+        </motion.div>
 
         {/* Display location results */}
-        <div className="divide-y divide-gray-500">
-          {selectedLocation &&
-            results
-              .filter((item) => item.location.level_name === selectedLocation)
-              .map((item) => (
-                <LocationResultsItem
-                  key={item.id}
-                  amenityId={amenityId}
-                  {...item}
-                />
-              ))}
-        </div>
-      </div>
+        {/* key={amenityId} | Force re-render when amenityId changes to prevent 
+            results-item transition animations e.g. list re-ordering effect
+        */}
+        <motion.div className="divide-y divide-gray-500" layout key={amenityId}>
+          {searchResults && searchResults.length > 0 ? (
+            searchResults.map((item, idx) => (
+              <LocationResultsItem
+                key={item.id}
+                amenityId={amenityId}
+                listNum={idx + 1}
+                {...item}
+              />
+            ))
+          ) : (
+            <motion.div className="p-4 py-6 text-center text-gray-200" layout>
+              {noResultsFound}
+            </motion.div>
+          )}
+        </motion.div>
+      </motion.div>
     </>
   );
 }

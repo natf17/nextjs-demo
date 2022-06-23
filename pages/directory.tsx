@@ -2,6 +2,7 @@ import makeGraphQLRequest from "../utils/makeGraphQLRequest";
 import GetMapStrings, {
   LocationSchema,
   MapImages,
+  MapViewConfig,
 } from "../shared/models/GetMapStrings";
 import GetDonationLocations from "../shared/models/GetDonationLocations";
 import GetBathroomLocations from "../shared/models/GetBathroomLocations";
@@ -51,6 +52,7 @@ export type AmenityData = {
 export type Props = {
   strings: BasicPageSchema;
   locationData: LocationSchema[];
+  mapConfig: MapViewConfig;
   amenityData: AmenityData;
   locale: string;
   maps: MapImages;
@@ -92,6 +94,7 @@ export const getStaticProps: GetStaticProps<Props, Params> = async (
       props: {
         strings: mapPage,
         locationData: locations,
+        mapConfig: mapPage.mapViewConfig,
         amenityData: {
           bathrooms: {
             id: "bathrooms",

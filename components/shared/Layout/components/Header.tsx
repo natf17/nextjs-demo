@@ -12,14 +12,11 @@ type Props = {
 };
 
 export default function Header({ src, width, height }: Props) {
-  const router = useRouter();
-
   return (
     <div
-      className="overflow-hidden h-16
+      className="
       grid w-full grid-cols-navBar
-      px-10 max-w-7xl m-auto
-      border-b border-indigo-300      
+      px-10 max-w-7xl m-auto h-full
     "
     >
       {/* To include text: we need some way to make this dynamic, i.e.
@@ -38,7 +35,7 @@ export default function Header({ src, width, height }: Props) {
             src={src}
             alt="logo"
             width={width}
-            height={height}
+            height={"4rem"}
             layout={"intrinsic"}
           />
         </a>

@@ -29,6 +29,17 @@ describe("Home Screen", () => {
           },
         ],
       },
+      about: {
+        title: "About",
+        menuItems: [
+          {
+            id: "1",
+            isVisible: true,
+            label: "About",
+            url: "",
+          },
+        ],
+      },
     },
   };
 

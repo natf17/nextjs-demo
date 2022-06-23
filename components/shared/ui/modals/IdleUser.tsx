@@ -1,6 +1,8 @@
+import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useIdleTimerContext } from "react-idle-timer";
 import Modal from "react-modal";
+import localizedModal from "./../../../../root_l10ns/inactivity_modal";
 
 type Props = {
   isOpen: boolean;
@@ -15,6 +17,7 @@ export default function IdleUser({
 }: Props) {
   const idleTimer = useIdleTimerContext();
   const [remainingTime, setRemainingTime] = useState(promptDuration);
+  const { locale = "en" } = useRouter();
 
   // show time remaining
   useEffect(() => {
@@ -56,12 +59,14 @@ export default function IdleUser({
       >
         {/* Header */}
         <header className="py-2 px-1">
-          <h1 className="text-2xl">Are you still there?</h1>
+          <h1 className="text-2xl">
+            {localizedModal[locale]?.header || "{HEADER}"}
+          </h1>
         </header>
 
         {/* Body */}
         <div className="py-6 px-1 text-lg">
-          <p>Your session will end automatically.</p>
+          <p>{localizedModal[locale]?.message || "{HEADER}"}</p>
         </div>
 
         {/* Footer */}
@@ -70,13 +75,14 @@ export default function IdleUser({
             className="bg-indigo-300 p-3 rounded-md mr-6 font-bold"
             onClick={idleTimer.reset}
           >
-            I&apos;m still here ({remainingTime})
+            {localizedModal[locale]?.extendSessionBtn || "{button_extend}"} (
+            {remainingTime})
           </button>
           <button
             className="bg-red-300 p-3 rounded-md font-bold"
             onClick={resetKiosk}
           >
-            End session
+            {localizedModal[locale]?.resetSessionBtn || "{button_end}"}
           </button>
         </footer>
       </Modal>

@@ -10,15 +10,24 @@ export type BasicPageSchema = {
     water_label?: string;
     firstaid_label?: string;
     donations_label?: string;
+    noResultsFound: string;
   };
 };
 
 export type MapPageSchema = BasicPageSchema & {
+  mapViewConfig: MapViewConfig;
   bathroomAmenity: LocationAmenity;
   waterFountainAmenity: LocationAmenity;
   firstAidAmenity: LocationAmenity;
   donationAmenity: LocationAmenity;
   maps: MapImages;
+};
+
+export type MapViewConfig = {
+  enableFsCustomMaps: boolean;
+  clearResults: string;
+  levelSelect: string;
+  mapNotAvailable: string;
 };
 
 export type LocationAmenity = {
@@ -43,6 +52,11 @@ export type LocationSchema = {
   fullname: string;
   level_name: "FIRST" | "MEZZ" | "SECOND" | "THIRD";
   level_num: number;
+  map: {
+    width: number;
+    height: number;
+    url: string;
+  };
 };
 
 const query = (locale = "en") => {
@@ -57,8 +71,14 @@ const query = (locale = "en") => {
           water_label
           firstaid_label
           donations_label
+          noResultsFound
         }
-        
+        mapViewConfig {
+          enableFsCustomMaps
+          clearResults
+          levelSelect
+          mapNotAvailable
+        }
         bathroomAmenity {
           widgetLabel
           headingLabel
@@ -108,6 +128,11 @@ const query = (locale = "en") => {
         fullname
         level_num
         level_name
+        map {          
+          width
+          height
+          url
+        }
       }
     }  
   `;
