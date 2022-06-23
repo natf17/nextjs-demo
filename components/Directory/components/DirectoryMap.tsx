@@ -1,7 +1,9 @@
 import React, { useEffect, useRef } from "react";
 import Image from "next/image";
-import GroundSVG from "!@svgr/webpack!../../../public/custom-maps/en/ground.svg";
-import MezzSVG from "!@svgr/webpack!../../../public/custom-maps/en/mezz.svg";
+import GroundSVG_EN from "!@svgr/webpack!../../../public/custom-maps/en/ground.svg";
+import MezzSVG_EN from "!@svgr/webpack!../../../public/custom-maps/en/mezz.svg";
+import GroundSVG_ES from "!@svgr/webpack!../../../public/custom-maps/es/ground.svg";
+import MezzSVG_ES from "!@svgr/webpack!../../../public/custom-maps/es/mezz.svg";
 /* import SVG as component while retaining next/image functionality
     https://github.com/vercel/next.js/discussions/30472
 */
@@ -29,6 +31,12 @@ export default function DirectoryMap({ locationData }: Props) {
   const searchResultsZZ = useMapUIStore((state) => state.searchResults);
   const router = useRouter();
 
+  let GroundSVG = GroundSVG_EN;
+  let MezzSVG = MezzSVG_EN;
+  if (router.locale === "es") {
+    GroundSVG = GroundSVG_ES;
+    MezzSVG = MezzSVG_ES;
+  }
   const GroundMapSVG = useRef<SVGElement & HTMLElement>(null);
   const MezzMapSVG = useRef<SVGElement & HTMLElement>(null);
 
