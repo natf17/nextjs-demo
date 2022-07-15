@@ -59,7 +59,7 @@ export default function LocationResults({
       <motion.div
         className="
               mt-10 ml-5 rounded-md overflow-x-hidden
-              bg-slate-900 bg-opacity-60 border-b-green-300 border-b-2"
+              bg-slate-900 bg-opacity-60 border-b-amber-100 border-b-2"
         layout
       >
         {/* Display amenity selection menu */}
