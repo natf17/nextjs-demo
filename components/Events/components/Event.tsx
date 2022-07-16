@@ -1,8 +1,5 @@
 import React from "react";
-import {
-  SeasonalEvent,
-  SeasonalType,
-} from "../../../shared/models/GetEventData";
+import { SeasonalEvent } from "../../../shared/models/GetEventData";
 import { Public as LangIcon } from "@mui/icons-material";
 import { useRouter } from "next/router";
 
@@ -91,7 +88,7 @@ export default function Event({
       <motion.div
         className={`${
           isPastEvent ? "text-gray-300" : "text-gray-50"
-        } text-center text-xl`}
+        } text-center text-lg`}
       >
         {localizedDateRange}
       </motion.div>
