@@ -84,7 +84,7 @@ export default function DirectoryMap({ locationData, mapConfig }: Props) {
   };
 
   return (
-    <div className="w-full max-w-6xl mx-auto drop-shadow-md p-6">
+    <div className="w-full max-w-6xl mx-auto drop-shadow-md p-1">
       {/* Select level */}
 
       <motion.div className="flex mt-10 items-center justify-evenly" layout>
@@ -95,12 +95,12 @@ export default function DirectoryMap({ locationData, mapConfig }: Props) {
             className="p-2 text-center rounded-md bg-slate-800 max-w-lg flex justify-center items-center"
             layout
           >
-            <h1 className="text-zinc-300 px-2 uppercase">
+            <h1 className="text-zinc-300 px-2 uppercase text-sm">
               {mapConfig.levelSelect}
             </h1>
             {availableLevelsZZ?.map((level) => (
               <button
-                className={`uppercase rounded-lg py-2 px-3 mx-2 ${
+                className={`uppercase rounded-lg py-2 px-2 mx-2 text-xs ${
                   selectedLevelZZ === level.level_name
                     ? selectedLevelZZ === "MEZZ"
                       ? "bg-emerald-300"
@@ -119,7 +119,7 @@ export default function DirectoryMap({ locationData, mapConfig }: Props) {
           <AnimatePresence>
             {selectedAmenityZZ && (
               <motion.button
-                className="uppercase rounded-lg py-2 px-3 bg-red-300"
+                className="uppercase rounded-lg py-2 px-3 bg-red-300 text-sm flex items-center gap-1"
                 onClick={resetAmenitySelection}
                 key="clearSelectedAmenity"
                 initial={{ opacity: 0 }}
@@ -136,7 +136,7 @@ export default function DirectoryMap({ locationData, mapConfig }: Props) {
 
       {mapConfig.enableFsCustomMaps ? (
         // CUSTOM MAPS
-        <div className="px-10">
+        <div className="px-16">
           {selectedLevelZZ === "FIRST" && <GroundSVG ref={GroundMapSVG} />}
           {selectedLevelZZ === "MEZZ" && <MezzSVG ref={MezzMapSVG} />}
         </div>

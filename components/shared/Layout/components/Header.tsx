@@ -2,7 +2,6 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import LanguagePicker from "./LanguagePicker";
-import { useRouter } from "next/router";
 import BackButton from "./BackButton";
 
 type Props = {
@@ -16,7 +15,7 @@ export default function Header({ src, width, height }: Props) {
     <div
       className="
       grid w-full grid-cols-navBar
-      px-10 max-w-7xl m-auto h-full
+      px-2 sm:px-10 max-w-7xl m-auto h-full
     "
     >
       {/* To include text: we need some way to make this dynamic, i.e.
@@ -35,7 +34,7 @@ export default function Header({ src, width, height }: Props) {
             src={src}
             alt="logo"
             width={width}
-            height={"4rem"}
+            height={"3.5rem"}
             layout={"intrinsic"}
           />
         </a>

@@ -11,7 +11,7 @@ export default function MenuItem(item: MenuItemType) {
         className="
           flex flex-col 
           p-1 bg-black bg-opacity-40 text-gray-200          
-          border-b border-solid border-blue-200 rounded
+           rounded
           shadow-md shadow-blue-500/50"
       >
         {/* Container sizing */}
@@ -23,7 +23,7 @@ export default function MenuItem(item: MenuItemType) {
           {item.image && (
             // Center/alignment container
             <div
-              className="w-20 h-20 overflow-hidden relative
+              className="w-16 h-16 overflow-hidden relative
                   flex justify-center items-center
                 "
             >
@@ -44,7 +44,7 @@ export default function MenuItem(item: MenuItemType) {
           className="
               h-1/3 overflow-hidden text-center 
               flex justify-center items-center
-              uppercase text-lg px-1
+              uppercase text-sm px-1
             "
         >
           {item.label}

@@ -49,7 +49,7 @@ export default function EventInformationPane({
     >
       {/* Left pane */}
       <motion.div
-        className="col-span-4 flex flex-col justify-center"
+        className="col-span-4 flex flex-col justify-center text-sm"
         layout="position"
       >
         {/* Show event type name */}
@@ -67,12 +67,12 @@ export default function EventInformationPane({
 
       {/* Language picker */}
       <motion.div
-        className="col-span-2 text-lg flex justify-end"
+        className="col-span-2 text-sm flex justify-end"
         layout="position"
       >
         {currentLang && (
-          <div>
-            <span className="text-blue-50">
+          <div className="flex items-center gap-2">
+            <span className="text-blue-50 hidden sm:inline">
               {/* Put general strings in react context? */}
               {chooseLangLabel}{" "}
             </span>

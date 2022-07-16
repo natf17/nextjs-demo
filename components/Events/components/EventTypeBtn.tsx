@@ -16,7 +16,7 @@ export default function EventTypeBtn({
   return (
     <button
       className={`
-        rounded-full p-4 px-5 mr-4 last:mr-0 border
+        rounded-full p-2 px-5 mr-4 last:mr-0 border mb-2
         text-slate-400 border-slate-500
         ${
           selected &&
@@ -28,7 +28,7 @@ export default function EventTypeBtn({
     >
       <h2
         className={`        
-          text-2xl uppercase select-none
+          text-md sm:text-lg uppercase select-none
           filter drop-shadow-lg          
           text-center                  
         `}

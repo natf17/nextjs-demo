@@ -28,27 +28,27 @@ export default function AmenityBtn({
       <div className="flex justify-center">
         <div
           className={`
-            rounded-full bg-gray-900 h-16 w-16 border-4 border-gray-500            
-            flex items-center justify-center text-3xl
+            rounded-full bg-gray-900 h-12 w-12 border-4 border-gray-500            
+            flex items-center justify-center text-xl
             ${
               selected &&
               amenityId === "waterFountains" &&
-              "border-slate-400 text-teal-300"
+              "border-amber-300 text-teal-400"
             }
             ${
               selected &&
               amenityId === "bathrooms" &&
-              "border-slate-400 text-slate-200"
+              "border-amber-300 text-slate-200"
             }
             ${
               selected &&
               amenityId === "firstAid" &&
-              "border-slate-400 text-red-300"
+              "border-amber-300 text-red-300"
             }
             ${
               selected &&
               amenityId === "donations" &&
-              "border-slate-400 text-purple-300"
+              "border-amber-300 text-purple-300"
             } 
           `}
         >
@@ -63,9 +63,9 @@ export default function AmenityBtn({
           {amenityId === "donations" && <DonationsIcon fontSize="inherit" />}
         </div>
       </div>
-      <div className="text-center text-sm text-zinc-300 pt-1">{label}</div>
+      <div className="text-center text-xs text-zinc-300 pt-1">{label}</div>
       {selected && (
-        <div className="text-zinc-400 absolute -bottom-5 left-1/2">&bull;</div>
+        <div className="text-amber-400 absolute -bottom-5 left-1/2">&bull;</div>
       )}
     </div>
   );

@@ -66,7 +66,7 @@ export default function LocationResults({
 
         <motion.div
           className="
-              px-1 py-8 bg-teal-600 bg-opacity-10 text-gray-300
+              px-1 py-4 bg-teal-600 bg-opacity-10 text-gray-300
               flex justify-around 
             "
           layout
@@ -104,7 +104,7 @@ export default function LocationResults({
         {selectedAmenity && (
           <motion.div className="pt-2 px-1" layout>
             <motion.header
-              className="text-2xl px-4 pt-4 pb-2 text-slate-200"
+              className="text-lg px-4 pt-2 pb-2 text-slate-200"
               layout
             >
               {`${amenityData[selectedAmenity].headingLabel}`}

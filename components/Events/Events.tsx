@@ -93,15 +93,15 @@ export default function Events({
       className="self-stretch w-full"
     >
       <main className="h-full">
-        <header className="text-center p-2 py-6">
-          <h1 className="text-4xl text-blue-50 pb-2 mb-12">
+        <header className="text-center p-2">
+          <h1 className="text-2xl text-blue-50 pb-2 mb-4">
             {strings.pageTitle}
           </h1>
 
           {/* Select event type */}
           <motion.div layout>
             {!selectedEventType && (
-              <p className="text-lg text-gray-300 p-2 pb-6 pt-16">
+              <p className="text-lg text-gray-300 p-2 pb-6 pt-10">
                 {strings.pageDescription.toUpperCase()}
               </p>
             )}
@@ -122,7 +122,7 @@ export default function Events({
 
         <LayoutGroup>
           {selectedEventType && (
-            <motion.div className="px-3 py-6" layout>
+            <motion.div className="px-3 py-2" layout>
               <DynamicEventLayout
                 eventTypeNameFull={strings[`section${selectedEventType}`].title}
                 eventSeason={firstSeasonByType[selectedEventType]}
