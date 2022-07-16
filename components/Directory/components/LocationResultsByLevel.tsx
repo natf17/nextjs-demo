@@ -45,7 +45,7 @@ function LocationResultsByLevel({
               <div
                 key={level.level_num}
                 className={`
-                    uppercase text-lg relative
+                    uppercase text-xs relative
                     p-2 px-4 inline-block cursor-pointer                    
                     ${
                       level.level_name === selectedLevelZZ

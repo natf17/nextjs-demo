@@ -46,12 +46,12 @@ export default function EventMonthsLayout({
 
   return (
     <motion.div
-      className="py-4"
+      className="pb-4"
       variants={EventMonthsLayoutAnimationVariants}
       layout
     >
       <motion.h2
-        className={`text-3xl mb-6
+        className={`text-2xl mb-6
           ${
             isPastYear
               ? "text-gray-400"
@@ -78,7 +78,7 @@ export default function EventMonthsLayout({
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   className={`
-                border-l-8 ${
+                border-l-4 ${
                   isPastYear || isPastMonth
                     ? "border-gray-400"
                     : eventType
@@ -104,8 +104,8 @@ export default function EventMonthsLayout({
 
                   <motion.div
                     className={`                  
-                  grid grid-cols-[repeat(auto-fill,_minmax(12em,_1fr))]
-                  auto-rows-auto gap-8
+                  grid grid-cols-[repeat(auto-fill,_minmax(10em,_1fr))]
+                  auto-rows-auto gap-6
                 `}
                   >
                     {/* Cols 2 to n: Events  */}

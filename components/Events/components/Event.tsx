@@ -91,7 +91,7 @@ export default function Event({
       <motion.div
         className={`${
           isPastEvent ? "text-gray-300" : "text-gray-50"
-        } text-center text-2xl`}
+        } text-center text-xl`}
       >
         {localizedDateRange}
       </motion.div>

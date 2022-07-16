@@ -51,7 +51,7 @@ export default function LocationResultsItem(props: Props) {
   }
 
   return (
-    <motion.div className="py-2" layout="position">
+    <motion.div className="py-1" layout="position">
       <div className="flex">
         {/* Thumbnail */}
         <div
@@ -83,10 +83,10 @@ export default function LocationResultsItem(props: Props) {
 
         {/* Amenity quick-view */}
         <div className="p-2">
-          <h3 className="text-lg font-medium text-amber-200 py-1">{`${listNum}. ${name}`}</h3>
+          <h3 className="text-sm font-medium text-amber-200 py-1">{`${listNum}. ${name}`}</h3>
           <ul className="text-gray-300">
             {/* Level */}
-            <li className="inline-block">
+            <li className="inline-block text-xs">
               <BuildingLevelIcon />
               {location?.fullname}
             </li>
@@ -129,8 +129,8 @@ export default function LocationResultsItem(props: Props) {
           </ul>
           {/* Note */}
           {note && (
-            <div className="text-emerald-200 py-1 text-sm">
-              * <span className="italic text-emerald-100">{note}</span>
+            <div className="text-amber-50 py-1 text-xs">
+              * <span className="italic">{note}</span>
             </div>
           )}
         </div>

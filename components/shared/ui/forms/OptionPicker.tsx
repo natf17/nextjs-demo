@@ -60,14 +60,14 @@ export default function OptionPicker({
           setOpen((prev) => !prev);
         }}
         className={`
-          border px-2 py-2 rounded-md      
+          border px-2 py-2 rounded-md flex items-center
           ${moreThanOne ? `text-green-300` : `text-gray-400`}
           ${moreThanOne ? `border-green-600` : `border-gray-400`}
         `}
       >
         <div
           className={`
-            inline-block max-w-xs overflow-hidden 
+            max-w-xs overflow-hidden 
             whitespace-nowrap text-ellipsis align-top
           `}
         >
@@ -85,7 +85,7 @@ export default function OptionPicker({
           className={`
             absolute border border-green-800 text-green-400 
             rounded-md p-2 px-4 w-52 bg-black bg-opacity-90
-            divide-y divide-green-800 inline top-8 left-0 z-10
+            divide-y divide-green-800 inline top-10 left-0 z-10
             text-left
           `}
           ref={dropdownRef}

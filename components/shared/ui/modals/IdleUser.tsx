@@ -44,7 +44,7 @@ export default function IdleUser({
         style={{
           overlay: { backgroundColor: "rgba(0,0,0,0.75)", zIndex: "10" },
           content: {
-            width: "30rem",
+            width: "25rem",
             marginLeft: "auto",
             marginRight: "auto",
             maxHeight: "40rem",
@@ -59,27 +59,27 @@ export default function IdleUser({
       >
         {/* Header */}
         <header className="py-2 px-1">
-          <h1 className="text-2xl">
+          <h1 className="text-xl">
             {localizedModal[locale]?.header || "{HEADER}"}
           </h1>
         </header>
 
         {/* Body */}
-        <div className="py-6 px-1 text-lg">
+        <div className="py-6 px-1 text-base">
           <p>{localizedModal[locale]?.message || "{HEADER}"}</p>
         </div>
 
         {/* Footer */}
-        <footer className="py-2 px-1 text-lg">
+        <footer className="py-2 px-1 text-sm">
           <button
-            className="bg-indigo-300 p-3 rounded-md mr-6 font-bold"
+            className="bg-indigo-300 p-2 px-3 rounded-md mr-6 font-bold"
             onClick={idleTimer.reset}
           >
             {localizedModal[locale]?.extendSessionBtn || "{button_extend}"} (
             {remainingTime})
           </button>
           <button
-            className="bg-red-300 p-3 rounded-md font-bold"
+            className="bg-red-300 p-2 px-3 rounded-md font-bold"
             onClick={resetKiosk}
           >
             {localizedModal[locale]?.resetSessionBtn || "{button_end}"}

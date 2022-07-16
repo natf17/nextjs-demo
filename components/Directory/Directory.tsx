@@ -53,9 +53,9 @@ export default function Map({
   return (
     <motion.div {...MotionFadeEnter} className="self-stretch w-full">
       <main className="h-full">
-        <header className="text-center p-2 py-6 mb-6">
-          <h1 className="text-4xl text-blue-50 pb-2">{strings.pageTitle}</h1>
-          <p className="text-lg text-gray-300">{strings.pageDescription}</p>
+        <header className="text-center p-2 mb-4">
+          <h1 className="text-2xl text-blue-50 pb-2">{strings.pageTitle}</h1>
+          <p className="text-md text-gray-300">{strings.pageDescription}</p>
         </header>
 
         {/* Map view */}

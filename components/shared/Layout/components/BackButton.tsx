@@ -7,7 +7,7 @@ export default function BackButton() {
 
   return (
     <button
-      className="text-indigo-300 px-3"
+      className="text-indigo-300 pr-6"
       type="button"
       onClick={() => router.back()}
     >
