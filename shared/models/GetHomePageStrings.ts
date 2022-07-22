@@ -7,8 +7,8 @@ export type HomePageSchema = {
   welcomeText: string;
 };
 
-export type MultiLangHomePage = {
-  [key: string]: HomePageSchema;
+export type MultiLangData = {
+  [key: string]: Omit<HomePageSchema, "id">;
 };
 
 const query = (locale = "en") => {
@@ -30,19 +30,14 @@ const getMultiLangQuery = (locales: string[]): DocumentNode => {
   locales.forEach((locale) => {
     multiLangQuery += `
       ${locale}: homePage(locale: "${locale}") {
-        ...homePageFields
+        pageTitle
+        tapToContinuePrompt
+        welcomeText
       }
     `;
   });
 
-  return gql`
-    fragment homePageFields on HomePage {
-      id
-      pageTitle
-      tapToContinuePrompt
-      welcomeText
-    }
-    
+  return gql`    
     query MultiLangQuery {
       ${multiLangQuery}
     }
