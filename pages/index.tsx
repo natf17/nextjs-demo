@@ -45,26 +45,4 @@ export const getStaticProps: GetStaticProps<Props, Params> = async (
 /* EXPORT COMPONENT */
 export default Home;
 
-/* OLD CODE */
-// export async function getStaticProps({ locale })  {
-//   // make request for strings on Strapi
-//   const data = await makeGraphQLRequest(locale, GetGlobalStrings);
-
-//   // handle request errors with 404
-//   if (!data || !data.globalSetting) {
-//     return { notFound: true }
-//   }
-
-//   // handle Apollo errors (look into documentation) and
-//   // separate into utility func for all pages with data fetching
-
-//   // pass down data into component props
-//   return {
-//     props: {
-//       strings: data.globalSetting,
-//       locale
-//     }
-//   }
-// }
-
 // See https://github.com/vercel/next.js/discussions/16522?sort=old
