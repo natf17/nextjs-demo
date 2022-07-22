@@ -1,10 +1,10 @@
 import Head from "next/head";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { PublicOutlined } from "@mui/icons-material";
 
 import { Props } from "../../pages/index";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useIdleTimerContext } from "react-idle-timer";
 import { useRouter } from "next/router";
 import wrapArray from "../../utils/wrapArray";
@@ -15,9 +15,12 @@ const rotatingLocaleBorderStyles = [
   "border-indigo-400",
 ];
 
-export default function Home({ strings }: Props) {
+// duration of displayed language before rotating
+const ROTATE_LANGS_DURATION = 5000;
+
+export default function Home({ strings, locales, rotatingI18nData }: Props) {
   const idleTimer = useIdleTimerContext();
-  const locales = useRouter()?.locales ?? ["en"];
+  const [featuredLang, setFeaturedLang] = useState(locales[0]);
 
   // disable inactivity timer on home page
   useEffect(() => {
@@ -27,6 +30,25 @@ export default function Home({ strings }: Props) {
       idleTimer.reset();
     };
   }, [idleTimer]);
+
+  // start rotating lang timer
+  useEffect(() => {
+    // abort if there aren't multiple langs
+    if (locales.length < 2) {
+      return;
+    }
+    let iterationNum = 0;
+    const intervalRotateLanguage = setInterval(() => {
+      // rotate the selected lang
+      iterationNum++;
+      const newFeaturedLang = wrapArray(locales, iterationNum);
+      setFeaturedLang(newFeaturedLang);
+    }, ROTATE_LANGS_DURATION);
+
+    return () => {
+      clearInterval(intervalRotateLanguage);
+    };
+  }, [locales]);
 
   return (
     <motion.div
