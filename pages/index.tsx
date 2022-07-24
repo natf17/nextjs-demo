@@ -1,74 +1,59 @@
-import makeGraphQLRequest from '../utils/makeGraphQLRequest';
-import GetHomePageStrings from '../shared/models/GetHomePageStrings';
-import Home from '../components/Home'
+import makeGraphQLRequest from "../utils/makeGraphQLRequest";
+import GetHomePageStrings, {
+  getMultiLangQuery,
+  MultiLangData,
+} from "../shared/models/GetHomePageStrings";
+import Home from "../components/Home";
 
 // Type data
-import { GetStaticProps } from 'next';
-import { ParsedUrlQuery } from 'querystring';
-import { HomePageSchema } from '../shared/models/GetHomePageStrings';
-
+import { GetStaticProps } from "next";
+import { ParsedUrlQuery } from "querystring";
+import { HomePageSchema } from "../shared/models/GetHomePageStrings";
 
 // Props passed down to page component
 export type Props = {
-  strings: HomePageSchema,
-  locale: string
-}
+  strings: HomePageSchema;
+  rotatingI18nData: MultiLangData;
+  locale: string;
+  locales: string[];
+};
 
 // Context params interface
 export interface Params extends ParsedUrlQuery {
-  locale: string
+  locale: string;
 }
 
+export const getStaticProps: GetStaticProps<Props, Params> = async (
+  context
+) => {
+  // Use locales configured in next.config.js
+  const locale = context.locale ?? "en";
+  const locales = context.locales ?? ["en"];
 
-
-export const getStaticProps: GetStaticProps<Props, Params> = async (context) => {
-  const locale = context.locale!;
-  
   try {
     const { homePage } = await makeGraphQLRequest(locale, GetHomePageStrings);
+    const rotatingI18nData = await makeGraphQLRequest(
+      locale,
+      getMultiLangQuery.bind(null, locales)
+    );
+
     return {
       props: {
         strings: homePage,
-        locale
-      }
-    }
+        rotatingI18nData,
+        locale,
+        locales,
+      },
+    };
   } catch (error) {
     // if any errors, return 404
     return {
-      notFound: true
-    }
+      notFound: true,
+    };
   }
-}
-
+};
 
 /* EXPORT COMPONENT */
 export default Home;
 
-
-
-/* OLD CODE */
-// export async function getStaticProps({ locale })  {
-//   // make request for strings on Strapi
-//   const data = await makeGraphQLRequest(locale, GetGlobalStrings);
-
-//   // handle request errors with 404
-//   if (!data || !data.globalSetting) {
-//     return { notFound: true }
-//   }
-
-//   // handle Apollo errors (look into documentation) and
-//   // separate into utility func for all pages with data fetching
-  
-//   // pass down data into component props
-//   return {
-//     props: {
-//       strings: data.globalSetting,
-//       locale
-//     }
-//   }
-// }
-
-
-
 // See https://github.com/vercel/next.js/discussions/16522?sort=old
-

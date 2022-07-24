@@ -1,5 +1,7 @@
 import { ApolloClient, createHttpLink, InMemoryCache } from "@apollo/client";
 
+// TODO: Eventually phase out this old request method with new makeLocalizedGraphQLRequest
+
 export default async function makeGraphQLRequest(locale, query) {
   let client;
 
