@@ -1,10 +1,12 @@
 import { Props } from "./../../pages/about";
 import ReactMarkdown from "react-markdown";
 import Image from "next/image";
+import { motion } from "framer-motion";
+import { MotionFadeEnter } from "./../../shared/animations/pages/onPageLoad";
 
 function About({ strings }: Props) {
   return (
-    <main className="prose prose-invert mx-auto">
+    <motion.main {...MotionFadeEnter} className="prose prose-invert mx-auto">
       <h1 className="text-center p-2 mb-4">{strings.pageTitle}</h1>
       {strings.featImg?.url && (
         <div className="max-w-xs mx-auto shadow-lg shadow-blue-500/40">
@@ -20,7 +22,7 @@ function About({ strings }: Props) {
         </div>
       )}
       <ReactMarkdown>{strings.richDescription}</ReactMarkdown>
-    </main>
+    </motion.main>
   );
 }
 
