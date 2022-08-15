@@ -52,7 +52,7 @@ export default function Layout({ children, globalValues }: Props) {
 
       <main
         className="
-        pt-[5rem] pb-16
+        pt-[5rem] 
         min-h-screen max-w-5xl m-auto flex
       "
       >
