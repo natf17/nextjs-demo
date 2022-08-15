@@ -19,7 +19,7 @@ function About({ strings }: Props) {
       "
       >
         {/* Close button TODO: separate into a component */}
-        <div className={`absolute top-0 right-0 p-2 z-10`}>
+        <div className={`absolute top-0 right-0 p-2 z-20`}>
           <Link href="/menu">
             <a>
               <button className="border border-indigo-300 p-2 rounded-full hover:bg-slate-500">
@@ -30,8 +30,10 @@ function About({ strings }: Props) {
         </div>
 
         <OverflowScrollGradient
-          gradientHeight="3rem"
-          twTargetFadeColor="slate-800"
+          twGradientHeightBefore="before:h-12"
+          twGradientHeightAfter="after:h-12"
+          twTargetFadeColorBefore="before:to-slate-800"
+          twTargetFadeColorAfter="after:to-slate-800"
         >
           <div
             className={`relative py-12 
