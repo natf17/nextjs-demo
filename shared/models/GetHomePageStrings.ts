@@ -5,6 +5,7 @@ export type HomePageSchema = {
   pageTitle: string;
   tapToContinuePrompt: string;
   welcomeText: string;
+  showSelectFromAvailableLocales: boolean;
 };
 
 export type MultiLangData = {
@@ -18,7 +19,8 @@ const query = (locale = "en") => {
           id
           pageTitle
           tapToContinuePrompt
-          welcomeText          
+          welcomeText
+          showSelectFromAvailableLocales
         }    
       }  
   `;
@@ -33,6 +35,7 @@ const getMultiLangQuery = (locales: string[]): DocumentNode => {
         pageTitle
         tapToContinuePrompt
         welcomeText
+        showSelectFromAvailableLocales
       }
     `;
   });

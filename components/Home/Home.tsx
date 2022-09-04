@@ -5,8 +5,6 @@ import { PublicOutlined } from "@mui/icons-material";
 
 import { Props } from "../../pages/index";
 import { useEffect, useState } from "react";
-import { useIdleTimerContext } from "react-idle-timer";
-import { useRouter } from "next/router";
 import wrapArray from "../../utils/wrapArray";
 
 const rotatingLocaleBorderStyles = [
@@ -19,17 +17,7 @@ const rotatingLocaleBorderStyles = [
 const ROTATE_LANGS_DURATION = 10000;
 
 export default function Home({ strings, locales, rotatingI18nData }: Props) {
-  const idleTimer = useIdleTimerContext();
   const [featuredLang, setFeaturedLang] = useState(locales[0]);
-
-  // disable inactivity timer on home page
-  useEffect(() => {
-    idleTimer.pause();
-
-    return () => {
-      idleTimer.reset();
-    };
-  }, [idleTimer]);
 
   // start rotating lang timer
   useEffect(() => {
@@ -89,8 +77,7 @@ export default function Home({ strings, locales, rotatingI18nData }: Props) {
         </AnimatePresence>
 
         {/* Language select */}
-        {/* TODO: Add CMS setting for toggling this */}
-        {true ? (
+        {strings.showSelectFromAvailableLocales ? (
           <div className="flex gap-2 items-center mt-10">
             <PublicOutlined className="text-slate-400" />
             <div className="flex gap-2 sm:gap-8 text-blue-200">

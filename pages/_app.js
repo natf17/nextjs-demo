@@ -7,7 +7,7 @@ import Head from "next/head";
 import Image from "next/image";
 import bgImage from "../public/bg_flipped.jpeg";
 import Modal from "react-modal";
-import IdleUser from "./../components/shared/ui/modals/IdleUser";
+import IdleUserPrompt from "../components/shared/ui/modals/IdleUserPrompt";
 import { IdleTimerProvider } from "react-idle-timer";
 import React, { useState } from "react";
 
@@ -48,56 +48,63 @@ function MyApp({ Component, pageProps }) {
     setIsIdleModalOpen(true);
   };
 
+  const closeModal = () => setIsIdleModalOpen(false);
+
   const resetKiosk = () => {
-    setIsIdleModalOpen(false);
+    closeModal();
     router.push("/");
   };
 
-  const onUserActive = () => {
-    setIsIdleModalOpen(false);
-  };
+  // JSX
+  const children = (
+    <Layout globalValues={globalValues}>
+      <Head>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      {/* bg image wrapper */}
+      <div style={imageWrapperStyle}>
+        <Image
+          src={bgImage}
+          alt="Background image"
+          layout="fill"
+          objectFit="cover"
+          quality={100}
+        />
+      </div>
+      {/* Filter wrapper */}
+      <div
+        style={imageWrapperStyle}
+        className="bg-black bg-opacity-50 backdrop-filter backdrop-blur"
+      />
+
+      <AnimatePresence exitBeforeEnter>
+        <Component {...pageProps} key={router.pathname} />
+      </AnimatePresence>
+    </Layout>
+  );
 
   return (
     <IntlProvider locale={router.locale} key={router.locale}>
       {/* Make timer accessible to child components */}
-      <IdleTimerProvider
-        onIdle={resetKiosk}
-        onPrompt={onUserIdlePrompt}
-        onActive={onUserActive}
-        timeout={INACTIVITY_TIMER.idletime * 1000}
-        promptTimeout={INACTIVITY_TIMER.promptduration * 1000}
-      >
-        <Layout globalValues={globalValues}>
-          <Head>
-            <link rel="icon" href="/favicon.ico" />
-          </Head>
-          {/* bg image wrapper */}
-          <div style={imageWrapperStyle}>
-            <Image
-              src={bgImage}
-              alt="Background image"
-              layout="fill"
-              objectFit="cover"
-              quality={100}
-            />
-          </div>
-          {/* Filter wrapper */}
-          <div
-            style={imageWrapperStyle}
-            className="bg-black bg-opacity-50 backdrop-filter backdrop-blur"
+
+      {router.pathname === "/" ? (
+        children
+      ) : (
+        <IdleTimerProvider
+          onIdle={resetKiosk}
+          onPrompt={onUserIdlePrompt}
+          timeout={INACTIVITY_TIMER.idletime * 1000}
+          promptTimeout={INACTIVITY_TIMER.promptduration * 1000}
+        >
+          {children}
+          <IdleUserPrompt
+            resetKiosk={resetKiosk}
+            closeModal={closeModal}
+            isOpen={isIdleModalOpen}
+            promptDuration={INACTIVITY_TIMER.promptduration}
           />
-
-          <AnimatePresence exitBeforeEnter>
-            <Component {...pageProps} key={router.pathname} />
-          </AnimatePresence>
-        </Layout>
-
-        <IdleUser
-          resetKiosk={resetKiosk}
-          isOpen={isIdleModalOpen}
-          promptDuration={INACTIVITY_TIMER.promptduration}
-        />
-      </IdleTimerProvider>
+        </IdleTimerProvider>
+      )}
     </IntlProvider>
   );
 }
