@@ -1,45 +1,77 @@
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useIdleTimerContext } from "react-idle-timer";
 import Modal from "react-modal";
-import localizedModal from "./../../../../root_l10ns/inactivity_modal";
+import localizedModal from "../../../../root_l10ns/inactivity_modal";
 
 type Props = {
   isOpen: boolean;
   resetKiosk: () => void;
+  closeModal: () => void;
   promptDuration: number;
 };
 
-export default function IdleUser({
+export default function IdleUserPrompt({
   isOpen,
   resetKiosk,
   promptDuration,
+  closeModal,
 }: Props) {
   const idleTimer = useIdleTimerContext();
   const [remainingTime, setRemainingTime] = useState(promptDuration);
   const { locale = "en" } = useRouter();
 
+  // store timer in a ref
+  const idleCountdown = useRef<NodeJS.Timer | null>(null);
+
   // show time remaining
   useEffect(() => {
+    console.log(
+      `idleUser (modal component) useEffect fired [idleTimer, isOpen ${isOpen}]`
+    );
+    // modal is closed
     if (!isOpen) {
-      return;
+      // clear ref timer
+      idleCountdown.current && clearInterval(idleCountdown.current);
     }
-    // set getRemainingTime timer to update UI
-    const timerId = setInterval(() => {
-      const timeRemaining = Math.round(idleTimer.getRemainingTime() / 1000);
-      setRemainingTime(timeRemaining);
-    }, 1000);
+
+    // modal opened
+    if (isOpen) {
+      // check timer
+      if (!idleCountdown.current) {
+        // create new timer, store in ref
+        idleCountdown.current = setInterval(() => {
+          const timeRemaining = Math.round(idleTimer.getRemainingTime() / 1000);
+          setRemainingTime(timeRemaining);
+        }, 1000);
+      } else {
+        // timer already exists, clear and reset
+        clearInterval(idleCountdown.current);
+        // TODO: Repeated code!
+        idleCountdown.current = setInterval(() => {
+          const timeRemaining = Math.round(idleTimer.getRemainingTime() / 1000);
+          setRemainingTime(timeRemaining);
+        }, 1000);
+      }
+    }
 
     return () => {
-      clearTimeout(timerId);
+      if (idleCountdown.current) {
+        clearInterval(idleCountdown.current);
+      }
     };
   }, [idleTimer, isOpen]);
+
+  const resetTimerAndCloseModal = () => {
+    idleTimer.reset();
+    closeModal();
+  };
 
   return (
     <div>
       <Modal
         isOpen={isOpen}
-        onRequestClose={idleTimer.reset}
+        onRequestClose={resetTimerAndCloseModal}
         onAfterClose={() => setRemainingTime(promptDuration)}
         style={{
           overlay: { backgroundColor: "rgba(0,0,0,0.75)", zIndex: "10" },
@@ -73,7 +105,7 @@ export default function IdleUser({
         <footer className="py-2 px-1 text-sm">
           <button
             className="bg-indigo-300 p-2 px-3 rounded-md mr-6 font-bold"
-            onClick={idleTimer.reset}
+            onClick={resetTimerAndCloseModal}
           >
             {localizedModal[locale]?.extendSessionBtn || "{button_extend}"} (
             {remainingTime})

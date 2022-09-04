@@ -5,8 +5,6 @@ import { PublicOutlined } from "@mui/icons-material";
 
 import { Props } from "../../pages/index";
 import { useEffect, useState } from "react";
-import { useIdleTimerContext } from "react-idle-timer";
-import { useRouter } from "next/router";
 import wrapArray from "../../utils/wrapArray";
 
 const rotatingLocaleBorderStyles = [
@@ -19,17 +17,7 @@ const rotatingLocaleBorderStyles = [
 const ROTATE_LANGS_DURATION = 10000;
 
 export default function Home({ strings, locales, rotatingI18nData }: Props) {
-  const idleTimer = useIdleTimerContext();
   const [featuredLang, setFeaturedLang] = useState(locales[0]);
-
-  // disable inactivity timer on home page
-  useEffect(() => {
-    idleTimer.pause();
-
-    return () => {
-      idleTimer.reset();
-    };
-  }, [idleTimer]);
 
   // start rotating lang timer
   useEffect(() => {
