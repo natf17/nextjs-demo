@@ -77,8 +77,7 @@ export default function Home({ strings, locales, rotatingI18nData }: Props) {
         </AnimatePresence>
 
         {/* Language select */}
-        {/* TODO: Add CMS setting for toggling this */}
-        {true ? (
+        {strings.showSelectFromAvailableLocales ? (
           <div className="flex gap-2 items-center mt-10">
             <PublicOutlined className="text-slate-400" />
             <div className="flex gap-2 sm:gap-8 text-blue-200">
