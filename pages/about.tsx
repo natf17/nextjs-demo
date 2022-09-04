@@ -37,6 +37,7 @@ export const getStaticProps: GetStaticProps<Props, Params> = async (
       },
     };
   } catch (error) {
+    console.log(`ERROR: ${error}`);
     // if any errors, return 404
     return {
       notFound: true,
