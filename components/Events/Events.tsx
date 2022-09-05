@@ -1,4 +1,5 @@
 import { LayoutGroup, motion } from "framer-motion";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useMemo, useState } from "react";
 
@@ -92,6 +93,9 @@ export default function Events({
       exit={{ opacity: 0 }}
       className="self-stretch w-full"
     >
+      <Head>
+        <title>{strings.pageTitle}</title>
+      </Head>
       <main className="h-full">
         <header className="text-center p-2">
           <h1 className="text-2xl text-blue-50 pb-2 mb-4">

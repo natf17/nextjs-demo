@@ -6,6 +6,7 @@ import { MotionSlideUp } from "./../../shared/animations/pages/onPageLoad";
 import { CloseSharp } from "@mui/icons-material";
 import Link from "next/link";
 import OverflowScrollGradient from "../shared/Layout/components/OverflowScrollGradient";
+import Head from "next/head";
 
 function About({ strings }: Props) {
   return (
@@ -13,6 +14,9 @@ function About({ strings }: Props) {
       {...MotionSlideUp}
       className="w-full self-stretch flex content-end"
     >
+      <Head>
+        <title>{strings.pageTitle}</title>
+      </Head>
       <div
         className="w-full max-w-3xl mx-auto self-end relative
         overflow-hidden rounded-t-lg bg-slate-800/60

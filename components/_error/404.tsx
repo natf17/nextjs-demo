@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Props } from "../../pages/404";
 import Link from "next/link";
 import { KeyboardReturnSharp, BrokenImageTwoTone } from "@mui/icons-material";
+import Head from "next/head";
 
 export default function Custom404({ strings }: Props) {
   return (
@@ -11,6 +12,9 @@ export default function Custom404({ strings }: Props) {
       exit={{ opacity: 0 }}
       className="w-full min-h-[90%] flex justify-center items-center"
     >
+      <Head>
+        <title>{strings.pageTitle}</title>
+      </Head>
       <div className="pb-8">
         <div className="text-center pb-6 text-2xl">
           <BrokenImageTwoTone htmlColor="#d9d9d9" fontSize="large" />
