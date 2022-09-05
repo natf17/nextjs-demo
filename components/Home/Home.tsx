@@ -82,7 +82,7 @@ export default function Home({ strings, locales, rotatingI18nData }: Props) {
             <PublicOutlined className="text-slate-400" />
             <div className="flex gap-2 sm:gap-8 text-blue-200">
               {locales.map((locale, index) => (
-                <Link href="/menu" key={locale} locale={locale} replace>
+                <Link href="/menu" key={locale} locale={locale}>
                   <a className="px-2 hover:-translate-y-1 transition-transform">
                     <motion.div
                       className={`border-b-4 font-extrabold ${wrapArray(

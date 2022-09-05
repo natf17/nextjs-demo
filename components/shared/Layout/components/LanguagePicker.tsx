@@ -22,7 +22,7 @@ export default function LanguagePicker() {
       {/* 1 locale: show simple toggle */}
       {locales.length === 2 && (
         <div className="text-indigo-300 flex items-center text-sm">
-          <Link href={router.pathname} locale={otherLocales[0]}>
+          <Link href={router.pathname} locale={otherLocales[0]} replace>
             <a>
               <LanguageIcon fontSize="inherit" />{" "}
               {new Intl.DisplayNames(otherLocales[0], { type: "language" }).of(
