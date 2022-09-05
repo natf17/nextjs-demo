@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import Head from "next/head";
 import { Props } from "../../pages/menu";
 
 import MenuRow from "./components/MenuRow";
@@ -13,6 +14,9 @@ export default function Home({ strings }: Props) {
       // stretch to fill height of container
       className="self-stretch w-full"
     >
+      <Head>
+        <title>{strings.pageTitle}</title>
+      </Head>
       <main className="h-full">
         <h1 className="text-2xl text-center p-2 pb-3 text-blue-50">
           {strings.pageTitle}

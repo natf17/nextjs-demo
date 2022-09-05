@@ -12,6 +12,7 @@ import useMapUIStore from "./useMapUIStore";
 
 import { AmenityId as AMENITY_ID } from "./../../pages/directory";
 import { MotionFadeEnter } from "./../../shared/animations/pages/onPageLoad";
+import Head from "next/head";
 
 export default function Map({
   strings,
@@ -52,6 +53,9 @@ export default function Map({
 
   return (
     <motion.div {...MotionFadeEnter} className="self-stretch w-full">
+      <Head>
+        <title>{strings.pageTitle}</title>
+      </Head>
       <main className="h-full">
         <header className="text-center p-2 mb-4">
           <h1 className="text-2xl text-blue-50 pb-2">{strings.pageTitle}</h1>
