@@ -38,7 +38,7 @@ export default function EventInformationPane({
 
   const dropdownOptions = availableLangs.map((langCode) => ({
     value: langCode,
-    label: languageTranslation.of(langCode),
+    label: languageTranslation.of(langCode) || "",
   }));
 
   return (
