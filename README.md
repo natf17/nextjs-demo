@@ -53,7 +53,7 @@ Allow the following application-level permissions via the strapi admin:
 - MAP-PAGE:
 - MENU-PAGE: find
 - NON-SEASONAL-EVENT: count, find, findOne
-- SEASONAL-EVENT: count, find, findOnehttp://host.docker.internal:1337/graphql
+- SEASONAL-EVENT: count, find, findOne
 - WATER-FOUNTAIN:
 
 ## SETUP: Add locales
@@ -81,18 +81,19 @@ See ./data.txt for suggested data.
 The `Events Page` is configured to show two views:
 
 - Type 1: `/events`: three buttons are shown that add an `eventType` parameter to the url, which changes the view to Type 2
-- Type 2: `/events?eventType={REG or CACO or CABR}
+- Type 2: `/events?eventType={REG or CACO or CABR}`
   - Buttons at the top allow selecting different event types (like in Type 1)
   - Information belonging to the **current season** of the selected event type is shown below.
   - Next to it is a small menu to select the event language (it defaults to, and always includes, the locale language).
   - All the events associated with this season are shown below.
   - The events are ordered in chronological order: by month going down the "y-axis" and within the month across the "x-axis".
 
-The current season is defined as the season that
+The current season is defined as the season that either matches...
 
-- if the current month is before September: matches the current year
-- if the current month is September or later: matches the current year + 1
-  For example, if the date is May 1, 2023, the current season has the year 2023. If the date is September 1, 2023, then the current season has the year 2024.
+- the current year if the current month is before September
+- the current year + 1 if the current month is September or later
+
+For example, if the date is May 1, 2023, the current season has the year 2023. If the date is September 1, 2023, then the current season has the year 2024.
 
 The app non-deterministically chooses **a** current season. To avoid undefined behavior, only add one season per year per event type.
 
