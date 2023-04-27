@@ -76,7 +76,7 @@ Populate the following pages in all locales defined.
 Note: At least the error page, in both the `en` and `es` locales, is required. Furthermore, every page that is populated must be populated in both the en and es locales.
 See ./data.txt for suggested data.
 
-## Understanding events and seasons
+## Events and seasons
 
 The `Events Page` is configured to show two views:
 
@@ -97,10 +97,49 @@ For example, if the date is May 1, 2023, the current season has the year 2023. I
 
 The app non-deterministically chooses **a** current season. To avoid undefined behavior, only add one season per year per event type.
 
-## Understanding images
+## App images
 
-A library of icons is used for icons in the map page; the logo, back button, and language icon, are all local files. The background image is loaded from the project directory. For all other images (menu, about page, ), a graphql request is made to obtain the src url, which is appended to NEXT_PUBLIC_VERCEL_IMG_API.
-In the map page, either custom maps (local) or location maps (from strapi) will be used (determined by the `mapViewConfig.enableFsCustomMaps` field in the graphql response). The app currently only supports looking for custom maps for the es and en locales.
+Where do the images come from?
+
+- background image: loaded from the project directory (`/public/bg_flipped.jpeg`)
+- icons in home page and map page: mui library
+- the header logo: loaded from the project directory (`/public/headerLogo.svg`)
+- header back button and language picker: mui library
+- images in menu page grid, about page, and maps: the src url is extracted from the GraphQL response, which is appended to NEXT_PUBLIC_VERCEL_IMG_API
+
+The global.values configuration currently isn't being used.
+
+## The Map page
+
+Like the other pages, the actual content of this page is obtained from the corresponding page (Map Page) single type in the CMS. Unlike the other pages, this page has a Location Results section and a Map section that show the currently selected amenity type and location.
+
+There are two views:
+
+- Type 1: `/directory`: the Location Results section is shown, with nothing selected, and the Map section, with buttons to switch between maps for different levels.
+  Tapping on the Location Results buttons changes to view to Type 2
+- Type 2: `/directory?amenityId={bathrooms or firstAid or donations or waterFountains}`
+  - on the left side are is the Location Results section
+    - this section always has four buttons at the top to select one of the four supported amenity types.
+    - the names of all the location objects in the CMS are shown underneath. Special functionality exists for a location named `"MEZZ"`
+    - the order of the locations is determined by the `level_num` property (asc)
+    - the results are found by matching **all** bathroom, water fountain, girst aid, and donation objects with the currently selected amenity type and location/level
+    - each amenity object should have a reference to a location
+    - the amenity's location and the selected location object are matched by name
+  - on the right side is the map section
+    - there is a small menu with buttons to select the location/level (all locations in existence are shown)
+    - next to the menu is a button to clear results, which changes the view to Type 1
+    - underneath is the map image
+
+There are custom maps for the `en` and `es` locales. These are used if `mapConfig.enableFsCustomMaps` is `true`.
+
+- `/public/custom-maps/en/ground.svg` is used when the locale is `en` and the level name is `"FIRST"`
+- `/public/custom-maps/en/mezz.svg` is used when the locale is `en` and the level name is `"MEZZ"`
+- `/public/custom-maps/es/ground.svg` is used when the locale is `es` and the level name is `"FIRST"`
+- `/public/custom-maps/es/mezz.svg` is used when the locale is `es` and the level name is `"MEZZ"`
+
+All other maps are obtained from the location object found by searching through all the existing location objects until one that matches by name is found.
+
+The image has `src = process.env.NEXT_PUBLIC_VERCEL_IMG_API + matchedLevelMap.url`.
 
 ## Add seasons
 
@@ -113,3 +152,24 @@ Add `Seasonal Events` that correspond to the `Event Seasons` just created. Selec
 ## Add more locales
 
 When adding another locale, ensure all the pages and seasons are populated in the new language.
+
+## Add locations
+
+A location corresponds to a level in the building. All amenties in the same floor or level should have the same `location`.
+
+Special functionality (colors, custom SVG maps) is enabled if there are locations with the property `level_name == "MEZZ"` or `level_name == "FIRST"`.
+
+The maps added to the locations are the ones that will be shown in the maps page.
+
+## Add amenities
+
+You can add the following amenities:
+
+- bathrooms
+- firstAid
+- donations
+- waterFountains
+
+Be sure to add a location to each amenity so that the Location Results in the map page will show the correct amenities.
+
+Images for the amenities are not currently used.
