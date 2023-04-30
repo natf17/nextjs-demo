@@ -11,6 +11,8 @@ The full tech stack consists of:
 
 ## Configure the application
 
+The rest of this guide assumes that [the strapi CMS](https://github.com/natf17/kiosk-prd-demo) has been set up and can be reached. See the CMS's README for details on how to input data.
+
 The app requires the following environment variables (they can be set in `./env.local`):
 
 - `CMS_GRAPHQL_ENDPOINT`: the endpoint for GraphQL queries
@@ -32,9 +34,7 @@ To run the production server, use `npm run build`.
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-The base directory structure was bootstrapped using with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
-See the headless CMS configuration ['here'](https://github.com/isaacd8k/kiosk-prd-demo)
+The base directory structure was bootstrapped using [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## SETUP: Configure permissions
 
@@ -62,21 +62,42 @@ Add the following (required) locales:
 
 - es
 
+## SETUP: Add locations
+
+A location corresponds to a level in the building. All amenties in the same floor or level should have the same `location`.
+
+Special functionality (colors, custom SVG maps) is enabled if there are locations with the property `level_name == "MEZZ"` or `level_name == "FIRST"`.
+
+The maps added to the locations are the ones that will be shown in the maps page.
+
+## SETUP: Add amenities
+
+You can add the following amenities:
+
+- bathrooms
+- firstAid
+- donations
+- waterFountains
+
+Be sure to add a location to each amenity so that the Location Results in the map page will show the correct amenities.
+
+Currently, the `FeatImg` is not being used.
+
 ## SETUP: Populate the pages
 
-Populate the following pages in all locales defined.
+Populate the following pages in all locales defined:
 
 - About Page
 - Error 404 Page
-- Events Page
+- Events Page (see "The Events Page")
 - Home Page
-- Map Page
+- Map Page (see "The Map Page")
 - Menu Page
 
 Note: At least the error page, in both the `en` and `es` locales, is required. Furthermore, every page that is populated must be populated in both the en and es locales.
 See ./data.txt for suggested data.
 
-## Events and seasons
+## The Events Page
 
 The `Events Page` is configured to show two views:
 
@@ -96,18 +117,6 @@ The current season is defined as the season that either matches...
 For example, if the date is May 1, 2023, the current season has the year 2023. If the date is September 1, 2023, then the current season has the year 2024.
 
 The app non-deterministically chooses **a** current season. To avoid undefined behavior, only add one season per year per event type.
-
-## App images
-
-Where do the images come from?
-
-- background image: loaded from the project directory (`/public/bg_flipped.jpeg`)
-- icons in home page and map page: mui library
-- the header logo: loaded from the project directory (`/public/headerLogo.svg`)
-- header back button and language picker: mui library
-- images in menu page grid, about page, and maps: the src url is extracted from the GraphQL response, which is appended to NEXT_PUBLIC_VERCEL_IMG_API
-
-The global.values configuration currently isn't being used.
 
 ## The Map page
 
@@ -143,7 +152,7 @@ The image has `src = process.env.NEXT_PUBLIC_VERCEL_IMG_API + matchedLevelMap.ur
 
 ## Add seasons
 
-Add an `Event Seasons` object corresponding to the current season for each event type.
+Add an `Event Seasons` object corresponding to the current season for each event type. Populate the fields for each locale.
 
 ## Add events
 
@@ -153,23 +162,14 @@ Add `Seasonal Events` that correspond to the `Event Seasons` just created. Selec
 
 When adding another locale, ensure all the pages and seasons are populated in the new language.
 
-## Add locations
+## App images
 
-A location corresponds to a level in the building. All amenties in the same floor or level should have the same `location`.
+Where do the images come from?
 
-Special functionality (colors, custom SVG maps) is enabled if there are locations with the property `level_name == "MEZZ"` or `level_name == "FIRST"`.
+- background image: loaded from the project directory (`/public/bg_flipped.jpeg`)
+- icons in home page and map page: mui library
+- the header logo: loaded from the project directory (`/public/headerLogo.svg`)
+- header back button and language picker: mui library
+- images in menu page grid, about page, and maps: the src url is extracted from the GraphQL response, which is appended to NEXT_PUBLIC_VERCEL_IMG_API
 
-The maps added to the locations are the ones that will be shown in the maps page.
-
-## Add amenities
-
-You can add the following amenities:
-
-- bathrooms
-- firstAid
-- donations
-- waterFountains
-
-Be sure to add a location to each amenity so that the Location Results in the map page will show the correct amenities.
-
-Images for the amenities are not currently used.
+The global.values configuration currently isn't being used.
