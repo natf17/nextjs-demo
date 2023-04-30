@@ -68,7 +68,7 @@ A location corresponds to a level in the building. All amenties in the same floo
 
 Special functionality (colors, custom SVG maps) is enabled if there are locations with the property `level_name == "MEZZ"` or `level_name == "FIRST"`.
 
-The maps added to the locations are the ones that will be shown in the maps page.
+The maps added to the locations are the ones that will be shown in the maps page. Remember to add a map to each locale.
 
 ## SETUP: Add amenities
 
@@ -139,7 +139,7 @@ There are two views:
     - next to the menu is a button to clear results, which changes the view to Type 1
     - underneath is the map image
 
-There are custom maps for the `en` and `es` locales. These are used if `mapConfig.enableFsCustomMaps` is `true`.
+There are custom maps for the `en` and `es` locales. These are used if `mapConfig.enableFsCustomMaps` is `true` (in the `en` and `es` locales). Their locations are listed below:
 
 - `/public/custom-maps/en/ground.svg` is used when the locale is `en` and the level name is `"FIRST"`
 - `/public/custom-maps/en/mezz.svg` is used when the locale is `en` and the level name is `"MEZZ"`
@@ -160,7 +160,7 @@ Add `Seasonal Events` that correspond to the `Event Seasons` just created. Selec
 
 ## Add more locales
 
-When adding another locale, ensure all the pages and seasons are populated in the new language.
+When adding another locale, ensure all the pages and seasons are populated in the new language. Add the new locale to the `i18n.locales` array in `next.config.js` so that the new language can be selected from the home page.
 
 ## App images
 
