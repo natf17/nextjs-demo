@@ -40,21 +40,21 @@ The base directory structure was bootstrapped using [`create-next-app`](https://
 
 Allow the following application-level permissions via the strapi admin:
 
-- ABOUT-PAGE:
-- BATHROOMS: find
-- DONATION:
+- ABOUT-PAGE: find
+- BATHROOMS: count, find, findOne
+- DONATION: count, find, findOne
 - ERROR-404-PAGE: find
 - EVENT-SEASON: count, find, findOne
 - EVENTS-PAGE: find
-- FIRST-AID:
+- FIRST-AID: count, find, findOne
 - GLOBAL-SETTINGS:
 - HOME-PAGE: find
-- LOCATIONS:
-- MAP-PAGE:
+- LOCATIONS: count, find, findOne
+- MAP-PAGE: find
 - MENU-PAGE: find
 - NON-SEASONAL-EVENT: count, find, findOne
 - SEASONAL-EVENT: count, find, findOne
-- WATER-FOUNTAIN:
+- WATER-FOUNTAIN: count, find, findOne
 
 ## SETUP: Add locales
 
