@@ -12,13 +12,13 @@ function About({ strings }: Props) {
   return (
     <motion.div
       {...MotionSlideUp}
-      className="w-full self-stretch flex content-end"
+      className="w-full max-h-[80vh] flex content-end pt-12"
     >
       <Head>
         <title>{strings.pageTitle}</title>
       </Head>
       <div
-        className="w-full max-w-3xl mx-auto self-end relative
+        className="w-full max-w-3xl mx-auto self-start relative
         overflow-hidden rounded-t-lg bg-slate-800/60
       "
       >
@@ -41,7 +41,7 @@ function About({ strings }: Props) {
         >
           <div
             className={`relative py-12 
-              max-h-[85vh] overflow-y-scroll`}
+              max-h-[80vh] min-h-[75vh] overflow-y-auto w-[103%]`}
           >
             <main className="prose prose-invert mx-auto">
               <h1 className="text-center mb-4">{strings.pageTitle}</h1>
